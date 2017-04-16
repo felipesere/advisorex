@@ -1,0 +1,21 @@
+<section class="module">
+  <header class="module-header large-header">
+    <h1>Advisor</h1>
+    <p>Let's help someone on the path to mastery today.</p>
+  </header>
+
+  <div class="login-form">
+    <form action="/begin" method="post">
+      <input type="email" name="email" placeholder="Put your email here" />
+      <button type="submit"  class="button primary"><%= @button %></button>
+      <%= if @target do %>
+        <input type="hidden" name="target" value="<%= @target %>"
+      <% end %>
+      <form>
+  </div>
+</section>
+<%= if @message do %>
+  <div class="notice fadeOut <%= @message_kind %>">
+    <p class="notice-message"><%= @message %></p>
+  </div>
+<% end %>

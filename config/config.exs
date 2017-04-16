@@ -12,6 +12,7 @@ config :advisor,
 # Configures the endpoint
 config :advisor, Advisor.Web.Endpoint,
   url: [host: "localhost"],
+  static_url: [path: "/assets"],
   secret_key_base: "SmmWRTx2vhEgHIcQ/7BRuQaIuvQ7fSeTrsFVuPsudiHKtD0AT068LXD61mN5Ow+d",
   render_errors: [view: Advisor.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Advisor.PubSub,

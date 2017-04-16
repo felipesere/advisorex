@@ -16,11 +16,6 @@ defmodule Advisor.Web.Router do
   scope "/", Advisor.Web do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", LandingPage, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", Advisor.Web do
-  #   pipe_through :api
-  # end
 end

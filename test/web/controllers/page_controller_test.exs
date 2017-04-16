@@ -1,4 +1,4 @@
-defmodule Advisor.Web.PageControllerTest do
+defmodule Advisor.Web.LandingPageTest do
   use Advisor.Web.ConnCase
 
   test "GET /", %{conn: conn} do
