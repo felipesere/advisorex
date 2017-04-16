@@ -1,5 +1,17 @@
 # Advisor
 
+This little app sprung to life as an attempt to improve upon the current peer-feedback process.
+The main point is to provide valuable insight by giving and advice and avoiding generic feedback.
+
+Advisor allows you to create a form from a catalog of questions and lets you direct that form to specific people.
+This makes the insights more targeted to your current situation.
+
+It also pushes the responsibility to collect and track the results away from a central authority and out the mentee/group lead pairs.
+
+Hopefully, this app will delight you by guiding you through a swift creation process.
+
+# Running the server
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
