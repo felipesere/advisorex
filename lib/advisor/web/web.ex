@@ -21,7 +21,6 @@ defmodule Advisor.Web do
       use Phoenix.Controller, namespace: Advisor.Web
       import Plug.Conn
       import Advisor.Web.Router.Helpers
-      import Advisor.Web.Gettext
     end
   end
 
@@ -38,7 +37,6 @@ defmodule Advisor.Web do
 
       import Advisor.Web.Router.Helpers
       import Advisor.Web.ErrorHelpers
-      import Advisor.Web.Gettext
     end
   end
 

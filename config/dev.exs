@@ -35,7 +35,6 @@ config :advisor, Advisor.Web.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
-      ~r{priv/gettext/.*(po)$},
       ~r{lib/advisor/web/views/.*(ex)$},
       ~r{lib/advisor/web/templates/.*(eex)$}
     ]
