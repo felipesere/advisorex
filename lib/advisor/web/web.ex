@@ -50,13 +50,6 @@ defmodule Advisor.Web do
     end
   end
 
-  def channel do
-    quote do
-      use Phoenix.Channel
-      import Advisor.Web.Gettext
-    end
-  end
-
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """
