@@ -17,5 +17,6 @@ defmodule Advisor.Web.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", LandingPage, :index
+    post "/begin", LoginController, :index
   end
 end

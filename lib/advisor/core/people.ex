@@ -1,10 +1,12 @@
-defmodule Advisor.Core.Person do
-  use Ecto.Schema
+defmodule Advisor.Core.People do
+  alias Advisor.Repo
+  alias Advisor.Core.Person
+  import Ecto.Query
 
-  schema "people" do
-    field :name,          :string
-    field :profile_image, :string
-    field :is_group_lead, :boolean
-    field :email,         :string
+  def find_by([email: email]) do
+    query = from u in Person,
+                where: u.email == ^email
+
+    Repo.one(query)
   end
 end

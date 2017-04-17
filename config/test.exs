@@ -9,6 +9,7 @@ config :advisor, Advisor.Web.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
+
 # Configure your database
 config :advisor, Advisor.Repo,
   adapter: Ecto.Adapters.Postgres,
