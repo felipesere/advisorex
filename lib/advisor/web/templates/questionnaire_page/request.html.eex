@@ -6,7 +6,7 @@
     <header class="module-header">
       <h1>Who is your Group Lead?</h1>
     </header>
-    {{> group-leads group_leads}}
+    <%= render "_group_leads.html", leads: @group_leads %>
   </section>
 
   <hr class="separator" />
@@ -14,7 +14,7 @@
     <header class="module-header">
       <h1>Choose topics for advice</h1>
     </header>
-    {{> questions catalog}}
+    <%= render "_questions.html", questions: @questions %>
   </section>
 
   <hr class="separator" />
@@ -23,7 +23,7 @@
     <header class="module-header">
       <h1>Choose people to give you advice</h1>
     </header>
-    {{> people people }}
+    <%= render "_advisors.html", everybody: @everybody %>
   </section>
 
   <section class="module">

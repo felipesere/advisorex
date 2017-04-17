@@ -18,5 +18,15 @@ defmodule Advisor.Web.RequestPageTest do
              |> Floki.find("h1")
              |> Enum.at(0)
              |> Floki.text == "Hello Felipe Sere!"
+
+
+    # maybe split this later into group_lead and advisor
+    assert response
+             |> Floki.find(".people-picker li")
+             |> length == 30
+
+    assert response
+             |> Floki.find(".question-picker li")
+             |> length == 16
   end
 end

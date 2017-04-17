@@ -26,4 +26,8 @@ defmodule Advisor.Core.People do
       _ -> :bad_parse
     end
   end
+
+  def everybody() do
+    Repo.all(Person)
+  end
 end
