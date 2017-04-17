@@ -33,8 +33,9 @@ defmodule Advisor.Mixfile do
      {:phoenix_ecto, "~> 3.2"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.6"},
+     {:cowboy, "~> 1.0"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:cowboy, "~> 1.0"}]
+     {:floki, "~> 0.17.0", only: :test}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
