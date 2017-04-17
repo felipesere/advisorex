@@ -9,4 +9,21 @@ defmodule Advisor.Core.People do
 
     Repo.one(query)
   end
+
+  def find_by([id: nil]), do: nil
+  def find_by([id: user_id]) do
+    case parse(user_id) do
+      :bad_parse -> nil
+      id -> query_by_user(id)
+    end
+  end
+
+  defp query_by_user(id), do: Repo.one(from u in Person, where: u.id == ^id)
+
+  defp parse(user_id) do
+    case Integer.parse(user_id) do
+      {id, ""} -> id
+      _ -> :bad_parse
+    end
+  end
 end

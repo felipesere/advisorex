@@ -1,0 +1,37 @@
+<form action="/request" method="post">
+  <section class="module">
+    <header class="module-header medium-header">
+      <h1>Hello <%= @requester.name %>!</h1>
+    </header>
+    <header class="module-header">
+      <h1>Who is your Group Lead?</h1>
+    </header>
+    {{> group-leads group_leads}}
+  </section>
+
+  <hr class="separator" />
+  <section class="module">
+    <header class="module-header">
+      <h1>Choose topics for advice</h1>
+    </header>
+    {{> questions catalog}}
+  </section>
+
+  <hr class="separator" />
+
+  <section class="module">
+    <header class="module-header">
+      <h1>Choose people to give you advice</h1>
+    </header>
+    {{> people people }}
+  </section>
+
+  <section class="module">
+    <button type="submit" class="request-advice button primary full">Ask for advice</button>
+  </section>
+</form>
+
+<div class="notice invisible">
+  <p class="notice-message"></p>
+</div>
+<script src="/assets/js/request.js"></script>
