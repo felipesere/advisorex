@@ -8,8 +8,9 @@
     <form action="/begin" method="post">
       <input type="email" name="email" placeholder="Put your email here" />
       <button type="submit"  class="button primary"><%= @button %></button>
+      <input type="hidden" name="_csrf_token" value="<%= csrf_token() %>">
       <%= if @target do %>
-        <input type="hidden" name="target" value="<%= @target %>"
+        <input type="hidden" name="target" value="<%= @target %>">
       <% end %>
       <form>
   </div>
