@@ -3,13 +3,14 @@ defmodule Advisor.Core.People do
   alias Advisor.Core.Person
   import Ecto.Query
 
+  def find_by_id(id), do: find_by([id: id])
+
   def find_by([email: email]) do
     query = from u in Person,
                 where: u.email == ^email
 
     Repo.one(query)
   end
-
   def find_by([id: nil]), do: nil
   def find_by([id: user_id]) do
     case parse(user_id) do
