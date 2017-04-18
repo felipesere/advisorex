@@ -1,12 +1,16 @@
 defmodule Advisor.Core.Questions do
   alias Advisor.Repo
   alias Advisor.Core.Question
-  import Ecto.Query
 
   def all() do
     Repo.all(Question)
     |> Enum.group_by(&( &1.kind))
-    |> Enum.map(fn({k,v}) -> {convert_key(k), v} end)
+    |> coerce()
+  end
+
+  defp coerce(elements) do
+    elements
+    |> Enum.map(fn({key,value}) -> {convert_key(key), value} end)
     |> Enum.into(%{})
   end
 
