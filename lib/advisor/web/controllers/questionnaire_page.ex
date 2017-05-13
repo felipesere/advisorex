@@ -17,4 +17,8 @@ defmodule Advisor.Web.QuestionnairePage do
       conn |> redirect(to: "/")
     end
   end
+
+  def create(conn, _params) do
+    conn
+  end
 end
