@@ -1,9 +1,9 @@
 # Advisor
 
 This little app sprung to life as an attempt to improve upon the current peer-feedback process.
-The main point is to provide valuable insight by giving and advice and avoiding generic feedback.
+The main point is to provide valuable insight by giving advice and avoiding generic feedback.
 
-Advisor allows you to create a form from a catalog of questions and lets you direct that form to specific people.
+Advisor allows you to create a form from a catalogue of questions and lets you direct that form to specific people.
 This makes the insights more targeted to your current situation.
 
 It also pushes the responsibility to collect and track the results away from a central authority and out the mentee/group lead pairs.
@@ -17,7 +17,7 @@ _things_ are relevant in Advisorex. Its neither complete nor detailed.
 
 ![Domain Model](doc/domain-model.jpg)
 
-# Running the server
+# From your local machine
 
 To start your Phoenix server:
 
@@ -28,12 +28,26 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+# In a virtual machine
 
-## Learn more
+You need to have [Vagrant](https://www.vagrantup.com/docs/installation/) and [Virtual Box](https://www.virtualbox.org/) installed
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+Then install the Ansible libraries for Postgresql and NodeJS
+
+`ansible-galaxy install geerlingguy.nodejs`
+
+`ansible-galaxy install ANXS.postgresql`
+
+Provision the Vagrant box
+
+`vagrant up`
+
+Then access the virtual machine with
+
+`vagrant ssh`
+
+`cd /vagrant`
+
+`mix phx.server`
+
+
