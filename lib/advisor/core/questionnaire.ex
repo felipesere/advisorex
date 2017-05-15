@@ -1,5 +1,13 @@
 defmodule Advisor.Core.Questionnaire do
+  use Ecto.Schema
   alias Advisor.Core.{People, Questions}
+
+  @primary_key {:id, :binary_id, autogenerate: true}
+
+  schema "questionnaires" do
+    field :question_ids, {:array, :integer}
+    field :requester_id, :integer
+  end
 
   def form_data() do
     everybody = People.everybody()
