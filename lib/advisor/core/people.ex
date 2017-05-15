@@ -12,8 +12,9 @@ defmodule Advisor.Core.People do
     Repo.one(query)
   end
   def find_by([id: nil]), do: nil
-  def find_by([id: user_id]) do
-    case parse(user_id) do
+  def find_by([id: id]) when is_integer(id), do: query_by_user(id)
+  def find_by([id: id]) do
+    case parse(id) do
       :bad_parse -> nil
       id -> query_by_user(id)
     end

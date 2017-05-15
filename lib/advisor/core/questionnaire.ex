@@ -18,4 +18,8 @@ defmodule Advisor.Core.Questionnaire do
   end
 
   defp who_is_a_group_lead(person), do: person.is_group_lead
+
+  defmodule Created do
+    defstruct questionnaire: :unassigned, advisories: []
+  end
 end

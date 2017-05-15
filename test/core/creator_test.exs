@@ -16,10 +16,11 @@ defmodule Advisor.Core.CreatorTest do
   test "creates a simple questionnaire" do
     proposal = %QuestionnaireProposal{group_lead: 1, 
                                       requester: 2,
-                                      advisors: [2],
+                                      advisors: [2,9],
                                       questions: [7] }
 
-    {:ok, s} = Creator.create(proposal)
-    assert s.id
+    {:ok, created} = Creator.create(proposal)
+    assert created.questionnaire
+    assert length(created.advisories) == 2
   end
 end
