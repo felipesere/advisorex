@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+echo "Setting up basic git configuration"
+git_name=`git config --global user.name`
+git_email=`git config --global user.email`
+vagrant ssh -c "git config --global user.name '$git_name'"
+vagrant ssh -c "git config --global user.email '$git_email'"
+
+echo "Transferring configuration files"
+pub_key=`cat ~/.ssh/id_rsa.pub`
+vagrant ssh -c "echo \"$pub_key\" >> ~/.ssh/authorized_keys"
+
+eval `ssh-agent -s`
+ssh-add
