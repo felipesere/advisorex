@@ -4,7 +4,8 @@
   - role: geerlingguy.nodejs
   tasks:
     - name: installing Git
-      package: name=git state=present
+      shell: 'sudo apt-get update &&
+sudo apt-get -y install git'
     - name: installing Erlang
       shell: 'wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && sudo dpkg -i erlang-solutions_1.0_all.deb'
     - name: updating Erlang
@@ -15,8 +16,6 @@
       shell: 'cd /vagrant && mix local.hex --force'
     - name: installing Phoenix
       shell: 'cd /vagrant && mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez'
-    - name: installing NodeJS
-      shell: 'sudo apt-get -y install nodejs'
     - name: installing PostgreSQL
       shell: 'sudo apt-get -y install postgresql postgresql-contrib'
     - name: createing user postgres

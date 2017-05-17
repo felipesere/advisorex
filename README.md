@@ -30,7 +30,12 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 # In a virtual machine
 
-You need to have [Vagrant](https://www.vagrantup.com/docs/installation/) and [Virtual Box](https://www.virtualbox.org/) installed
+Prerequisites:
+
+- [Vagrant](https://www.vagrantup.com/docs/installation/)
+
+- [Virtual Box](https://www.virtualbox.org/)
+
 
 Then install the Ansible libraries for Postgresql and NodeJS
 
@@ -38,15 +43,13 @@ Then install the Ansible libraries for Postgresql and NodeJS
 
 `ansible-galaxy install ANXS.postgresql`
 
-Provision the Vagrant box
+To enter the virtual machine, run
 
-`vagrant up`
+`bin/start`
 
-Then access the virtual machine with
+This command will also provision the machine if you're using it for the first time which will take a few minutes. But once you have it running, it will ssh you into the correct directory
 
-`vagrant ssh`
-
-`cd /vagrant`
+To start the server for the advisorex project, run:
 
 `mix phx.server`
 
