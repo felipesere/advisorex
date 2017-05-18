@@ -1,3 +1,6 @@
 #! /usr/bin/env bash
-
+VM_STATUS=$(vagrant status --machine-readable | grep ",state," | egrep -o '([a-z]*)$')
+if [ "${VM_STATUS}" = "poweroff" ]; then
+  vagrant up
+fi
 vagrant ssh -- -t 'cd /vagrant/; /bin/bash'
