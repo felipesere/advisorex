@@ -3,6 +3,8 @@
   roles:
   - role: geerlingguy.nodejs
   tasks:
+    - name: configure Depian package manager
+      shell: 'sudo dpkg --configure -a'
     - name: installing Git
       shell: 'sudo apt-get update &&
 sudo apt-get -y install git'
