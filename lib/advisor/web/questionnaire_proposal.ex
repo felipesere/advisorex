@@ -4,13 +4,16 @@ defmodule Advisor.Web.QuestionnaireProposal do
             advisors: [],
             questions: []
 
-  def from(%{"group_lead" => lead, "people" => people, "questions" => questions}) do
+
+  def for_requester(%{"group_lead" => lead, "people" => people, "questions" => questions},
+                    %{id: id}) do
     with {:ok, lead} <- parse(lead),
          {:ok, people} <- parse(people),
          {:ok, questions} <- parse(questions),
       do: %Advisor.Web.QuestionnaireProposal{ group_lead: lead,
                                               advisors: people,
-                                              questions: questions }
+                                              questions: questions,
+                                              requester: id}
   end
 
   def for_requester(proposal, request_id) do
