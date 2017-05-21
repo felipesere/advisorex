@@ -9,8 +9,12 @@ defmodule Advisor.Web.QuestionnaireProposal do
          {:ok, people} <- parse(people),
          {:ok, questions} <- parse(questions),
       do: %Advisor.Web.QuestionnaireProposal{ group_lead: lead,
-                                              requester: people,
+                                              advisors: people,
                                               questions: questions }
+  end
+
+  def for_requester(proposal, request_id) do
+    %{ proposal | requester: request_id }
   end
 
   def parse(map) when is_map(map) do

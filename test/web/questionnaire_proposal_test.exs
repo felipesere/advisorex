@@ -8,10 +8,10 @@ defmodule Advisor.Web.QuestionnaireProposalTest do
     assert QuestionnaireProposal.from(data).group_lead == 11
   end
 
-  test "can extract multiple requesters from form data" do
+  test "can extract multiple advisors from form data" do
    data = %{"group_lead" => "11", "people" => %{"4" => "on", "5" => "on"}, "questions" => %{"13" => "on"}}
 
-    assert QuestionnaireProposal.from(data).requester == [4,5]
+    assert QuestionnaireProposal.from(data).advisors == [4,5]
   end
 
   test "can extract multiple questions" do

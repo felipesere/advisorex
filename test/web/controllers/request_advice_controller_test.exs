@@ -7,5 +7,8 @@ defmodule Advisor.Web.RequestAdviceControllerTest do
     response = html_response(conn, 200)
 
     assert Floki.find(response, "h1") |> Floki.text == "Here are your links"
+    assert Floki.find(response, ".individual") |> Enum.count == 1
+    assert Floki.find(response, ".see-advice-link") |> Floki.text =~ "/progress/"
   end
+
 end

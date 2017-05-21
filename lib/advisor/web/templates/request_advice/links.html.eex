@@ -13,5 +13,5 @@
     <% end %>
   </ul>
 
-  <p>See advice <a href="<%= @progress_link %>"><%= @progress_link %></a></p>
+  <p>See advice <a class="see-advice-link" href="<%= @progress_link %>"><%= @progress_link %></a></p>
 </section>
