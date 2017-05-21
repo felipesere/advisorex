@@ -1,0 +1,21 @@
+language: elixir
+elixir:
+  - 1.4.2
+otp_release:
+  - 19.3
+services:
+  - postgresql
+
+addons:
+  postgresql: "9.4"
+
+before_script:
+  - psql -c 'create database advisor_test;' -U postgres
+  - psql -c 'create extension pgcrypto;' -U postgres
+
+cache:
+  directories:
+    - _build
+    - deps
+    - otp
+    - .kerl

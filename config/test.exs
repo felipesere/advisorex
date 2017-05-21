@@ -14,7 +14,7 @@ config :logger, level: :warn
 config :advisor, Advisor.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
+  password: "",
   database: "advisor_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
