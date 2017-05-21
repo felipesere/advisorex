@@ -5,22 +5,22 @@ defmodule Advisor.Web.Authentication.Gatekeeper do
 
   def init(opts), do: opts
 
-  def call(conn, _params) do
+  def call(conn, _opts) do
     conn
     |> user_id
     |> People.find_by_id
-    |> assign(conn)
+    |> preload(conn)
   end
 
   def user_id(conn) do
     conn = fetch_cookies(conn)
-    conn.req_cookies["user"]
+    conn.req_cookies["user"] || conn.assigns[:user_id]
   end
 
-  def assign(%Person{} = user, conn) do
+  def preload(%Person{} = user, conn) do
     assign(conn, :user, user)
   end
-  def assign(_, conn) do
+  def preload(_, conn) do
     conn
     |> redirect_to_login
   end
