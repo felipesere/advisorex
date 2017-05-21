@@ -2,6 +2,7 @@ defmodule Advisor.Web.Authentication.Gatekeeper do
   import Plug.Conn
   alias Advisor.Core.People
   alias Advisor.Core.Person
+  import Phoenix.Controller, only: [redirect: 2]
 
   def init(opts), do: opts
 
@@ -28,7 +29,7 @@ defmodule Advisor.Web.Authentication.Gatekeeper do
   def redirect_to_login(conn) do
     conn
     |> preserve_original_destination
-    |> Phoenix.Controller.redirect(to: "/")
+    |> redirect(to: "/")
     |> halt()
   end
 
