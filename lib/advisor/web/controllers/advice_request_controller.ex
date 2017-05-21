@@ -1,4 +1,4 @@
-defmodule Advisor.Web.RequestAdviceController do
+defmodule Advisor.Web.AdviceRequestController do
   use Advisor.Web, :controller
   alias Advisor.Web.{Links, QuestionnaireProposal, Authentication.User}
   alias Advisor.Core.Creator

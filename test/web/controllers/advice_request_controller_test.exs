@@ -1,4 +1,4 @@
-defmodule Advisor.Web.RequestAdviceControllerTest do
+defmodule Advisor.Web.AdviceRequestControllerTest do
   use Advisor.Web.ConnCase
 
   test "creates the proper questionnaire", %{conn: conn} do
