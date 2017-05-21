@@ -26,3 +26,4 @@ npm-debug.log
 # variables.
 /config/*.secret.exs
 .vagrant/
+ubuntu-zesty-17.04-cloudimg-console.log
