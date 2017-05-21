@@ -1,3 +1,0 @@
-dbuser: "postgres"
-dbname: "advisor_dev"
-dbpassword: "postgres"
