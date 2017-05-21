@@ -19,7 +19,7 @@
   vars:
     dbname: advisor_dev
     dbuser: postgres
-    dbpassword: postgres
+    dbpassword:
 
   roles:
     - role: ANXS.postgresql
