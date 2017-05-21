@@ -1,5 +1,7 @@
 # Advisor
 
+[![Build Status](https://travis-ci.org/felipesere/advisorex.svg?branch=master)](https://travis-ci.org/felipesere/advisorex)
+
 This little app sprung to life as an attempt to improve upon the current peer-feedback process.
 The main point is to provide valuable insight by giving advice and avoiding generic feedback.
 
