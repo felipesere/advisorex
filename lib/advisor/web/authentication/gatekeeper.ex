@@ -2,25 +2,26 @@ defmodule Advisor.Web.Authentication.Gatekeeper do
   import Plug.Conn
   alias Advisor.Core.People
   alias Advisor.Core.Person
+  import Phoenix.Controller, only: [redirect: 2]
 
   def init(opts), do: opts
 
-  def call(conn, _params) do
+  def call(conn, _opts) do
     conn
     |> user_id
     |> People.find_by_id
-    |> assign(conn)
+    |> preload(conn)
   end
 
   def user_id(conn) do
     conn = fetch_cookies(conn)
-    conn.req_cookies["user"]
+    conn.req_cookies["user"] || conn.assigns[:user_id]
   end
 
-  def assign(%Person{} = user, conn) do
+  def preload(%Person{} = user, conn) do
     assign(conn, :user, user)
   end
-  def assign(_, conn) do
+  def preload(_, conn) do
     conn
     |> redirect_to_login
   end
@@ -28,7 +29,7 @@ defmodule Advisor.Web.Authentication.Gatekeeper do
   def redirect_to_login(conn) do
     conn
     |> preserve_original_destination
-    |> Phoenix.Controller.redirect(to: "/")
+    |> redirect(to: "/")
     |> halt()
   end
 

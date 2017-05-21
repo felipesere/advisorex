@@ -29,3 +29,5 @@ npm-debug.log
 ubuntu-zesty-17.04-cloudimg-console.log
 playbook.retry
 setup/playbook.retry
+mix.lock
+
