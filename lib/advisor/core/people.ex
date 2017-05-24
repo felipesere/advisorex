@@ -5,6 +5,10 @@ defmodule Advisor.Core.People do
 
   def find_by_id(id), do: find_by([id: id])
 
+  def find_by([name: name]) do
+    Repo.one(from u in Person, where: u.name == ^name)
+  end
+  def find_by(%{advisor_id: id}), do: find_by_id(id)
   def find_by([email: email]) do
     query = from u in Person,
                 where: u.email == ^email

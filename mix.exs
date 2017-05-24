@@ -37,7 +37,8 @@ defmodule Advisor.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:ex_unit_notifier, "~> 0.1.3", only: :test},
      {:mix_test_watch, "~> 0.3.3"},
-     {:floki, "~> 0.17.0", only: :test}]
+     {:floki, "~> 0.17.0", only: :test},
+     {:credo, "~> 0.7", only: [:dev, :test]}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
