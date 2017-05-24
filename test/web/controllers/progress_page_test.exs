@@ -10,9 +10,11 @@ defmodule Advisor.Web.ProgressPageTest do
     proposal = %Proposal{group_lead: 1,
                          requester: requester.id,
                          advisors: Enum.map(advisors, &(&1.id)),
-                         questions: [5,6]}
+                         questions: [5, 6]}
 
-    {_, progress_link} = Creator.create(proposal) |> Links.generate
+    {_, progress_link} = proposal
+                         |> Creator.create
+                         |> Links.generate
 
     conn = conn |> get(progress_link)
     html = html_response(conn, 200)

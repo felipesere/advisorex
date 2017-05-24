@@ -11,7 +11,7 @@ defmodule Advisor.Web.QuestionnaireProposalTest do
     proposal = QuestionnaireProposal.for_requester(@data, @user)
 
     assert proposal.group_lead == 11
-    assert proposal.advisors == [4,5]
+    assert proposal.advisors == [4, 5]
     assert proposal.questions == [13]
     assert proposal.requester == 1
   end

@@ -11,7 +11,8 @@ defmodule Advisor.Web.Authentication.GatekeeprTest do
   end
 
   test "presrves original destination in session" do
-    conn = get("/foo")
+    conn = "/foo"
+           |> get()
            |> Gatekeeper.call(%{})
            |> fetch_cookies()
 
@@ -19,7 +20,8 @@ defmodule Advisor.Web.Authentication.GatekeeprTest do
   end
 
   test "loads the user if it available" do
-    conn = get("/foo")
+    conn = "/foo"
+           |> get()
            |> with_user("11")
            |> Gatekeeper.call(%{})
 

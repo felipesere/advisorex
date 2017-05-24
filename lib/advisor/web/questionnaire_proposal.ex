@@ -10,14 +10,14 @@ defmodule Advisor.Web.QuestionnaireProposal do
     with {:ok, lead} <- parse(lead),
          {:ok, people} <- parse(people),
          {:ok, questions} <- parse(questions),
-      do: %Advisor.Web.QuestionnaireProposal{ group_lead: lead,
-                                              advisors: people,
-                                              questions: questions,
-                                              requester: id}
+      do: %Advisor.Web.QuestionnaireProposal{group_lead: lead,
+                                             advisors: people,
+                                             questions: questions,
+                                             requester: id}
   end
 
   def for_requester(proposal, request_id) do
-    %{ proposal | requester: request_id }
+    %{proposal | requester: request_id}
   end
 
   def parse(map) when is_map(map) do
@@ -29,14 +29,14 @@ defmodule Advisor.Web.QuestionnaireProposal do
   end
   def parse(potential) when is_binary(potential) do
     case Integer.parse(potential) do
-      {number,""} -> {:ok, number}
+      {number, ""} -> {:ok, number}
       _ -> :could_not_parse_to_integer
     end
   end
 
   def parse!(potential) do
     case Integer.parse(potential) do
-      {number,""} -> number
+      {number, ""} -> number
       _ -> raise "Could not parse to integer"
     end
   end

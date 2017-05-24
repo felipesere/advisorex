@@ -8,9 +8,9 @@ defmodule Advisor.Web.AdviceRequestControllerTest do
 
     response = html_response(conn, 200)
 
-    assert Floki.find(response, "h1") |> Floki.text == "Here are your links"
-    assert Floki.find(response, ".individual") |> Enum.count == 1
-    assert Floki.find(response, ".see-advice-link") |> Floki.text =~ "/progress/"
+    assert response |> Floki.find("h1") |> Floki.text == "Here are your links"
+    assert response |> Floki.find(".individual") |> Enum.count == 1
+    assert response |> Floki.find(".see-advice-link") |> Floki.text =~ "/progress/"
   end
 
   test "redirects unauthenticated user request", %{conn: conn} do
