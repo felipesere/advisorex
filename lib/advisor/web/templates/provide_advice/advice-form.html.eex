@@ -1,0 +1,19 @@
+<form action="/provide/{{id}}" method="post">
+  <section class="module">
+    <header class="module-header">
+      <h1>Advice for <%= @requester.name %></h1>
+    </header>
+
+    <div class="feedback-questions">
+      <%= for question <- @questions do  %>
+        <div class="feedback-question">
+          <h3><%= question.phrase %></h3>
+          <textarea name="<%= question.id %>" rows="5"></textarea>
+        </div>
+      <% end %>
+
+      <button type="submit" class="button primary full">Submit your feedback</a>
+    </div>
+  </section>
+</form>
+

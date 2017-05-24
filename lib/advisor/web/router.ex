@@ -21,5 +21,6 @@ defmodule Advisor.Web.Router do
     get "/request", QuestionnairePage, :index
     post "/request", AdviceRequestController, :create
     get "/progress/:id", ProgressPage, :index
+    get "/provide/:id", ProvideAdviceController, :index
   end
 end
