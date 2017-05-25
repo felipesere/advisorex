@@ -4,10 +4,10 @@
   </header>
   <ul class="advisors">
     <%= for person <- @completed do %>
-      <%= render "advisor-progress-completed.html", person: person %>
+      <%= render "_advisor-progress.html", person: person %>
     <% end %>
     <%= for person <- @incomplete do %>
-      <%= render "advisor-progress-incomplete.html", person: person %>
+      <%= render "_advisor-progress.html", person: person, state: :incomplete %>
     <% end %>
   </ul>
 </section>
