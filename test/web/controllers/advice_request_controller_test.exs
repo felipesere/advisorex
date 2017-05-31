@@ -4,7 +4,7 @@ defmodule Advisor.Web.AdviceRequestControllerTest do
   test "creates the proper questionnaire", %{conn: conn} do
     conn = conn
            |> login_as(11)
-           |> post("/request", [group_lead: "11", people: %{"4" => "on"}, questions:  %{"13" => "on"}])
+           |> post("/request", [proposal: %{:group_lead => "11", :advisors => %{"4" => "true"}, :questions =>  %{"13" => "true"}}])
 
     response = html_response(conn, 200)
 

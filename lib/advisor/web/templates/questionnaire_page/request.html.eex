@@ -1,36 +1,37 @@
-<form action="/request" method="post">
-  <section class="module">
-    <header class="module-header medium-header">
-      <h1>Hello <%= @requester.name %>!</h1>
-    </header>
-    <header class="module-header">
-      <h1>Who is your Group Lead?</h1>
-    </header>
-    <%= render "_group_leads.html", leads: @group_leads %>
-  </section>
+<%= form_for @conn, "/request", [as: :proposal], fn f -> %>
+    <section class="module">
+      <header class="module-header medium-header">
+        <h1>Hello <%= @requester.name %>!</h1>
+      </header>
+      <header class="module-header">
+        <h1>Who is your Group Lead?</h1>
+      </header>
+      <%= render "_group_leads.html", leads: @group_leads, form: f %>
+    </section>
 
-  <hr class="separator" />
-  <section class="module">
-    <header class="module-header">
-      <h1>Choose topics for advice</h1>
-    </header>
-    <%= render "_questions.html", questions: @questions %>
-  </section>
+    <hr class="separator" />
 
-  <hr class="separator" />
+    <section class="module">
+      <header class="module-header">
+        <h1>Choose topics for advice</h1>
+      </header>
+      <%= render "_questions.html", questions: @questions, form: f %>
+    </section>
 
-  <section class="module">
-    <header class="module-header">
-      <h1>Choose people to give you advice</h1>
-    </header>
-    <%= render "_advisors.html", everybody: @everybody %>
-  </section>
+    <hr class="separator" />
+
+    <section class="module">
+      <header class="module-header">
+        <h1>Choose people to give you advice</h1>
+      </header>
+      <%= render "_advisors.html", everybody: @everybody, form: f %>
+    </section>
 
   <section class="module">
     <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
     <button type="submit" class="request-advice button primary full">Ask for advice</button>
   </section>
-</form>
+<% end %>
 
 <div class="notice invisible">
   <p class="notice-message"></p>

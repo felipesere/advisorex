@@ -1,6 +1,6 @@
 <li>
   <label>
-    <input type="checkbox" name="questions[<%= @q.id %>]" />
+    <%= checkbox(@form, String.to_atom("#{@q.id}")) %>
     <span><%= @q.phrase %></span>
   </label>
 </li>

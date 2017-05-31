@@ -5,8 +5,7 @@ defmodule Advisor.Web.QuestionnaireProposal do
             questions: []
 
 
-  def for_requester(%{"group_lead" => lead, "people" => people, "questions" => questions},
-                    %{id: id}) do
+  def for_requester(%{"proposal" => %{"group_lead" => lead, "advisors" => people, "questions" => questions}}, %{id: id}) do
     with {:ok, lead} <- parse(lead),
          {:ok, people} <- parse(people),
          {:ok, questions} <- parse(questions),
@@ -16,14 +15,8 @@ defmodule Advisor.Web.QuestionnaireProposal do
                                              requester: id}
   end
 
-  def for_requester(proposal, request_id) do
-    %{proposal | requester: request_id}
-  end
-
   def parse(map) when is_map(map) do
-    map = map
-          |> Map.keys
-          |> Enum.map(&parse!/1)
+    map = Enum.filter_map(map, fn({_, value}) -> value == "true" end, fn({key, _}) -> parse!(key) end)
 
     {:ok, map}
   end
