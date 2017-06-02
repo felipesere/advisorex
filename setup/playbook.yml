@@ -12,6 +12,10 @@ sudo apt-get -y install git'
       shell: 'wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && sudo dpkg -i erlang-solutions_1.0_all.deb'
     - name: updating Erlang
       shell: 'sudo apt-get update'
+    - name: installing Erlang dev tools
+      shell: 'sudo apt-get install erlang-dev'
+    - name: installing Erlang parse tools
+      shell: 'sudo apt-get install erlang-parsetools'
     - name: installing Elixir
       shell: 'sudo apt-get -y install elixir'
     - name: installing Hex
@@ -20,7 +24,7 @@ sudo apt-get -y install git'
       shell: 'cd /vagrant && mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez'
     - name: installing PostgreSQL
       shell: 'sudo apt-get -y install postgresql postgresql-contrib'
-    - name: createing user postgres
+    - name: creating user postgres
       shell: 'sudo -u postgres psql postgres'
     - name: installing rebar
       shell: 'mix local.rebar --force'
