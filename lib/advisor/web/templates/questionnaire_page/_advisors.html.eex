@@ -1,9 +1,9 @@
 <ul class="people-picker">
-  <%= inputs_for @form, :advisors, fn x -> %>
+  <%= inputs_for @form, :advisors, fn advisors_form -> %>
     <%= for person <- @everybody do %>
       <li>
-        <%= checkbox(x, String.to_atom("#{person.id}")) %>
-        <%= label(x, :advisor, "", for: "proposal_advisors_#{person.id}", class: "people-picker", style: "background: url(#{person.profile_image}); background-size: cover;") %>
+        <%= checkbox(advisors_form, String.to_atom("#{person.id}")) %>
+        <%= label(advisors_form, :advisor, "", for: "proposal_advisors_#{person.id}", class: "people-picker", style: "background: url(#{person.profile_image}); background-size: cover;") %>
         <span class="name"><%= person.name %></span>
       </li>
     <% end %>

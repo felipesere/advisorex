@@ -4,7 +4,7 @@ defmodule Advisor.Web.QuestionnaireProposalTest do
 
   @user %{id: 1}
 
-  @new %{"proposal" => %{"advisors" => %{"1" => "false", "4" => "true", "5" => "true"}, 
+  @new %{"proposal" => %{"advisors" => %{"1" => "false", "4" => "true", "5" => "true"},
                          "group_lead" => "11",
                          "questions" => %{"4" => "false", "13" => "true"}}}
 

@@ -1,22 +1,22 @@
 <div class="question-picker">
-  <%= inputs_for @form, :questions, fn x -> %>
+  <%= inputs_for @form, :questions, fn questions_form -> %>
     <ul class="green-questions">
 
       <h3>Technical</h3>
       <%= for q <- @questions.technical do %>
-        <%= render "_question.html", q: q, form: x %>
+        <%= render "_question.html", q: q, form: questions_form %>
       <% end %>
     </ul>
     <ul class="red-questions">
       <h3>Client</h3>
       <%= for q <- @questions.client do %>
-        <%= render "_question.html", q: q, form: x %>
+        <%= render "_question.html", q: q, form: questions_form %>
       <% end %>
     </ul>
     <ul class="blue-questions">
       <h3>Community</h3>
       <%= for q <- @questions.community do %>
-        <%= render "_question.html", q: q, form: x %>
+        <%= render "_question.html", q: q, form: questions_form %>
       <% end %>
     </ul>
   <% end %>
