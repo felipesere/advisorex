@@ -1,0 +1,9 @@
+<li>
+  <img class="profile-image <%= @state %>"  src="<%= @person.profile_image %>">
+  <span class="advisor"><%= @person.name %></span>
+  <%= if @state  == :incomplete do %>
+    <span class="completeness">Incomplete</span>
+  <% else %>
+    <span class="completeness">Completed</span>
+    <%= end %>
+</li>

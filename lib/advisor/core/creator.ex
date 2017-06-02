@@ -14,7 +14,8 @@ defmodule Advisor.Core.Creator do
         advisor_id: advisor}
     end)
 
-    advisories = Repo.insert_all(AdviceRequest, advice_requests, returning: true)
+    advisories = AdviceRequest
+                 |> Repo.insert_all(advice_requests, returning: true)
                  |> elem(1)
                  |> Enum.map(&%Advisory{advisor: People.find_by_id(&1.advisor_id), advice_id: &1.id})
 

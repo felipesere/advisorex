@@ -3,14 +3,15 @@ defmodule Advisor.Core.Questions do
   alias Advisor.Core.Question
 
   def all() do
-    Repo.all(Question)
-    |> Enum.group_by(&( &1.kind))
+    Question
+    |> Repo.all
+    |> Enum.group_by(&(&1.kind))
     |> coerce()
   end
 
   defp coerce(elements) do
     elements
-    |> Enum.map(fn({key,value}) -> {convert_key(key), value} end)
+    |> Enum.map(fn({key, value}) -> {convert_key(key), value} end)
     |> Enum.into(%{})
   end
 

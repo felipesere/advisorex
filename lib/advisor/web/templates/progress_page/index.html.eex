@@ -1,0 +1,21 @@
+<section class="module">
+  <header class="module-header">
+    <h1 class="progress-requester">Progress on the advice for <%= @requester.name %></h1>
+  </header>
+  <ul class="advisors">
+    <%= for person <- @completed do %>
+      <%= render "_advisor-progress.html", person: person %>
+    <% end %>
+    <%= for person <- @incomplete do %>
+      <%= render "_advisor-progress.html", person: person, state: :incomplete %>
+    <% end %>
+  </ul>
+</section>
+
+<section class="module">
+  <%= if @all_complete do %>
+    <a href="/present/<%= @questionnaire.id %>" class="button primary full">We are good to go!</a>
+  <% else %>
+    <p class="button primary full disabled">Waiting for further responses</p>
+  <% end %>
+</section>

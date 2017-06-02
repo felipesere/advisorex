@@ -1,9 +1,8 @@
 <ul class="people-picker">
   <%= for person <- @leads do %>
     <li>
-      <input id="group-lead<%= person.id %>" type="radio" name="group_lead" value="<%= person.id %>">
-      <label for="group-lead<%=person.id%>"  class="people-picker" style="background: url(<%=person.profile_image%>); background-size: cover;">
-      </label>
+      <%= radio_button(@form ,:group_lead, person.id) %>
+      <%= label(@form, :group_lead, "", for: "proposal_group_lead_#{person.id}", class: "people-picker", style: "background: url(#{person.profile_image}); background-size: cover;", ) %>
       <span class="name"><%= person.name %></span>
     </li>
   <% end %>

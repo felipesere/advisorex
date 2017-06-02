@@ -4,13 +4,13 @@ defmodule Advisor.Web.AdviceRequestControllerTest do
   test "creates the proper questionnaire", %{conn: conn} do
     conn = conn
            |> login_as(11)
-           |> post("/request", [group_lead: "11", people: %{"4" => "on"}, questions:  %{"13" => "on"}])
+           |> post("/request", [proposal: %{:group_lead => "11", :advisors => %{"4" => "true"}, :questions =>  %{"13" => "true"}}])
 
     response = html_response(conn, 200)
 
-    assert Floki.find(response, "h1") |> Floki.text == "Here are your links"
-    assert Floki.find(response, ".individual") |> Enum.count == 1
-    assert Floki.find(response, ".see-advice-link") |> Floki.text =~ "/progress/"
+    assert response |> Floki.find("h1") |> Floki.text == "Here are your links"
+    assert response |> Floki.find(".individual") |> Enum.count == 1
+    assert response |> Floki.find(".see-advice-link") |> Floki.text =~ "/progress/"
   end
 
   test "redirects unauthenticated user request", %{conn: conn} do

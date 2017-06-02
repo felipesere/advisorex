@@ -5,7 +5,7 @@ defmodule Advisor.Web.LandingPageTest do
     conn = get conn, "/"
     response = html_response(conn, 200)
 
-    assert Floki.find(response, "h1") |> Floki.text == "Advisor"
-    assert Floki.find(response, "button") |> Floki.text == "Ask for advice"
+    assert response |> Floki.find("h1") |> Floki.text == "Advisor"
+    assert response |> Floki.find("button") |> Floki.text == "Ask for advice"
   end
 end

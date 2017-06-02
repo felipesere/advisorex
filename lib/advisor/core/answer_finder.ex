@@ -1,5 +1,5 @@
 defmodule Advisor.Core.AnswerFinder do
-  alias Advisor.Core.{Answer, AdviceRequest}
+  alias Advisor.Core.Answer
   alias Advisor.Repo
   import Ecto.Query
 
