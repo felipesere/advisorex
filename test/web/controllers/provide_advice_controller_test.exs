@@ -1,17 +1,35 @@
 defmodule Advisor.Web.ProvideAdviceControllerTest do
   use Advisor.Web.ConnCase
+  alias Advisor.Web.QuestionnaireProposal, as: Proposal
+  alias Advisor.Web.Links
+  alias Advisor.Core.Creator
 
-  @tag :pending
   test "renders the form", %{conn: conn} do
-    conn = conn
-           |> login_as(11)
-           |> get("/provide/5d83604c-c55b-4725-a529-91a24b01014c") 
-    response = html_response(conn, 200)
+    {links, _} = create_questionnaire(for: "Rabea Gleissner",
+                                      advisors: ["Felipe Sere", "Chris Jordan"],
+                                      group_lead: "Jim Suchy",
+                                      questions: [5, 6])
 
-    assert Floki.find(response, "h1") |> Floki.text == "Here's the advice form"
+    felipes_advice = advisory_for(links, "Felipe Sere")
+
+    response = conn
+           |> login_as("Felipe Sere")
+           |> get(felipes_advice)
+           |> html_response(200)
+
+    assert response |> Floki.find("h1") |> Floki.text == "Advice for Rabea Gleissner"
   end
 
-  def login_as(conn, id) do
-    assign(conn, :user_id, id)
+  def create_questionnaire(opts) do
+    opts
+    |> Proposal.build
+    |> Creator.create
+    |> Links.generate
+  end
+
+  def advisory_for(links, name) do
+    links
+    |> Enum.find(&(&1.person.name == name))
+    |> Map.fetch!(:link)
   end
 end

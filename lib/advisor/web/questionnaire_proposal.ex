@@ -1,8 +1,26 @@
 defmodule Advisor.Web.QuestionnaireProposal do
+  alias Advisor.Core.People
+  alias __MODULE__
+
   defstruct group_lead: :unassigned,
             requester: :unassigned,
             advisors: [],
             questions: []
+
+  def build([for: requester_name,
+             advisors: advisors_names,
+             group_lead: lead_name,
+             questions: questions]) do
+
+    requester = People.find_by(name: requester_name).id
+    group_lead = People.find_group_lead(name: lead_name).id
+    advisors = Enum.map(advisors_names, fn(name) -> People.find_by(name: name).id end)
+
+    %QuestionnaireProposal{group_lead: group_lead,
+                         requester: requester,
+                         advisors: advisors,
+                         questions: questions}
+  end
 
   def for_requester(%{"proposal" => %{"group_lead" => lead,
                                       "advisors" => people,

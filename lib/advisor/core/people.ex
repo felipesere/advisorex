@@ -24,6 +24,11 @@ defmodule Advisor.Core.People do
     end
   end
 
+  def find_group_lead([name: name]) do
+    query = from u in Person, where: u.name == ^name and u.is_group_lead
+    Repo.one(query)
+  end
+
   defp query_by_user(id), do: Repo.one(from u in Person, where: u.id == ^id)
 
   defp parse(user_id) do
