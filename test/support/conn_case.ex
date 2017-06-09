@@ -31,7 +31,6 @@ defmodule Advisor.Web.ConnCase do
       def login_as(conn, id) do
         assign(conn, :user_id, id)
       end
-
     end
   end
 
