@@ -9,8 +9,8 @@ defmodule Advisor.Web.ProgressPage do
 
     by_completion = advisories
                     |> AnswerFinder.gather
-                    |> Enum.group_by(fn(x) -> completed?(x.answers, questionnaire) end,
-                                     fn(x) -> People.find_by(x.advisory) end)
+                    |> Enum.group_by(&(completed?(&1.answers, questionnaire)),
+                                     &(People.find_by(&1.advisory)))
 
     render conn, "index.html", requester: requester,
                                completed: Map.get(by_completion, true, []),

@@ -4,12 +4,16 @@ defmodule Advisor.Web.ProgressPageTest do
   alias Advisor.Web.Links
   alias Advisor.Core.{Creator, People}
 
+
+
   test "shows the progress filling in the questionnaires", %{conn: conn} do
-    requester = People.find_by name: "Rabea Gleissner"
-    advisors = [People.find_by(name: "Felipe Sere"), People.find_by(name: "Chris Jordan")]
+    rabea = People.find_by(name: "Rabea Gleissner")
+    felipe = People.find_by(name: "Felipe Sere")
+    cj = People.find_by(name: "Chris Jordan")
+
     proposal = %Proposal{group_lead: 1,
-                         requester: requester.id,
-                         advisors: Enum.map(advisors, &(&1.id)),
+                         requester: rabea.id,
+                         advisors: [felipe.id, cj.id],
                          questions: [5, 6]}
 
     {_, progress_link} = proposal
@@ -19,8 +23,14 @@ defmodule Advisor.Web.ProgressPageTest do
     conn = conn |> get(progress_link)
     html = html_response(conn, 200)
 
-    assert html |> Floki.find(".progress-requester") |> Floki.text =~ "Rabea Gleissner"
-    assert advisors(html) == ["Felipe Sere", "Chris Jordan"]
+    assert requester(html) =~ "Rabea Gleissner"
+    assert advisors(html)  == ["Felipe Sere", "Chris Jordan"]
+  end
+
+  def requester(html) do
+    html
+    |> Floki.find(".progress-requester")
+    |> Floki.text
   end
 
   def advisors(html) do
