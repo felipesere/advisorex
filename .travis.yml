@@ -13,6 +13,9 @@ before_script:
   - psql -c 'create database advisor_test;' -U postgres
   - psql -c 'create extension pgcrypto;' -U postgres
 
+script:
+  - MIX_ENV=test mix ci
+
 cache:
   directories:
     - _build
