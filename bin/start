@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 VM_STATUS=$(vagrant status --machine-readable | grep ",state," | egrep -o '([a-z]*)$')
-if [ "${VM_STATUS}" = "poweroff" ]; then
+if [ "${VM_STATUS}" = "poweroff" ] || [ "${VM_STATUS}" = "saved" ]; then
   vagrant up
 fi
 
