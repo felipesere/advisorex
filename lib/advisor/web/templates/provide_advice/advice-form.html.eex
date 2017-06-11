@@ -1,4 +1,4 @@
-<form action="/provide/{{id}}" method="post">
+<form action="<%= "/provide/#{@advice_id}" %>" method="post">
   <section class="module">
     <header class="module-header">
       <h1>Advice for <%= @requester.name %></h1>
@@ -11,7 +11,7 @@
           <textarea name="<%= question.id %>" rows="5"></textarea>
         </div>
       <% end %>
-
+      <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
       <button type="submit" class="button primary full">Submit your feedback</a>
     </div>
   </section>

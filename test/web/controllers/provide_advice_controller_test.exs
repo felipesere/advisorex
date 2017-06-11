@@ -20,6 +20,15 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
     assert response |> Floki.find("h1") |> Floki.text == "Advice for Rabea Gleissner"
   end
 
+  test "renders thank you page", %{conn: conn} do
+    response = conn
+               |> login_as("Felipe Sere")
+               |> post("/provide/1")
+               |> html_response(200)
+
+    assert response |> Floki.find("h1") |> Floki.text == "Thank you!"
+  end
+
   def create_questionnaire(opts) do
     opts
     |> Proposal.build
