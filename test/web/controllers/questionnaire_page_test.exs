@@ -23,7 +23,6 @@ defmodule Advisor.Web.RequestPageTest do
     # maybe split this later into group_lead and advisor
     assert response
              |> Floki.find(".people-picker li")
-             |> IO.inspect
              |> length == 29
 
     assert response
