@@ -8,7 +8,11 @@ defmodule Advisor.Core.AnswerFinder do
   end
 
   defp find_all(advisory) do
-    query = from answer in Answer, where: answer.advice_request_id == ^advisory.id
-    %{advisory: advisory, answers: Repo.all(query)}
+    answers_from_advisory = from a in Answer,
+      where: a.advice_request_id == ^advisory.id
+
+    answers = Repo.all(answers_from_advisory)
+
+    %{advisory: advisory, answers: answers}
   end
 end

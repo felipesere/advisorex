@@ -1,3 +1,4 @@
+# credo:disable-for-this-file
 defmodule Advisor.Web.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
@@ -25,7 +26,6 @@ defmodule Advisor.Web.ConnCase do
       @endpoint Advisor.Web.Endpoint
     end
   end
-
 
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Advisor.Repo)

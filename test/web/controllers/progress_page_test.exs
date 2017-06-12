@@ -4,8 +4,6 @@ defmodule Advisor.Web.ProgressPageTest do
   alias Advisor.Web.Links
   alias Advisor.Core.{Creator, People}
 
-
-
   test "shows the progress filling in the questionnaires", %{conn: conn} do
     rabea = People.find_by(name: "Rabea Gleissner")
     felipe = People.find_by(name: "Felipe Sere")

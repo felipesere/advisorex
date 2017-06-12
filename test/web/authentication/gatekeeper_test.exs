@@ -3,7 +3,6 @@ defmodule Advisor.Web.Authentication.GatekeeprTest do
   alias Advisor.Web.Authentication.Gatekeeper
   alias Advisor.Core.Person
 
-
   test "halts the request if not user_id found in session" do
     conn = build_conn() |> Gatekeeper.call(%{})
 
