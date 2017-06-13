@@ -1,4 +1,3 @@
-# credo:disable-for-this-file
 defmodule Advisor.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring

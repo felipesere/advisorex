@@ -1,4 +1,3 @@
-# credo:disable-for-this-file
 ExUnit.configure formatters: [ExUnit.CLIFormatter, ExUnitNotifier]
 ExUnit.start()
 
