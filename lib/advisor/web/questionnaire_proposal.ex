@@ -17,7 +17,7 @@ defmodule Advisor.Web.QuestionnaireProposal do
   end
 
   def parse(map) when is_map(map) do
-    map = Enum.filter_map(map, &truthish/1, fn({key, _}) -> parse!(key) end)
+    map = Enum.filter_map(map, &truthy/1, fn({key, _}) -> parse!(key) end)
 
     {:ok, map}
   end
@@ -28,8 +28,8 @@ defmodule Advisor.Web.QuestionnaireProposal do
     end
   end
 
-  def truthish({_key, "true"}), do: true
-  def truthish(_pair), do: false
+  def truthy({_key, "true"}), do: true
+  def truthy(_pair), do: false
 
   def parse!(potential) do
     case Integer.parse(potential) do
