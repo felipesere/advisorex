@@ -51,7 +51,7 @@ defmodule Advisor.Mixfile do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
      "test": ["ecto.create --quiet", "ecto.migrate", "test"],
-     "ci": ["test", "credo --ignore readability"]
+     "ci": ["test", "credo --strict"]
     ]
   end
 end
