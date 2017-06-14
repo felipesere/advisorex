@@ -1,7 +1,7 @@
 defmodule Advisor.Web.Authentication.GatekeeprTest do
   use Advisor.Web.ConnCase
   alias Advisor.Web.Authentication.Gatekeeper
-  alias Advisor.Core.Person
+  alias Advisor.Core.{Person, People}
 
   @default_opts Gatekeeper.init([])
 
@@ -39,7 +39,7 @@ defmodule Advisor.Web.Authentication.GatekeeprTest do
   end
 
   defp with_user(conn, [name: name]) do
-    case Advisor.Core.People.find_by(name: name) do
+    case People.find_by(name: name) do
       nil -> raise "Could not finder user #{name}"
       %{id: id} -> put_req_cookie(conn, "user", Integer.to_string(id))
     end

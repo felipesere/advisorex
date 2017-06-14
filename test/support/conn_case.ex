@@ -23,6 +23,10 @@ defmodule Advisor.Web.ConnCase do
 
       # The default endpoint for testing
       @endpoint Advisor.Web.Endpoint
+
+      def login_as(conn, id) do
+        assign(conn, :user_id, id)
+      end
     end
   end
 

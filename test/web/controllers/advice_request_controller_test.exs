@@ -21,8 +21,4 @@ defmodule Advisor.Web.AdviceRequestControllerTest do
 
     assert redirected_to(conn) == "/"
   end
-
-  def login_as(conn, id) do
-    assign(conn, :user_id, id)
-  end
 end
