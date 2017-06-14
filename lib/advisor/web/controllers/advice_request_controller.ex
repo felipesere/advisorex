@@ -7,11 +7,11 @@ defmodule Advisor.Web.AdviceRequestController do
   plug  Advisor.Web.Authentication.Gatekeeper
 
   def create(conn, params) do
-    {links, progress_link} = params
-                             |> QuestionnaireProposal.for_requester(found_in(conn))
-                             |> Creator.create
-                             |> Links.generate
+    {links, progress} = params
+                        |> QuestionnaireProposal.for_requester(found_in(conn))
+                        |> Creator.create
+                        |> Links.generate
 
-    render conn, "links.html", links: links, progress_link: progress_link
+    render conn, "links.html", links: links, progress_link: progress
   end
 end

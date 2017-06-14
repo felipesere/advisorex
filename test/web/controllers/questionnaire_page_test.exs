@@ -19,7 +19,6 @@ defmodule Advisor.Web.RequestPageTest do
              |> Enum.at(0)
              |> Floki.text == "Hello Felipe Sere!"
 
-
     # maybe split this later into group_lead and advisor
     assert response
              |> Floki.find(".people-picker li")

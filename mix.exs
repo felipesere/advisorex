@@ -38,7 +38,7 @@ defmodule Advisor.Mixfile do
      {:ex_unit_notifier, "~> 0.1.3", only: :test},
      {:mix_test_watch, "~> 0.3.3"},
      {:floki, "~> 0.17.0", only: :test},
-     {:credo, "~> 0.7", only: [:dev, :test]}]
+     {:credo, "~> 0.7", only: [:dev, :test], runtime: false}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
@@ -50,6 +50,8 @@ defmodule Advisor.Mixfile do
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"],
+     "ci": ["test", "credo --strict"]
+    ]
   end
 end

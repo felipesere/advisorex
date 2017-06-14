@@ -4,8 +4,9 @@ defmodule Advisor.Web.QuestionnaireProposal do
             advisors: [],
             questions: []
 
-
-  def for_requester(%{"proposal" => %{"group_lead" => lead, "advisors" => people, "questions" => questions}}, %{id: id}) do
+  def for_requester(%{"proposal" => %{"group_lead" => lead,
+                                      "advisors" => people,
+                                      "questions" => questions}}, %{id: id}) do
     with {:ok, lead} <- parse(lead),
          {:ok, people} <- parse(people),
          {:ok, questions} <- parse(questions),
@@ -16,7 +17,7 @@ defmodule Advisor.Web.QuestionnaireProposal do
   end
 
   def parse(map) when is_map(map) do
-    map = Enum.filter_map(map, fn({_, value}) -> value == "true" end, fn({key, _}) -> parse!(key) end)
+    map = Enum.filter_map(map, &truthy/1, fn({key, _}) -> parse!(key) end)
 
     {:ok, map}
   end
@@ -26,6 +27,9 @@ defmodule Advisor.Web.QuestionnaireProposal do
       _ -> :could_not_parse_to_integer
     end
   end
+
+  def truthy({_key, "true"}), do: true
+  def truthy(_pair), do: false
 
   def parse!(potential) do
     case Integer.parse(potential) do
