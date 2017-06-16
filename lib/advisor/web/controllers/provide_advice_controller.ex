@@ -7,7 +7,7 @@ defmodule Advisor.Web.ProvideAdviceController do
     advice_request = AdvisoryFinder.find(id)
     questionnaire = QuestionnaireFinder.find(advice_request.questionnaire_id)
     questions = QuestionFinder.find_all(questionnaire.question_ids)
-    requester = People.find_by(id: advice_request.requester_id) 
+    requester = People.find_by(id: advice_request.requester_id)
     render conn, "advice-form.html", requester: requester, questions: questions, advice_id: id
   end
 
@@ -19,13 +19,12 @@ defmodule Advisor.Web.ProvideAdviceController do
   def all_answers(params) do
     %{"id" => advice_request_id} = params
 
-    Enum.reduce(params, [], fn({question_id, answer}, acc) -> 
+    Enum.reduce(params, [], fn({question_id, answer}, acc) ->
       case Integer.parse(question_id) do
         {id, ""} -> acc ++ [
           %{question_id: id,
             answer: answer,
-            advice_request_id: advice_request_id,
-            inserted_at: DateTime.utc_now}
+            advice_request_id: advice_request_id}
         ]
         _ -> acc
       end
