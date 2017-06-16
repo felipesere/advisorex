@@ -18,7 +18,10 @@ defmodule Advisor.Web.ProgressPageTest do
                          |> Creator.create
                          |> Links.generate
 
-    conn = conn |> get(progress_link)
+    conn = conn
+           |> assign(:user_id, felipe.id)
+           |> get(progress_link)
+
     html = html_response(conn, 200)
 
     assert requester(html) =~ "Rabea Gleissner"
