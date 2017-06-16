@@ -12,16 +12,37 @@ defmodule Advisor.Web.ProgressPageTest do
                               group_lead: "Felipe Sere",
                               questions: @sample_questions)
 
-    {_, progress_link} = proposal
+    {_, progress_page} = proposal
                          |> Creator.create
                          |> Links.generate
 
     conn
     |> login_as("Felipe Sere")
-    |> get(progress_link)
+    |> get(progress_page)
     |> html_response(200)
     |> has_requester("Rabea Gleissner")
     |> has_advisors(["Chris Jordan", "Priya Patil"])
+  end
+
+  test "shows that an advisors has completed the advice form", %{conn: conn} do
+    proposal = Proposal.build(for: "Rabea Gleissner",
+                              advisors: ["Chris Jordan"],
+                              group_lead: "Felipe Sere",
+                              questions: [1])
+
+    {[%{link: link}], progress_page} = proposal
+                                       |> Creator.create
+                                       |> Links.generate
+
+    conn
+    |> login_as("Chris Jordan")
+    |> post(link, ["1": "someting"])
+
+    conn
+    |> login_as("Felipe Sere")
+    |> get(progress_page)
+    |> html_response(200)
+    |> has_completed_advice()
   end
 
   def has_requester(html, requester_name) do
@@ -31,6 +52,10 @@ defmodule Advisor.Web.ProgressPageTest do
 
   def has_advisors(html, advisors_names) do
     assert advisors(html) == advisors_names
+    html
+  end
+
+  def has_completed_advice(html) do
     html
   end
 
