@@ -14,7 +14,9 @@ defmodule Advisor.Web.QuestionnaireProposal do
 
     requester = People.find_by(name: requester_name).id
     group_lead = People.find_group_lead(name: lead_name).id
-    advisors = Enum.map(advisors_names, fn(name) -> People.find_by(name: name).id end)
+    advisors = [names: advisors_names]
+                          |> People.find_by()
+                          |> Enum.map(&(&1.id))
 
     %QuestionnaireProposal{group_lead: group_lead,
                          requester: requester,

@@ -1,6 +1,7 @@
 defmodule Advisor.Web.ProvideAdviceController do
   use Advisor.Web, :controller
-  alias Advisor.Core.{AdvisoryFinder, People, QuestionnaireFinder, QuestionFinder, Answer}
+  alias Advisor.Core.{AdvisoryFinder, People, QuestionnaireFinder,
+                      QuestionFinder, Answer}
   alias Advisor.Repo
 
   def index(conn, %{"id" => id}) do
@@ -8,7 +9,9 @@ defmodule Advisor.Web.ProvideAdviceController do
     questionnaire = QuestionnaireFinder.find(advice_request.questionnaire_id)
     questions = QuestionFinder.find_all(questionnaire.question_ids)
     requester = People.find_by(id: advice_request.requester_id)
-    render conn, "advice-form.html", requester: requester, questions: questions, advice_id: id
+    render conn, "advice-form.html", requester: requester,
+                                     questions: questions,
+                                     advice_id: id
   end
 
   def create(conn, params) do

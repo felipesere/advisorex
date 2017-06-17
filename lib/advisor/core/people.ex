@@ -5,6 +5,10 @@ defmodule Advisor.Core.People do
 
   def find_by_id(id), do: find_by([id: id])
 
+  def find_by([names: names]) when is_list(names) do
+    names
+    |> Enum.map(&(find_by(name: &1)))
+  end
   def find_by([name: name]) do
     Repo.one(from u in Person, where: u.name == ^name)
   end

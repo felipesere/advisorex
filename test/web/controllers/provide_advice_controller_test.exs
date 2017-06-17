@@ -12,21 +12,27 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
 
     felipes_advice = advisory_for(links, "Felipe Sere")
 
-    response = conn
-           |> login_as("Felipe Sere")
-           |> get(felipes_advice)
-           |> html_response(200)
+    conn
+    |> login_as("Felipe Sere")
+    |> get(felipes_advice)
+    |> html_response(200)
+    |> has_header("Advice for Rabea Gleissner")
+  end
 
-    assert response |> Floki.find("h1") |> Floki.text == "Advice for Rabea Gleissner"
+  def has_header(html, header) do
+    value = html
+            |> Floki.find("h1")
+            |> Floki.text
+
+    assert value ==  header
   end
 
   test "renders thank you page", %{conn: conn} do
-    response = conn
-               |> login_as("Felipe Sere")
-               |> post("/provide/1")
-               |> html_response(200)
-
-    assert response |> Floki.find("h1") |> Floki.text == "Thank you!"
+    conn
+    |> login_as("Felipe Sere")
+    |> post("/provide/1")
+    |> html_response(200)
+    |> has_header("Thank you!")
   end
 
   def create_questionnaire(opts) do

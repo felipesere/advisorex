@@ -14,29 +14,30 @@ defmodule Advisor.Web.AdviceRequestControllerTest do
 
     assert response |> Floki.find("h1") |> Floki.text == "Here are your links"
     assert response |> Floki.find(".individual") |> Enum.count == 1
-    assert response |> Floki.find(".see-advice-link") |> Floki.text =~ "/progress/"
+    assert advice_link(response) =~ "/progress/"
+  end
+
+  def advice_link(html) do
+    html
+    |> Floki.find(".see-advice-link")
+    |> Floki.text
   end
 
   test "transforms params into database compatible answers" do
-    params = %{
-      "1" => "answer_1",
-      "2" => "answer_2",
-      "_csrf_token" => "token",
-      "id" => "id"
-    }
-    [ %{ advice_request_id: advice_request_id_1,
-        answer: answer_1,
-        question_id: question_id_1 },
-      %{ advice_request_id: advice_request_id_2,
-        answer: answer_2,
-        question_id: question_id_2 } | _] = ProvideAdviceController.all_answers(params)
+    params = %{"1" => "answer_1",
+               "2" => "answer_2",
+               "_csrf_token" => "token",
+               "id" => "id"}
 
-    assert advice_request_id_1 == "id"
-    assert answer_1== "answer_1"
-    assert question_id_1 == 1
-    assert advice_request_id_2 == "id"
-    assert answer_2 == "answer_2"
-    assert question_id_2 == 2
+    [first, second] = ProvideAdviceController.all_answers(params)
+
+    assert first ==  %{advice_request_id: "id",
+                           answer: "answer_1",
+                           question_id: 1}
+
+    assert second == %{advice_request_id: "id",
+                            answer: "answer_2",
+                            question_id: 2}
   end
 
   test "redirects unauthenticated user request", %{conn: conn} do
