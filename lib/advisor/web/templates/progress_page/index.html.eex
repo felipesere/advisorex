@@ -4,7 +4,7 @@
   </header>
   <ul class="advisors">
     <%= for person <- @completed do %>
-      <%= render "_advisor-progress.html", person: person %>
+      <%= render "_advisor-progress.html", person: person, state: true %>
     <% end %>
     <%= for person <- @incomplete do %>
       <%= render "_advisor-progress.html", person: person, state: :incomplete %>
