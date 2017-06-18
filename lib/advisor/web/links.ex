@@ -4,6 +4,7 @@ defmodule Advisor.Web.Links do
       %{link: "/provide/#{advisory.advice_id}", person: advisory.advisor}
     end)
     progress_link = "/progress/#{questionnaire_id}"
-    {links, progress_link}
+    present_link = "/present/#{questionnaire_id}"
+    {links, progress_link, present_link}
   end
 end

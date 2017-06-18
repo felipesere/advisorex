@@ -5,7 +5,7 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
   alias Advisor.Core.Creator
 
   test "renders the form", %{conn: conn} do
-    {links, _} = create_questionnaire(for: "Rabea Gleissner",
+    {links, _, _} = create_questionnaire(for: "Rabea Gleissner",
                                       advisors: ["Felipe Sere", "Chris Jordan"],
                                       group_lead: "Jim Suchy",
                                       questions: [5, 6])
