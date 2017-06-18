@@ -38,7 +38,8 @@ defmodule Advisor.Mixfile do
      {:ex_unit_notifier, "~> 0.1.3", only: :test},
      {:mix_test_watch, "~> 0.3.3"},
      {:floki, "~> 0.17.0", only: :test},
-     {:credo, "~> 0.7", only: [:dev, :test], runtime: false}]
+     {:credo, "~> 0.7", only: [:dev, :test], runtime: false},
+     {:apex, "~> 1.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
