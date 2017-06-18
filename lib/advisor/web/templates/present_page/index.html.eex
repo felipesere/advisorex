@@ -1,0 +1,13 @@
+<section class="module">
+  <header class="module-header">
+    <h1>Advice for <%= @request.name %></h1>
+    <a href="{{download_link}}"><img class="download-link" src="/assets/images/download-csv.png" alt="Download the file"></a>
+  </header>
+
+  <div class="feedback-questions">
+    {{#each answered_questions as |answer| }}
+    {{> answered-question answer}}
+    <hr class="separator" />
+    {{/each}}
+  </div>
+</section>

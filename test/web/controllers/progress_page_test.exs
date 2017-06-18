@@ -16,9 +16,9 @@ defmodule Advisor.Web.ProgressPageTest do
 
   test "shows the progress filling in the questionnaires", %{conn: conn,
                                                              proposal: proposal} do
-    {_, progress_page} = proposal
-                         |> Creator.create
-                         |> Links.generate
+    {_, progress_page, _} = proposal
+                            |> Creator.create
+                            |> Links.generate
 
     conn
     |> login_as("Felipe Sere")
@@ -31,7 +31,7 @@ defmodule Advisor.Web.ProgressPageTest do
   test "shows that an advisors has completed the advice form", %{conn: conn,
                                                                  proposal: proposal} do
     proposal =  %{proposal | questions: [1]}
-    {[%{link: link} | _], progress_page} = proposal
+    {[%{link: link} | _], progress_page, _} = proposal
                                            |> Creator.create
                                            |> Links.generate
 
@@ -48,7 +48,7 @@ defmodule Advisor.Web.ProgressPageTest do
   end
 
   test "all completed feedback", %{conn: conn, proposal: proposal} do
-    {[%{link: cj}, %{link: priya}], progress_page} = proposal
+    {[%{link: cj}, %{link: priya}], progress_page, _} = proposal
                                                     |> Creator.create
                                                     |> Links.generate
 
