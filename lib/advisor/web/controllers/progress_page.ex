@@ -14,10 +14,13 @@ defmodule Advisor.Web.ProgressPage do
                     |> Enum.group_by(&(completed?(&1.answers, questionnaire)),
                                      &(People.find_by(&1.advisory)))
 
+    completed = Map.get(by_completion, true, [])
+    incomplete = Map.get(by_completion, false, [])
+
     render conn, "index.html", requester: requester,
-                               completed: Map.get(by_completion, true, []),
-                               incomplete: Map.get(by_completion, false, []),
-                               all_complete: true, # TODO
+                               completed: completed,
+                               incomplete: incomplete,
+                               all_complete:  incomplete == [],
                                questionnaire: questionnaire
 
   end

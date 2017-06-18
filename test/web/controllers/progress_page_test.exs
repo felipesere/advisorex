@@ -2,30 +2,99 @@ defmodule Advisor.Web.ProgressPageTest do
   use Advisor.Web.ConnCase
   alias Advisor.Web.QuestionnaireProposal, as: Proposal
   alias Advisor.Web.Links
-  alias Advisor.Core.{Creator, People}
+  alias Advisor.Core.Creator
 
-  test "shows the progress filling in the questionnaires", %{conn: conn} do
-    rabea = People.find_by(name: "Rabea Gleissner")
-    felipe = People.find_by(name: "Felipe Sere")
-    cj = People.find_by(name: "Chris Jordan")
+  @sample_questions [5, 6]
 
-    proposal = %Proposal{group_lead: 1,
-                         requester: rabea.id,
-                         advisors: [felipe.id, cj.id],
-                         questions: [5, 6]}
+  setup do
+    proposal = Proposal.build(for: "Rabea Gleissner",
+                              advisors: ["Chris Jordan", "Priya Patil"],
+                              group_lead: "Felipe Sere",
+                              questions: @sample_questions)
+    [proposal: proposal]
+  end
 
-    {_, progress_link} = proposal
+  test "shows the progress filling in the questionnaires", %{conn: conn,
+                                                             proposal: proposal} do
+    {_, progress_page} = proposal
                          |> Creator.create
                          |> Links.generate
 
-    conn = conn
-           |> assign(:user_id, felipe.id)
-           |> get(progress_link)
+    conn
+    |> login_as("Felipe Sere")
+    |> get(progress_page)
+    |> html_response(200)
+    |> has_requester("Rabea Gleissner")
+    |> has_advisors(["Chris Jordan", "Priya Patil"])
+  end
 
-    html = html_response(conn, 200)
+  test "shows that an advisors has completed the advice form", %{conn: conn,
+                                                                 proposal: proposal} do
+    proposal =  %{proposal | questions: [1]}
+    {[%{link: link} | _], progress_page} = proposal
+                                           |> Creator.create
+                                           |> Links.generate
 
-    assert requester(html) =~ "Rabea Gleissner"
-    assert advisors(html)  == ["Felipe Sere", "Chris Jordan"]
+    conn
+    |> login_as("Chris Jordan")
+    |> post(link, ["1": "someting"])
+
+    conn
+    |> login_as("Felipe Sere")
+    |> get(progress_page)
+    |> html_response(200)
+    |> has_completed_advice()
+    |> has_continue_button_with("Waiting for further responses")
+  end
+
+  test "all completed feedback", %{conn: conn, proposal: proposal} do
+    {[%{link: cj}, %{link: priya}], progress_page} = proposal
+                                                    |> Creator.create
+                                                    |> Links.generate
+
+    answers = ["1": "something", "2": "else"]
+
+    conn
+    |> login_as("Chris Jordan")
+    |> post(cj, answers)
+
+    conn
+    |> login_as("Priya Patil")
+    |> post(priya, answers)
+
+    conn
+    |> login_as("Felipe Sere")
+    |> get(progress_page)
+    |> html_response(200)
+    |> has_continue_button_with("We are good to go")
+  end
+
+  def has_continue_button_with(html, text) do
+    button = html
+             |> Floki.find(".button")
+             |> Floki.text
+
+    assert button =~ text
+    html
+  end
+
+  def has_requester(html, requester_name) do
+    assert requester(html) =~ requester_name
+    html
+  end
+
+  def has_advisors(html, advisors_names) do
+    assert advisors(html) == advisors_names
+    html
+  end
+
+  def has_completed_advice(html) do
+    assert html
+           |> Floki.find(".completeness")
+           |> Enum.map(&Floki.text/1)
+           |> Enum.any?(&(&1 =~ "Completed"))
+
+    html
   end
 
   def requester(html) do
