@@ -5,9 +5,20 @@
   </header>
 
   <div class="feedback-questions">
-    {{#each answered_questions as |answer| }}
-    {{> answered-question answer}}
+    <%= for question <- @answered_questions do %>
+    <div class="feedback-question">
+      <h3><%= question.question_phrase %></h3>
+      <%= for answer <- question.answers do %>
+      <div class="feedback-answer">
+        <aside class="provider">
+          <img class="profile-image" src="<%= answer.person.profile_image %>" alt="<%= answer.person.name %>" />
+          <span><%= answer.person.name %></span>
+        </aside>
+        <blockquote><%= answer.answer_phrase %></blockquote>
+      </div>
+      <% end %>
+    </div>
     <hr class="separator" />
-    {{/each}}
+  <% end %>
   </div>
 </section>

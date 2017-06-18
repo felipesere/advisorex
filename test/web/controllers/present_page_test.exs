@@ -5,7 +5,7 @@ defmodule Advisor.Web.PresentPageTest do
   alias Advisor.Web.Links
   alias Advisor.Core.Creator
 
-  @sample_questions [5, 6]
+  @sample_questions [1, 2]
 
   setup do
     proposal = Proposal.build(for: "Rabea Gleissner",
@@ -34,10 +34,25 @@ defmodule Advisor.Web.PresentPageTest do
     |> get(present_link)
     |> html_response(200)
     |> has_title("Advice for Rabea Gleissner")
+    |> has_feedback_questions(2)
+    |> has_answers(["something", "else"])
   end
 
   def has_title(html, expected_title) do
     assert html |> Floki.find("h1") |> Floki.text() == expected_title
+    html
+  end
+
+  def has_feedback_questions(html, amount) do
+    assert html |> Floki.find(".feedback-question") |> length == amount
+    html
+  end
+
+  def has_answers(html, answers_to_look_for) do
+    html
+    |> Floki.find(".feedback-answer > blockquote")
+    |> Enum.map(&Floki.text/1)
+    |> Enum.each(&(assert Enum.member?(answers_to_look_for, &1)))
     html
   end
 end
