@@ -31,6 +31,7 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
            |> get(felipes_advice_link)
 
     assert conn |> redirected_to() == "/"
+    assert conn.cookies["target"] == felipes_advice_link
   end
 
   def has_header(html, header) do

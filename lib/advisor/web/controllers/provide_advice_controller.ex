@@ -18,7 +18,9 @@ defmodule Advisor.Web.ProvideAdviceController do
                                        questions: questions,
                                        advice_id: id)
     else
-      redirect(conn, to: "/")
+      conn
+      |> put_resp_cookie("target", conn.request_path)
+      |> redirect(to: "/")
     end
   end
 
