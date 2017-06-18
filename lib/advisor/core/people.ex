@@ -3,22 +3,16 @@ defmodule Advisor.Core.People do
   alias Advisor.Core.Person
   import Ecto.Query
 
+  def find_requester(%{requester_id: id}), do: find_by_id(id)
   def find_by_id(id), do: find_by([id: id])
 
   def find_by([names: names]) when is_list(names) do
     names
     |> Enum.map(&(find_by(name: &1)))
   end
-  def find_by([name: name]) do
-    Repo.one(from u in Person, where: u.name == ^name)
-  end
+  def find_by([name: name]), do: Repo.one(from u in Person, where: u.name == ^name)
   def find_by(%{advisor_id: id}), do: find_by_id(id)
-  def find_by([email: email]) do
-    query = from u in Person,
-                where: u.email == ^email
-
-    Repo.one(query)
-  end
+  def find_by([email: email]), do: Repo.one(from u in Person, where: u.email == ^email)
   def find_by([id: nil]), do: nil
   def find_by([id: id]) when is_integer(id), do: query_by_user(id)
   def find_by([id: id]) do

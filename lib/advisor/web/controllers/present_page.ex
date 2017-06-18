@@ -4,7 +4,7 @@ defmodule Advisor.Web.PresentPage do
   alias Advisor.Core.Questions
 
   def index(conn, %{"id" => id}) do
-    %{question_ids: question_ids} = QuestionnaireFinder.find(id)
+    %{question_ids: question_ids} = questionnaire = QuestionnaireFinder.find(id)
     advisories = AdvisoryFinder.gather_for_questionnaire(id)
     advisor_for = for advisory <- advisories, into: %{}, do: {advisory.id, People.find_by(advisory)}
     answers = Enum.flat_map(advisories, &AnswerFinder.find/1)
@@ -21,6 +21,7 @@ defmodule Advisor.Web.PresentPage do
       %{question_phrase: question.phrase, answers: answers}
     end)
 
-    render conn, "index.html", request: People.find_by(name: "Rabea Gleissner"), answered_questions: answered_questions
+    requester = People.find_requester(questionnaire)
+    render conn, "index.html", request: requester, answered_questions: answered_questions
   end
 end
