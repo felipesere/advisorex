@@ -7,4 +7,8 @@ defmodule Advisor.Core.AdvisoryFinder do
     query = from ar in AdviceRequest, where: ar.questionnaire_id == ^id
     Repo.all(query)
   end
+
+  def find(id) do
+    Repo.get(AdviceRequest, id)
+  end
 end

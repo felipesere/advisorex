@@ -13,7 +13,9 @@
         # You can give explicit globs or simply directories.
         # In the latter case `**/*.{ex,exs}` will be used.
         included: ["lib/", "test/"],
-        excluded: [~r"/_build/", ~r"/deps/", ~r"/test/support/"]
+        excluded: [~r"/_build/", ~r"/deps/",
+                   ~r"/test/support/",
+                   ~r"/test/test_helper.exs"]
       },
       #
       requires: [],
