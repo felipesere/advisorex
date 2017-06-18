@@ -11,4 +11,7 @@ defmodule Advisor.Core.AdvisoryFinder do
   def find(id) do
     Repo.get(AdviceRequest, id)
   end
+  def find(id, [for_user: %{id: user_id}]) do
+    Repo.one(from ar in AdviceRequest, where: ar.id == ^id and ar.advisor_id == ^user_id)
+  end
 end
