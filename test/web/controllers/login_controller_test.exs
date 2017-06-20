@@ -14,4 +14,12 @@ defmodule Advisor.Web.LoginControllerTest do
     assert redirected_to(conn) == "/"
     refute conn.cookies["user"]
   end
+
+  test "Redirect to original path if this was a bounced login", %{conn: conn} do
+    conn = conn
+           |> put_req_cookie("target", "/foo/bar")
+           |> post("/begin", [email: "felipe@example.com"])
+
+    assert redirected_to(conn) == "/foo/bar"
+  end
 end

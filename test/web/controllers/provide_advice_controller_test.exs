@@ -4,12 +4,16 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
   alias Advisor.Web.Links
   alias Advisor.Core.Creator
 
-  test "renders the form", %{conn: conn} do
-    {links, _, _} = create_questionnaire(for: "Rabea Gleissner",
-                                      advisors: ["Felipe Sere", "Chris Jordan"],
-                                      group_lead: "Jim Suchy",
-                                      questions: [5, 6])
+  setup do
+    {links, progress, _} = create_questionnaire(for: "Rabea Gleissner",
+                                                advisors: ["Felipe Sere", "Chris Jordan"],
+                                                group_lead: "Jim Suchy",
+                                                questions: [5, 6])
 
+    [links: links, progress: progress]
+  end
+
+  test "renders the form", %{conn: conn, links: links} do
     felipes_advice = advisory_for(links, "Felipe Sere")
 
     conn
@@ -17,6 +21,17 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
     |> get(felipes_advice)
     |> html_response(200)
     |> has_header("Advice for Rabea Gleissner")
+  end
+
+  test "force login if incorrect advisor is authenticated", %{conn: conn, links: links} do
+    felipes_advice_link = advisory_for(links, "Felipe Sere")
+
+    conn = conn
+           |> login_as("Rabea Gleissner")
+           |> get(felipes_advice_link)
+
+    assert conn |> redirected_to() == "/"
+    assert conn.cookies["target"] == felipes_advice_link
   end
 
   def has_header(html, header) do
