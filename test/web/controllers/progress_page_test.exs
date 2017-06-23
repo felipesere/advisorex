@@ -1,8 +1,10 @@
 defmodule Advisor.Web.ProgressPageTest do
   use Advisor.Web.ConnCase
+  import PageAssertions
   alias Advisor.Web.QuestionnaireProposal, as: Proposal
   alias Advisor.Web.Links
   alias Advisor.Core.Creator
+
 
   @sample_questions [5, 6]
 
@@ -67,45 +69,5 @@ defmodule Advisor.Web.ProgressPageTest do
     |> get(progress_page)
     |> html_response(200)
     |> has_continue_button_with("We are good to go")
-  end
-
-  def has_continue_button_with(html, text) do
-    button = html
-             |> Floki.find(".button")
-             |> Floki.text
-
-    assert button =~ text
-    html
-  end
-
-  def has_requester(html, requester_name) do
-    assert requester(html) =~ requester_name
-    html
-  end
-
-  def has_advisors(html, advisors_names) do
-    assert advisors(html) == advisors_names
-    html
-  end
-
-  def has_completed_advice(html) do
-    assert html
-           |> Floki.find(".completeness")
-           |> Enum.map(&Floki.text/1)
-           |> Enum.any?(&(&1 =~ "Completed"))
-
-    html
-  end
-
-  def requester(html) do
-    html
-    |> Floki.find(".progress-requester")
-    |> Floki.text
-  end
-
-  def advisors(html) do
-    html
-    |> Floki.find(".advisor")
-    |> Enum.map(&Floki.text/1)
   end
 end
