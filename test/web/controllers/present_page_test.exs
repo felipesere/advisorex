@@ -17,8 +17,8 @@ defmodule Advisor.Web.PresentPageTest do
 
   test "it displays all four answers to the questionnaire", %{conn: conn, proposal: proposal} do
     {[%{link: cj}, %{link: priya}], _, present_link} = proposal
-                                                                   |> Creator.create
-                                                                   |> Links.generate
+                                                       |> Creator.create
+                                                       |> Links.generate
     answers = ["1": "something", "2": "else"]
 
     conn

@@ -1,7 +1,7 @@
 defmodule Advisor.Web.ProvideAdviceController do
   use Advisor.Web, :controller
   alias Advisor.Core.{AdvisoryFinder, People, QuestionnaireFinder,
-                      QuestionFinder, Answer}
+                      QuestionFinder, Answer, Answers}
   alias Advisor.Repo
   import Advisor.Web.Authentication.User, only: [found_in: 1]
 
@@ -25,20 +25,7 @@ defmodule Advisor.Web.ProvideAdviceController do
   end
 
   def create(conn, params) do
-    Repo.insert_all(Answer, all_answers(params), returning: true)
+    Answers.store(params)
     render conn, "thank-you.html"
-  end
-
-  def all_answers(%{"id" => advice_request_id} = params) do
-    Enum.reduce(params, [], fn({question_id, answer}, acc) ->
-      case Integer.parse(question_id) do
-        {id, ""} -> acc ++ [
-          %{question_id: id,
-            answer: answer,
-            advice_request_id: advice_request_id}
-        ]
-        _ -> acc
-      end
-    end)
   end
 end

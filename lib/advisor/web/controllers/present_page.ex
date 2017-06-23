@@ -22,6 +22,6 @@ defmodule Advisor.Web.PresentPage do
     end)
 
     requester = People.find_requester(questionnaire)
-    render conn, "index.html", request: requester, answered_questions: answered_questions
+    render conn, "index.html", id: id, request: requester, answered_questions: answered_questions
   end
 end
