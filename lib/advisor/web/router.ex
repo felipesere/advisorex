@@ -24,5 +24,6 @@ defmodule Advisor.Web.Router do
     get "/provide/:id", ProvideAdviceController, :index
     post "/provide/:id", ProvideAdviceController, :create
     get "/present/:id", PresentPage, :index
+    get "/present/:id/download.csv", DownloadSummaryController, :export
   end
 end

@@ -16,9 +16,13 @@ defmodule Advisor.Core.AnswerFinder do
     %{advisory: advisory, answers: answers}
   end
 
+  def find(advisories) when is_list(advisories) do
+    ids = advisories |> Enum.map(fn(x) -> x.advice_id end)
+
+    Repo.all(from a in Answer, where: a.advice_request_id in ^ids)
+  end
   def find(advisory) do
-    answers_from_advisory = from a in Answer,
-      where: a.advice_request_id == ^advisory.id
+    answers_from_advisory = from a in Answer, where: a.advice_request_id == ^advisory.id
 
     Repo.all(answers_from_advisory)
   end
