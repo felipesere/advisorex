@@ -29,7 +29,6 @@ defmodule Advisor.Core.SummaryTest do
 
     answer!(advisories, with: %{"1" => "Foo", "2" => "Bar"})
 
-
     [_headers, first, _second] = Summary.for_download(id)
     assert length(first) == 5
   end

@@ -4,7 +4,6 @@ defmodule Advisor.Core.Summary do
   alias Advisor.Repo
   import Ecto.Query
 
-
   def for_download(id) do
     query = from advice in AdviceRequest,
                join: r in Person, on: [id: advice.requester_id],
@@ -19,7 +18,6 @@ defmodule Advisor.Core.Summary do
               |> Enum.map(fn({ts, adv, req, answers}) -> [ts, adv, req] ++ answers end)
 
     header = ["timestamp", "advisor", "requester"] ++ Questions.of_questionnaire(id)
-
 
     [header | content]
   end

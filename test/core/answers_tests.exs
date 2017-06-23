@@ -1,8 +1,9 @@
 defmodule Advisor.Core.AnswersTest do
-  use ExUnit.case
+  use ExUnit.Case
   alias Advisor.Core.Answers
 
   test "transforms params into database compatible answers" do
+
     params = %{"1" => "answer_1",
                "2" => "answer_2",
                "_csrf_token" => "token",
@@ -18,3 +19,4 @@ defmodule Advisor.Core.AnswersTest do
                             answer: "answer_2",
                             question_id: 2}
   end
+end

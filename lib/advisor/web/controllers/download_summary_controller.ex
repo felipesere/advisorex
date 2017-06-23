@@ -1,6 +1,7 @@
 defmodule Advisor.Web.DownloadSummaryController do
   use Advisor.Web, :controller
   alias Advisor.Core.Summary
+  alias CSV.Encoding.Encoder
 
   plug  Advisor.Web.Authentication.Gatekeeper, only: :group_leads
 
@@ -20,7 +21,7 @@ defmodule Advisor.Web.DownloadSummaryController do
 
   defp encode(content) do
     content
-    |> CSV.Encoding.Encoder.encode()
+    |> Encoder.encode()
     |> Enum.to_list
   end
 end
