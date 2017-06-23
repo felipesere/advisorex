@@ -5,7 +5,6 @@ defmodule Advisor.Web.ProgressPageTest do
   alias Advisor.Web.Links
   alias Advisor.Core.Creator
 
-
   @sample_questions [5, 6]
 
   setup do

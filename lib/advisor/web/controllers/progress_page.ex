@@ -22,7 +22,6 @@ defmodule Advisor.Web.ProgressPage do
                                incomplete: incomplete,
                                all_complete:  incomplete == [],
                                questionnaire: questionnaire
-
   end
 
   defp completed?(answers, questionnaire) do
