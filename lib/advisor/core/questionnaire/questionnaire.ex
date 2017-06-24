@@ -1,6 +1,8 @@
 defmodule Advisor.Core.Questionnaire do
   use Ecto.Schema
   alias Advisor.Core.{People, Questions}
+  alias Advisor.Repo
+  alias __MODULE__
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
@@ -21,5 +23,9 @@ defmodule Advisor.Core.Questionnaire do
 
   defmodule Created do
     defstruct questionnaire: :unassigned, advisories: []
+  end
+
+  def find(id) do
+    Repo.get(Questionnaire, id)
   end
 end

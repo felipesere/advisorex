@@ -1,10 +1,9 @@
 defmodule Advisor.Web.PresentPage do
   use Advisor.Web, :controller
-  alias Advisor.Core.{People, QuestionnaireFinder, AdviceFinder, Answers}
-  alias Advisor.Core.Questions
+  alias Advisor.Core.{People, Questionnaire, AdviceFinder, Answers, Questions}
 
   def index(conn, %{"id" => id}) do
-    %{question_ids: question_ids} = questionnaire = QuestionnaireFinder.find(id)
+    %{question_ids: question_ids} = questionnaire = Questionnaire.find(id)
     advisories = AdviceFinder.gather_for_questionnaire(id)
     advisor_for = for advisory <- advisories, into: %{}, do: {advisory.id, People.find_by(advisory)}
     answers = Enum.flat_map(advisories, &Answers.find/1)

@@ -1,6 +1,6 @@
 defmodule Advisor.Web.ProvideAdviceController do
   use Advisor.Web, :controller
-  alias Advisor.Core.{AdviceFinder, People, QuestionnaireFinder,
+  alias Advisor.Core.{AdviceFinder, People, Questionnaire,
                       Questions, Answers}
 
   import Advisor.Web.Authentication.User, only: [found_in: 1]
@@ -11,7 +11,7 @@ defmodule Advisor.Web.ProvideAdviceController do
     advice_request = AdviceFinder.find(id, for_user: found_in(conn))
 
     if advice_request do
-      questionnaire = QuestionnaireFinder.find(advice_request.questionnaire_id)
+      questionnaire = Questionnaire.find(advice_request.questionnaire_id)
       questions = Questions.find(questionnaire.question_ids)
       requester = People.find_by(id: advice_request.requester_id)
       render(conn, "advice-form.html", requester: requester,
