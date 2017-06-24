@@ -3,7 +3,7 @@ defmodule Advisor.Web.DownloadSummaryControllerTest do
 
   alias Advisor.Web.QuestionnaireProposal, as: Proposal
   alias Advisor.Web.Links
-  alias Advisor.Core.Creator
+  alias Advisor.Core.Questionnaire.Creator
 
   @answers  ["1": "something", "2": "else"]
 

@@ -13,7 +13,7 @@ defmodule Advisor.Web.QuestionnaireProposal do
              questions: questions]) do
 
     requester = People.find_by(name: requester_name).id
-    group_lead = People.find_group_lead(name: lead_name).id
+    group_lead = People.group_lead(name: lead_name).id
     advisors = [names: advisors_names]
                           |> People.find_by()
                           |> Enum.map(&(&1.id))

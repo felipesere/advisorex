@@ -1,4 +1,4 @@
-defmodule Advisor.Core.Creator do
+defmodule Advisor.Core.Questionnaire.Creator do
   alias Advisor.Core.{People, Questionnaire, Advice}
   alias Advisor.Core.Questionnaire.Created
   alias Advisor.Core.Advice.Advisory

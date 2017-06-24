@@ -16,7 +16,9 @@ Hopefully, this app will delight you by guiding you through a swift creation pro
 # Domain Model
 
 The picture below tries to sketch out the domain objects and their relationships. The picture is meant to give a rough idea of what
-_things_ are relevant in Advisorex. Its neither complete nor detailed.
+_things_ are relevant in Advisorex. 
+Its neither complete nor detailed.
+You can find me [here](lib/advisor/core/README.md)
 
 ![Domain Model](doc/domain-model.jpg)
 

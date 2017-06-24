@@ -1,7 +1,7 @@
 defmodule Advisor.Web.AdviceRequestController do
   use Advisor.Web, :controller
   alias Advisor.Web.{Links, QuestionnaireProposal, Authentication.User}
-  alias Advisor.Core.Creator
+  alias Advisor.Core.Questionnaire.Creator
   import User, only: [found_in: 1]
 
   plug  Advisor.Web.Authentication.Gatekeeper

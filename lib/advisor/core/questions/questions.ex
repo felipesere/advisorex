@@ -3,10 +3,6 @@ defmodule Advisor.Core.Questions do
   alias Advisor.Core.{Question, Questionnaire}
   import Ecto.Query
 
-  def gather(advisories) do
-    Enum.map(advisories, &(find(&1)))
-  end
-
   def all() do
     Question
     |> Repo.all

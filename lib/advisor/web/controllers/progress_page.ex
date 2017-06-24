@@ -7,7 +7,7 @@ defmodule Advisor.Web.ProgressPage do
   def index(conn, %{"id" => id}) do
     advisories = AdviceFinder.gather_for_questionnaire(id)
     questionnaire = Questionnaire.find(id)
-    requester = People.find_requester(questionnaire)
+    requester = People.requester(questionnaire)
 
     by_completion = advisories
                     |> Answers.gather

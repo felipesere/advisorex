@@ -24,7 +24,7 @@ defmodule Advisor.Core.Answers do
     Enum.map(advisories, &(find_with_advisory(&1)))
   end
 
-  def find_with_advisory(advisory) do
+  defp find_with_advisory(advisory) do
     answers_from_advisory = from a in Answer,
       where: a.advice_request_id == ^advisory.id
 

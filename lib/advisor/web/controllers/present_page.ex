@@ -20,7 +20,7 @@ defmodule Advisor.Web.PresentPage do
       %{question_phrase: question.phrase, answers: answers}
     end)
 
-    requester = People.find_requester(questionnaire)
+    requester = People.requester(questionnaire)
     render conn, "index.html", id: id, request: requester, answered_questions: answered_questions
   end
 end

@@ -1,6 +1,6 @@
-defmodule Advisor.Core.CreatorTest do
+defmodule Advisor.Core.Questionnaire.CreatorTest do
   use Advisor.DataCase
-  alias Advisor.Core.Creator
+  alias Advisor.Core.Questionnaire.Creator
   alias Advisor.Web.QuestionnaireProposal
 
   test "creates a simple questionnaire" do
