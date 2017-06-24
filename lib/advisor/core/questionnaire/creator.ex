@@ -1,7 +1,7 @@
 defmodule Advisor.Core.Creator do
-  alias Advisor.Core.{People, Questionnaire, AdviceRequest}
+  alias Advisor.Core.{People, Questionnaire, Advice}
   alias Advisor.Core.Questionnaire.Created
-  alias Advisor.Core.AdviceRequest.Advisory
+  alias Advisor.Core.Advice.Advisory
   alias Advisor.Repo
 
   def create(%{questions: questions,
@@ -16,7 +16,7 @@ defmodule Advisor.Core.Creator do
         advisor_id: advisor}
     end)
 
-    advisories = AdviceRequest
+    advisories = Advice
                  |> Repo.insert_all(advice_requests, returning: true)
                  |> elem(1)
                  |> Enum.map(&to_advisory/1)

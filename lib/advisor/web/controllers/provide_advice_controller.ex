@@ -1,6 +1,6 @@
 defmodule Advisor.Web.ProvideAdviceController do
   use Advisor.Web, :controller
-  alias Advisor.Core.{AdvisoryFinder, People, QuestionnaireFinder,
+  alias Advisor.Core.{AdviceFinder, People, QuestionnaireFinder,
                       QuestionFinder, Answers}
 
   import Advisor.Web.Authentication.User, only: [found_in: 1]
@@ -8,7 +8,7 @@ defmodule Advisor.Web.ProvideAdviceController do
   plug  Advisor.Web.Authentication.Gatekeeper
 
   def index(conn, %{"id" => id}) do
-    advice_request = AdvisoryFinder.find(id, for_user: found_in(conn))
+    advice_request = AdviceFinder.find(id, for_user: found_in(conn))
 
     if advice_request do
       questionnaire = QuestionnaireFinder.find(advice_request.questionnaire_id)

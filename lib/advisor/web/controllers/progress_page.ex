@@ -1,11 +1,11 @@
 defmodule Advisor.Web.ProgressPage do
   use Advisor.Web, :controller
-  alias Advisor.Core.{People, AdvisoryFinder, AnswerFinder, QuestionnaireFinder}
+  alias Advisor.Core.{People, AdviceFinder, AnswerFinder, QuestionnaireFinder}
 
   plug  Advisor.Web.Authentication.Gatekeeper, only: :group_leads
 
   def index(conn, %{"id" => id}) do
-    advisories = AdvisoryFinder.gather_for_questionnaire(id)
+    advisories = AdviceFinder.gather_for_questionnaire(id)
     questionnaire = QuestionnaireFinder.find(id)
     requester = People.find_requester(questionnaire)
 

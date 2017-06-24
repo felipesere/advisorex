@@ -1,4 +1,4 @@
-defmodule Advisor.Core.AdviceRequest do
+defmodule Advisor.Core.Advice do
   use Ecto.Schema
 
   @primary_key {:id, :binary_id, autogenerate: true}
