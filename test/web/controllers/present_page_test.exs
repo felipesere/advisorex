@@ -1,5 +1,6 @@
 defmodule Advisor.Web.PresentPageTest do
   use Advisor.Web.ConnCase
+  import PageAssertions
 
   alias Advisor.Web.QuestionnaireProposal, as: Proposal
   alias Advisor.Web.Links
@@ -36,23 +37,5 @@ defmodule Advisor.Web.PresentPageTest do
     |> has_title("Advice for Rabea Gleissner")
     |> has_feedback_questions(2)
     |> has_answers(["something", "else"])
-  end
-
-  def has_title(html, expected_title) do
-    assert html |> Floki.find("h1") |> Floki.text() == expected_title
-    html
-  end
-
-  def has_feedback_questions(html, amount) do
-    assert html |> Floki.find(".feedback-question") |> length == amount
-    html
-  end
-
-  def has_answers(html, answers_to_look_for) do
-    html
-    |> Floki.find(".feedback-answer > blockquote")
-    |> Enum.map(&Floki.text/1)
-    |> Enum.each(&(assert Enum.member?(answers_to_look_for, &1)))
-    html
   end
 end

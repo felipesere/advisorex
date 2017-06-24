@@ -3,6 +3,7 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
   alias Advisor.Web.QuestionnaireProposal, as: Proposal
   alias Advisor.Web.Links
   alias Advisor.Core.Creator
+  import PageAssertions
 
   setup do
     {links, progress, _} = create_questionnaire(for: "Rabea Gleissner",
@@ -32,14 +33,6 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
 
     assert conn |> redirected_to() == "/"
     assert conn.cookies["target"] == felipes_advice_link
-  end
-
-  def has_header(html, header) do
-    value = html
-            |> Floki.find("h1")
-            |> Floki.text
-
-    assert value ==  header
   end
 
   test "renders thank you page", %{conn: conn} do
