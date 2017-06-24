@@ -1,6 +1,6 @@
 defmodule Advisor.Web.ProgressPage do
   use Advisor.Web, :controller
-  alias Advisor.Core.{People, AdviceFinder, AnswerFinder, QuestionnaireFinder}
+  alias Advisor.Core.{People, AdviceFinder, Answers, QuestionnaireFinder}
 
   plug  Advisor.Web.Authentication.Gatekeeper, only: :group_leads
 
@@ -10,7 +10,7 @@ defmodule Advisor.Web.ProgressPage do
     requester = People.find_requester(questionnaire)
 
     by_completion = advisories
-                    |> AnswerFinder.gather
+                    |> Answers.gather
                     |> Enum.group_by(&(completed?(&1.answers, questionnaire)),
                                      &(People.find_by(&1.advisory)))
 
