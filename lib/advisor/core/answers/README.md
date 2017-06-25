@@ -1,7 +1,7 @@
 # Answers
 
 Anything related to storing and finding answers.
-Normally, one would look up the ansers to a given [advice](lib/advisor/core/advice/README.md) entity. This module can also look through an entire list of advice entities.
+Normally, one would look up the answers to a given [advice](lib/advisor/core/advice/README.md) entity. This module can also look through an entire list of advice entities to find their answers.
 
 To store answers, provide a hash like:
 ```json
@@ -15,5 +15,5 @@ Other params will be ignored.
 
 ## Changes
 
-You'll likely need to changes here if the way answers are submitted change.
+You'll likely need updates here if the way answers are submitted changes.
 Another source of changes could be different ways to find and represent answers.
