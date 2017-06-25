@@ -9,13 +9,13 @@ defmodule Advisor.Web.ProgressPage do
     questionnaire = Questionnaire.find(id)
     requester = People.requester(questionnaire)
 
-    by_completion = advisories
+    who_is_done = advisories
                     |> Answers.gather
                     |> Enum.group_by(&(completed?(&1.answers, questionnaire)),
                                      &(People.find_by(&1.advisory)))
 
-    completed = Map.get(by_completion, true, [])
-    incomplete = Map.get(by_completion, false, [])
+    completed = Map.get(who_is_done, true, [])
+    incomplete = Map.get(who_is_done, false, [])
 
     render conn, "index.html", requester: requester,
                                completed: completed,
