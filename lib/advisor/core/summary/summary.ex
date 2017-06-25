@@ -17,7 +17,8 @@ defmodule Advisor.Core.Summary do
               |> Repo.all()
               |> Enum.map(fn({ts, adv, req, answers}) -> [ts, adv, req] ++ answers end)
 
-    header = ["timestamp", "advisor", "requester"] ++ Questions.of_questionnaire(id)
+    questions = id |> Questions.of_questionnaire() |> Questions.phrases()
+    header = ["timestamp", "advisor", "requester"] ++ questions
 
     [header | content]
   end

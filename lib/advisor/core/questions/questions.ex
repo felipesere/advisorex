@@ -15,12 +15,15 @@ defmodule Advisor.Core.Questions do
   end
 
   def of_questionnaire(id) do
-    questions = from qs in Questionnaire,
-      join: q in Question, on: q.id in qs.question_ids,
-      where: qs.id == ^id,
-      select: q.phrase
+    questions = from q in Question,
+      join: qs in Questionnaire, on: q.id in qs.question_ids,
+      where: qs.id == ^id
 
     Repo.all(questions)
+  end
+
+  def phrases(questions) do
+    Enum.map(questions, fn(question) -> question.phrase end)
   end
 
   defp coerce(elements) do
