@@ -24,12 +24,12 @@ defmodule Advisor.Core.People do
 
   def requester(%{requester_id: id}), do: find_by_id(id)
   def group_lead([name: name]) do
-    Repo.one(from u in Person, where: u.name == ^name and u.is_group_lead)
+    Repo.one(from p in Person, where: p.name == ^name and p.is_group_lead)
   end
 
-  defp query_by_user(id), do: Repo.one(from u in Person, where: u.id == ^id)
-  defp query_by_name(name), do: Repo.one(from u in Person, where: u.name == ^name)
-  defp query_by_email(email), do: Repo.one(from u in Person, where: u.email == ^email)
+  defp query_by_user(id),     do: Repo.one(from p in Person, where: p.id == ^id)
+  defp query_by_name(name),   do: Repo.one(from p in Person, where: p.name == ^name)
+  defp query_by_email(email), do: Repo.one(from p in Person, where: p.email == ^email)
 
   defp parse(user_id) do
     case Integer.parse(user_id) do
