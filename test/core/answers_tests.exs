@@ -8,7 +8,7 @@ defmodule Advisor.Core.AnswersTest do
                "_csrf_token" => "token",
                "id" => "id"}
 
-    [first, second] = Answers.all_answers(params)
+    [first, second] = Answers.all_answers_in(params)
 
     assert first ==  %{advice_request_id: "id",
                            answer: "answer_1",

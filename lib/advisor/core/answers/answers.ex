@@ -3,21 +3,35 @@ defmodule Advisor.Core.Answers do
   alias Advisor.Core.Answer
   import Ecto.Query
 
+  @into_list []
+
   def store(params) do
-    Repo.insert_all(Answer, all_answers(params), returning: true)
+    Repo.insert_all(Answer, all_answers_in(params), returning: true)
   end
 
-  def all_answers(%{"id" => advice_request_id} = params) do
-    Enum.reduce(params, [], fn({question_id, answer}, acc) ->
-      case Integer.parse(question_id) do
-        {id, ""} -> acc ++ [
-          %{question_id: id,
-            answer: answer,
-            advice_request_id: advice_request_id}
-        ]
-        _ -> acc
-      end
-    end)
+  def all_answers_in(%{"id" => advice_request_id} = params) do
+    params
+    |> Enum.reduce(@into_list, &to_answer/2)
+    |> add(advice_request_id)
+  end
+
+  defp add(answers, advice_request_id) when is_list(answers) do
+    answers
+    |> Enum.map(&(Map.put(&1, :advice_request_id, advice_request_id)))
+  end
+
+  defp to_answer({question_id, answer}, answers) do
+    case number?(question_id) do
+      :not_a_number -> answers
+      num -> [%{question_id: num, answer: answer} | answers]
+    end
+  end
+
+  defp number?(number) do
+    case Integer.parse(number) do
+      {num, ""} -> num
+      _ -> :not_a_number
+    end
   end
 
   def gather(advisories) do
