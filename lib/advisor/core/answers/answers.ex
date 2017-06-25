@@ -15,16 +15,16 @@ defmodule Advisor.Core.Answers do
     |> add(advice_request_id)
   end
 
-  defp add(answers, advice_request_id) when is_list(answers) do
-    answers
-    |> Enum.map(&(Map.put(&1, :advice_request_id, advice_request_id)))
-  end
-
   defp to_answer({question_id, answer}, answers) do
     case number?(question_id) do
       :not_a_number -> answers
       num -> [%{question_id: num, answer: answer} | answers]
     end
+  end
+
+  defp add(answers, advice_request_id) when is_list(answers) do
+    answers
+    |> Enum.map(&(Map.put(&1, :advice_request_id, advice_request_id)))
   end
 
   defp number?(number) do
