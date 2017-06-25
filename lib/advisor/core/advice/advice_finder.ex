@@ -3,7 +3,7 @@ defmodule Advisor.Core.AdviceFinder do
   alias Advisor.Repo
   import Ecto.Query
 
-  def gather_for_questionnaire(id) do
+  def all_for(id) do
     query = from advice in Advice, where: advice.questionnaire_id == ^id
     Repo.all(query)
   end

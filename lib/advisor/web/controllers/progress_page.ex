@@ -5,7 +5,7 @@ defmodule Advisor.Web.ProgressPage do
   plug  Advisor.Web.Authentication.Gatekeeper, only: :group_leads
 
   def index(conn, %{"id" => id}) do
-    advisories = AdviceFinder.gather_for_questionnaire(id)
+    advisories = AdviceFinder.all_for(id)
     questionnaire = Questionnaire.find(id)
     requester = People.requester(questionnaire)
 
