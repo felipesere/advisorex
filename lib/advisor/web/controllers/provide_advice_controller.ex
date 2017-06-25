@@ -8,12 +8,12 @@ defmodule Advisor.Web.ProvideAdviceController do
   plug  Advisor.Web.Authentication.Gatekeeper
 
   def index(conn, %{"id" => id}) do
-    advice_request = AdviceFinder.find(id, for_user: found_in(conn))
+    advice = AdviceFinder.find(id, from_advisor: found_in(conn))
 
-    if advice_request do
-      questionnaire = Questionnaire.find(advice_request.questionnaire_id)
+    if advice do
+      questionnaire = Questionnaire.find(advice.questionnaire_id)
       questions = Questions.find(questionnaire.question_ids)
-      requester = People.find_by(id: advice_request.requester_id)
+      requester = People.find_by(id: advice.requester_id)
       render(conn, "advice-form.html", requester: requester,
                                        questions: questions,
                                        advice_id: id)
