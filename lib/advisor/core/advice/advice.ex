@@ -1,5 +1,6 @@
 defmodule Advisor.Core.Advice do
   use Ecto.Schema
+  alias Advisor.Core.Advice.Finder
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
@@ -12,4 +13,8 @@ defmodule Advisor.Core.Advice do
   defmodule Advisory do
     defstruct [:advisor, :advice_id]
   end
+
+  defdelegate find(id), to: Finder
+  defdelegate find(id, opts), to: Finder
+  defdelegate all_for(id), to: Finder
 end
