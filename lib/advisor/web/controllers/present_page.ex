@@ -1,13 +1,12 @@
 defmodule Advisor.Web.PresentPage do
   use Advisor.Web, :controller
-  alias Advisor.Core.{People, QuestionnaireFinder, AdvisoryFinder, AnswerFinder}
-  alias Advisor.Core.Questions
+  alias Advisor.Core.{People, Questionnaire, Advice, Answers, Questions}
 
-  def index(conn, %{"id" => id}) do
-    %{question_ids: question_ids} = questionnaire = QuestionnaireFinder.find(id)
-    advisories = AdvisoryFinder.gather_for_questionnaire(id)
+  def index(conn, %{"id" => questionnaire_id}) do
+    %{question_ids: question_ids} = questionnaire = Questionnaire.find(questionnaire_id)
+    advisories = Advice.all_for(questionnaire_id)
     advisor_for = for advisory <- advisories, into: %{}, do: {advisory.id, People.find_by(advisory)}
-    answers = Enum.flat_map(advisories, &AnswerFinder.find/1)
+    answers = Enum.flat_map(advisories, &Answers.find/1)
     questions = Questions.find(question_ids)
 
     answered_questions = Enum.map(questions, fn(question) ->
@@ -21,7 +20,9 @@ defmodule Advisor.Web.PresentPage do
       %{question_phrase: question.phrase, answers: answers}
     end)
 
-    requester = People.find_requester(questionnaire)
-    render conn, "index.html", id: id, request: requester, answered_questions: answered_questions
+    requester = People.requester(questionnaire)
+    render conn, "index.html", id: questionnaire_id,
+                               request: requester,
+                               answered_questions: answered_questions
   end
 end

@@ -1,21 +1,21 @@
 defmodule Advisor.Web.ProgressPage do
   use Advisor.Web, :controller
-  alias Advisor.Core.{People, AdvisoryFinder, AnswerFinder, QuestionnaireFinder}
+  alias Advisor.Core.{People, Answers, Questionnaire, Advice}
 
   plug  Advisor.Web.Authentication.Gatekeeper, only: :group_leads
 
   def index(conn, %{"id" => id}) do
-    advisories = AdvisoryFinder.gather_for_questionnaire(id)
-    questionnaire = QuestionnaireFinder.find(id)
-    requester = People.find_requester(questionnaire)
+    advisories = Advice.all_for(id)
+    questionnaire = Questionnaire.find(id)
+    requester = People.requester(questionnaire)
 
-    by_completion = advisories
-                    |> AnswerFinder.gather
+    who_is_done = advisories
+                    |> Answers.gather
                     |> Enum.group_by(&(completed?(&1.answers, questionnaire)),
                                      &(People.find_by(&1.advisory)))
 
-    completed = Map.get(by_completion, true, [])
-    incomplete = Map.get(by_completion, false, [])
+    completed = Map.get(who_is_done, true, [])
+    incomplete = Map.get(who_is_done, false, [])
 
     render conn, "index.html", requester: requester,
                                completed: completed,

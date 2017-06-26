@@ -4,7 +4,7 @@ defmodule Advisor.Web.PresentPageTest do
 
   alias Advisor.Web.QuestionnaireProposal, as: Proposal
   alias Advisor.Web.Links
-  alias Advisor.Core.Creator
+  alias Advisor.Core.Questionnaire.Creator
 
   @sample_questions [1, 2]
 

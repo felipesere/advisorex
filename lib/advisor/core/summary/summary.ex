@@ -1,11 +1,11 @@
 defmodule Advisor.Core.Summary do
-  alias Advisor.Core.{Person, Answer, AdviceRequest}
+  alias Advisor.Core.{Person, Answer, Advice}
   alias Advisor.Core.Questions
   alias Advisor.Repo
   import Ecto.Query
 
   def for_download(id) do
-    query = from advice in AdviceRequest,
+    query = from advice in Advice,
                join: r in Person, on: [id: advice.requester_id],
                join: a in Person, on: [id: advice.advisor_id],
                join: answer in Answer, on: [advice_request_id: advice.id],
@@ -17,7 +17,8 @@ defmodule Advisor.Core.Summary do
               |> Repo.all()
               |> Enum.map(fn({ts, adv, req, answers}) -> [ts, adv, req] ++ answers end)
 
-    header = ["timestamp", "advisor", "requester"] ++ Questions.of_questionnaire(id)
+    questions = id |> Questions.of_questionnaire() |> Questions.phrases()
+    header = ["timestamp", "advisor", "requester"] ++ questions
 
     [header | content]
   end

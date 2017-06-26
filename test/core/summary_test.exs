@@ -2,9 +2,8 @@ defmodule Advisor.Core.SummaryTest do
   use Advisor.DataCase
 
   alias Advisor.Web.QuestionnaireProposal, as: Proposal
-  alias Advisor.Core.Creator
-  alias Advisor.Core.Answers
-  alias Advisor.Core.Summary
+  alias Advisor.Core.Questionnaire.Creator
+  alias Advisor.Core.{Answers, Summary}
 
   setup do
     proposal = Proposal.build(for: "Rabea Gleissner",
