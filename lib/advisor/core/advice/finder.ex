@@ -1,4 +1,4 @@
-defmodule Advisor.Core.AdviceFinder do
+defmodule Advisor.Core.Advice.Finder do
   alias Advisor.Core.Advice
   alias Advisor.Repo
   import Ecto.Query

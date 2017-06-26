@@ -1,6 +1,7 @@
 defmodule Advisor.Web.PresentPage do
   use Advisor.Web, :controller
-  alias Advisor.Core.{People, Questionnaire, AdviceFinder, Answers, Questions}
+  alias Advisor.Core.{People, Questionnaire, Answers, Questions}
+  alias Advisor.Core.Advice.Finder, as: AdviceFinder
 
   def index(conn, %{"id" => questionnaire_id}) do
     %{question_ids: question_ids} = questionnaire = Questionnaire.find(questionnaire_id)

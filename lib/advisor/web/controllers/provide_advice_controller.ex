@@ -1,6 +1,7 @@
 defmodule Advisor.Web.ProvideAdviceController do
   use Advisor.Web, :controller
-  alias Advisor.Core.{AdviceFinder, People, Questions, Answers}
+  alias Advisor.Core.{People, Questions, Answers}
+  alias Advisor.Core.Advice.Finder, as: AdviceFinder
 
   import Advisor.Web.Authentication.User, only: [found_in: 1]
 

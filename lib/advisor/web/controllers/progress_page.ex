@@ -1,6 +1,8 @@
 defmodule Advisor.Web.ProgressPage do
   use Advisor.Web, :controller
-  alias Advisor.Core.{People, AdviceFinder, Answers, Questionnaire}
+  alias Advisor.Core.{People, Answers, Questionnaire}
+ 
+  alias Advisor.Core.Advice.Finder, as: AdviceFinder
 
   plug  Advisor.Web.Authentication.Gatekeeper, only: :group_leads
 
