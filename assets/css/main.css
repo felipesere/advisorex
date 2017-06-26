@@ -64,12 +64,8 @@ button:focus {outline:0;}
 }
 
 .button:active {
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
   box-shadow: none;
-  margin-top: -webkit-calc(1em + 3px);
   margin-top: calc(1em + 3px);
-  padding: -webkit-calc(0.6em - 1.5px) 2em;
   padding: calc(0.6em - 1.5px) 2em;
 }
 
