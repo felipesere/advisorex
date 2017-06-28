@@ -6,9 +6,10 @@ defmodule Advisor.Core.Questionnaire.Creator do
 
   def create(%{questions: questions,
                requester: requester,
-               advisors: advisors}) do
+               advisors: advisors,
+               group_lead: group_lead}) do
     {:ok, questionnaire} = Repo.insert(%Questionnaire{question_ids: questions,
-                               requester_id: requester})
+      requester_id: requester, group_lead: group_lead})
 
     advice_requests = Enum.map(advisors, fn(advisor) ->
       %{questionnaire_id: questionnaire.id,

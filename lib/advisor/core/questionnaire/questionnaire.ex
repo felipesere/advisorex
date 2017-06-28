@@ -1,5 +1,6 @@
 defmodule Advisor.Core.Questionnaire do
   use Ecto.Schema
+  import Ecto.Query
   alias Advisor.Core.{People, Questions}
   alias Advisor.Repo
   alias __MODULE__
@@ -9,6 +10,7 @@ defmodule Advisor.Core.Questionnaire do
   schema "questionnaires" do
     field :question_ids, {:array, :integer}
     field :requester_id, :integer
+    field :group_lead, :integer
   end
 
   def form_data() do
@@ -21,6 +23,9 @@ defmodule Advisor.Core.Questionnaire do
 
   defp who_is_a_group_lead(person), do: person.is_group_lead
 
+  def find([group_lead: group_lead_id]) do
+    Repo.all(from q in Questionnaire, where: q.group_lead == ^group_lead_id)
+  end
   def find(id) do
     Repo.get(Questionnaire, id)
   end
