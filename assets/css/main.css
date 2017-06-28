@@ -408,6 +408,31 @@ li {
   width: 100%;
 }
 
+/* ======== DASHBOARD ================*/
+
+img.small-circle {
+  width: 50px;
+  border-radius: 25px;
+  margin-right:10px;
+}
+
+.row {
+  display: flex;
+  margin: 5px;
+}
+
+.row > p {
+  flex: 0 1 20%;
+}
+
+.row > li {
+  flex: 0 1 20%;
+}
+
+.profile-size {
+  width: 200px;
+}
+
 /* ======== NOTICE ================*/
 
 .notice {

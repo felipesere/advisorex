@@ -1,0 +1,76 @@
+<section class="module">
+  <header class="module-header">
+    <h1>Hello <%= @viewer.name %>!</h1>
+  </header>
+</section>
+
+<%= if @viewer.is_group_lead  do %>
+  <section class="module">
+    <header class="module-header medium-header">
+      Your groups advice:
+    </header
+    <ul>
+      <li class="row">
+        <p>Advice for Jarkyn</p>
+        <ul class="row">
+          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
+          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
+          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
+        </ul>
+      </li>
+      <li class="row">
+        <p>Advice for Rabea</p>
+        <ul class="row">
+          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
+          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
+        </ul>
+      </li>
+      <li class="row">
+        <p>Advice for Chris</p>
+        <ul class="row">
+          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
+          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
+          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
+          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
+        </ul>
+      </li>
+      </li>
+    </ul>
+  </section>
+<% end %>
+
+<hr class="separator" />
+
+<section class="module">
+  <header class="module-header medium-header">
+    These people are still awaiting your advice:
+  </header>
+
+  <ul class="row" >
+    <li>
+      <img class="profile-image"  src="<%= @person.profile_image %>">
+    <a href="/some-link/" target="_blank" class="button primary profile-size">Give advice now</a>
+    </li>
+    <li>
+      <img class="profile-image"  src="<%= @person.profile_image %>" >
+      <a href="/some-link/" target="_blank" class="button primary profile-size">Give advice now</a>
+    </li>
+    </u>
+</section>
+
+<hr class="separator" />
+
+<section class="module">
+  <header class="module-header medium-header">
+    Status of your own request for advice:
+  </header>
+
+  <ul class="row">
+    <li>
+      <img class="profile-image"  src="<%= @person.profile_image %>">
+    </li>
+    <li>
+      <img class="profile-image"  src="<%= @person.profile_image %>">
+    </li>
+  </ul>
+</section>
