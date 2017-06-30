@@ -10,31 +10,9 @@
       Your groups advice:
     </header
     <ul>
-      <li class="row">
-        <p>Advice for Jarkyn</p>
-        <ul class="row">
-          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
-          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
-          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
-        </ul>
-      </li>
-      <li class="row">
-        <p>Advice for Rabea</p>
-        <ul class="row">
-          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
-          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
-        </ul>
-      </li>
-      <li class="row">
-        <p>Advice for Chris</p>
-        <ul class="row">
-          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
-          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
-          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
-          <li><img class="profile-image small-circle"  src="<%= @person.profile_image %>"></li>
-        </ul>
-      </li>
-      </li>
+      <%= for group  <- @group_lead_section do %>
+        <%= render "advice_for.html", group: group %>
+      <% end %>
     </ul>
   </section>
 <% end %>

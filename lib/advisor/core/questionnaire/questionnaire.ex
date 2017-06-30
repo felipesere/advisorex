@@ -23,9 +23,10 @@ defmodule Advisor.Core.Questionnaire do
 
   defp who_is_a_group_lead(person), do: person.is_group_lead
 
-  def find([group_lead: group_lead_id]) do
+  def for_group_lead(group_lead_id) do
     Repo.all(from q in Questionnaire, where: q.group_lead == ^group_lead_id)
   end
+
   def find(id) do
     Repo.get(Questionnaire, id)
   end

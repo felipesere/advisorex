@@ -22,6 +22,7 @@ defmodule Advisor.Core.People do
     end
   end
 
+  def advisor(%{advisor_id: id}), do: find_by_id(id)
   def requester(%{requester_id: id}), do: find_by_id(id)
   def group_lead([name: name]) do
     Repo.one(from p in Person, where: p.name == ^name and p.is_group_lead)

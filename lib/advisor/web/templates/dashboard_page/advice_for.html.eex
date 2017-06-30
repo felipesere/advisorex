@@ -1,0 +1,8 @@
+<li class="row">
+  <p>Advice for <%= @group.requester.name %></p>
+  <ul class="row">
+    <%= for person <- @group.advisors do %>
+      <li><img class="profile-image small-circle"  src="<%= person.profile_image %>"></li>
+    <% end %>
+  </ul>
+</li>

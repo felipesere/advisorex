@@ -16,6 +16,7 @@ defmodule Advisor.Core.Advice do
     defstruct [:advisor, :advice_id]
   end
 
+  def all_for(%{id: id}), do: all_for(id)
   def all_for(id) do
     Repo.all(from advice in Advice, where: advice.questionnaire_id == ^id)
   end

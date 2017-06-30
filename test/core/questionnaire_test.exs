@@ -9,13 +9,13 @@ defmodule Advisor.Core.QuestionnaireTest do
   test "finds a group leads questinnaires" do
     felipe = People.find_by(name: "Felipe Sere")
 
-    Proposal.build(for: "Rabea Gleissner",
+    proposal = Proposal.build(for: "Rabea Gleissner",
                    advisors: ["Christoph Gockel"],
                    group_lead: felipe.name,
-                   questions: [1,2])
-                   |> Creator.create
+                   questions: [1, 2])
+    Creator.create(proposal)
 
-    [%{group_lead: group_lead}] = Questionnaire.find(group_lead: felipe.id)
+    [%{group_lead: group_lead}] = Questionnaire.for_group_lead(felipe.id)
     assert group_lead == felipe.id
 
   end
