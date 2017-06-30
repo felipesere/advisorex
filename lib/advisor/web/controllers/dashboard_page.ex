@@ -10,8 +10,10 @@ defmodule Advisor.Web.DashboardPage do
   def index(conn, _params) do
     viewer = User.of(conn)
     group_lead_section = Dashboard.group_lead_section(viewer)
+    my_required_advice = Dashboard.required_advice_section(viewer)
     render conn, "index.html", viewer: viewer,
                                group_lead_section: group_lead_section,
+                               required_advice_section: my_required_advice,
                                person: People.find_by(name: "Uku Taht")
   end
 end

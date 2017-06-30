@@ -1,7 +1,7 @@
 defmodule Advisor.Core.Questionnaire do
   use Ecto.Schema
   import Ecto.Query
-  alias Advisor.Core.{People, Questions}
+  alias Advisor.Core.{Advice, People, Questions}
   alias Advisor.Repo
   alias __MODULE__
 
@@ -25,6 +25,15 @@ defmodule Advisor.Core.Questionnaire do
 
   def for_group_lead(group_lead_id) do
     Repo.all(from q in Questionnaire, where: q.group_lead == ^group_lead_id)
+  end
+
+  def with_advisor(person) do
+    advisories = Repo.all(from a in Advice,
+                          where: a.advisor_id == ^person)
+
+   ids = Enum.map(advisories, fn(x) -> x.questionnaire_id end)
+
+    Repo.all(from q in Questionnaire, where: q.id in ^ids)
   end
 
   def find(id) do

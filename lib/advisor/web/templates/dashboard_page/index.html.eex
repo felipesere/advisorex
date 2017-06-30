@@ -25,15 +25,10 @@
   </header>
 
   <ul class="row" >
-    <li>
-      <img class="profile-image"  src="<%= @person.profile_image %>">
-    <a href="/some-link/" target="_blank" class="button primary profile-size">Give advice now</a>
-    </li>
-    <li>
-      <img class="profile-image"  src="<%= @person.profile_image %>" >
-      <a href="/some-link/" target="_blank" class="button primary profile-size">Give advice now</a>
-    </li>
-    </u>
+    <%= for advice <- @required_advice_section do %>
+      <%= render "dashboard_requester.html", advice: advice %>
+    <% end %>
+  </ul>
 </section>
 
 <hr class="separator" />
