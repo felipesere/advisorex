@@ -47,11 +47,21 @@ defmodule Advisor.Web.DashboardPageTest do
     |> login_as("Rabea Gleissner")
     |> get("/dashboard")
     |> html_response(200)
+    |> still_has_to_give_me_advice("Priya Patil")
+    |> still_has_to_give_me_advice("Sarah Johnston")
+  end
+
+  def still_has_to_give_me_advice(html, advisor) do
+    assert html
+            |> Floki.find(".status-of-my-advisors > p")
+            |> Enum.map(&Floki.text/1)
+            |> Enum.member?(advisor)
+    html
   end
 
   def advice_needed_for(html, requester) do
     assert html
-            |> Floki.find(".requested-advice > p")
+            |> Floki.find(".open-advice-requets > p")
             |> Enum.map(&Floki.text/1)
             |> Enum.member?(requester)
 

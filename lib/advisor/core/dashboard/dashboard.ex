@@ -27,4 +27,12 @@ defmodule Advisor.Core.Dashboard do
       %{requester:  requester, advice: advice}
     end)
   end
+
+  def advice_for_me_section(%{id: person}) do
+    case Questionnaire.with_requester(person) do
+      nil -> :nothing
+      id ->  Advice.all_for(id) |> Enum.map(&People.advisor/1)
+    end
+
+  end
 end

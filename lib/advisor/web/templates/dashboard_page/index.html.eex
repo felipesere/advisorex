@@ -4,7 +4,7 @@
   </header>
 </section>
 
-<%= if @viewer.is_group_lead  do %>
+<%= if @viewer.is_group_lead && length(@group_lead_section) > 0  do %>
   <section class="module">
     <header class="module-header medium-header">
       Your groups advice:
@@ -17,33 +17,37 @@
   </section>
 <% end %>
 
-<hr class="separator" />
+<%= if length(@required_advice_section) > 0 do %>
+  <hr class="separator" />
 
-<section class="module">
-  <header class="module-header medium-header">
-    These people are still awaiting your advice:
-  </header>
+  <section class="module">
+    <header class="module-header medium-header">
+      These people are still awaiting your advice:
+    </header>
 
-  <ul class="row" >
-    <%= for advice <- @required_advice_section do %>
-      <%= render "dashboard_requester.html", advice: advice %>
-    <% end %>
-  </ul>
-</section>
+    <ul class="row" >
+      <%= for advice <- @required_advice_section do %>
+        <%= render "dashboard_requester.html", advice: advice %>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
 
-<hr class="separator" />
+<%= if @advice_for_me != :nothing do %>
+  <hr class="separator" />
 
-<section class="module">
-  <header class="module-header medium-header">
-    Status of your own request for advice:
-  </header>
+  <section class="module">
+    <header class="module-header medium-header">
+      Status of your own request for advice:
+    </header>
 
-  <ul class="row">
-    <li>
-      <img class="profile-image"  src="<%= @person.profile_image %>">
-    </li>
-    <li>
-      <img class="profile-image"  src="<%= @person.profile_image %>">
-    </li>
-  </ul>
-</section>
+    <ul class="row">
+      <%= for advisor <- @advice_for_me do %>
+        <li class="status-of-my-advisors">
+          <img class="profile-image"  src="<%= advisor.profile_image %>">
+          <p><%= advisor.name %></p>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>

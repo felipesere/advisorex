@@ -36,6 +36,10 @@ defmodule Advisor.Core.Questionnaire do
     Repo.all(from q in Questionnaire, where: q.id in ^ids)
   end
 
+  def with_requester(person) do
+    Repo.one(from q in Questionnaire, where: q.requester_id == ^person)
+  end
+
   def find(id) do
     Repo.get(Questionnaire, id)
   end
