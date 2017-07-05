@@ -3,8 +3,6 @@ defmodule Advisor.Web.LoginController do
   alias Advisor.Core.People
 
   def index(conn, %{"email" => email, "dashboard" => _nothing}) do
-    user = People.find_by(email: email)
-
     login(conn, as: email, redirect_to: "/dashboard")
   end
 
