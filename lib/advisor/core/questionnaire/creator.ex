@@ -26,6 +26,6 @@ defmodule Advisor.Core.Questionnaire.Creator do
   end
 
   defp to_advisory(%{advisor_id: advisor_id, id: id}) do
-    %Advisory{advisor: People.find_by_id(advisor_id), advice_id: id}
+    %Advisory{advisor: People.find_by_id(advisor_id), advice_id: id, id: id}
   end
 end

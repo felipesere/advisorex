@@ -34,6 +34,10 @@ defmodule Advisor.Core.Questionnaire do
     Repo.get(Questionnaire, id)
   end
 
+  def delete(id) do
+    Repo.delete_all(from q in Questionnaire, where: q.id == ^id)
+  end
+
   defmodule Created do
     defstruct questionnaire: :unassigned, advisories: []
   end
