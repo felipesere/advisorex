@@ -70,6 +70,25 @@ defmodule Advisor.Web.DashboardPageTest do
     |> still_has_to_give_me_advice("Sarah Johnston")
   end
 
+  @tag :skip
+  test "group leads can delete a questionnaire", %{conn: conn} do
+    advice_for("Rabea Gleissner", ["Priya Patil", "Sarah Johnston"])
+    advice_for("Chris Jordan", ["Priya Patil", "Jim Suchy"])
+
+    conn
+    |> login_as(@group_lead)
+    |> get("/dashboard")
+    |> html_response(200)
+    |> delete_questionnaire_for("Rabea Gleissner")
+    |> html_response(200)
+    |> advice_open_for("Chris Jordan")
+    |> no_advice_open_for("Rabea Gleissner")
+  end
+
+  def delete_questionnaire_for(html, _name) do
+    html
+  end
+
   def still_has_to_give_me_advice(html, advisor) do
     assert html
             |> Floki.find(".status-of-my-advisors > p")
