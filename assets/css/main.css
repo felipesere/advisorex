@@ -416,6 +416,10 @@ img.small-circle {
   margin-right:10px;
 }
 
+img.dashboard_action_icon {
+  height: 40px;
+}
+
 .row {
   display: flex;
   margin: 5px;
