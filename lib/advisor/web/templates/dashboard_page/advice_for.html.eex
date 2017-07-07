@@ -8,17 +8,17 @@
 </ul>
 <ul class="row dashboard_actions">
   <li>
-    <a href="<%= path_to_questionnaire(@group.questionnaire_id) %>" class="button">
+    <a href="<%= path_to_questionnaire(@group.questionnaire_id) %>" class="button primary">
       <img src="/assets/images/rubbish_bin_icon.png" alt="Delete">
     </a>
   </li>
   <li>
-    <a href="<%= path_to_present(@group.questionnaire_id) %>" class="button" target="_blank">
+    <a href="<%= path_to_present(@group.questionnaire_id) %>" class="button primary" target="_blank">
       <img src="/assets/images/chat_icon.png" alt="Progress">
     </a>
   </li>
   <li>
-    <a href="<%= download_summary(@group.questionnaire_id) %>" class="button" target="_blank">
+    <a href="<%= download_summary(@group.questionnaire_id) %>" class="button primary" target="_blank">
       <img src="/assets/images/download-csv-v2.png" alt="Download CSV">
     </a>
   </li>

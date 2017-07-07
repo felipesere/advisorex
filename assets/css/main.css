@@ -445,6 +445,10 @@ img.dashboard_action_icon {
   background-color: #d3d4d6;
 }
 
+.groups-advice-section > li:nth-child(odd) {
+  background-color: #ecedef;
+}
+
 .groups-advice {
   padding-left: 5px;
 }
