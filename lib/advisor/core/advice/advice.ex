@@ -1,6 +1,7 @@
 defmodule Advisor.Core.Advice do
   use Ecto.Schema
   import Ecto.Query
+  alias Advisor.Core.Answers
   alias Advisor.Repo
   alias __MODULE__
 
@@ -46,5 +47,9 @@ defmodule Advisor.Core.Advice do
 
   def ids(advisories) do
     Enum.map(advisories, &(&1.id))
+  end
+
+  def completed?(advice, number_of_answers) do
+    length(Answers.find(advice)) == number_of_answers
   end
 end

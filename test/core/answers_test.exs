@@ -1,5 +1,5 @@
 defmodule Advisor.Core.AnswersTest do
-  use ExUnit.Case
+  use Advisor.DataCase
   alias Advisor.Core.Answers
 
   test "transforms params into database compatible answers" do
