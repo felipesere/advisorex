@@ -24,15 +24,22 @@ defmodule Advisor.Core.Dashboard do
     |> Enum.map(fn(questionnaire) ->
       requester = People.requester(questionnaire)
       advice = Advice.from_advisor(advisor, for: requester)
-      %{requester:  requester, advice: advice}
+      number_of_questions = length(questionnaire.question_ids)
+      %{requester:  requester, advice: advice, completed: Advice.completed?(advice, number_of_questions)}
     end)
+    |> Enum.reject(fn(%{completed: completed}) -> completed end)
   end
 
   def advice_for_me_section(%{id: person}) do
     case Questionnaire.with_requester(person) do
       nil -> :nothing
-      id ->  Advice.all_for(id) |> Enum.map(&People.advisor/1)
+      questionnaire ->  Advice.all_for(questionnaire) |> Enum.map(&(people_and_completeness(&1, questionnaire)))
     end
+  end
 
+  def people_and_completeness(advice, %{question_ids: questions}) do
+   nr_of_questions =  length(questions)
+    %{advisor: People.advisor(advice),
+      completed: Advice.completed?(advice, nr_of_questions)}
   end
 end

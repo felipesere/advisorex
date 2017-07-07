@@ -12,4 +12,7 @@ defmodule Advisor.Web.DashboardPageView do
   def download_summary(id) do
     download_summary_path(Advisor.Web.Endpoint, :export, id)
   end
+
+  def completed?(%{completed: true}), do: "completed"
+  def completed?(%{completed: false}), do: "incomplete"
 end

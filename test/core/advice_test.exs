@@ -7,22 +7,22 @@ defmodule Advisor.Core.AdviceTest do
   @questions [1, 2, 3]
 
   test "can figure out if an advice has been answered fully" do
-    christoph = questionnaire_for("Christoph Gockel", @questions)
+    christoph = advice_with("Christoph Gockel", @questions)
 
     answer!(christoph, with: %{"1" => "foo", "2" => "bar", "3" => "batz"})
     assert Advice.completed?(christoph, length(@questions))
   end
 
   test "cann tell if advice has not been answered fully" do
-    christoph = questionnaire_for("Christoph Gockel", @questions)
+    christoph = advice_with("Christoph Gockel", @questions)
 
     answer!(christoph, with: %{"1" => "foo"})
     refute Advice.completed?(christoph, length(@questions))
   end
 
-  def questionnaire_for(person, questions) do
+  def advice_with(person, questions) do
     {:ok, %{advisories: [individual]}} = Proposal.build(for: "Felipe Sere",
-                                                       advisors: ["Christoph Gockel"],
+                                                       advisors: [person],
                                                        group_lead: "Jim Suchy",
                                                        questions: questions) |> Creator.create
     individual

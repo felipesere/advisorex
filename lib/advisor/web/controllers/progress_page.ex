@@ -1,6 +1,6 @@
 defmodule Advisor.Web.ProgressPage do
   use Advisor.Web, :controller
-  alias Advisor.Core.{People, Answers, Questionnaire, Advice}
+  alias Advisor.Core.{People, Questionnaire, Advice}
 
   plug  Advisor.Web.Authentication.Gatekeeper, only: :group_leads
 
@@ -9,10 +9,10 @@ defmodule Advisor.Web.ProgressPage do
     questionnaire = Questionnaire.find(id)
     requester = People.requester(questionnaire)
 
+    number_of_answers = length(questionnaire.question_ids)
     who_is_done = advisories
-                    |> Answers.gather
-                    |> Enum.group_by(&(completed?(&1.answers, questionnaire)),
-                                     &(People.find_by(&1.advisory)))
+                  |> Enum.group_by(&(Advice.completed?(&1, number_of_answers)),
+                                                       &People.advisor/1)
 
     completed = Map.get(who_is_done, true, [])
     incomplete = Map.get(who_is_done, false, [])
@@ -22,9 +22,5 @@ defmodule Advisor.Web.ProgressPage do
                                incomplete: incomplete,
                                all_complete:  incomplete == [],
                                questionnaire: questionnaire
-  end
-
-  defp completed?(answers, questionnaire) do
-    length(answers) == length(questionnaire.question_ids)
   end
 end

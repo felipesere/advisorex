@@ -44,10 +44,11 @@
     </header>
 
     <ul class="row">
-      <%= for advisor <- @advice_for_me do %>
+      <%= for advice <- @advice_for_me do %>
         <li class="status-of-my-advisors">
-          <img class="profile-image"  src="<%= advisor.profile_image %>">
-          <p><%= advisor.name %></p>
+          <img class="profile-image <%= completed?(advice) %>"  src="<%= advice.advisor.profile_image %>">
+          <p><%= advice.advisor.name %></p>
+          <p><%= completed?(advice) %></p>
         </li>
       <% end %>
     </ul>
