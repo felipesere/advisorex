@@ -437,6 +437,30 @@ img.dashboard_action_icon {
   width: 200px;
 }
 
+.groups-advice {
+  justify-content: space-between;
+}
+
+.groups-advice-section > li:nth-child(even) {
+  background-color: #d3d4d6;
+}
+
+.groups-advice {
+  padding-left: 5px;
+}
+
+.dashboard_actions a.button {
+  height: 50px;
+  margin: 0;
+  padding: 10px;
+  margin-left: 5px;
+}
+
+.dashboard_actions img {
+  height: 30px;
+  display: block;
+}
+
 /* ======== NOTICE ================*/
 
 .notice {

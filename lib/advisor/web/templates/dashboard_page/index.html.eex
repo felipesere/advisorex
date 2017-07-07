@@ -8,10 +8,10 @@
   <section class="module">
     <header class="module-header medium-header">
       Your groups advice:
-    </header
-    <ul>
+    </header>
+    <ul class="groups-advice-section">
       <%= for group  <- @group_lead_section do %>
-        <li class="row">
+        <li class="row groups-advice">
           <%= render "advice_for.html", group: group %>
         </li>
       <% end %>

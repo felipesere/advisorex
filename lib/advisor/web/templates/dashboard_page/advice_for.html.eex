@@ -6,21 +6,20 @@
     </li>
   <% end %>
 </ul>
-Actions:
-<ol class="row actions">
+<ul class="row dashboard_actions">
   <li>
-    <a href="<%= path_to_questionnaire(@group.questionnaire_id) %>">
-      <img class="dashboard_action_icon" src="/assets/images/rubbish_bin_icon.png" alt="Delete">
+    <a href="<%= path_to_questionnaire(@group.questionnaire_id) %>" class="button">
+      <img src="/assets/images/rubbish_bin_icon.png" alt="Delete">
     </a>
   </li>
   <li>
-    <a href="<%= path_to_present(@group.questionnaire_id) %>" target="_blank">
-      <img class="dashboard_action_icon" src="/assets/images/chat_icon.png" alt="Progress">
+    <a href="<%= path_to_present(@group.questionnaire_id) %>" class="button" target="_blank">
+      <img src="/assets/images/chat_icon.png" alt="Progress">
     </a>
   </li>
   <li>
-    <a href="<%= download_summary(@group.questionnaire_id) %>" target="_blank">
-      <img class="dashboard_action_icon" src="/assets/images/download-csv-v2.png" alt="Download CSV">
+    <a href="<%= download_summary(@group.questionnaire_id) %>" class="button" target="_blank">
+      <img src="/assets/images/download-csv-v2.png" alt="Download CSV">
     </a>
   </li>
-</ol>
+</ul>
