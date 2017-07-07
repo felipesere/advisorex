@@ -11,7 +11,9 @@
     </header
     <ul>
       <%= for group  <- @group_lead_section do %>
-        <%= render "advice_for.html", group: group %>
+        <li class="row">
+          <%= render "advice_for.html", group: group %>
+        </li>
       <% end %>
     </ul>
   </section>

@@ -10,12 +10,12 @@ defmodule Advisor.Core.Dashboard do
   defp expand(questionnaires) when is_list(questionnaires) do
     Enum.map(questionnaires, &expand/1)
   end
-  defp expand(questionnaire) do
+  defp expand(%{id: id} = questionnaire) do
     advisors = questionnaire
                |> Advice.all_for()
                |> Enum.map(&People.advisor/1)
 
-    %{requester: People.requester(questionnaire), advisors: advisors}
+    %{questionnaire_id: id, requester: People.requester(questionnaire), advisors: advisors}
   end
 
   def required_advice_section(%{id: advisor}) do

@@ -71,9 +71,22 @@ defmodule Advisor.Web.DashboardPageTest do
   def advice_open_for(html, requester) do
     advice = fn(text) -> text =~ "Advice for " <> requester end
     assert html
-            |> Floki.find("li > p")
-            |> Enum.map(&Floki.text/1)
+            |> advice_text
             |> Enum.any?(advice)
     html
+  end
+
+  def no_advice_open_for(html, requester) do
+    advice = fn(text) -> text =~ "Advice for " <> requester end
+    assert html
+            |> advice_text
+            |> Enum.none?(advice)
+    html
+  end
+
+  defp advice_text(html) do
+    html
+    |> Floki.find("li > p")
+    |> Enum.map(&Floki.text/1)
   end
 end
