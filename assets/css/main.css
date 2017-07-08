@@ -69,6 +69,10 @@ button:focus {outline:0;}
   padding: calc(0.6em - 1.5px) 2em;
 }
 
+.center {
+  text-align: center;
+}
+
 p.center {
   text-align: center;
 }

@@ -1,7 +1,9 @@
-<section class="module">
+<section class="module center">
   <header class="module-header">
     <h1>Hello <%= @viewer.name %>!</h1>
   </header>
+
+  <a href="/request" class="button primary">Request advice for yourself</a>
 </section>
 
 <%= if @viewer.is_group_lead && length(@group_lead_section) > 0  do %>
