@@ -13,7 +13,7 @@ defmodule Advisor.Core.AdviceTest do
     assert Advice.completed?(christoph, length(@questions))
   end
 
-  test "cann tell if advice has not been answered fully" do
+  test "can tell if advice has not been answered fully" do
     christoph = advice_with("Christoph Gockel", @questions)
 
     ThroughTheCore.answer!(christoph, with: %{"1" => "foo"})
