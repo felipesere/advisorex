@@ -2,12 +2,16 @@ defmodule Advisor.Web.LoginController do
   use Advisor.Web, :controller
   alias Advisor.Core.People
 
-  def index(conn, %{"email" => email, "dashboard" => _nothing}) do
+  def index(conn, %{"email" => email, "submit" => "dashboard"}) do
     login(conn, as: email, redirect_to: "/dashboard")
   end
 
-  def index(conn, %{"email" => email, "request" => _nothing}) do
-    target = conn.cookies["target"] || "/request"
+  def index(conn, %{"email" => email, "submit" => "advice"}) do
+    login(conn, as: email, redirect_to: "/request")
+  end
+
+  def index(conn, %{"email" => email, "submit" => "redirect"}) do
+    target = conn.cookies["target"] || "/"
 
     login(conn, as: email, redirect_to: target)
   end
@@ -18,15 +22,12 @@ defmodule Advisor.Web.LoginController do
     if user do
       conn
       |> put_resp_cookie("user", "#{user.id}")
+      |> put_resp_cookie("target", "deleted")
       |> redirect(to: destination)
     else
       conn
       |> redirect(to: "/")
     end
-  end
-
-  def look_for_redirect(conn) do
-    {conn, conn.cookies["target"]}
   end
 
   def redirect({conn, nil}), do: redirect(conn, to: "/request")
