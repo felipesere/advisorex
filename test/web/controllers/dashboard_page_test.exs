@@ -27,7 +27,7 @@ defmodule Advisor.Web.DashboardPageTest do
     advice_for("Chris Jordan", ["Nick Dyer", "Jim Suchy"])
 
     conn
-    |> login_as(@group_lead)
+    |> ThroughTheWeb.login_as(@group_lead)
     |> get("/dashboard")
     |> html_response(200)
     |> has_title("Hello Felipe Sere!")
@@ -40,7 +40,7 @@ defmodule Advisor.Web.DashboardPageTest do
     advice_for("Chris Jordan", ["Priya Patil", "Jim Suchy"])
 
     conn
-    |> login_as("Priya Patil")
+    |> ThroughTheWeb.login_as("Priya Patil")
     |> get("/dashboard")
     |> html_response(200)
     |> advice_needed_for("Rabea Gleissner")
@@ -53,7 +53,7 @@ defmodule Advisor.Web.DashboardPageTest do
     answer!(priya_advice, with: @answers)
 
     conn
-    |> login_as("Priya Patil")
+    |> ThroughTheWeb.login_as("Priya Patil")
     |> get("/dashboard")
     |> html_response(200)
     |> no_advice_needed_for("Rabea Gleissner")
@@ -63,7 +63,7 @@ defmodule Advisor.Web.DashboardPageTest do
     advice_for("Rabea Gleissner", ["Priya Patil", "Sarah Johnston"])
 
     conn
-    |> login_as("Rabea Gleissner")
+    |> ThroughTheWeb.login_as("Rabea Gleissner")
     |> get("/dashboard")
     |> html_response(200)
     |> still_has_to_give_me_advice("Priya Patil")
@@ -76,7 +76,7 @@ defmodule Advisor.Web.DashboardPageTest do
     advice_for("Chris Jordan", ["Priya Patil", "Jim Suchy"])
 
     conn
-    |> login_as(@group_lead)
+    |> ThroughTheWeb.login_as(@group_lead)
     |> get("/dashboard")
     |> html_response(200)
     |> delete_questionnaire_for("Rabea Gleissner")

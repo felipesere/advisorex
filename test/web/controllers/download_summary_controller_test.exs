@@ -18,7 +18,7 @@ defmodule Advisor.Web.DownloadSummaryControllerTest do
   def answer!(conn, links) do
     Enum.each(links, fn (link) ->
       conn
-      |> login_as(link.person.name)
+      |> ThroughTheWeb.login_as(link.person.name)
       |> post(link.link, @answers)
     end)
   end
@@ -28,10 +28,10 @@ defmodule Advisor.Web.DownloadSummaryControllerTest do
                                 |> Creator.create
                                 |> Links.generate
 
-    answer!(conn, links)
+    ThroughTheWeb.answer!(conn, links, @answers)
 
     conn
-    |> login_as("Felipe Sere")
+    |> ThroughTheWeb.login_as("Felipe Sere")
     |> get("#{present_link}/download.csv")
     |> response_content_type(:csv)
   end

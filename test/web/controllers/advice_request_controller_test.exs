@@ -6,7 +6,7 @@ defmodule Advisor.Web.AdviceRequestControllerTest do
                  :advisors => %{"4" => "true"},
                  :questions =>  %{"13" => "true"}}
     conn = conn
-           |> login_as(11)
+           |> ThroughTheWeb.login_as(11)
            |> post("/request", [proposal: proposal])
 
     response = html_response(conn, 200)

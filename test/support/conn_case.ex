@@ -23,14 +23,6 @@ defmodule Advisor.Web.ConnCase do
 
       # The default endpoint for testing
       @endpoint Advisor.Web.Endpoint
-
-      def login_as(conn, name) when is_binary(name) do
-        person = Advisor.Core.People.find_by(name: name)
-        assign(conn, :user_id, person.id)
-      end
-      def login_as(conn, id) do
-        assign(conn, :user_id, id)
-      end
     end
   end
 
