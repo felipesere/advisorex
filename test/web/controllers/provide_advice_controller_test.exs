@@ -18,7 +18,7 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
     felipes_advice = advisory_for(links, "Felipe Sere")
 
     conn
-    |> login_as("Felipe Sere")
+    |> ThroughTheWeb.login_as("Felipe Sere")
     |> get(felipes_advice)
     |> html_response(200)
     |> has_header("Advice for Rabea Gleissner")
@@ -28,7 +28,7 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
     felipes_advice_link = advisory_for(links, "Felipe Sere")
 
     conn = conn
-           |> login_as("Rabea Gleissner")
+           |> ThroughTheWeb.login_as("Rabea Gleissner")
            |> get(felipes_advice_link)
 
     assert conn |> redirected_to() == "/"
@@ -37,7 +37,7 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
 
   test "renders thank you page", %{conn: conn} do
     conn
-    |> login_as("Felipe Sere")
+    |> ThroughTheWeb.login_as("Felipe Sere")
     |> post("/provide/1")
     |> html_response(200)
     |> has_header("Thank you!")

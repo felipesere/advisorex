@@ -69,6 +69,10 @@ button:focus {outline:0;}
   padding: calc(0.6em - 1.5px) 2em;
 }
 
+.center {
+  text-align: center;
+}
+
 p.center {
   text-align: center;
 }
@@ -406,6 +410,63 @@ li {
 
 .login-form > form > button {
   width: 100%;
+}
+
+/* ======== DASHBOARD ================*/
+
+img.small-circle {
+  width: 50px;
+  border-radius: 25px;
+  margin-right:10px;
+}
+
+img.dashboard_action_icon {
+  height: 40px;
+}
+
+.row {
+  display: flex;
+  margin: 5px;
+}
+
+.row > p {
+  flex: 0 1 20%;
+}
+
+.row > li {
+  flex: 0 1 20%;
+}
+
+.profile-size {
+  width: 200px;
+}
+
+.groups-advice {
+  justify-content: space-between;
+}
+
+.groups-advice-section > li:nth-child(even) {
+  background-color: #d3d4d6;
+}
+
+.groups-advice-section > li:nth-child(odd) {
+  background-color: #ecedef;
+}
+
+.groups-advice {
+  padding-left: 5px;
+}
+
+.dashboard_actions a.button {
+  height: 50px;
+  margin: 0;
+  padding: 10px;
+  margin-left: 5px;
+}
+
+.dashboard_actions img {
+  height: 30px;
+  display: block;
 }
 
 /* ======== NOTICE ================*/

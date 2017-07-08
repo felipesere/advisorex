@@ -1,0 +1,58 @@
+<section class="module center">
+  <header class="module-header">
+    <h1>Hello <%= @viewer.name %>!</h1>
+  </header>
+
+  <a href="/request" class="button primary">Request advice for yourself</a>
+</section>
+
+<%= if @viewer.is_group_lead && length(@group_lead_section) > 0  do %>
+  <section class="module">
+    <header class="module-header medium-header">
+      Your groups advice:
+    </header>
+    <ul class="groups-advice-section">
+      <%= for group  <- @group_lead_section do %>
+        <li class="row groups-advice">
+          <%= render "advice_for.html", group: group %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<%= if length(@required_advice_section) > 0 do %>
+  <hr class="separator" />
+
+  <section class="module">
+    <header class="module-header medium-header">
+      These people are still awaiting your advice:
+    </header>
+
+    <ul class="row" >
+      <%= for advice <- @required_advice_section do %>
+        <%= render "dashboard_requester.html", advice: advice %>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<%= if @advice_for_me != :nothing do %>
+  <hr class="separator" />
+
+  <section class="module">
+    <header class="module-header medium-header">
+      Status of your own request for advice:
+    </header>
+
+    <ul class="row">
+      <%= for advice <- @advice_for_me do %>
+        <li class="status-of-my-advisors">
+          <img class="profile-image <%= completed?(advice) %>"  src="<%= advice.advisor.profile_image %>">
+          <p><%= advice.advisor.name %></p>
+          <p><%= completed?(advice) %></p>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>

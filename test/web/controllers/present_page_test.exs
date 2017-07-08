@@ -23,15 +23,15 @@ defmodule Advisor.Web.PresentPageTest do
     answers = ["1": "something", "2": "else"]
 
     conn
-    |> login_as("Chris Jordan")
+    |> ThroughTheWeb.login_as("Chris Jordan")
     |> post(cj, answers)
 
     conn
-    |> login_as("Priya Patil")
+    |> ThroughTheWeb.login_as("Priya Patil")
     |> post(priya, answers)
 
     conn
-    |> login_as("Felipe Sere")
+    |> ThroughTheWeb.login_as("Felipe Sere")
     |> get(present_link)
     |> html_response(200)
     |> has_title("Advice for Rabea Gleissner")

@@ -1,6 +1,7 @@
 defmodule Advisor.Core.Answers do
   alias Advisor.Repo
   alias Advisor.Core.Answer
+  alias Advisor.Core.Advice
   import Ecto.Query
 
   @into_list []
@@ -48,7 +49,7 @@ defmodule Advisor.Core.Answers do
   end
 
   def find(advisories) when is_list(advisories) do
-    ids = advisories |> Enum.map(fn(x) -> x.advice_id end)
+    ids = advisories |> Enum.map(fn(x) -> x.id end)
 
     Repo.all(from a in Answer, where: a.advice_request_id in ^ids)
   end
@@ -56,5 +57,10 @@ defmodule Advisor.Core.Answers do
     answers_from_advisory = from a in Answer, where: a.advice_request_id == ^advisory.id
 
     Repo.all(answers_from_advisory)
+  end
+
+  def delete_all(advisories) do
+    ids = Advice.ids(advisories)
+    Repo.delete_all(from a in Answer, where: a.advice_request_id in ^ids)
   end
 end
