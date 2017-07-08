@@ -49,7 +49,7 @@ defmodule Advisor.Core.Answers do
   end
 
   def find(advisories) when is_list(advisories) do
-    ids = advisories |> Enum.map(fn(x) -> x.advice_id end)
+    ids = advisories |> Enum.map(fn(x) -> x.id end)
 
     Repo.all(from a in Answer, where: a.advice_request_id in ^ids)
   end

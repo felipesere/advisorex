@@ -28,7 +28,7 @@ defmodule Advisor.Core.AdviceTest do
     individual
   end
 
-  def answer!(%{advice_id: id}, [with: data]) do
+  def answer!(%{id: id}, [with: data]) do
     Answers.store(Map.put(data, "id", id))
   end
 end

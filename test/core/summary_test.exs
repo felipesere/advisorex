@@ -18,7 +18,7 @@ defmodule Advisor.Core.SummaryTest do
     advisories
     |> Enum.each(fn(advisory) -> answer!(advisory, data) end)
   end
-  def answer!(%{advice_id: id}, [with: data]) do
+  def answer!(%{id: id}, [with: data]) do
     Answers.store(Map.put(data, "id", id))
   end
 

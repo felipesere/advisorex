@@ -13,11 +13,6 @@ defmodule Advisor.Core.Advice do
     field :advisor_id,        :integer
   end
 
-  # TOOD: This module needs to go
-  defmodule Advisory do
-    defstruct [:advisor, :advice_id, :id]
-  end
-
   def all_for(%{id: id}), do: all_for(id)
   def all_for(id) do
     Repo.all(from advice in Advice, where: advice.questionnaire_id == ^id)
@@ -36,8 +31,7 @@ defmodule Advisor.Core.Advice do
   end
 
   def from_advisor(advisor, [for: requester]) do
-    Repo.one(from a in Advice,
-             where: a.advisor_id == ^advisor and a.requester_id == ^requester.id)
+    Repo.one(from a in Advice, where: a.advisor_id == ^advisor and a.requester_id == ^requester.id)
   end
 
   def delete_all(advisories) do
