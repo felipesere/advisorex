@@ -15,7 +15,6 @@ before_script:
 
 script:
   - MIX_ENV=test mix ci
-  - MIX_ENV=test mix coveralls.travis
 
 cache:
   directories:
