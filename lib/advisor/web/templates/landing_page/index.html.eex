@@ -10,10 +10,10 @@
       <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
       <%= if @target do %>
         <input type="hidden" name="target" value="<%= @target %>">
-        <button type="submit"  class="button primary" name="submit" value="redirect">Login</button>
+        <button type="submit" class="button primary" name="submit" value="redirect">Login</button>
       <% else %>
-        <button type="submit"  class="button primary" name="submit" value="advice">Ask for advice</button>
-        <button type="submit"  class="button primary" name="submit" value="dashboard" >Go to your Dashboard</button>
+        <button type="submit" class="button primary" name="submit" value="advice">Ask for advice</button>
+        <button type="submit" class="button primary" name="submit" value="dashboard" >Go to your Dashboard</button>
       <% end %>
     </form>
   </div>
