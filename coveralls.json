@@ -1,0 +1,11 @@
+{
+  "custom_stop_words": [
+    "with"
+  ],
+
+  "skip_files": [
+    "lib/advisor/web/endpoint.ex",
+    "lib/advisor/web/web.ex"
+  ]
+}
+
