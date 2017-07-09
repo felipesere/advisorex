@@ -9,7 +9,8 @@ defmodule Advisor.Mixfile do
      compilers: [:phoenix] ++ Mix.compilers,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
-     deps: deps()]
+     deps: deps(),
+     test_coverage: [tool: ExCoveralls]]
   end
 
   # Configuration for the OTP application.
@@ -39,6 +40,7 @@ defmodule Advisor.Mixfile do
      {:mix_test_watch, "~> 0.3.3"},
      {:floki, "~> 0.17.0", only: :test},
      {:credo, "~> 0.7", only: [:dev, :test], runtime: false},
+     {:excoveralls, "~> 0.7.1"},
      {:apex, "~> 1.0"},
      {:csv, "~> 2.0"}]
   end
