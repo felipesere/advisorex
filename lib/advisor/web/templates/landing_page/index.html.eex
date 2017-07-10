@@ -7,12 +7,14 @@
   <div class="login-form">
     <form action="/begin" method="post">
       <input type="email" name="email" placeholder="Put your email here" />
-      <button type="submit"  class="button primary" name="request"><%= @button %></button>
-      <input type="hidden" name="_csrf_token" value="<%= csrf_token() %>">
+      <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
       <%= if @target do %>
         <input type="hidden" name="target" value="<%= @target %>">
+        <button type="submit" class="button primary" name="submit" value="redirect">Login</button>
+      <% else %>
+        <button type="submit" class="button primary" name="submit" value="advice">Ask for advice</button>
+        <button type="submit" class="button primary" name="submit" value="dashboard" >Go to your Dashboard</button>
       <% end %>
-      <button type="submit"  class="button primary" name="dashboard" >Go to your Dashboard</button>
     </form>
   </div>
 </section>
