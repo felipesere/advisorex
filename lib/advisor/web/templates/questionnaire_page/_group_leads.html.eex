@@ -1,6 +1,6 @@
-<ul class="people-picker">
+<ul class="people-picker collection-wrapper">
   <%= for person <- @leads do %>
-    <li>
+    <li class="group-lead">
       <%= radio_button(@form ,:group_lead, person.id) %>
       <%= label(@form, :group_lead, "", for: "proposal_group_lead_#{person.id}", class: "people-picker", style: "background: url(#{person.profile_image}); background-size: cover;", ) %>
       <span class="name"><%= person.name %></span>

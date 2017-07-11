@@ -1,8 +1,8 @@
 defmodule Advisor.Core.Questionnaire.Form do
   alias Advisor.Core.{People, Questions}
 
-  def data() do
-    everybody = People.everybody()
+  def data_for(person) do
+    everybody = People.everybody_but(person)
     group_leads = Enum.filter(everybody, &who_is_a_group_lead/1)
     questions = Questions.all()
 

@@ -6,7 +6,7 @@ defmodule Advisor.Web.QuestionnairePage do
   plug  Advisor.Web.Authentication.Gatekeeper
 
   def index(conn, _params) do
-    {everybody, group_leads, questions} = QuestionnaireForm.data()
+    {everybody, group_leads, questions} = QuestionnaireForm.data_for(User.of(conn))
 
     render conn, "request.html", requester: User.of(conn),
       group_leads: group_leads,

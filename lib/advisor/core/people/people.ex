@@ -3,7 +3,11 @@ defmodule Advisor.Core.People do
   alias Advisor.Core.Person
   import Ecto.Query
 
-  def everybody(), do: Repo.all(Person)
+  def everybody_but(user) do
+    Enum.filter(everybody(), fn(person) -> person.email !=  user.email end)
+  end
+
+  defp everybody(), do: Repo.all(Person)
 
   def find_by_id(id), do: find_by([id: id])
 
