@@ -24,7 +24,7 @@ defmodule Advisor.Web.RequestPageTest do
              |> Floki.find(".group-lead")
              |> length == number_of_group_lead
 
-    number_of_advisors = 23
+    number_of_advisors = 21
     assert response
              |> Floki.find(".advisor")
              |> length == number_of_advisors
