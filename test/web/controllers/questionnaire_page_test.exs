@@ -1,5 +1,8 @@
 defmodule Advisor.Web.RequestPageTest do
   use Advisor.Web.ConnCase
+  alias Advisor.Core.{People, Questions}
+
+  @myself 1
 
   test "cannot request advice if not authenticated", %{conn: conn} do
     conn = get conn, "/request"
@@ -19,18 +22,21 @@ defmodule Advisor.Web.RequestPageTest do
              |> Enum.at(0)
              |> Floki.text == "Hello Felipe Sere!"
 
-    number_of_group_lead = 4
+    number_of_group_lead = length(People.group_leads()) - @myself
     assert response
              |> Floki.find(".group-lead")
              |> length == number_of_group_lead
 
-    number_of_advisors = 21
+    number_of_advisors = length(People.everybody()) - @myself
     assert response
              |> Floki.find(".advisor")
              |> length == number_of_advisors
 
+    number_of_questions = Questions.all |> flatten |> length
     assert response
              |> Floki.find(".question-picker li")
-             |> length == 16
+             |> length == number_of_questions
   end
+
+  defp flatten(%{client: c, technical: t, community: co}), do: c ++ t ++ co
 end

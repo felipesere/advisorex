@@ -7,7 +7,9 @@ defmodule Advisor.Core.People do
     Enum.filter(everybody(), fn(person) -> person.email !=  user.email end)
   end
 
-  defp everybody(), do: Repo.all(Person)
+  def everybody(), do: Repo.all(Person)
+
+  def group_leads(), do: Repo.all(from p in Person, where: p.is_group_lead)
 
   def find_by_id(id), do: find_by([id: id])
 
