@@ -18,3 +18,8 @@ config :advisor, Advisor.Repo,
   database: "advisor_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+
+config :advisor, Advisor.Web.Authentication.Password,
+  password: "secret"
+
