@@ -29,5 +29,8 @@ config :advisor, Advisor.Repo,
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "15")
 
+config :comeonin, :bcrypt_log_rounds, 15
+
 config :advisor, Advisor.Web.Authentication.Password,
+  checker: Advisor.Web.Authentication.Password.HashedPassword,
   password: System.get_env("PASSWORD")

@@ -21,5 +21,6 @@ config :advisor, Advisor.Repo,
 
 
 config :advisor, Advisor.Web.Authentication.Password,
+  checker: Advisor.Web.Authentication.Password.SimplePassword,
   password: "secret"
 
