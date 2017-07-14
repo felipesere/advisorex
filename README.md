@@ -43,12 +43,6 @@ Prerequisites:
 - [Virtual Box](https://www.virtualbox.org/)
 
 
-Then install the Ansible libraries for Postgresql and NodeJS
-
-`ansible-galaxy install geerlingguy.nodejs`
-
-`ansible-galaxy install ANXS.postgresql`
-
 Now you need to setup your virtual machine. 
 
 `vagrant up`
@@ -57,14 +51,10 @@ If vagrant is already running but you want to copy over the configuration or loc
 
 `vagrant provision`
 
-To setup your git username and email in the vagrant machine, run:
-
-`bin/git-setup`
-
-To enter the virtual machine, run
-
-`bin/start`
-
 To start the server for the advisorex project, run:
 
-`mix phx.server`
+``` unix
+vagrant ssh
+cd /advisorex
+mix phx.server
+```
