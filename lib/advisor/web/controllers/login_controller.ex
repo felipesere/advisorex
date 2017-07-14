@@ -30,7 +30,4 @@ defmodule Advisor.Web.LoginController do
       |> redirect(to: "/")
     end
   end
-
-  def redirect({conn, nil}), do: redirect(conn, to: "/request")
-  def redirect({conn, destination}), do: redirect(conn, to: destination)
 end
