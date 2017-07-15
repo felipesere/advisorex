@@ -23,5 +23,7 @@ defmodule Advisor.Web.Router do
     get "/present/:id/download.csv", DownloadSummaryController, :export
     get "/dashboard", DashboardPage, :index
     get "/questionnaire/:id/delete", QuestionnaireController, :delete
+
+    get "/healthcheck", HealthcheckController, :index
   end
 end
