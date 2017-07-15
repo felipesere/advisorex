@@ -20,6 +20,6 @@ defmodule Advisor.Web.HealthcheckController do
   @git_sha Git.current_git_sha()
 
   def index(conn, _params) do
-    text conn, @git_sha
+    text conn, "Last commit: #{@git_sha}"
   end
 end
