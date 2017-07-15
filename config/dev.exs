@@ -55,3 +55,8 @@ config :advisor, Advisor.Repo,
   database: "advisor_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :advisor, Advisor.Web.Authentication.Password,
+  checker: Advisor.Web.Authentication.Password.HashedPassword,
+  password: System.get_env("PASSWORD")
+

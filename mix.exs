@@ -18,7 +18,7 @@ defmodule Advisor.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Advisor.Application, []},
-     extra_applications: [:logger, :runtime_tools]]
+     extra_applications: [:logger, :runtime_tools, :comeonin]]
   end
 
   # Specifies which paths to compile per environment.
@@ -42,7 +42,8 @@ defmodule Advisor.Mixfile do
      {:credo, "~> 0.7", only: [:dev, :test], runtime: false},
      {:excoveralls, "~> 0.7.1"},
      {:apex, "~> 1.0"},
-     {:csv, "~> 2.0"}]
+     {:csv, "~> 2.0"},
+     {:comeonin, "~> 3.2"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

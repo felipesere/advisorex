@@ -7,6 +7,7 @@
   <div class="login-form">
     <form action="/begin" method="post">
       <input type="email" name="email" placeholder="Put your email here" />
+      <input type="password" name="password" placeholder="Your password" />
       <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
       <%= if @target do %>
         <input type="hidden" name="target" value="<%= @target %>">
