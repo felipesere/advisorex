@@ -57,6 +57,6 @@ config :advisor, Advisor.Repo,
   pool_size: 10
 
 config :advisor, Advisor.Web.Authentication.Password,
-  checker: Advisor.Web.Authentication.Password.HashedPassword,
-  password: System.get_env("PASSWORD")
+  checker: Advisor.Web.Authentication.Password.SimplePassword,
+  password: "secret"
 
