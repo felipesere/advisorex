@@ -32,3 +32,4 @@ setup/playbook.retry
 mix.lock
 cover
 
+terraform/terraform.tfvars
