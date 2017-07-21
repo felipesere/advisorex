@@ -33,3 +33,4 @@ mix.lock
 cover
 
 terraform/terraform.tfvars
+terraform/terraform.tfstate
