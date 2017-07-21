@@ -1,33 +1,36 @@
 defmodule Advisor.Web.LoginController do
   use Advisor.Web, :controller
-  alias Advisor.Core.People
-  alias Advisor.Web.Authentication.Password
+  alias Advisor.Web.Authentication.User
 
-  def index(conn, %{"submit" => "dashboard"} = params) do
-    login(conn, params, redirect_to: "/dashboard")
+  plug Advisor.Web.Authentication.Gatekeeper, redirect: false
+
+  def index(conn, params) do
+    login(conn, params, redirect_to: destination(conn, params))
   end
 
-  def index(conn, %{"submit" => "advice"} = params) do
-    login(conn, params, redirect_to: "/request")
-  end
-
-  def index(conn, %{"submit" => "redirect"} = params) do
-    target = conn.cookies["target"] || "/"
-
-    login(conn, params, redirect_to: target)
-  end
-
-  def login(conn, %{"email" => email, "password" => password}, [redirect_to: destination]) do
-    user = People.find_by(email: email)
-
-    if user && Password.matches?(password) do
-      conn
-      |> put_resp_cookie("user", "#{user.id}")
-      |> put_resp_cookie("target", "deleted")
-      |> redirect(to: destination)
-    else
-      conn
-      |> redirect(to: "/")
+  def destination(conn, params) do
+    case Map.fetch!(params, "submit") do
+      "dashboard" -> "/dashboard"
+      "advice" -> "/request"
+      "redirect" -> conn.cookies["target"] || "/"
     end
+  end
+
+  def login(conn, %{"email" => email, "password" => password}, destination) do
+    user = User.logged_in_with(email, password)
+    proceed(conn, user, destination)
+  end
+
+  def login(conn, _, destination) do
+    user = User.of(conn)
+    proceed(conn, user, destination)
+  end
+
+  def proceed(conn, nil, _), do: redirect(conn, to: "/")
+  def proceed(conn, %{id: id}, [redirect_to: destination]) do
+    conn
+    |> put_resp_cookie("user", "#{id}")
+    |> put_resp_cookie("target", "deleted")
+    |> redirect(to: destination)
   end
 end
