@@ -33,4 +33,10 @@ defmodule Advisor.Web.LoginController do
     |> put_resp_cookie("target", "deleted")
     |> redirect(to: destination)
   end
+
+  def logout(conn, _params) do
+    conn
+    |> put_resp_cookie("user", "deleted")
+    |> redirect(to: "/")
+  end
 end

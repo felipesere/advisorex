@@ -10,17 +10,20 @@
         <input type="email" name="email" placeholder="Put your email here" />
         <input type="password" name="password" placeholder="Your password" />
       <% end %>
+
       <%= if @redirect_to do %>
         <input type="hidden" name="target" value="<%= @redirect_to %>">
         <button type="submit" class="button primary" name="submit" value="redirect">Login</button>
       <% else %>
         <button type="submit" class="button primary" name="submit" value="advice">Ask for advice</button>
-        <button type="submit" class="button primary" name="submit" value="dashboard" >Go to your Dashboard</button>
+        <button type="submit" class="button primary" name="submit" value='dashboard' >Go to your Dashboard</button>
       <% end %>
-      <%= if @logged_in do %> 
-        <button class="button primary logout">Log out</button>
-      <% end %> 
+
       <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
     </form>
+
+    <%= if @logged_in && not redirecting(@redirect_to) do %>
+      <a href="/logout" class="button primary logout">Log out</a>
+    <% end %>
   </div>
 </section>

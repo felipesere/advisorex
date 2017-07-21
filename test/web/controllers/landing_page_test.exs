@@ -41,6 +41,6 @@ defmodule Advisor.Web.LandingPageTest do
   end
 
   def has_logout_button(html) do
-    assert html |> Floki.find("button.logout") |> length() == 1
+    assert html |> Floki.find(".button.logout") |> length() == 1
   end
 end
