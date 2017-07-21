@@ -17,6 +17,9 @@
         <button type="submit" class="button primary" name="submit" value="advice">Ask for advice</button>
         <button type="submit" class="button primary" name="submit" value="dashboard" >Go to your Dashboard</button>
       <% end %>
+      <%= if @logged_in do %> 
+        <button class="button primary logout">Log out</button>
+      <% end %> 
       <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
     </form>
   </div>

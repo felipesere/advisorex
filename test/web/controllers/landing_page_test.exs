@@ -8,11 +8,11 @@ defmodule Advisor.Web.LandingPageTest do
 
     response
     |> has_title("Advisor")
-    |> has_buttons(["Ask for advice", "Go to your Dashboard"])
+    |> has_submit_buttons(["Ask for advice", "Go to your Dashboard"])
   end
 
-  def has_buttons(html, buttons) do
-    assert html |> Floki.find("button") |> Enum.map(&Floki.text/1) == buttons
+  def has_submit_buttons(html, buttons) do
+    assert html |> Floki.find("button[type=submit]") |> Enum.map(&Floki.text/1) == buttons
     html
   end
 
@@ -22,13 +22,25 @@ defmodule Advisor.Web.LandingPageTest do
     |> get("/")
     |> html_response(200)
     |> has_title("Hello Felipe Sere!")
-    |> has_buttons(["Ask for advice", "Go to your Dashboard"])
+    |> has_submit_buttons(["Ask for advice", "Go to your Dashboard"])
     |> has_no_login()
+  end
+
+  test "Can log out if you are logged in", %{conn: conn} do
+    conn
+    |> ThroughTheWeb.login_as("Felipe Sere")
+    |> get("/")
+    |> html_response(200)
+    |> has_logout_button()
   end
 
   def has_no_login(html) do
     assert html |> Floki.find("input[type=password]") == []
     assert html |> Floki.find("input[type=email]") == []
     html
+  end
+
+  def has_logout_button(html) do
+    assert html |> Floki.find("button.logout") |> length() == 1
   end
 end
