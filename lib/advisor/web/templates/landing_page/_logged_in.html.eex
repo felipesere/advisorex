@@ -1,0 +1,3 @@
+<%= render "_login_buttons.html" %>
+
+<a href="/logout" class="button primary full logout">Log out</a>

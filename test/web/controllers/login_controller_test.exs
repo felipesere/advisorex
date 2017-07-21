@@ -36,4 +36,21 @@ defmodule Advisor.Web.LoginControllerTest do
 
     assert redirected_to(conn) == "/foo/bar"
   end
+
+  test "Can login with cookies", %{conn: conn} do
+    conn = conn
+           |> put_req_cookie("user", "12")
+           |> post("/begin", [submit: "advice"])
+
+    assert redirected_to(conn) =~ "/request"
+  end
+
+  test "Can log out a user", %{conn: conn} do
+    conn = conn
+           |> ThroughTheWeb.login_as("Felipe Sere")
+           |> get("/logout")
+
+    assert redirected_to(conn) == "/"
+    assert conn.cookies["user"] == "deleted"
+  end
 end

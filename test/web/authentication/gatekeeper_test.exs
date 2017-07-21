@@ -30,12 +30,22 @@ defmodule Advisor.Web.Authentication.GatekeeprTest do
   end
 
   test "prevents a regular user from accessing a page for group leads" do
+    opts = Gatekeeper.init(only: :group_leads)
     conn = "/foo"
            |> get()
            |> with_user(name: "Chris Jordan")
-           |> Gatekeeper.call(:group_leads)
+           |> Gatekeeper.call(opts)
 
     assert conn.status == 302
+  end
+
+  test "the redirect can be disabled" do
+    opts = Gatekeeper.init(redirect: false)
+    conn = "/foo"
+           |> get()
+           |> Gatekeeper.call(opts)
+
+    assert conn.halted == false
   end
 
   defp with_user(conn, [name: name]) do

@@ -14,11 +14,15 @@ defmodule Advisor.Web.Router do
 
     get "/", LandingPage, :index
     post "/begin", LoginController, :index
+    get "/logout", LoginController, :logout
+
     get "/request", QuestionnairePage, :index
     post "/request", AdviceRequestController, :create
     get "/progress/:id", ProgressPage, :index
+
     get "/provide/:id", ProvideAdviceController, :index
     post "/provide/:id", ProvideAdviceController, :create
+
     get "/present/:id", PresentPage, :index
     get "/present/:id/download.csv", DownloadSummaryController, :export
     get "/dashboard", DashboardPage, :index

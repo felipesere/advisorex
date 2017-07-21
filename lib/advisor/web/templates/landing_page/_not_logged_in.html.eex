@@ -1,0 +1,3 @@
+<%= render "_email_login.html" %>
+
+<%= render "_login_buttons.html" %>

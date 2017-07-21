@@ -5,8 +5,12 @@ defmodule Advisor.Web.Authentication.Gatekeeper do
   import Phoenix.Controller, only: [redirect: 2]
 
   def init(opts) do
-    opts
-    |> Keyword.get(:only, :regular)
+    allowed_role = Keyword.get(opts, :only, :regular)
+    redirect = case Keyword.fetch(opts, :redirect) do
+      :error -> "/"
+      {:ok, value} -> value
+    end
+    %{only: allowed_role, redirect: redirect}
   end
 
   def call(conn, opts) do
@@ -21,11 +25,14 @@ defmodule Advisor.Web.Authentication.Gatekeeper do
     conn.req_cookies["user"] || conn.assigns[:user_id]
   end
 
-  def preload(%Person{} = user, conn, :regular) do
+  def preload(%Person{} = user, conn, %{only: :regular}) do
     assign(conn, :user, user)
   end
-  def preload(%Person{is_group_lead: true} = user, conn, :group_leads) do
+  def preload(%Person{is_group_lead: true} = user, conn, %{only: :group_leads}) do
     assign(conn, :user, user)
+  end
+  def preload(_, conn, %{redirect: false}) do
+    conn
   end
   def preload(_, conn, _) do
     conn
