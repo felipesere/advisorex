@@ -1,16 +1,18 @@
 <section class="module">
   <header class="module-header large-header">
-    <h1>Advisor</h1>
+    <h1><%= @title %></h1>
     <p>Let's help someone on the path to mastery today.</p>
   </header>
 
   <div class="login-form">
     <form action="/begin" method="post">
-      <input type="email" name="email" placeholder="Put your email here" />
-      <input type="password" name="password" placeholder="Your password" />
+      <%= if not @logged_in do %>
+        <input type="email" name="email" placeholder="Put your email here" />
+        <input type="password" name="password" placeholder="Your password" />
+      <% end %>
       <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
       <%= if @target do %>
-        <input type="hidden" name="target" value="<%= @target %>">
+        <input type="hidden" name="target" value="Ask for advice">
         <button type="submit" class="button primary" name="submit" value="redirect">Login</button>
       <% else %>
         <button type="submit" class="button primary" name="submit" value="advice">Ask for advice</button>
@@ -19,8 +21,3 @@
     </form>
   </div>
 </section>
-<%= if @message do %>
-  <div class="notice fadeOut <%= @message_kind %>">
-    <p class="notice-message"><%= @message %></p>
-  </div>
-<% end %>
