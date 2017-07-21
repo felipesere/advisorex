@@ -9,7 +9,7 @@ defmodule Advisor.Web.LandingPage do
       nil -> [title: "Advisor", logged_in: false]
       %{name: name} -> [title: "Hello #{name}!", logged_in: true]
     end
-    render conn, "index.html", Keyword.merge(data, target: target(conn))
+    render conn, "index.html", Keyword.merge(data, redirect_to: target(conn))
   end
 
   def target(%Plug.Conn{} = conn), do: target(conn.cookies["target"])
