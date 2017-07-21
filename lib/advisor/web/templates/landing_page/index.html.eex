@@ -6,24 +6,11 @@
 
   <div class="login-form">
     <form action="/begin" method="post">
-      <%= if (not @logged_in) || @redirect_to do %>
-        <input type="email" name="email" placeholder="Put your email here" />
-        <input type="password" name="password" placeholder="Your password" />
-      <% end %>
 
-      <%= if @redirect_to do %>
-        <input type="hidden" name="target" value="<%= @redirect_to %>">
-        <button type="submit" class="button primary" name="submit" value="redirect">Login</button>
-      <% else %>
-        <button type="submit" class="button primary" name="submit" value="advice">Ask for advice</button>
-        <button type="submit" class="button primary" name="submit" value='dashboard' >Go to your Dashboard</button>
-      <% end %>
+      <%= login_form_for(@logged_in, @redirect_to) %>
 
       <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
     </form>
 
-    <%= if @logged_in && not redirecting(@redirect_to) do %>
-      <a href="/logout" class="button primary logout">Log out</a>
-    <% end %>
   </div>
 </section>

@@ -1,0 +1,4 @@
+<button type="submit" class="button primary" name="submit" value="advice"    >Ask for advice</button>
+<button type="submit" class="button primary" name="submit" value='dashboard' >Go to your Dashboard</button>
+
+<a href="/logout" class="button primary full logout">Log out</a>
