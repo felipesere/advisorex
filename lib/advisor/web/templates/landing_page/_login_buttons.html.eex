@@ -1,0 +1,2 @@
+<button type="submit" class="button primary" name="submit" value="advice"    >Ask for advice</button>
+<button type="submit" class="button primary" name="submit" value='dashboard' >Go to your Dashboard</button>

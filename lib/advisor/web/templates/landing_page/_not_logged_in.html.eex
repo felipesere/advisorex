@@ -1,5 +1,3 @@
-<input type="email" name="email" placeholder="Put your email here" />
-<input type="password" name="password" placeholder="Your password" />
+<%= render "_email_login.html" %>
 
-<button type="submit" class="button primary" name="submit" value="advice"    >Ask for advice</button>
-<button type="submit" class="button primary" name="submit" value='dashboard' >Go to your Dashboard</button>
+<%= render "_login_buttons.html" %>
