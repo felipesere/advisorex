@@ -34,6 +34,15 @@ defmodule Advisor.Web.LandingPageTest do
     |> has_logout_button()
   end
 
+  test "When the user is bounced back to the login page, that is all they can do", %{conn: conn} do
+    conn
+    |> ThroughTheWeb.login_as("Felipe Sere")
+    |> ThroughTheWeb.tried_to_access("/flubber")
+    |> get("/")
+    |> html_response(200)
+    |> has_submit_buttons(["Login"])
+  end
+
   def has_no_login(html) do
     assert html |> Floki.find("input[type=password]") == []
     assert html |> Floki.find("input[type=email]") == []
