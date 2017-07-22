@@ -19,6 +19,6 @@ defmodule ThroughTheWeb do
   end
 
   def tried_to_access(conn, target) do
-    put_req_cookie(conn, "target", conn.request_path)
+    put_req_cookie(conn, "target", target)
   end
 end
