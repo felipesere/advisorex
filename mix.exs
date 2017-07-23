@@ -30,7 +30,6 @@ defmodule Advisor.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:phoenix, "~> 1.3.0-rc.2"},
-     {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 3.2"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.6"},
@@ -43,7 +42,8 @@ defmodule Advisor.Mixfile do
      {:excoveralls, "~> 0.7.1"},
      {:apex, "~> 1.0"},
      {:csv, "~> 2.0"},
-     {:comeonin, "~> 3.2"}]
+     {:comeonin, "~> 3.2"},
+     {:yaml_elixir, "~> 1.3"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
