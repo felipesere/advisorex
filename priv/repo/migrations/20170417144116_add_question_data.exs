@@ -1,9 +1,8 @@
 defmodule Advisor.Repo.Migrations.AddQuestionData do
   use Ecto.Migration
-  alias Advisor.Core.Question
 
   def up do
-    Advisor.Repo.insert_all(Question, [
+    Advisor.Repo.insert_all("questions", [
                               %{phrase: "How could this person become a better pair?", kind: 1},
                               %{phrase: "How could the this person improve their code quality?", kind: 1},
                               %{phrase: "How could this person improve their testing strategy?", kind: 1},
@@ -24,6 +23,6 @@ defmodule Advisor.Repo.Migrations.AddQuestionData do
   end
 
   def down do
-    Advisor.Repo.delete_all(Question)
+    Advisor.Repo.delete_all("questions")
   end
 end
