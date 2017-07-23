@@ -1,6 +1,6 @@
 defmodule Advisor.Core.Summary do
   alias Advisor.Core.{Person, Answer, Advice}
-  alias Advisor.Core.Questions
+  alias Advisor.Core.{Questions, Questionnaire}
   alias Advisor.Repo
   import Ecto.Query
 
@@ -17,7 +17,10 @@ defmodule Advisor.Core.Summary do
               |> Repo.all()
               |> Enum.map(fn({ts, adv, req, answers}) -> [ts, adv, req] ++ answers end)
 
-    questions = id |> Questions.of_questionnaire() |> Questions.phrases()
+    questions = id
+                |> Questionnaire.questions()
+                |> Questions.find()
+                |> Questions.phrases()
     header = ["timestamp", "advisor", "requester"] ++ questions
 
     [header | content]
