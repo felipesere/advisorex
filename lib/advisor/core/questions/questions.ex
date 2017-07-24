@@ -1,6 +1,6 @@
 defmodule Advisor.Core.Questions do
   alias Advisor.Repo
-  alias Advisor.Core.{Question, Questionnaire}
+  alias Advisor.Core.Question
   import Ecto.Query
 
   def all() do
@@ -12,14 +12,6 @@ defmodule Advisor.Core.Questions do
 
   def find(ids) do
     Repo.all(from q in Question, where: q.id in ^ids)
-  end
-
-  def of_questionnaire(id) do
-    questions = from q in Question,
-      join: qs in Questionnaire, on: q.id in qs.question_ids,
-      where: qs.id == ^id
-
-    Repo.all(questions)
   end
 
   def phrases(questions) do
