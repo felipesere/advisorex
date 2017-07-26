@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :advisor, Advisor.Web.Endpoint,
+config :advisor, AdvisorWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -31,12 +31,12 @@ config :advisor, Advisor.Web.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :advisor, Advisor.Web.Endpoint,
+config :advisor, AdvisorWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
-      ~r{lib/advisor/web/views/.*(ex)$},
-      ~r{lib/advisor/web/templates/.*(eex)$}
+      ~r{lib/advisor_web/views/.*(ex)$},
+      ~r{lib/advisor_web/templates/.*(eex)$}
     ]
   ]
 
@@ -56,7 +56,7 @@ config :advisor, Advisor.Repo,
   hostname: "localhost",
   pool_size: 10
 
-config :advisor, Advisor.Web.Authentication.Password,
-  checker: Advisor.Web.Authentication.Password.SimplePassword,
+config :advisor, AdvisorWeb.Authentication.Password,
+  checker: AdvisorWeb.Authentication.Password.SimplePassword,
   password: "secret"
 

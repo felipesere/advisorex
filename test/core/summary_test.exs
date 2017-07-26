@@ -1,7 +1,7 @@
 defmodule Advisor.Core.SummaryTest do
   use Advisor.DataCase
 
-  alias Advisor.Web.QuestionnaireProposal, as: Proposal
+  alias AdvisorWeb.QuestionnaireProposal, as: Proposal
   alias Advisor.Core.Questionnaire.Creator
   alias Advisor.Core.Summary
 

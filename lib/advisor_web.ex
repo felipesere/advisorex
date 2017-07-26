@@ -1,12 +1,12 @@
-defmodule Advisor.Web do
+defmodule AdvisorWeb do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Advisor.Web, :controller
-      use Advisor.Web, :view
+      use AdvisorWeb, :controller
+      use AdvisorWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -18,16 +18,16 @@ defmodule Advisor.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: Advisor.Web
+      use Phoenix.Controller, namespace: AdvisorWeb
       import Plug.Conn
-      import Advisor.Web.Router.Helpers
+      import AdvisorWeb.Router.Helpers
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/advisor/web/templates",
-                        namespace: Advisor.Web
+      use Phoenix.View, root: "lib/advisor_web/templates",
+                        namespace: AdvisorWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0,
@@ -37,8 +37,8 @@ defmodule Advisor.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Advisor.Web.Router.Helpers
-      import Advisor.Web.ErrorHelpers
+      import AdvisorWeb.Router.Helpers
+      import AdvisorWeb.ErrorHelpers
     end
   end
 

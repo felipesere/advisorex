@@ -1,8 +1,8 @@
-defmodule Advisor.Web.DownloadSummaryControllerTest do
-  use Advisor.Web.ConnCase
+defmodule AdvisorWeb.DownloadSummaryControllerTest do
+  use AdvisorWeb.ConnCase
 
-  alias Advisor.Web.QuestionnaireProposal, as: Proposal
-  alias Advisor.Web.Links
+  alias AdvisorWeb.QuestionnaireProposal, as: Proposal
+  alias AdvisorWeb.Links
   alias Advisor.Core.Questionnaire.Creator
 
   @answers  ["1": "something", "2": "else"]

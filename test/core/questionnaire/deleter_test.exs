@@ -1,7 +1,7 @@
 defmodule Advisor.Core.Questionnaire.DeleterTest do
   use Advisor.DataCase
 
-  alias Advisor.Web.QuestionnaireProposal, as: Proposal
+  alias AdvisorWeb.QuestionnaireProposal, as: Proposal
   alias Advisor.Core.Questionnaire.{Creator, Deleter}
   alias Advisor.Core.Questionnaire
   alias Advisor.Core.{Answers, Advice}
