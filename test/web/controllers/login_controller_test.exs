@@ -1,5 +1,5 @@
-defmodule Advisor.Web.LoginControllerTest do
-  use Advisor.Web.ConnCase
+defmodule AdvisorWeb.LoginControllerTest do
+  use AdvisorWeb.ConnCase
 
   test "Proper login to request page", %{conn: conn} do
     conn = post conn, "/begin", [email: "felipe@example.com", password: "secret", submit: "advice"]

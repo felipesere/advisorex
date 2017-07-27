@@ -1,8 +1,8 @@
-defmodule Advisor.Web.ProgressPageTest do
-  use Advisor.Web.ConnCase
+defmodule AdvisorWeb.ProgressPageTest do
+  use AdvisorWeb.ConnCase
   import PageAssertions
-  alias Advisor.Web.QuestionnaireProposal, as: Proposal
-  alias Advisor.Web.Links
+  alias AdvisorWeb.QuestionnaireProposal, as: Proposal
+  alias AdvisorWeb.Links
   alias Advisor.Core.Questionnaire.Creator
 
   @sample_questions [5, 6]

@@ -1,5 +1,5 @@
-defmodule Advisor.Web.AdviceRequestControllerTest do
-  use Advisor.Web.ConnCase
+defmodule AdvisorWeb.AdviceRequestControllerTest do
+  use AdvisorWeb.ConnCase
 
   test "creates the proper questionnaire", %{conn: conn} do
     proposal = %{:group_lead => "11",

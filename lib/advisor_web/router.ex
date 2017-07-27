@@ -1,5 +1,5 @@
-defmodule Advisor.Web.Router do
-  use Advisor.Web, :router
+defmodule AdvisorWeb.Router do
+  use AdvisorWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -9,7 +9,7 @@ defmodule Advisor.Web.Router do
     plug :put_secure_browser_headers
   end
 
-  scope "/", Advisor.Web do
+  scope "/", AdvisorWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", LandingPage, :index

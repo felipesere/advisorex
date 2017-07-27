@@ -10,11 +10,11 @@ config :advisor,
   ecto_repos: [Advisor.Repo]
 
 # Configures the endpoint
-config :advisor, Advisor.Web.Endpoint,
+config :advisor, AdvisorWeb.Endpoint,
   url: [host: "localhost"],
   static_url: [path: "/assets"],
   secret_key_base: "SmmWRTx2vhEgHIcQ/7BRuQaIuvQ7fSeTrsFVuPsudiHKtD0AT068LXD61mN5Ow+d",
-  render_errors: [view: Advisor.Web.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: AdvisorWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Advisor.PubSub,
            adapter: Phoenix.PubSub.PG2]
 

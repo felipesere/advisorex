@@ -1,5 +1,5 @@
-defmodule Advisor.Web.LandingPageTest do
-  use Advisor.Web.ConnCase
+defmodule AdvisorWeb.LandingPageTest do
+  use AdvisorWeb.ConnCase
   import PageAssertions
 
   test "Hit the landing page", %{conn: conn} do
