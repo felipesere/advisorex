@@ -1,5 +1,4 @@
 defmodule Advisor.Core.Questions do
-  alias Advisor.Core.Questions.Server
   alias Advisor.Core.Questions.YamlQuestions
 
   defdelegate all(), to: YamlQuestions
