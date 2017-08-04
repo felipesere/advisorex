@@ -26,10 +26,6 @@ defmodule Advisor.Core.Questions.Server do
     GenServer.call(__MODULE__, {:find, ids})
   end
 
-  def phrases(questions) do
-    YamlQuestions.phrases(questions)
-  end
-
   def stop() do
     GenServer.stop(__MODULE__)
   end

@@ -1,7 +1,7 @@
 defmodule Advisor.Core.Summary do
   alias Advisor.Core.{Person, Answer, Advice}
   alias Advisor.Core.Questionnaire
-  alias Advisor.Core.Questions.YamlQuestions
+  alias Advisor.Core.Questions
   alias Advisor.Repo
   import Ecto.Query
 
@@ -20,8 +20,8 @@ defmodule Advisor.Core.Summary do
 
     questions = id
                 |> Questionnaire.questions()
-                |> YamlQuestions.find()
-                |> YamlQuestions.phrases()
+                |> Questions.find()
+                |> Questions.phrases()
     header = ["timestamp", "advisor", "requester"] ++ questions
 
     [header | content]
