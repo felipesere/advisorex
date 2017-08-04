@@ -6,8 +6,20 @@ defmodule Advisor.Core.Questions.YamlQuestions do
   def all() do
     File.cwd!
     |> Path.join(@path)
-    |> YamlElixir.read_all_from_file()
-    |> List.first
+    |> all()
+  end
+  def all(path) do
+    path
+    |> YamlElixir.read_from_file()
+    |> extract()
+  end
+  def from_data(yaml) do
+    yaml
+    |> YamlElixir.read_from_string()
+    |> extract()
+  end
+  defp extract(yaml) do
+    yaml
     |> Enum.reduce(%{counter: 1, data: %{}}, fn({kind, phrases}, %{counter: counter, data: data}) ->
       kind = String.to_atom(kind)
       questions = convert(phrases, kind, counter)
@@ -16,9 +28,10 @@ defmodule Advisor.Core.Questions.YamlQuestions do
     |> Map.fetch!(:data)
   end
 
-  def find(ids) do
-    all() |> flatten() |> Enum.filter(fn(question) -> question.id in ids end)
+  def find(yaml, ids) do
+    yaml |> flatten() |> Enum.filter(fn(question) -> question.id in ids end)
   end
+  def find(ids), do: all() |> find(ids)
 
   defp flatten(question_map), do: question_map |> Map.values |> List.flatten
 
