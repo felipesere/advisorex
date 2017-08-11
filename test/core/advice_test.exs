@@ -4,23 +4,24 @@ defmodule Advisor.Core.AdviceTest do
   alias Advisor.Core.Questionnaire.Creator
   alias Advisor.Web.QuestionnaireProposal, as: Proposal
 
-  @questions [1, 2, 3]
+  @phrases ["first", "second", "third"]
 
   test "can figure out if an advice has been answered fully" do
-    christoph = advice_with("Christoph Gockel", @questions)
+    christoph = advised_by("Christoph Gockel", @phrases)
 
+    # this can not be right. but I'll wait for a failure to direct me...
     ThroughTheCore.answer!(christoph, with: %{"1" => "foo", "2" => "bar", "3" => "batz"})
-    assert Advice.completed?(christoph, length(@questions))
+    assert Advice.completed?(christoph, length(@phrases))
   end
 
   test "can tell if advice has not been answered fully" do
-    christoph = advice_with("Christoph Gockel", @questions)
+    christoph = advised_by("Christoph Gockel", @phrases)
 
     ThroughTheCore.answer!(christoph, with: %{"1" => "foo"})
-    refute Advice.completed?(christoph, length(@questions))
+    refute Advice.completed?(christoph, length(@phrases))
   end
 
-  def advice_with(person, questions) do
+  def advised_by(person, questions) do
     {:ok, %{advisories: [individual]}} = Proposal.build(for: "Felipe Sere",
                                                        advisors: [person],
                                                        group_lead: "Jim Suchy",

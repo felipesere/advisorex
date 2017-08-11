@@ -7,7 +7,7 @@ defmodule Advisor.Core.Answers do
   @into_list []
 
   def store(params) do
-    Repo.insert_all(Answer, all_answers_in(params), returning: true)
+    Repo.insert_all(Answer, all_answers_in(params), returning: true) |> IO.inspect
   end
 
   def all_answers_in(%{"id" => advice_request_id} = params) do
@@ -17,10 +17,7 @@ defmodule Advisor.Core.Answers do
   end
 
   defp to_answer({question_id, answer}, answers) do
-    case number?(question_id) do
-      :not_a_number -> answers
-      num -> [%{question_id: num, answer: answer} | answers]
-    end
+    [%{question_id: question_id, answer: answer} | answers]
   end
 
   defp add(answers, advice_request_id) when is_list(answers) do

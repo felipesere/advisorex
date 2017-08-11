@@ -4,10 +4,11 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
   alias Advisor.Web.QuestionnaireProposal
 
   test "creates a simple questionnaire" do
+    phrases = ["first question", "second question"]
     proposal = %QuestionnaireProposal{group_lead: 1,
                                       requester: 2,
                                       advisors: [2, 9],
-                                      questions: [7]}
+                                      questions: phrases}
 
     {:ok, created} = Creator.create(proposal)
     assert created.questionnaire

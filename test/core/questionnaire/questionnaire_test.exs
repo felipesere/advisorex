@@ -12,7 +12,7 @@ defmodule Advisor.Core.QuestionnaireTest do
     proposal = Proposal.build(for: "Rabea Gleissner",
                    advisors: ["Christoph Gockel"],
                    group_lead: felipe.name,
-                   questions: [1, 2])
+                   questions: ["first", "second"])
     Creator.create(proposal)
 
     [%{group_lead: group_lead}] = Questionnaire.for_group_lead(felipe.id)

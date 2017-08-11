@@ -1,5 +1,4 @@
 defmodule Advisor.Core.Questions.YamlQuestions do
-  alias Advisor.Core.Question
 
   @path "lib/advisor/core/questions/questions.yml"
 
@@ -39,7 +38,7 @@ defmodule Advisor.Core.Questions.YamlQuestions do
 
   defp convert([], _, _), do: []
   defp convert([value | others], kind, counter) do
-    [%Question{phrase: value, kind: id_of(kind), id: counter} | convert(others, kind, counter + 1)]
+    [%{phrase: value, kind: id_of(kind), id: counter} | convert(others, kind, counter + 1)]
   end
 
   defp id_of(:technical), do: 1

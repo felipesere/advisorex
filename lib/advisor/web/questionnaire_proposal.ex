@@ -1,5 +1,6 @@
 defmodule Advisor.Web.QuestionnaireProposal do
   alias Advisor.Core.People
+  alias Advisor.Core.Questions
   alias __MODULE__
 
   defstruct group_lead: :unassigned,
@@ -10,8 +11,9 @@ defmodule Advisor.Web.QuestionnaireProposal do
   def build([for: requester_name,
              advisors: advisors_names,
              group_lead: lead_name,
-             questions: questions]) do
+             questions: phrases]) do
 
+    questions = Questions.store(phrases)
     requester = People.find_by(name: requester_name).id
     group_lead = People.group_lead(name: lead_name).id
     advisors = [names: advisors_names]
@@ -37,7 +39,9 @@ defmodule Advisor.Web.QuestionnaireProposal do
   end
 
   def parse(map) when is_map(map) do
-    map = Enum.filter_map(map, &truthy/1, fn({key, _}) -> parse!(key) end)
+    map = map
+          |> Enum.filter(&truthy/1)
+          |> Enum.map(fn({key, _}) -> parse!(key) end)
 
     {:ok, map}
   end
