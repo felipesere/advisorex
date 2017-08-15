@@ -10,11 +10,13 @@ defmodule Advisor.Core.Questionnaire.DeleterTest do
     proposal = Proposal.build(for: "Felipe Sere",
                               advisors: ["Rabea Gleissner", "Nick Dyer"],
                               group_lead: "Jim Suchy",
-                              questions: ["1", "2"])
+                              questions: ["first", "second"])
+
+    %Proposal{questions: [first_id, second_id]} = proposal
 
     {:ok, %{questionnaire: id, advisories: advisories}} = Creator.create(proposal)
 
-    ThroughTheCore.answer!(advisories, with: %{"1" => "Foo", "2" => "Bar"})
+    ThroughTheCore.answer!(advisories, with: %{first_id => "Foo", second_id => "Bar"})
 
     Deleter.delete(id)
 

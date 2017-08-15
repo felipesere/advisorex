@@ -7,15 +7,17 @@ defmodule Advisor.Web.DashboardPageTest do
   alias Advisor.Core.Answers
 
   @group_lead "Felipe Sere"
-  @questions [1, 2]
-  @answers  %{"1" => "something", "2" => "else"}
+  @questions ["first", "second"]
 
   def advice_for(person, advisors) do
       proposal = Proposal.build(for: person,
                      advisors: advisors,
                      group_lead: @group_lead,
                      questions: @questions)
-    Creator.create(proposal)
+    %{questions: questions} = proposal
+    {:ok, questionnaire} = Creator.create(proposal)
+
+    {questionnaire, questions}
   end
 
   def answer!(%{id: id}, [with: data]) do
@@ -48,9 +50,9 @@ defmodule Advisor.Web.DashboardPageTest do
   end
 
   test "it doesn't show advice you have already given", %{conn: conn} do
-    {:ok, %{advisories: [priya_advice]}} = advice_for("Rabea Gleissner", ["Priya Patil"])
+    {%{advisories: [priya_advice]}, [first, second]} = advice_for("Rabea Gleissner", ["Priya Patil"])
 
-    answer!(priya_advice, with: @answers)
+    answer!(priya_advice, with: %{first => "something", second => "else"})
 
     conn
     |> ThroughTheWeb.login_as("Priya Patil")
