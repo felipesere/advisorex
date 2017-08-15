@@ -14,6 +14,11 @@ defmodule Advisor.Repo.Migrations.ChangeForImmutableQuetsions do
       remove :question_ids
       add :question_ids, {:array, :binary}
     end
+
+    alter table(:answers) do
+      remove :question_id
+      add :question_id, :binary
+    end
   end
 
   def down do
@@ -26,6 +31,11 @@ defmodule Advisor.Repo.Migrations.ChangeForImmutableQuetsions do
     create table(:questions) do
       add :phrase, :text
       add :kind, :integer
+    end
+
+    alter table(:answers) do
+      remove :question_id
+      add :question_id, :integer
     end
 
     flush()

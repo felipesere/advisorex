@@ -7,7 +7,7 @@ defmodule Advisor.Core.Answers do
   @into_list []
 
   def store(params) do
-    Repo.insert_all(Answer, all_answers_in(params), returning: true) |> IO.inspect
+    Repo.insert_all(Answer, all_answers_in(params), returning: true)
   end
 
   def all_answers_in(%{"id" => advice_request_id} = params) do
@@ -16,6 +16,7 @@ defmodule Advisor.Core.Answers do
     |> add(advice_request_id)
   end
 
+  defp to_answer({"id", _}, answers), do: answers
   defp to_answer({question_id, answer}, answers) do
     [%{question_id: question_id, answer: answer} | answers]
   end
