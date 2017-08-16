@@ -16,9 +16,8 @@ defmodule Advisor.Web.QuestionnaireProposal do
     questions = Questions.store(phrases)
     requester = People.find_by(name: requester_name).id
     group_lead = People.group_lead(name: lead_name).id
-    advisors = [names: advisors_names]
-                          |> People.find_by()
-                          |> Enum.map(&(&1.id))
+    advisors = People.find_by(names: advisors_names)
+               |> Enum.map(&(&1.id))
 
     %QuestionnaireProposal{group_lead: group_lead,
                          requester: requester,
@@ -29,13 +28,40 @@ defmodule Advisor.Web.QuestionnaireProposal do
   def for_requester(%{"proposal" => %{"group_lead" => lead,
                                       "advisors" => people,
                                       "questions" => questions}}, %{id: id}) do
+
+    questions = questions |> identify() |> load()
+
     with {:ok, lead} <- parse(lead),
          {:ok, people} <- parse(people),
-         {:ok, questions} <- parse(questions),
       do: %Advisor.Web.QuestionnaireProposal{group_lead: lead,
                                              advisors: people,
                                              questions: questions,
                                              requester: id}
+  end
+
+  def identify(phrase_or_id) do
+    keys = Map.keys(phrase_or_id)
+    if all_integers(keys) do
+      {:ids, parse(phrase_or_id)}
+    else
+      {:phrases, parse(phrase_or_id)}
+    end
+  end
+
+  def load({:ids, {:ok, ids}}) do
+    ids
+    |> Questions.find
+    |> Questions.phrases
+  end
+  def load({:phrases, phrases}), do: phrases
+
+  def all_integers(phrase_or_id) do
+    Enum.all?(phrase_or_id, fn(element) ->
+      case Integer.parse(element) do
+        {_, ""} -> true
+        _ -> false
+      end
+    end)
   end
 
   def parse(map) when is_map(map) do
@@ -44,6 +70,9 @@ defmodule Advisor.Web.QuestionnaireProposal do
           |> Enum.map(fn({key, _}) -> parse!(key) end)
 
     {:ok, map}
+  end
+  def parse(potential) when is_list(potential) do
+    Enum.map(potential, &parse!/1)
   end
   def parse(potential) when is_binary(potential) do
     case Integer.parse(potential) do

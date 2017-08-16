@@ -15,7 +15,7 @@ defmodule Advisor.Web.DownloadSummaryController do
   defp csv_content(id) do
     id
     |> Summary.for_download()
-    |> encode
+    |> encode()
     |> to_string()
   end
 

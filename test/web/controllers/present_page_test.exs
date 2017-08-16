@@ -21,6 +21,7 @@ defmodule Advisor.Web.PresentPageTest do
     {[%{link: cj}, %{link: priya}], _, present_link} = proposal
                                                        |> Creator.create
                                                        |> Links.generate
+
     answers = ["#{first_id}": "something", "#{second_id}": "else"]
 
     conn

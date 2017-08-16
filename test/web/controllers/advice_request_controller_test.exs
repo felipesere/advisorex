@@ -3,9 +3,9 @@ defmodule Advisor.Web.AdviceRequestControllerTest do
 
   test "creates the proper questionnaire", %{conn: conn} do
 
-    proposal = Proposal.build(%{:group_lead => "11",
+    proposal = %{:group_lead => "11",
                  :advisors => %{"4" => "true"},
-                 :questions =>  %{"13" => "true"}})
+                 :questions =>  %{"13" => "true"}}
     conn = conn
            |> ThroughTheWeb.login_as("Felipe Sere")
            |> post("/request", [proposal: proposal])

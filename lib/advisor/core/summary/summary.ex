@@ -20,7 +20,7 @@ defmodule Advisor.Core.Summary do
 
     questions = id
                 |> Questionnaire.questions()
-                |> Questions.find()
+                |> Questions.load()
                 |> Questions.phrases()
     header = ["timestamp", "advisor", "requester"] ++ questions
 

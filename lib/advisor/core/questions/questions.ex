@@ -8,5 +8,7 @@ defmodule Advisor.Core.Questions do
   def phrases(questions), do: Enum.map(questions, fn(question) -> question.phrase end)
 
   def store(phrases), do: Question.store_all(phrases)
+
+  def load(uuids), do: Question.load(uuids)
 end
 

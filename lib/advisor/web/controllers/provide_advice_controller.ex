@@ -12,7 +12,7 @@ defmodule Advisor.Web.ProvideAdviceController do
     if advice do
       questions = advice.questionnaire_id
                   |> Questionnaire.questions()
-                  |> Questions.find()
+                  |> Questions.load()
       requester = People.find_by(id: advice.requester_id)
       render(conn, "advice-form.html", requester: requester,
                                        questions: questions,

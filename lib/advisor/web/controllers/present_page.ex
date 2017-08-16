@@ -7,7 +7,7 @@ defmodule Advisor.Web.PresentPage do
     advisories = Advice.all_for(questionnaire_id)
     advisor_for = for advisory <- advisories, into: %{}, do: {advisory.id, People.find_by(advisory)}
     answers = Enum.flat_map(advisories, &Answers.find/1)
-    questions = Questions.find(question_ids)
+    questions = Questions.load(question_ids)
 
     answered_questions = Enum.map(questions, fn(question) ->
       answers = answers

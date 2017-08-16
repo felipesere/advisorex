@@ -5,6 +5,7 @@ defmodule Advisor.Core.Answers do
   import Ecto.Query
 
   @into_list []
+  @ignored_keys ["id", "_csrf_token"] 
 
   def store(params) do
     Repo.insert_all(Answer, all_answers_in(params), returning: true)
@@ -12,11 +13,11 @@ defmodule Advisor.Core.Answers do
 
   def all_answers_in(%{"id" => advice_request_id} = params) do
     params
+    |> Enum.reject(fn({marker, _}) -> marker in @ignored_keys end)
     |> Enum.reduce(@into_list, &to_answer/2)
     |> add(advice_request_id)
   end
 
-  defp to_answer({"id", _}, answers), do: answers
   defp to_answer({question_id, answer}, answers) do
     [%{question_id: question_id, answer: answer} | answers]
   end
@@ -24,13 +25,6 @@ defmodule Advisor.Core.Answers do
   defp add(answers, advice_request_id) when is_list(answers) do
     answers
     |> Enum.map(&(Map.put(&1, :advice_request_id, advice_request_id)))
-  end
-
-  defp number?(number) do
-    case Integer.parse(number) do
-      {num, ""} -> num
-      _ -> :not_a_number
-    end
   end
 
   def find(advisories) when is_list(advisories) do
