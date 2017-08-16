@@ -29,22 +29,24 @@ defmodule Advisor.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.3.0-rc.2"},
-     {:phoenix_ecto, "~> 3.2"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.6"},
-     {:cowboy, "~> 1.0"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:ex_unit_notifier, "~> 0.1.3", only: :test},
-     {:mix_test_watch, "~> 0.4"},
-     {:floki, "~> 0.18", only: :test},
-     {:credo, "~> 0.7", only: [:dev, :test], runtime: false},
-     {:excoveralls, "~> 0.7.1"},
+    [
      {:apex, "~> 1.0"},
-     {:csv, "~> 2.0"},
-     {:comeonin, "~> 4.0"},
      {:bcrypt_elixir, "~> 0.12.1"},
-     {:yaml_elixir, "~> 1.3"}]
+     {:comeonin, "~> 4.0"},
+     {:cowboy, "~> 1.0"},
+     {:credo, "~> 0.7", only: [:dev, :test], runtime: false},
+     {:csv, "~> 2.0"},
+     {:ex_unit_notifier, "~> 0.1.3", only: :test},
+     {:excoveralls, "~> 0.7.1"},
+     {:floki, "~> 0.18", only: :test},
+     {:mix_test_watch, "~> 0.4"},
+     {:phoenix, "~> 1.3.0-rc.2"},
+     {:phoenix_ecto, "~> 3.2"},
+     {:phoenix_html, "~> 2.6"},
+     {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:postgrex, ">= 0.0.0"},
+     {:yaml_elixir, "~> 1.3"}
+    ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
