@@ -1,6 +1,5 @@
 defmodule Advisor.Web.DashboardPageTest do
   use Advisor.Web.ConnCase
-  import PageAssertions
 
   alias Advisor.Web.QuestionnaireProposal, as: Proposal
   alias Advisor.Core.Questionnaire.Creator
@@ -18,107 +17,62 @@ defmodule Advisor.Web.DashboardPageTest do
     Creator.create(proposal)
   end
 
-  def answer!(%{id: id}, [with: data]) do
-    Answers.store(Map.put(data, "id", id))
+  test "it shows a section for group leads" do
+    rabea = "Rabea Gleissner"
+    chris = "Chris Jordan"
+    advice_for(rabea, ["Priya Patil", "Sarah Johnston"])
+    advice_for(chris, ["Nick Dyer", "Jim Suchy"])
+
+    dashboard_page = login_to_dashboard_as(@group_lead)
+
+    assert dashboard_page.status == 200
+    assert page_contains?(dashboard_page.resp_body, "Hello Felipe Sere!")
+    assert page_contains?(dashboard_page.resp_body, "Advice for " <> rabea)
+    assert page_contains?(dashboard_page.resp_body, "Advice for " <> chris)
   end
 
-  test "it shows a section for group leads", %{conn: conn} do
-    advice_for("Rabea Gleissner", ["Priya Patil", "Sarah Johnston"])
-    advice_for("Chris Jordan", ["Nick Dyer", "Jim Suchy"])
+  test "it shows the advice you still have to give" do
+    rabea = "Rabea Gleissner"
+    chris = "Chris Jordan"
+    advice_for(rabea, ["Priya Patil", "Sarah Johnston"])
+    advice_for(chris, ["Priya Patil", "Jim Suchy"])
 
-    conn
-    |> ThroughTheWeb.login_as(@group_lead)
-    |> get("/dashboard")
-    |> html_response(200)
-    |> has_title("Hello Felipe Sere!")
-    |> advice_open_for("Rabea Gleissner")
-    |> advice_open_for("Chris Jordan")
+    dashboard_page = login_to_dashboard_as("Priya Patil")
+
+    assert page_contains?(dashboard_page.resp_body, rabea)
+    assert page_contains?(dashboard_page.resp_body, chris)
+    refute page_contains?(dashboard_page.resp_body, "Advice for")
   end
 
-  test "it shows the advice you still have to give", %{conn: conn} do
-    advice_for("Rabea Gleissner", ["Priya Patil", "Sarah Johnston"])
-    advice_for("Chris Jordan", ["Priya Patil", "Jim Suchy"])
+  test "it doesn't show advice you have already given" do
+    rabea = "Rabea Gleissner"
+    priya = "Priya Patil"
+    {:ok, %{advisories: [%{id: priya_advice_id}]}} = advice_for(rabea, [priya])
+    Answers.store(Map.put(@answers, "id", priya_advice_id))
 
-    conn
-    |> ThroughTheWeb.login_as("Priya Patil")
-    |> get("/dashboard")
-    |> html_response(200)
-    |> advice_needed_for("Rabea Gleissner")
-    |> advice_needed_for("Chris Jordan")
+    dashboard_page = login_to_dashboard_as(priya)
+
+    refute page_contains?(dashboard_page.resp_body, rabea)
   end
 
-  test "it doesn't show advice you have already given", %{conn: conn} do
-    {:ok, %{advisories: [priya_advice]}} = advice_for("Rabea Gleissner", ["Priya Patil"])
+  test "it shows who still has to give you advice" do
+    rabea = "Rabea Gleissner"
+    priya = "Priya Patil"
+    sarah = "Sarah Johnston"
+    advice_for(rabea, [priya, sarah])
 
-    answer!(priya_advice, with: @answers)
+    dashboard_page = login_to_dashboard_as(rabea)
 
-    conn
-    |> ThroughTheWeb.login_as("Priya Patil")
-    |> get("/dashboard")
-    |> html_response(200)
-    |> no_advice_needed_for("Rabea Gleissner")
+    assert page_contains?(dashboard_page.resp_body, priya)
+    assert page_contains?(dashboard_page.resp_body, sarah)
   end
 
-  test "it shows who still has to give you advice", %{conn: conn} do
-    advice_for("Rabea Gleissner", ["Priya Patil", "Sarah Johnston"])
-
-    conn
-    |> ThroughTheWeb.login_as("Rabea Gleissner")
-    |> get("/dashboard")
-    |> html_response(200)
-    |> still_has_to_give_me_advice("Priya Patil")
-    |> still_has_to_give_me_advice("Sarah Johnston")
+  def login_to_dashboard_as(person) do
+    updated_conn = ThroughTheWeb.login_as(build_conn(), person)
+    get updated_conn, dashboard_page_path(updated_conn, :index)
   end
 
-  def delete_questionnaire_for(html, _name) do
-    html
-  end
-
-  def still_has_to_give_me_advice(html, advisor) do
-    assert html
-            |> Floki.find(".status-of-my-advisors > p")
-            |> Enum.map(&Floki.text/1)
-            |> Enum.member?(advisor)
-    html
-  end
-
-  def advice_needed_for(html, requester) do
-    assert html
-            |> Floki.find(".open-advice-requets > p")
-            |> Enum.map(&Floki.text/1)
-            |> Enum.member?(requester)
-
-    html
-  end
-
-  def no_advice_needed_for(html, requester) do
-    refute html
-            |> Floki.find(".open-advice-requets > p")
-            |> Enum.map(&Floki.text/1)
-            |> Enum.member?(requester)
-
-    html
-  end
-
-  def advice_open_for(html, requester) do
-    advice = fn(text) -> text =~ "Advice for " <> requester end
-    assert html
-            |> advice_text
-            |> Enum.any?(advice)
-    html
-  end
-
-  def no_advice_open_for(html, requester) do
-    advice = fn(text) -> text =~ "Advice for " <> requester end
-    assert html
-            |> advice_text
-            |> Enum.none?(advice)
-    html
-  end
-
-  defp advice_text(html) do
-    html
-    |> Floki.find("li > p")
-    |> Enum.map(&Floki.text/1)
+  defp page_contains?(html, string) do
+    String.contains?(html, string)
   end
 end
