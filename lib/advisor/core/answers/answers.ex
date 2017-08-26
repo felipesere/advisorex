@@ -4,8 +4,7 @@ defmodule Advisor.Core.Answers do
   alias Advisor.Core.Advice
   import Ecto.Query
 
-  @into_list []
-  @ignored_keys ["id", "_csrf_token"] 
+  @ignored_keys ["id", "_csrf_token"]
 
   def store(params) do
     Repo.insert_all(Answer, all_answers_in(params), returning: true)
@@ -13,30 +12,29 @@ defmodule Advisor.Core.Answers do
 
   def all_answers_in(%{"id" => advice_request_id} = params) do
     params
-    |> Enum.reject(fn({marker, _}) -> marker in @ignored_keys end)
-    |> Enum.reduce(@into_list, &to_answer/2)
+    |> Enum.reject(fn({key, _}) -> key in @ignored_keys end)
+    |> Enum.map(&to_answer/1)
     |> add(advice_request_id)
   end
 
-  defp to_answer({question_id, answer}, answers) do
-    [%{question_id: question_id, answer: answer} | answers]
+  # This feels to intricite... map into Map put?
+  defp to_answer({question_id, answer}) do
+    %{question_id: question_id, answer: answer}
   end
 
-  defp add(answers, advice_request_id) when is_list(answers) do
+  # This feels to intricite... map into Map put?
+  defp add(answers, advice_request_id) do
     answers
     |> Enum.map(&(Map.put(&1, :advice_request_id, advice_request_id)))
   end
 
   def find(advisories) when is_list(advisories) do
-    # replace this with Advce.ids(..) later
-    ids = advisories |> Enum.map(fn(x) -> x.id end)
+    ids = Advice.ids(advisories)
 
     Repo.all(from a in Answer, where: a.advice_request_id in ^ids)
   end
   def find(advisory) do
-    answers_from_advisory = from a in Answer, where: a.advice_request_id == ^advisory.id
-
-    Repo.all(answers_from_advisory)
+    Repo.all(from a in Answer, where: a.advice_request_id == ^advisory.id)
   end
 
   def delete_all(advisories) do

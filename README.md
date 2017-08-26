@@ -40,7 +40,7 @@ Prerequisites:
 
 - [Vagrant](https://www.vagrantup.com/docs/installation/)
 
-- [Virtual Box](https://www.virtualbox.org/)
+- [](https://www.virtualbox.org/)
 
 
 Now you need to setup your virtual machine. 

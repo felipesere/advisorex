@@ -10,14 +10,15 @@ defmodule Advisor.Core.Question do
     field :phrase, :string
   end
 
-  def store_all(phrases) do
+  def store(phrases) do
     phrases = Enum.map(phrases, &(%{phrase: &1}))
     Question
     |> Repo.insert_all(phrases, returning: true)
-    |> elem(1)
+    |> elem(1) # Gaaaaaaaaah...
     |> Enum.map(&(&1.id))
   end
 
+  # Load is very vague...
   def load(uuids) do
     Repo.all(from q in Question, where: q.id in ^uuids)
   end

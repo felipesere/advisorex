@@ -9,11 +9,12 @@ defmodule Advisor.Core.Questionnaire.Creator do
                advisors: advisors,
                group_lead: group_lead}) do
 
-
     questions = Questions.store(questions)
     {:ok, questionnaire} = Repo.insert(%Questionnaire{question_ids: questions,
-      requester_id: requester, group_lead: group_lead})
+                                                      requester_id: requester,
+                                                      group_lead: group_lead})
 
+    # Smell
     advice_requests = Enum.map(advisors, fn(advisor) ->
       %{questionnaire_id: questionnaire.id,
         requester_id: requester,

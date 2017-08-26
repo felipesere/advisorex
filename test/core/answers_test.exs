@@ -10,7 +10,7 @@ defmodule Advisor.Core.AnswersTest do
 
     [first, second] = Answers.all_answers_in(params)
 
-    assert first ==  %{advice_request_id: "id", answer: "answer_2", question_id: "uuid-2"}
-    assert second == %{advice_request_id: "id", answer: "answer_1", question_id: "uuid-1" }
+    assert first == %{advice_request_id: "id", answer: "answer_1", question_id: "uuid-1"}
+    assert second ==  %{advice_request_id: "id", answer: "answer_2", question_id: "uuid-2"}
   end
 end

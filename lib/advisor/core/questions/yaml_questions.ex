@@ -2,6 +2,7 @@ defmodule Advisor.Core.Questions.YamlQuestions do
 
   @path "lib/advisor/core/questions/questions.yml"
 
+  # This feel brutally complicated...
   def all() do
     File.cwd!
     |> Path.join(@path)
@@ -17,14 +18,17 @@ defmodule Advisor.Core.Questions.YamlQuestions do
     |> YamlElixir.read_from_string()
     |> extract()
   end
+
+  # Gawd this is intricate and complicated...
   defp extract(yaml) do
     yaml
     |> Enum.reduce(%{counter: 1, data: %{}}, fn({kind, phrases}, %{counter: counter, data: data}) ->
+      # Extract this function to its own module
       kind = String.to_atom(kind)
       questions = convert(phrases, kind, counter)
       %{counter: counter + length(questions), data: Map.put(data, kind, questions)}
     end)
-    |> Map.fetch!(:data)
+    |> Map.fetch!(:data) # Why do I just keep a few little chunks?!
   end
 
   def find(yaml, ids) do
@@ -36,6 +40,7 @@ defmodule Advisor.Core.Questions.YamlQuestions do
 
   def phrases(questions), do: Enum.map(questions, fn(question) -> question.phrase end)
 
+  # handcrafted reduce?
   defp convert([], _, _), do: []
   defp convert([value | others], kind, counter) do
     [%{phrase: value, kind: id_of(kind), id: counter} | convert(others, kind, counter + 1)]

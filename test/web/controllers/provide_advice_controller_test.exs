@@ -36,7 +36,7 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
   end
 
   test "renders thank you page", %{conn: conn, links: links} do
-    [%{link: link} | _ ] = links
+    [%{link: link} | _] = links
 
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")

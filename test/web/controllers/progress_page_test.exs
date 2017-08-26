@@ -38,7 +38,6 @@ defmodule Advisor.Web.ProgressPageTest do
 
     {:ok, %{questionnaire: questionnaire_id}} = questionnaires
 
-
     answers = questionnaire_id
               |> Questionnaire.questions
               |> Enum.map(fn(id) -> {String.to_atom(id), "some answer"} end)

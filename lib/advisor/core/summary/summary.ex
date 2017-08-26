@@ -24,7 +24,6 @@ defmodule Advisor.Core.Summary do
                 |> Questions.phrases()
     header = ["timestamp", "advisor", "requester"] ++ questions
 
-
     [header | content]
   end
 end

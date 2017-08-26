@@ -21,7 +21,6 @@ defmodule Advisor.Web.DownloadSummaryControllerTest do
                                 |> Creator.create
                                 |> Links.generate
 
-
     answers = questions
               |> Enum.map(fn(id) -> {String.to_atom(id), "some answer"} end)
               |> Keyword.new
