@@ -53,7 +53,6 @@ defmodule Advisor.Web.QuestionnaireProposal do
     |> Questions.find
     |> Questions.phrases
   end
-  def load({:phrases, phrases}), do: phrases
 
   def all_integers(phrase_or_id) do
     Enum.all?(phrase_or_id, fn(element) ->
@@ -70,9 +69,6 @@ defmodule Advisor.Web.QuestionnaireProposal do
           |> Enum.map(fn({key, _}) -> parse!(key) end)
 
     {:ok, map}
-  end
-  def parse(potential) when is_list(potential) do
-    Enum.map(potential, &parse!/1)
   end
   def parse(potential) when is_binary(potential) do
     case Integer.parse(potential) do
