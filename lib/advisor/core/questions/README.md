@@ -1,12 +1,14 @@
 # Questions
 
 Here we can find any question that can be [answered](lib/advisor/core/answers/README.md').
-Find all questions, or a subset basded on ids or the [questionnaire](/lib/advisor/core/questionnaire/README.md)
+Find questions based on their ids questions or just all of them.
+The questions are kept in a YAML file to ease collaboration.
 
 For the moment we are targeting three kinds of questions:
 1. Technical
 2. Client Relationships
 3. Community
+
 
 ## Changes
 

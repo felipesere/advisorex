@@ -1,5 +1,6 @@
 defmodule Advisor.Web.QuestionnaireProposal do
   alias Advisor.Core.People
+  alias Advisor.Core.Questions
   alias __MODULE__
 
   defstruct group_lead: :unassigned,
@@ -10,13 +11,13 @@ defmodule Advisor.Web.QuestionnaireProposal do
   def build([for: requester_name,
              advisors: advisors_names,
              group_lead: lead_name,
-             questions: questions]) do
+             questions: phrases]) do
 
+    questions = Questions.store(phrases)
     requester = People.find_by(name: requester_name).id
     group_lead = People.group_lead(name: lead_name).id
-    advisors = [names: advisors_names]
-                          |> People.find_by()
-                          |> Enum.map(&(&1.id))
+    advisors = People.find_by(names: advisors_names)
+               |> Enum.map(&(&1.id))
 
     %QuestionnaireProposal{group_lead: group_lead,
                          requester: requester,
@@ -27,17 +28,45 @@ defmodule Advisor.Web.QuestionnaireProposal do
   def for_requester(%{"proposal" => %{"group_lead" => lead,
                                       "advisors" => people,
                                       "questions" => questions}}, %{id: id}) do
+
+    questions = questions |> identify() |> load()
+
     with {:ok, lead} <- parse(lead),
          {:ok, people} <- parse(people),
-         {:ok, questions} <- parse(questions),
       do: %Advisor.Web.QuestionnaireProposal{group_lead: lead,
                                              advisors: people,
                                              questions: questions,
                                              requester: id}
   end
 
+  def identify(phrase_or_id) do
+    keys = Map.keys(phrase_or_id)
+    if all_integers(keys) do
+      {:ids, parse(phrase_or_id)}
+    else
+      {:phrases, parse(phrase_or_id)}
+    end
+  end
+
+  def load({:ids, {:ok, ids}}) do
+    ids
+    |> Questions.find
+    |> Questions.phrases
+  end
+
+  def all_integers(phrase_or_id) do
+    Enum.all?(phrase_or_id, fn(element) ->
+      case Integer.parse(element) do
+        {_, ""} -> true
+        _ -> false
+      end
+    end)
+  end
+
   def parse(map) when is_map(map) do
-    map = Enum.filter_map(map, &truthy/1, fn({key, _}) -> parse!(key) end)
+    map = map
+          |> Enum.filter(&truthy/1)
+          |> Enum.map(fn({key, _}) -> parse!(key) end)
 
     {:ok, map}
   end

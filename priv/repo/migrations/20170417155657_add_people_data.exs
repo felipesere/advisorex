@@ -1,9 +1,8 @@
 defmodule Advisor.Repo.Migrations.AddPeopleData do
   use Ecto.Migration
-  alias Advisor.Core.Person
 
   def up do
-    Advisor.Repo.insert_all(Person, [
+    Advisor.Repo.insert_all("people", [
                               %{name: "Andrea Mazzarella", profile_image: "https://8thlight.com/images/team/andrea-mazzarella-84ba2525.jpg", is_group_lead: false, email: "amazzarella@example.com"},
                               %{name: "Chris Jordan", profile_image: "https://8thlight.com/images/team/chris-jordan-4997becf.jpg", is_group_lead: false, email: "cj@example.com"},
                               %{name: "Daniel Irvine", profile_image: "https://8thlight.com/images/team/daniel-irvine-d41af5ef.jpg", is_group_lead: true, email: "daniel@example.com"},
@@ -32,7 +31,7 @@ defmodule Advisor.Repo.Migrations.AddPeopleData do
   end
 
   def down do
-    Advisor.Repo.delete_all(Person)
+    Advisor.Repo.delete_all("people")
   end
 
 end

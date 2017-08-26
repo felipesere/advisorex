@@ -5,7 +5,7 @@ defmodule Advisor.Core.Answer do
 
   schema "answers" do
     field :advice_request_id, :binary_id
-    field :question_id, :integer
+    field :question_id, :binary
     field :answer, :string
     timestamps(@only_created_at)
   end

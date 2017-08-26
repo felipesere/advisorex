@@ -9,7 +9,7 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
     {links, progress, _} = create_questionnaire(for: "Rabea Gleissner",
                                                 advisors: ["Felipe Sere", "Chris Jordan"],
                                                 group_lead: "Jim Suchy",
-                                                questions: [5, 6])
+                                                questions: ["first", "second"])
 
     [links: links, progress: progress]
   end
@@ -35,10 +35,12 @@ defmodule Advisor.Web.ProvideAdviceControllerTest do
     assert conn.cookies["target"] == felipes_advice_link
   end
 
-  test "renders thank you page", %{conn: conn} do
+  test "renders thank you page", %{conn: conn, links: links} do
+    [%{link: link} | _] = links
+
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")
-    |> post("/provide/1")
+    |> post(link)
     |> html_response(200)
     |> has_header("Thank you!")
   end

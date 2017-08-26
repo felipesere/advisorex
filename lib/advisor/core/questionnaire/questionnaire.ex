@@ -8,7 +8,7 @@ defmodule Advisor.Core.Questionnaire do
   @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "questionnaires" do
-    field :question_ids, {:array, :integer}
+    field :question_ids, {:array, :binary}
     field :requester_id, :integer
     field :group_lead, :integer
   end

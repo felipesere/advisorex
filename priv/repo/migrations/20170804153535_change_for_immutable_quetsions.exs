@@ -1,7 +1,45 @@
-defmodule Advisor.Repo.Migrations.AddQuestionData do
+defmodule Advisor.Repo.Migrations.ChangeForImmutableQuetsions do
   use Ecto.Migration
 
   def up do
+    execute "ALTER TABLE answers DROP CONSTRAINT IF EXISTS answers_question_id_fkey"
+    drop table(:questions)
+
+    create table(:questions, primary_key: false) do
+      add :id, :uuid, primary_key: true, default: fragment("gen_random_uuid()")
+      add :phrase, :text
+    end
+
+    alter table(:questionnaires) do
+      remove :question_ids
+      add :question_ids, {:array, :binary}
+    end
+
+    alter table(:answers) do
+      remove :question_id
+      add :question_id, :binary
+    end
+  end
+
+  def down do
+    alter table(:questionnaires) do
+      remove :question_ids
+      add :question_ids, {:array, :integer}
+    end
+
+    drop table(:questions)
+    create table(:questions) do
+      add :phrase, :text
+      add :kind, :integer
+    end
+
+    alter table(:answers) do
+      remove :question_id
+      add :question_id, :integer
+    end
+
+    flush()
+
     Advisor.Repo.insert_all("questions", [
                               %{phrase: "How could this person become a better pair?", kind: 1},
                               %{phrase: "How could the this person improve their code quality?", kind: 1},
@@ -20,9 +58,5 @@ defmodule Advisor.Repo.Migrations.AddQuestionData do
                               %{phrase: "How well does this person explain techincal concepts to others?", kind: 3},
                               %{phrase: "What could this person do to become a better mentor?", kind: 3}
                               ])
-  end
-
-  def down do
-    Advisor.Repo.delete_all("questions")
   end
 end

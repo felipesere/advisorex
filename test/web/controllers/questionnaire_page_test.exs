@@ -1,6 +1,7 @@
 defmodule Advisor.Web.RequestPageTest do
   use Advisor.Web.ConnCase
-  alias Advisor.Core.{People, Questions}
+  alias Advisor.Core.People
+  alias Advisor.Core.Questions
 
   @myself 1
 

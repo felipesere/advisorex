@@ -4,8 +4,9 @@ defmodule Advisor.Web.ProgressPageTest do
   alias Advisor.Web.QuestionnaireProposal, as: Proposal
   alias Advisor.Web.Links
   alias Advisor.Core.Questionnaire.Creator
+  alias Advisor.Core.Questionnaire
 
-  @sample_questions [5, 6]
+  @sample_questions ["first", "second"]
 
   setup do
     proposal = Proposal.build(for: "Rabea Gleissner",
@@ -31,14 +32,20 @@ defmodule Advisor.Web.ProgressPageTest do
 
   test "shows that an advisors has completed the advice form", %{conn: conn,
                                                                  proposal: proposal} do
-    proposal =  %{proposal | questions: [1]}
-    {[%{link: link} | _], progress_page, _} = proposal
-                                           |> Creator.create
-                                           |> Links.generate
+    proposal =  %{proposal | questions: ["blob"]}
+    questionnaires = Creator.create(proposal)
+    {[%{link: link} | _], progress_page, _} = Links.generate(questionnaires)
+
+    {:ok, %{questionnaire: questionnaire_id}} = questionnaires
+
+    answers = questionnaire_id
+              |> Questionnaire.questions
+              |> Enum.map(fn(id) -> {String.to_atom(id), "some answer"} end)
+              |> Keyword.new
 
     conn
     |> ThroughTheWeb.login_as("Chris Jordan")
-    |> post(link, ["1": "someting"])
+    |> post(link, answers)
 
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")
@@ -49,11 +56,15 @@ defmodule Advisor.Web.ProgressPageTest do
   end
 
   test "all completed feedback", %{conn: conn, proposal: proposal} do
-    {[%{link: cj}, %{link: priya}], progress_page, _} = proposal
-                                                    |> Creator.create
-                                                    |> Links.generate
+    questionnaire = Creator.create(proposal)
+    {[%{link: cj}, %{link: priya}], progress_page, _} = Links.generate(questionnaire)
 
-    answers = ["1": "something", "2": "else"]
+    {:ok, %{questionnaire: questionnaire_id}} = questionnaire
+
+    answers = questionnaire_id
+              |> Questionnaire.questions
+              |> Enum.map(fn(id) -> {String.to_atom(id), "some answer"} end)
+              |> Keyword.new
 
     conn
     |> ThroughTheWeb.login_as("Chris Jordan")

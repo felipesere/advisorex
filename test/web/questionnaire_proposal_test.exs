@@ -13,7 +13,7 @@ defmodule Advisor.Web.QuestionnaireProposalTest do
 
     assert proposal.group_lead == 11
     assert proposal.advisors == [4, 5]
-    assert proposal.questions == [13]
+    assert proposal.questions == ["How are this persons code reviews?"]
     assert proposal.requester == 1
   end
 end

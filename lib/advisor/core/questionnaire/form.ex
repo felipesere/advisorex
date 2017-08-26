@@ -1,5 +1,6 @@
 defmodule Advisor.Core.Questionnaire.Form do
-  alias Advisor.Core.{People, Questions}
+  alias Advisor.Core.People
+  alias Advisor.Core.Questions
 
   def data_for(person) do
     everybody = People.everybody_but(person)

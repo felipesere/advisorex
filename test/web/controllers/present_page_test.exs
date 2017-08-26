@@ -6,7 +6,7 @@ defmodule Advisor.Web.PresentPageTest do
   alias Advisor.Web.Links
   alias Advisor.Core.Questionnaire.Creator
 
-  @sample_questions [1, 2]
+  @sample_questions ["first", "second"]
 
   setup do
     proposal = Proposal.build(for: "Rabea Gleissner",
@@ -17,10 +17,12 @@ defmodule Advisor.Web.PresentPageTest do
   end
 
   test "it displays all four answers to the questionnaire", %{conn: conn, proposal: proposal} do
+    %{questions: [first_id, second_id]} = proposal
     {[%{link: cj}, %{link: priya}], _, present_link} = proposal
                                                        |> Creator.create
                                                        |> Links.generate
-    answers = ["1": "something", "2": "else"]
+
+    answers = ["#{first_id}": "something", "#{second_id}": "else"]
 
     conn
     |> ThroughTheWeb.login_as("Chris Jordan")

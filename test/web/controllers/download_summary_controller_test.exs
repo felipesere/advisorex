@@ -5,30 +5,26 @@ defmodule Advisor.Web.DownloadSummaryControllerTest do
   alias Advisor.Web.Links
   alias Advisor.Core.Questionnaire.Creator
 
-  @answers  ["1": "something", "2": "else"]
-
   setup do
     proposal = Proposal.build(for: "Rabea Gleissner",
                               advisors: ["Chris Jordan", "Priya Patil"],
                               group_lead: "Felipe Sere",
-                              questions: [1, 2])
-    [proposal: proposal]
+                              questions: ["first", "second"])
+
+    %{questions: questions} = proposal
+
+    [proposal: proposal, questions: questions]
   end
 
-  def answer!(conn, links) do
-    Enum.each(links, fn (link) ->
-      conn
-      |> ThroughTheWeb.login_as(link.person.name)
-      |> post(link.link, @answers)
-    end)
-  end
-
-  test "downloads answers as CSV", %{conn: conn, proposal: proposal} do
+  test "downloads answers as CSV", %{conn: conn, proposal: proposal, questions: questions} do
     {links, _, present_link} = proposal
                                 |> Creator.create
                                 |> Links.generate
 
-    ThroughTheWeb.answer!(conn, links, @answers)
+    answers = questions
+              |> Enum.map(fn(id) -> {String.to_atom(id), "some answer"} end)
+              |> Keyword.new
+    ThroughTheWeb.answer!(conn, links, answers)
 
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")

@@ -2,11 +2,12 @@ defmodule Advisor.Web.AdviceRequestControllerTest do
   use Advisor.Web.ConnCase
 
   test "creates the proper questionnaire", %{conn: conn} do
+
     proposal = %{:group_lead => "11",
                  :advisors => %{"4" => "true"},
                  :questions =>  %{"13" => "true"}}
     conn = conn
-           |> ThroughTheWeb.login_as(11)
+           |> ThroughTheWeb.login_as("Felipe Sere")
            |> post("/request", [proposal: proposal])
 
     response = html_response(conn, 200)

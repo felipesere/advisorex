@@ -19,7 +19,7 @@ defmodule Advisor.Core.People do
   def find_by([name: name]), do: query_by_name(name)
   def find_by(%{advisor_id: id}), do: find_by(id: id)
   def find_by([email: email]), do: query_by_email(email)
-  def find_by([id: nil]), do: nil
+  def find_by([id: nil]), do: nil # nill is annoying! Maybe there is a better pattern here?
   def find_by([id: id]) when is_integer(id), do: query_by_user(id)
   def find_by([id: id]) do
     case parse(id) do
