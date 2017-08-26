@@ -4,13 +4,12 @@ defmodule Advisor.Core.Questionnaire.Creator do
   alias Advisor.Core.Questions
   alias Advisor.Repo
 
-  def create(%{questions: questions,
+  def create(%{questions: questions_ids,
                requester: requester,
                advisors: advisors,
                group_lead: group_lead}) do
 
-    questions = Questions.store(questions)
-    {:ok, questionnaire} = Repo.insert(%Questionnaire{question_ids: questions,
+    {:ok, questionnaire} = Repo.insert(%Questionnaire{question_ids: questions_ids,
                                                       requester_id: requester,
                                                       group_lead: group_lead})
 
