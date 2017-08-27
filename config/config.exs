@@ -23,7 +23,7 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-if Mix.env == :test do
+if Mix.env == :dev do
   config :mix_test_watch, clear: true
 end
 
