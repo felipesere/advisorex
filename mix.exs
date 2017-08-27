@@ -34,18 +34,23 @@ defmodule Advisor.Mixfile do
      {:bcrypt_elixir, "~> 0.12.1"},
      {:comeonin, "~> 4.0"},
      {:cowboy, "~> 1.0"},
-     {:credo, "~> 0.7", only: [:dev, :test], runtime: false},
      {:csv, "~> 2.0"},
-     {:ex_unit_notifier, "~> 0.1.3", only: :test},
-     {:excoveralls, "~> 0.7.1"},
-     {:floki, "~> 0.18", only: :test},
-     {:mix_test_watch, "~> 0.4"},
      {:phoenix, "~> 1.3.0-rc.2"},
      {:phoenix_ecto, "~> 3.2"},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:postgrex, ">= 0.0.0"},
      {:yaml_elixir, "~> 1.3"}
+    ] ++ test_deps()
+  end
+
+  defp test_deps do
+    [
+      {:credo, "~> 0.7", only: [:dev, :test], runtime: false},
+      {:ex_unit_notifier, "~> 0.1.3", only: :test},
+      {:excoveralls, "~> 0.7.1", only: :test},
+      {:floki, "~> 0.18", only: :test},
+      {:mix_test_watch, "~> 0.4", only: :test},
     ]
   end
 
