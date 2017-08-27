@@ -2,7 +2,7 @@ defmodule Advisor.Core.AdviceTest do
   use Advisor.DataCase
   alias Advisor.Core.Advice
   alias Advisor.Core.Questionnaire.Creator
-  alias Advisor.Web.QuestionnaireProposal, as: Proposal
+  alias AdvisorWeb.QuestionnaireProposal, as: Proposal
 
   @phrases ["first", "second", "third"]
 

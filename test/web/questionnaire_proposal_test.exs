@@ -1,6 +1,6 @@
-defmodule Advisor.Web.QuestionnaireProposalTest do
+defmodule AdvisorWeb.QuestionnaireProposalTest do
   use ExUnit.Case
-  alias Advisor.Web.QuestionnaireProposal
+  alias AdvisorWeb.QuestionnaireProposal
 
   @user %{id: 1}
 

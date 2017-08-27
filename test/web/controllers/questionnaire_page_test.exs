@@ -1,5 +1,5 @@
-defmodule Advisor.Web.RequestPageTest do
-  use Advisor.Web.ConnCase
+defmodule AdvisorWeb.RequestPageTest do
+  use AdvisorWeb.ConnCase
   alias Advisor.Core.People
   alias Advisor.Core.Questions
 

@@ -1,6 +1,6 @@
 defmodule ThroughTheWeb do
   use Phoenix.ConnTest
-  @endpoint Advisor.Web.Endpoint
+  @endpoint AdvisorWeb.Endpoint
 
   def answer!(conn, links, answers) do
     Enum.each(links, fn (link) ->

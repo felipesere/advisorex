@@ -8,7 +8,7 @@ defmodule Advisor.Application do
 
     children = [
       supervisor(Advisor.Repo, []),
-      supervisor(Advisor.Web.Endpoint, []),
+      supervisor(AdvisorWeb.Endpoint, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

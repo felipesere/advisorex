@@ -1,8 +1,8 @@
-defmodule Advisor.Web.DashboardPageTest do
-  use Advisor.Web.ConnCase
+defmodule AdvisorWeb.DashboardPageTest do
+  use AdvisorWeb.ConnCase
   import PageAssertions
 
-  alias Advisor.Web.QuestionnaireProposal, as: Proposal
+  alias AdvisorWeb.QuestionnaireProposal, as: Proposal
   alias Advisor.Core.Questionnaire.Creator
   alias Advisor.Core.Answers
 

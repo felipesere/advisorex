@@ -35,7 +35,7 @@ defmodule Advisor.Mixfile do
      {:comeonin, "~> 4.0"},
      {:cowboy, "~> 1.0"},
      {:csv, "~> 2.0"},
-     {:phoenix, "~> 1.3.0-rc.2"},
+     {:phoenix, "~> 1.3.0"},
      {:phoenix_ecto, "~> 3.2"},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},

@@ -1,6 +1,6 @@
-defmodule Advisor.Web.Authentication.GatekeeprTest do
-  use Advisor.Web.ConnCase
-  alias Advisor.Web.Authentication.Gatekeeper
+defmodule AdvisorWeb.Authentication.GatekeeprTest do
+  use AdvisorWeb.ConnCase
+  alias AdvisorWeb.Authentication.Gatekeeper
   alias Advisor.Core.{Person, People}
 
   @default_opts Gatekeeper.init([])
