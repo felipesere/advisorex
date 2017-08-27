@@ -1,4 +1,4 @@
-defmodule Advisor.Core.Questions.YamlQuestions do
+defmodule Advisor.Core.Questions.PhrasesCatalog do
 
   @path "lib/advisor/core/questions/questions.yml"
 

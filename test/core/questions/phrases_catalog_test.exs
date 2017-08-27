@@ -1,4 +1,4 @@
-defmodule Advisor.Core.Questions.YamlQuestionsTests do
+defmodule Advisor.Core.Questions.PhrasesCatalogTests do
   use ExUnit.Case
   alias Advisor.Core.Questions
 
