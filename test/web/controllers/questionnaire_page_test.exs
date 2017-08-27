@@ -1,7 +1,7 @@
 defmodule AdvisorWeb.RequestPageTest do
   use AdvisorWeb.ConnCase
   alias Advisor.Core.People
-  alias Advisor.Core.Questions
+  alias Advisor.Core.Questions.PhrasesCatalog
 
   @myself 1
 
@@ -33,7 +33,7 @@ defmodule AdvisorWeb.RequestPageTest do
              |> Floki.find(".advisor")
              |> length == number_of_advisors
 
-    number_of_questions = Questions.all |> flatten |> length
+    number_of_questions = PhrasesCatalog.all |> flatten |> length
     assert response
              |> Floki.find(".question-picker li")
              |> length == number_of_questions

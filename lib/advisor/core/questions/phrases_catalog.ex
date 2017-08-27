@@ -2,7 +2,9 @@ defmodule Advisor.Core.Questions.PhrasesCatalog do
 
   @path "lib/advisor/core/questions/questions.yml"
 
-  # This feel brutally complicated...
+  # Maybe add a struct called `phrase`?
+
+  # This feel brutally complicated... and do I really need them all?
   def all() do
     File.cwd!
     |> Path.join(@path)
@@ -46,6 +48,7 @@ defmodule Advisor.Core.Questions.PhrasesCatalog do
     [%{phrase: value, kind: id_of(kind), id: counter} | convert(others, kind, counter + 1)]
   end
 
+  # Separate Module for this?
   defp id_of(:technical), do: 1
   defp id_of(:client), do: 2
   defp id_of(:community), do: 3

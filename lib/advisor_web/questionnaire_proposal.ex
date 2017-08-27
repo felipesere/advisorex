@@ -1,6 +1,7 @@
 defmodule AdvisorWeb.QuestionnaireProposal do
   alias Advisor.Core.People
   alias Advisor.Core.Questions
+  alias Advisor.Core.Questions.PhrasesCatalog
   alias __MODULE__
 
   defstruct group_lead: :unassigned,
@@ -16,8 +17,7 @@ defmodule AdvisorWeb.QuestionnaireProposal do
     questions = Questions.store(phrases)
     requester = People.find_by(name: requester_name).id
     group_lead = People.group_lead(name: lead_name).id
-    advisors = People.find_by(names: advisors_names)
-               |> Enum.map(&(&1.id))
+    advisors = People.find_by(names: advisors_names) |> Enum.map(&(&1.id))
 
     %QuestionnaireProposal{group_lead: group_lead,
                          requester: requester,
@@ -50,7 +50,7 @@ defmodule AdvisorWeb.QuestionnaireProposal do
 
   def load({:ids, {:ok, ids}}) do
     ids
-    |> Questions.find
+    |> PhrasesCatalog.find
     |> Questions.phrases
   end
 
