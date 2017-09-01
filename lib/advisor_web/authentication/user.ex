@@ -12,6 +12,7 @@ defmodule AdvisorWeb.Authentication.User do
     user =  People.find_by(email: email)
     password_match = Password.matches?(password)
 
+    # TODO: Maybe I can swap the `nil` for something else?
     case {user, password_match} do
       {nil, _} -> nil
       {_, false} -> nil

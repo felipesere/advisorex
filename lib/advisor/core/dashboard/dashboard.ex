@@ -1,14 +1,14 @@
 defmodule Advisor.Core.Dashboard do
   alias Advisor.Core.{People, Questionnaire, Advice}
 
-  # Can I turn this into a little struct?
+  # TODO: Can I turn this into a little struct?
   def group_lead_section(%{id: group_lead}) do
     group_lead
     |> Questionnaire.for_group_lead()
     |> expand()
   end
 
-  # Is there a pattern around this? Behave the same for one or a list?
+  # TODO: Is there a pattern around this? Behave the same for one or a list?
   defp expand(questionnaires) when is_list(questionnaires) do
     Enum.map(questionnaires, &expand/1)
   end
@@ -21,7 +21,7 @@ defmodule Advisor.Core.Dashboard do
     %{questionnaire_id: id, requester: People.requester(questionnaire), advisors: advisors}
   end
 
-  # this anonymous map function looks massive!
+  # TODO: this anonymous map function looks massive!
   def required_advice_section(%{id: advisor}) do
     advisor
     |> Questionnaire.with_advisor()
@@ -34,7 +34,7 @@ defmodule Advisor.Core.Dashboard do
     |> Enum.reject(fn(%{completed: completed}) -> completed end)
   end
 
-  # Can I turn this into its own little struct?
+  # TODO: Can I turn this into its own little struct?
   def advice_for_me_section(%{id: person}) do
     case Questionnaire.with_requester(person) do
       nil -> :nothing
@@ -42,7 +42,7 @@ defmodule Advisor.Core.Dashboard do
     end
   end
 
-  # Can I turn this into its own little struct?
+  # TODO: Can I turn this into its own little struct?
   defp section_for(questionnaire) do
     questionnaire
     |> Advice.all_for() # Meeeeeeeeeh

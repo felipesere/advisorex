@@ -1,3 +1,4 @@
+# TODO: This needs to go somewhere...
 defmodule AdvisorWeb.Redirect do
   def target(%Plug.Conn{} = conn), do: target(conn.cookies["target"])
   def target(nil), do: false

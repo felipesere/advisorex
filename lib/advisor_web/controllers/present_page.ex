@@ -2,7 +2,7 @@ defmodule AdvisorWeb.PresentPage do
   use AdvisorWeb, :controller
   alias Advisor.Core.{People, Questions, Questionnaire, Advice, Answers}
 
-  # This bit here is attrociously long...
+  # TODO: This bit here is attrociously long...
   def index(conn, %{"id" => questionnaire_id}) do
     %{question_ids: question_ids} = questionnaire = Questionnaire.find(questionnaire_id)
     advisories = Advice.all_for(questionnaire_id)

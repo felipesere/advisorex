@@ -1,3 +1,4 @@
+# TODO: this is loating in nothingness AND it doesnt use the route helpers!
 defmodule AdvisorWeb.Links do
   def generate({:ok, %{advisories: advisories, questionnaire: questionnaire_id}}) do
     links = Enum.map(advisories, fn(advice) ->

@@ -1,10 +1,12 @@
 defmodule Advisor.Core.Questions.PhrasesCatalog do
+  alias Advisor.Core.Questions.PhraseKind
 
   @path "lib/advisor/core/questions/questions.yml"
 
-  # Maybe add a struct called `phrase`?
+  # TODO Maybe add a struct called `phrase`?
 
-  # This feel brutally complicated... and do I really need them all?
+  # TODO This feel brutally complicated... 
+  # ...and do I really need them all? Maybe I can push this into a spearet module too
   def all() do
     File.cwd!
     |> Path.join(@path)
@@ -21,11 +23,11 @@ defmodule Advisor.Core.Questions.PhrasesCatalog do
     |> extract()
   end
 
-  # Gawd this is intricate and complicated...
+  # TODO: Gawd this is intricate and complicated...
   defp extract(yaml) do
     yaml
     |> Enum.reduce(%{counter: 1, data: %{}}, fn({kind, phrases}, %{counter: counter, data: data}) ->
-      # Extract this function to its own module
+      # TODO: Extract this function to its own module
       kind = String.to_atom(kind)
       questions = convert(phrases, kind, counter)
       %{counter: counter + length(questions), data: Map.put(data, kind, questions)}
@@ -42,7 +44,7 @@ defmodule Advisor.Core.Questions.PhrasesCatalog do
 
   def phrases(questions), do: Enum.map(questions, fn(question) -> question.phrase end)
 
-  # handcrafted reduce?
+  # TODO: handcrafted reduce?
   defp convert([], _, _), do: []
   defp convert([value | others], kind, counter) do
     [%{phrase: value, kind: PhraseKind.to_i(kind), id: counter} | convert(others, kind, counter + 1)]

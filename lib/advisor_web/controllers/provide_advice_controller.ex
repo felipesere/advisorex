@@ -6,6 +6,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
 
   plug  AdvisorWeb.Authentication.Gatekeeper
 
+  # TODO: This is long and by the way... did you notice the sneaky if/else?
   def index(conn, %{"id" => id}) do
     advice = Advice.find(id, from_advisor: found_in(conn))
 

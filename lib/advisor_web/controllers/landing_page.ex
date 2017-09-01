@@ -7,7 +7,7 @@ defmodule AdvisorWeb.LandingPage do
 
   def index(conn, _params) do
     data = case User.of(conn) do
-      nil -> [title: "Advisor",                  logged_in: false]
+      nil ->           [title: "Advisor",        logged_in: false] # TODO: This is where nill could be something better
       %{name: name} -> [title: "Hello #{name}!", logged_in: true]
     end
     render conn, "index.html", Keyword.merge(data, redirect_to: Redirect.target(conn))

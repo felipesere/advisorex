@@ -1,7 +1,7 @@
 defmodule Advisor.Core.Questionnaire.Deleter do
   alias Advisor.Core.{Advice, Answers, Questionnaire}
 
-  # Turn this into some kind of cascading delete or so?
+  # TODO Turn this into some kind of cascading delete or so?
   def delete(id) do
     advice = Advice.all_for(id)
     Answers.delete_all(advice)

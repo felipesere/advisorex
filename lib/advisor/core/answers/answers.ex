@@ -17,12 +17,12 @@ defmodule Advisor.Core.Answers do
     |> add(advice_request_id)
   end
 
-  # This feels to intricite... map into Map put?
+  # TODO This feels to intricite... map into Map put?
   defp to_answer({question_id, answer}) do
     %{question_id: question_id, answer: answer}
   end
 
-  # This feels to intricite... map into Map put?
+  # TODO This feels to intricite... map into Map put?
   defp add(answers, advice_request_id) do
     answers
     |> Enum.map(&(Map.put(&1, :advice_request_id, advice_request_id)))

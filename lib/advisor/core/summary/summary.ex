@@ -5,6 +5,7 @@ defmodule Advisor.Core.Summary do
   alias Advisor.Repo
   import Ecto.Query
 
+  # TODO: Larget. Query. Every. Can this be simplified?
   def for_download(id) do
     query = from advice in Advice,
                join: r in Person, on: [id: advice.requester_id],
@@ -16,7 +17,7 @@ defmodule Advisor.Core.Summary do
 
     content = query
               |> Repo.all()
-              |> Enum.map(fn({ts, adv, req, answers}) -> [ts, adv, req] ++ answers end)
+              |> Enum.map(fn({ts, adv, req, answers}) -> [ts, adv, req] ++ answers end) # TODO: Querky ending...
 
     questions = id
                 |> Questionnaire.questions()

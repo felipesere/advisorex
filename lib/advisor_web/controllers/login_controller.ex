@@ -2,6 +2,7 @@ defmodule AdvisorWeb.LoginController do
   use AdvisorWeb, :controller
   alias AdvisorWeb.Authentication.User
 
+  # TODO: Verify this against the Gatekeeper
   plug AdvisorWeb.Authentication.Gatekeeper, redirect: false
 
   def index(conn, params) do

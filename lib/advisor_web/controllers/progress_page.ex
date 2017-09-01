@@ -4,6 +4,7 @@ defmodule AdvisorWeb.ProgressPage do
 
   plug  AdvisorWeb.Authentication.Gatekeeper, only: :group_leads
 
+  # TODO: This bit here is attrociously long...
   def index(conn, %{"id" => id}) do
     advisories = Advice.all_for(id)
     questionnaire = Questionnaire.find(id)

@@ -4,9 +4,11 @@ defmodule AdvisorWeb.Authentication.Gatekeeper do
   alias Advisor.Core.Person
   import Phoenix.Controller, only: [redirect: 2]
 
+  # TODO: There is something fishy with the redirect paramter. It might not be needed.
+
   def init(opts) do
     allowed_role = Keyword.get(opts, :only, :regular)
-    redirect = case Keyword.fetch(opts, :redirect) do
+    redirect = case Keyword.fetch(opts, :redirect) do # TODO extract
       :error -> "/"
       {:ok, value} -> value
     end

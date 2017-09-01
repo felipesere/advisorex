@@ -13,7 +13,7 @@ defmodule Advisor.Core.Questionnaire.Creator do
                                                       requester_id: requester,
                                                       group_lead: group_lead})
 
-    # Smell
+    # TODO: Why is't this a proper struct?
     advice_requests = Enum.map(advisors, fn(advisor) ->
       %{questionnaire_id: questionnaire.id,
         requester_id: requester,
@@ -22,7 +22,7 @@ defmodule Advisor.Core.Questionnaire.Creator do
 
     advisories = Advice
                  |> Repo.insert_all(advice_requests, returning: true)
-                 |> elem(1)
+                 |> elem(1) # TODO: There is something off here too
                  |> Enum.map(&expanded_advisor/1)
 
     {:ok, %Created{questionnaire:  questionnaire.id, advisories: advisories}}
