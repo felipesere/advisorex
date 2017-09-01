@@ -45,11 +45,6 @@ defmodule Advisor.Core.Questions.PhrasesCatalog do
   # handcrafted reduce?
   defp convert([], _, _), do: []
   defp convert([value | others], kind, counter) do
-    [%{phrase: value, kind: id_of(kind), id: counter} | convert(others, kind, counter + 1)]
+    [%{phrase: value, kind: PhraseKind.to_i(kind), id: counter} | convert(others, kind, counter + 1)]
   end
-
-  # Separate Module for this?
-  defp id_of(:technical), do: 1
-  defp id_of(:client), do: 2
-  defp id_of(:community), do: 3
 end
