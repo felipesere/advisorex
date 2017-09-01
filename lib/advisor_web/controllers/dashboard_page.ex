@@ -14,7 +14,6 @@ defmodule AdvisorWeb.DashboardPage do
     render conn, "index.html", viewer: viewer,
                                group_lead_section: group_lead_section,
                                required_advice_section: my_required_advice,
-                               advice_for_me: advice_for_me,
-                               person: People.find_by(name: "Uku Taht")
+                               advice_for_me: advice_for_me
   end
 end
