@@ -17,7 +17,8 @@ defmodule Advisor.Core.Summary do
 
     content = query
               |> Repo.all()
-              |> Enum.map(fn({ts, adv, req, answers}) -> [ts, adv, req] ++ answers end) # TODO: Querky ending...
+              |> Enum.map(fn({ts, adv, req, answers}) -> [ts, adv, req] ++ answers end)
+              # TODO: Querky ending...
 
     questions = id
                 |> Questionnaire.questions()
