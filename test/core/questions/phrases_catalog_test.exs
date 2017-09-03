@@ -13,6 +13,6 @@ defmodule Advisor.Core.Questions.PhrasesCatalogTests do
   end
 
   test "Can strip the phrases" do
-    assert PhrasesCatalog.find([1]) |> Questions.phrases == ["How has this person contributed to the success of their client?"]
+    assert PhrasesCatalog.find([1]) |> Questions.phrases == ["How has this person navigated difficult situations with the client?"]
   end
 end
