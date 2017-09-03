@@ -1,25 +1,16 @@
 defmodule Advisor.Core.Questions.PhrasesCatalog do
-  alias Advisor.Core.Questions.PhraseKind
+  alias Advisor.Core.Questions.Phrase
 
   @path "lib/advisor/core/questions/questions.yml"
 
   # TODO Maybe add a struct called `phrase`?
 
-  # TODO This feel brutally complicated... 
+  # TODO This feel brutally complicated...
   # ...and do I really need them all? Maybe I can push this into a spearet module too
   def all() do
     File.cwd!
     |> Path.join(@path)
-    |> all()
-  end
-  def all(path) do
-    path
     |> YamlElixir.read_from_file()
-    |> extract()
-  end
-  def from_data(yaml) do
-    yaml
-    |> YamlElixir.read_from_string()
     |> extract()
   end
 
@@ -27,7 +18,6 @@ defmodule Advisor.Core.Questions.PhrasesCatalog do
   defp extract(yaml) do
     yaml
     |> Enum.reduce(%{counter: 1, data: %{}}, fn({kind, phrases}, %{counter: counter, data: data}) ->
-      # TODO: Extract this function to its own module
       kind = String.to_atom(kind)
       questions = convert(phrases, kind, counter)
       %{counter: counter + length(questions), data: Map.put(data, kind, questions)}
@@ -38,15 +28,19 @@ defmodule Advisor.Core.Questions.PhrasesCatalog do
   def find(yaml, ids) do
     yaml |> flatten() |> Enum.filter(fn(question) -> question.id in ids end)
   end
-  def find(ids), do: all() |> find(ids)
+  def find(ids) do
+    all() |> find(ids)
+  end
 
   defp flatten(question_map), do: question_map |> Map.values |> List.flatten
 
   def phrases(questions), do: Enum.map(questions, fn(question) -> question.phrase end)
 
-  # TODO: handcrafted reduce?
-  defp convert([], _, _), do: []
-  defp convert([value | others], kind, counter) do
-    [%{phrase: value, kind: PhraseKind.to_i(kind), id: counter} | convert(others, kind, counter + 1)]
+  defp convert(phrases, kind, counter) do
+    phrases
+    |> Enum.with_index(counter)
+    |> Enum.map(fn({phrase, id}) ->
+      %Phrase{phrase: phrase, kind: kind, id: id}
+    end)
   end
 end
