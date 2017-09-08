@@ -1,52 +1,46 @@
 defmodule Advisor.Core.Questions.PhrasesCatalog do
-  alias Advisor.Core.Questions.PhraseKind
+  alias Advisor.Core.Questions.Phrase
 
   @path "lib/advisor/core/questions/questions.yml"
 
-  # TODO Maybe add a struct called `phrase`?
+  def find(ids) do
+    all()
+    |> flatten()
+    |> Enum.filter(fn(%Phrase{id: id}) -> id in ids end)
+  end
 
-  # TODO This feel brutally complicated... 
-  # ...and do I really need them all? Maybe I can push this into a spearet module too
+  # TODO Consider moving the entire loading, path joining shenaningsn out of here
   def all() do
     File.cwd!
     |> Path.join(@path)
-    |> all()
-  end
-  def all(path) do
-    path
     |> YamlElixir.read_from_file()
     |> extract()
   end
-  def from_data(yaml) do
-    yaml
-    |> YamlElixir.read_from_string()
-    |> extract()
-  end
 
-  # TODO: Gawd this is intricate and complicated...
   defp extract(yaml) do
     yaml
-    |> Enum.reduce(%{counter: 1, data: %{}}, fn({kind, phrases}, %{counter: counter, data: data}) ->
-      # TODO: Extract this function to its own module
-      kind = String.to_atom(kind)
-      questions = convert(phrases, kind, counter)
-      %{counter: counter + length(questions), data: Map.put(data, kind, questions)}
+    |> zip()
+    |> Enum.with_index()
+    |> Enum.map(&to_phrase/1)
+    |> Enum.group_by(&kind/1, &(&1))
+  end
+
+  defp kind(%Phrase{kind: kind}), do: kind
+
+  defp zip(map) do
+    map
+    |> Enum.flat_map(fn({key, elements}) ->
+      Enum.map(elements, fn(v) -> {key, v} end)
     end)
-    |> Map.fetch!(:data) # Why do I just keep a few little chunks?!
   end
 
-  def find(yaml, ids) do
-    yaml |> flatten() |> Enum.filter(fn(question) -> question.id in ids end)
+  defp to_phrase({{kind, phrase}, id}) do
+    %Phrase{kind: String.to_atom(kind), phrase: phrase, id: id}
   end
-  def find(ids), do: all() |> find(ids)
 
-  defp flatten(question_map), do: question_map |> Map.values |> List.flatten
-
-  def phrases(questions), do: Enum.map(questions, fn(question) -> question.phrase end)
-
-  # TODO: handcrafted reduce?
-  defp convert([], _, _), do: []
-  defp convert([value | others], kind, counter) do
-    [%{phrase: value, kind: PhraseKind.to_i(kind), id: counter} | convert(others, kind, counter + 1)]
+  defp flatten(phrases) do
+    phrases
+    |> Map.values
+    |> List.flatten
   end
 end
