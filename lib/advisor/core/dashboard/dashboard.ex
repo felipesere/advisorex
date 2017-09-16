@@ -1,11 +1,10 @@
 defmodule Advisor.Core.Dashboard do
   alias Advisor.Core.{People, Questionnaire, Advice}
+  alias Advisor.Core.Dashboard.GroupLeadSection
 
-  # TODO: Can I turn this into a little struct?
+  # TODO: In the process of being replaced
   def group_lead_section(%{id: group_lead}) do
-    group_lead
-    |> Questionnaire.for_group_lead()
-    |> expand()
+    GroupLeadSection.group_lead_section(group_lead)
   end
 
   # TODO: Is there a pattern around this? Behave the same for one or a list?
@@ -14,7 +13,7 @@ defmodule Advisor.Core.Dashboard do
   end
   defp expand(%{id: id} = questionnaire) do
     advisors = questionnaire
-               |> Advice.all_for() # this looks oddly named
+               |> Advice.find_all() # this looks oddly named
                |> Enum.map(&People.advisor/1)
 
                # Why isn't this a pipeline?
@@ -45,7 +44,7 @@ defmodule Advisor.Core.Dashboard do
   # TODO: Can I turn this into its own little struct?
   defp section_for(questionnaire) do
     questionnaire
-    |> Advice.all_for() # Meeeeeeeeeh
+    |> Advice.find_all() # Meeeeeeeeeh
     |> Enum.map(&(people_and_completeness(&1, questionnaire)))
   end
 

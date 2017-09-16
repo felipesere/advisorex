@@ -6,7 +6,7 @@ defmodule AdvisorWeb.ProgressPage do
 
   # TODO: This bit here is attrociously long...
   def index(conn, %{"id" => id}) do
-    advisories = Advice.all_for(id)
+    advisories = Advice.find_all(id)
     questionnaire = Questionnaire.find(id)
     requester = People.requester(questionnaire)
 

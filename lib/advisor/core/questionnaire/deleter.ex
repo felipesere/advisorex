@@ -3,7 +3,7 @@ defmodule Advisor.Core.Questionnaire.Deleter do
 
   # TODO Turn this into some kind of cascading delete or so?
   def delete(id) do
-    advice = Advice.all_for(id)
+    advice = Advice.find_all(id)
     Answers.delete_all(advice)
     Advice.delete_all(advice)
     Questionnaire.delete(id)

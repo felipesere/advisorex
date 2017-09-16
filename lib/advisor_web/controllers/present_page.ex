@@ -5,7 +5,7 @@ defmodule AdvisorWeb.PresentPage do
   # TODO: This bit here is attrociously long...
   def index(conn, %{"id" => questionnaire_id}) do
     %{question_ids: question_ids} = questionnaire = Questionnaire.find(questionnaire_id)
-    advisories = Advice.all_for(questionnaire_id)
+    advisories = Advice.find_all(questionnaire_id)
     advisor_for = for advisory <- advisories, into: %{}, do: {advisory.id, People.find_by(advisory)}
     answers = Enum.flat_map(advisories, &Answers.find/1)
     questions = Questions.load(question_ids)

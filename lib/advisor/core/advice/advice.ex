@@ -13,8 +13,8 @@ defmodule Advisor.Core.Advice do
     field :advisor_id,        :integer
   end
 
-  def all_for(%{id: id}), do: all_for(id)
-  def all_for(id) do
+  def find_all(%{id: id}), do: find_all(id)
+  def find_all(id) do
     Repo.all(from advice in Advice, where: advice.questionnaire_id == ^id)
   end
 
