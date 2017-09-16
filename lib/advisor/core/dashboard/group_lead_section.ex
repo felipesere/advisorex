@@ -8,19 +8,29 @@ defmodule Advisor.Core.Dashboard.GroupLeadSection do
   end
 
   def group_lead_section(group_lead) do
-    groups = Questionnaire.for_group_lead(group_lead) |> expand()
+    group_lead
+    |> Questionnaire.all_for_group_lead()
+    |> Enum.map(&to_group/1)
+    |> to_section()
+  end
+
+  def empty(), do: %__MODULE__{groups: []}
+
+  defp to_section(groups) do
     %__MODULE__{groups: groups}
   end
 
-  # TODO: Is there a pattern around this? Behave the same for one or a list?
-  defp expand(questionnaires) when is_list(questionnaires) do
-    Enum.map(questionnaires, &expand/1)
+  defp to_group(%{id: id} = questionnaire) do
+    %Group{
+      questionnaire_id: id,
+      requester: People.requester(questionnaire),
+      advisors: all_advisors(id)
+    }
   end
-  defp expand(%{id: id} = questionnaire) do
-    advisors = Advice.find_all(id) # this looks oddly named
-               |> Enum.map(&People.advisor/1)
 
-               # Why isn't this a pipeline?
-    %Group{questionnaire_id: id, requester: People.requester(questionnaire), advisors: advisors}
+  defp all_advisors(questionnaire_id) do
+    questionnaire_id
+    |> Advice.find_all()
+    |> Enum.map(&People.advisor/1)
   end
 end

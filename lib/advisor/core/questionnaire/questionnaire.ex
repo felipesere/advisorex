@@ -13,7 +13,7 @@ defmodule Advisor.Core.Questionnaire do
     field :group_lead, :integer
   end
 
-  def for_group_lead(group_lead_id) do
+  def all_for_group_lead(group_lead_id) do
     Repo.all(from q in Questionnaire, where: q.group_lead == ^group_lead_id)
   end
 
@@ -42,6 +42,7 @@ defmodule Advisor.Core.Questionnaire do
     Repo.delete_all(from q in Questionnaire, where: q.id == ^id)
   end
 
+  # This needs to go away!
   defmodule Created do
     defstruct questionnaire: :unassigned, advisories: []
   end

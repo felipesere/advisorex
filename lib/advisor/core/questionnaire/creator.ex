@@ -1,7 +1,6 @@
 defmodule Advisor.Core.Questionnaire.Creator do
   alias Advisor.Core.{People, Questionnaire, Advice}
   alias Advisor.Core.Questionnaire.Created
-  alias Advisor.Core.Questions
   alias Advisor.Repo
 
   def create(%{questions: questions_ids,

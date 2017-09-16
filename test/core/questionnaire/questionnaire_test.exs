@@ -15,7 +15,7 @@ defmodule Advisor.Core.QuestionnaireTest do
                    questions: ["first", "second"])
     Creator.create(proposal)
 
-    [%{group_lead: group_lead}] = Questionnaire.for_group_lead(felipe.id)
+    [%{group_lead: group_lead}] = Questionnaire.all_for_group_lead(felipe.id)
     assert group_lead == felipe.id
 
   end

@@ -6,7 +6,7 @@
   <a href="/request" class="button primary">Request advice for yourself</a>
 </section>
 
-<%= if @viewer.is_group_lead && length(@group_lead_section.groups) > 0  do %>
+<%= if @viewer.is_group_lead && has_advice(@group_lead_section) do %>
   <%= render "_group_lead_section.html", section: @group_lead_section %>
 <% end %>
 
