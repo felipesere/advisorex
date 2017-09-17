@@ -1,4 +1,4 @@
-defmodule Advisor.Core.Questionnaire.DeleterTest do
+defmodule AdvisorWeb.QuestionnaireControllerTest do
   use AdvisorWeb.ConnCase
 
   alias AdvisorWeb.QuestionnaireProposal, as: Proposal
