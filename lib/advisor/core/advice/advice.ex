@@ -42,14 +42,13 @@ defmodule Advisor.Core.Advice do
     Repo.one(advice() |> where([a], a.advisor_id == ^advisor and a.requester_id == ^requester.id))
   end
 
-  def remove(questionnaire_id) do
-    Repo.delete_all(from advice in Advice, where: advice.questionnaire_id == ^questionnaire_id)
-  end
-
   def ids(advisories) do
     Enum.map(advisories, &(&1.id))
   end
 
+  def completed?(%Advice{answers: answers}, expected) when is_list(expected) do
+    length(answers) == length(expected)
+  end
   def completed?(%Advice{answers: answers}, number_of_answers) do
     length(answers) == number_of_answers
   end

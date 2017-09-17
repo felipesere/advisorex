@@ -16,10 +16,10 @@ defmodule Advisor.Core.Dashboard do
   def required_advice_section(%{id: advisor}) do
     advisor
     |> Questionnaire.with_advisor()
-    |> Enum.map(fn(%{question_ids: ids} = questionnaire) ->
+    |> Enum.map(fn(questionnaire) ->
       requester = People.requester(questionnaire)
-      advice    = Advice.from_advisor(advisor, for: requester)
-      completed = Advice.completed?(advice, length(ids))
+      advice    = Enum.find(questionnaire.advice, &(&1.requester_id == requester.id))
+      completed = Advice.completed?(advice, questionnaire.question_ids)
       %{requester:  requester, advice: advice, completed:  completed}
     end)
     |> Enum.reject(fn(%{completed: completed}) -> completed end)
@@ -35,14 +35,14 @@ defmodule Advisor.Core.Dashboard do
 
   # TODO: Can I turn this into its own little struct?
   defp section_for(questionnaire) do
-    questionnaire
-    |> Advice.find_all() # Meeeeeeeeeh
+    questionnaire.advice
     |> Enum.map(&(people_and_completeness(&1, questionnaire)))
   end
 
   def people_and_completeness(advice, %{question_ids: questions}) do
-   nr_of_questions = length(questions)
-    %{advisor:   People.advisor(advice),
-      completed: Advice.completed?(advice, nr_of_questions)}
+    %{
+      advisor:   People.advisor(advice),
+      completed: Advice.completed?(advice, questions)
+    }
   end
 end
