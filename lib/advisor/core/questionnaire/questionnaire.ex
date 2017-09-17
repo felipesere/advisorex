@@ -19,7 +19,7 @@ defmodule Advisor.Core.Questionnaire do
   defp questionnaire() do
     Questionnaire
     |> select([q], q)
-    |> preload(:advice)
+    |> preload([:advice, {:advice, :answers}])
   end
 
   def all_for_group_lead(group_lead_id) do

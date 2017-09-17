@@ -1,7 +1,6 @@
 defmodule Advisor.Core.Dashboard do
   alias Advisor.Core.{People, Questionnaire, Advice}
   alias Advisor.Core.Dashboard.GroupLeadSection
-  alias Advisor.Core.Person
 
   defstruct [:group_lead_section, :required_advice_section, :personal_advice_section]
 
