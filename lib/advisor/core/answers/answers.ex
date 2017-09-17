@@ -36,9 +36,4 @@ defmodule Advisor.Core.Answers do
   def find(advisory) do
     Repo.all(from a in Answer, where: a.advice_request_id == ^advisory.id)
   end
-
-  def delete_all(advisories) do
-    ids = Advice.ids(advisories)
-    Repo.delete_all(from a in Answer, where: a.advice_request_id in ^ids)
-  end
 end
