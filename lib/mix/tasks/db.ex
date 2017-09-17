@@ -5,7 +5,6 @@ defmodule Mix.Tasks.Db do
 
   @pg_directory "/usr/local/var/postgres"
 
-
   def run(_) do
     System.cmd("pg_ctl", ["start", "-D", @pg_directory, "-l", "#{@pg_directory}/server.log"])
   end
