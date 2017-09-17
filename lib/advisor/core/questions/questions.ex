@@ -1,5 +1,4 @@
 defmodule Advisor.Core.Questions do
-  alias Advisor.Core.Questions.PhrasesCatalog
   alias Advisor.Core.Question
 
   # TODO:  Is this already a code smell? Or a comfy pattern?
