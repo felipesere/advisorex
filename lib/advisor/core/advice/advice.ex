@@ -13,33 +13,34 @@ defmodule Advisor.Core.Advice do
     has_many :answers,        Advisor.Core.Answer, foreign_key: :advice_request_id
   end
 
-  def find_all(%{id: id}), do: find_all(id)
-  def find_all(id) do
-    Repo.all(from advice in Advice, where: advice.questionnaire_id == ^id, preload: [:answers])
+  defp advice() do
+    Advice
+    |> select([ar], ar)
+    |> preload(:answers)
   end
 
-  def find(ids) when is_list(ids) do
-    ids
-    |> Enum.map(&find/1)
-    |> Enum.filter(fn(value) -> value end)
+  def find_all(%{id: id}), do: find_all(id)
+  def find_all(id) do
+    Repo.all(advice() |> where([advice], advice.questionnaire_id == ^id))
+  end
+
+  def find(advisories) when is_list(advisories) do
+    ids = ids(advisories)
+    Repo.all(advice() |> where([a], a.id in ^ids))
   end
   def find(%{id: id}) do
     find(id)
   end
   def find(id) do
-    Repo.one(from advice in Advice, where: advice.id == ^id, preload: [:answers])
+    Repo.one(advice() |> where([advice], advice.id == ^id))
   end
 
   def find(advice_id, [from_advisor: %{id: advisor_id}]) do
-    Repo.one(from a in Advice,
-             where: a.id == ^advice_id and a.advisor_id == ^advisor_id,
-             preload: [:answers])
+    Repo.one(advice() |> where([a], a.id == ^advice_id and a.advisor_id == ^advisor_id))
   end
 
   def from_advisor(advisor, [for: requester]) do
-    Repo.one(from a in Advice,
-             where: a.advisor_id == ^advisor and a.requester_id == ^requester.id,
-             preload: [:answers])
+    Repo.one(advice() |> where([a], a.advisor_id == ^advisor and a.requester_id == ^requester.id))
   end
 
   def delete_all(advisories) do
