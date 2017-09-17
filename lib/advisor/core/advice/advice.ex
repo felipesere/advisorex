@@ -10,7 +10,9 @@ defmodule Advisor.Core.Advice do
     field :questionnaire_id,  :binary_id
     field :requester_id,      :integer
     field :advisor_id,        :integer
-    has_many :answers,        Advisor.Core.Answer, foreign_key: :advice_request_id
+    has_many :answers,        Advisor.Core.Answer,
+                                 foreign_key: :advice_request_id,
+                                 on_delete: :delete_all
   end
 
   defp advice() do
@@ -28,9 +30,6 @@ defmodule Advisor.Core.Advice do
     ids = ids(advisories)
     Repo.all(advice() |> where([a], a.id in ^ids))
   end
-  def find(%{id: id}) do
-    find(id)
-  end
   def find(id) do
     Repo.one(advice() |> where([advice], advice.id == ^id))
   end
@@ -43,9 +42,8 @@ defmodule Advisor.Core.Advice do
     Repo.one(advice() |> where([a], a.advisor_id == ^advisor and a.requester_id == ^requester.id))
   end
 
-  def delete_all(advisories) do
-    ids = ids(advisories)
-    Repo.delete_all(from a in Advice, where: a.id in ^ids)
+  def remove(questionnaire_id) do
+    Repo.delete_all(from advice in Advice, where: advice.questionnaire_id == ^questionnaire_id)
   end
 
   def ids(advisories) do
