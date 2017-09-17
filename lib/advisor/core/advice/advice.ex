@@ -1,7 +1,6 @@
 defmodule Advisor.Core.Advice do
   use Ecto.Schema
   import Ecto.Query
-  alias Advisor.Core.Answers
   alias Advisor.Repo
   alias __MODULE__
 
@@ -11,11 +10,12 @@ defmodule Advisor.Core.Advice do
     field :questionnaire_id,  :binary_id
     field :requester_id,      :integer
     field :advisor_id,        :integer
+    has_many :answers,        Advisor.Core.Answer, foreign_key: :advice_request_id
   end
 
   def find_all(%{id: id}), do: find_all(id)
   def find_all(id) do
-    Repo.all(from advice in Advice, where: advice.questionnaire_id == ^id)
+    Repo.all(from advice in Advice, where: advice.questionnaire_id == ^id, preload: [:answers])
   end
 
   def find(ids) when is_list(ids) do
@@ -23,15 +23,23 @@ defmodule Advisor.Core.Advice do
     |> Enum.map(&find/1)
     |> Enum.filter(fn(value) -> value end)
   end
-  def find(%{id: id}), do: find(id)
-  def find(id), do: Repo.get(Advice, id)
+  def find(%{id: id}) do
+    find(id)
+  end
+  def find(id) do
+    Repo.one(from advice in Advice, where: advice.id == ^id, preload: [:answers])
+  end
 
   def find(advice_id, [from_advisor: %{id: advisor_id}]) do
-    Repo.one(from a in Advice, where: a.id == ^advice_id and a.advisor_id == ^advisor_id)
+    Repo.one(from a in Advice,
+             where: a.id == ^advice_id and a.advisor_id == ^advisor_id,
+             preload: [:answers])
   end
 
   def from_advisor(advisor, [for: requester]) do
-    Repo.one(from a in Advice, where: a.advisor_id == ^advisor and a.requester_id == ^requester.id)
+    Repo.one(from a in Advice,
+             where: a.advisor_id == ^advisor and a.requester_id == ^requester.id,
+             preload: [:answers])
   end
 
   def delete_all(advisories) do
@@ -43,7 +51,7 @@ defmodule Advisor.Core.Advice do
     Enum.map(advisories, &(&1.id))
   end
 
-  def completed?(advice, number_of_answers) do
-    length(Answers.find(advice)) == number_of_answers
+  def completed?(%Advice{answers: answers}, number_of_answers) do
+    length(answers) == number_of_answers
   end
 end

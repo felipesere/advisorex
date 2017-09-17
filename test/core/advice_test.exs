@@ -6,19 +6,22 @@ defmodule Advisor.Core.AdviceTest do
 
   @phrases ["first", "second", "third"]
 
+  # TODO: These tests look... aweful!
   test "can figure out if an advice has been answered fully" do
     christoph = advised_by("Christoph Gockel", @phrases)
 
     # this can not be right. but I'll wait for a failure to direct me...
     ThroughTheCore.answer!(christoph, with: %{"1" => "foo", "2" => "bar", "3" => "batz"})
-    assert Advice.completed?(christoph, length(@phrases))
+    advice = Advice.find(christoph.id)
+    assert Advice.completed?(advice, length(@phrases))
   end
 
   test "can tell if advice has not been answered fully" do
     christoph = advised_by("Christoph Gockel", @phrases)
 
     ThroughTheCore.answer!(christoph, with: %{"1" => "foo"})
-    refute Advice.completed?(christoph, length(@phrases))
+    advice = Advice.find(christoph.id)
+    refute Advice.completed?(advice, length(@phrases))
   end
 
   def advised_by(person, questions) do
