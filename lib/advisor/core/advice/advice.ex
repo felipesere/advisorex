@@ -11,8 +11,8 @@ defmodule Advisor.Core.Advice do
     field :requester_id,      :integer
     field :advisor_id,        :integer
     has_many :answers,        Advisor.Core.Answer,
-                                 foreign_key: :advice_request_id,
-                                 on_delete: :delete_all
+      foreign_key: :advice_request_id,
+      on_delete: :delete_all
   end
 
   defp advice() do

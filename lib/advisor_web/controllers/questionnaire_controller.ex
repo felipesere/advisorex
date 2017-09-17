@@ -1,11 +1,11 @@
 defmodule AdvisorWeb.QuestionnaireController do
   use AdvisorWeb, :controller
-  alias Advisor.Core.Questionnaire.Deleter
+  alias Advisor.Core.Questionnaire
 
   plug AdvisorWeb.Authentication.Gatekeeper, only: :group_leads
 
   def delete(conn, %{"id" => id}) do
-    Deleter.delete(id)
+    Questionnaire.delete(id)
     redirect(conn, to: "/dashboard")
   end
 end

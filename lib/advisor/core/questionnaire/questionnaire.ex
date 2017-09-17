@@ -11,10 +11,19 @@ defmodule Advisor.Core.Questionnaire do
     field :question_ids, {:array, :binary}
     field :requester_id, :integer
     field :group_lead, :integer
+    has_many :advice, Advisor.Core.Advice,
+      foreign_key: :questionnaire_id,
+      on_delete: :delete_all
+  end
+
+  defp questionnaire() do
+    Questionnaire
+    |> select([q], q)
+    |> preload(:advice)
   end
 
   def all_for_group_lead(group_lead_id) do
-    Repo.all(from q in Questionnaire, where: q.group_lead == ^group_lead_id)
+    Repo.all(questionnaire() |> where([q], q.group_lead == ^group_lead_id))
   end
 
   def with_advisor(person) do
@@ -23,7 +32,7 @@ defmodule Advisor.Core.Questionnaire do
 
    ids = Enum.map(advisories, fn(x) -> x.questionnaire_id end)
 
-    Repo.all(from q in Questionnaire, where: q.id in ^ids)
+    Repo.all(questionnaire() |> where([q], q.id in ^ids))
   end
 
   def questions(id) do
@@ -31,11 +40,11 @@ defmodule Advisor.Core.Questionnaire do
   end
 
   def with_requester(person) do
-    Repo.one(from q in Questionnaire, where: q.requester_id == ^person)
+    Repo.one(questionnaire() |> where([q], q.requester_id == ^person))
   end
 
   def find(id) do
-    Repo.get(Questionnaire, id)
+    Repo.one(questionnaire() |> where([q], q.id == ^id))
   end
 
   def delete(id) do
