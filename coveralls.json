@@ -5,7 +5,9 @@
 
   "skip_files": [
     "lib/advisor/web/endpoint.ex",
-    "lib/advisor/web/web.ex"
+    "lib/advisor/web/web.ex",
+    "lib/advisor_web/controllers/healthcheck_controller.ex",
+    "lib/mix/tasks/*"
   ]
 }
 
