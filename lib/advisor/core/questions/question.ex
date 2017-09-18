@@ -12,6 +12,7 @@ defmodule Advisor.Core.Question do
 
   def store(phrases) do
     phrases = Enum.map(phrases, &(%{phrase: &1}))
+
     Question
     |> Repo.insert_all(phrases, returning: true)
     |> elem(1) # TODO: Gaaaaaaaaah...
