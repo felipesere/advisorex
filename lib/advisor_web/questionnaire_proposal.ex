@@ -1,15 +1,19 @@
   # TODO: this needs to GO ASAP.
 
 defmodule AdvisorWeb.QuestionnaireProposal do
+  import Ecto.Changeset
+  use Ecto.Schema
   alias Advisor.Core.People
   alias Advisor.Core.Questions
   alias Advisor.Core.Questions.PhrasesCatalog
   alias __MODULE__
 
-  defstruct group_lead: :unassigned,
-            requester: :unassigned,
-            advisors: [],
-            questions: []
+  schema "proposal" do
+    field :group_lead, :integer
+    field :requester, :integer
+    field :questions, {:map, :boolean}
+    field :advisors, {:map, :boolean}
+  end
 
   def build([for: requester_name,
              advisors: advisors_names,
@@ -27,60 +31,41 @@ defmodule AdvisorWeb.QuestionnaireProposal do
                          questions: questions}
   end
 
-  def for_requester(%{"proposal" => %{"group_lead" => lead,
-                                      "advisors" => people,
-                                      "questions" => questions}}, %{id: id}) do
-
-    questions = questions |> identify() |> load()
-
-    with {:ok, lead} <- parse(lead),
-         {:ok, people} <- parse(people),
-      do: %AdvisorWeb.QuestionnaireProposal{group_lead: lead,
-                                             advisors: people,
-                                             questions: questions,
-                                             requester: id}
+  def for_requester(%{"proposal" => proposal}, %{id: requester}) do
+    proposal
+    |> changeset(requester)
+    |> load_questions()
+    |> filter_advisors()
+    |> Apex.ap
   end
 
-  def identify(phrase_or_id) do
-    keys = Map.keys(phrase_or_id)
-    if all_integers(keys) do
-      {:ids, parse(phrase_or_id)}
-    else
-      {:phrases, parse(phrase_or_id)}
-    end
+  def changeset(params, id) do
+    %QuestionnaireProposal{}
+    |> cast(params, [:group_lead, :questions, :advisors])
+    |> put_change(:requester, id)
+    |> apply_changes()
   end
 
-  def load({:ids, {:ok, ids}}) do
-    ids
-    |> PhrasesCatalog.find
-    |> Questions.phrases
+  def load_questions(%QuestionnaireProposal{questions: questions} = struct) do
+    %{struct | questions: load(questions)}
   end
 
-  def all_integers(phrase_or_id) do
-    Enum.all?(phrase_or_id, fn(element) ->
-      case Integer.parse(element) do
-        {_, ""} -> true
-        _ -> false
-      end
-    end)
+  def filter_advisors(%QuestionnaireProposal{advisors: advisors} = struct) do
+    %{struct | advisors: ids(advisors)}
   end
 
-  def parse(map) when is_map(map) do
-    map = map
-          |> Enum.filter(&truthy/1)
-          |> Enum.map(fn({key, _}) -> parse!(key) end)
-
-    {:ok, map}
-  end
-  def parse(potential) when is_binary(potential) do
-    case Integer.parse(potential) do
-      {number, ""} -> {:ok, number}
-      _ -> :could_not_parse_to_integer
-    end
+  def load(questions) do
+    questions
+    |> ids()
+    |> PhrasesCatalog.find()
+    |> Questions.phrases()
   end
 
-  def truthy({_key, "true"}), do: true
-  def truthy(_pair), do: false
+  def ids(map) do
+    map
+    |> Enum.filter(fn({_, v}) -> v end)
+    |> Enum.map(fn({k, _}) -> parse!(k) end)
+  end
 
   def parse!(potential) do
     case Integer.parse(potential) do
