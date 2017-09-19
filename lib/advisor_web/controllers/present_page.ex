@@ -6,7 +6,7 @@ defmodule AdvisorWeb.PresentPage do
   def index(conn, %{"id" => questionnaire_id}) do
     questionnaire = Questionnaire.find(questionnaire_id)
 
-    answered_questions = larger_method(questionnaire)
+    answered_questions = answers_per_question(questionnaire)
 
     requester = People.requester(questionnaire)
     render conn, "index.html", id: questionnaire_id,
@@ -14,7 +14,7 @@ defmodule AdvisorWeb.PresentPage do
                                answered_questions: answered_questions
   end
 
-  defp larger_method(questionnaire) do
+  defp answers_per_question(questionnaire) do
     questionnaire
     |> collect_answers()
     |> join(advisors(questionnaire))

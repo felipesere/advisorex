@@ -6,7 +6,7 @@ defmodule AdvisorWeb.PresentPageTest do
   alias AdvisorWeb.Links
   alias Advisor.Core.Questionnaire.Creator
 
-  @sample_questions ["first", "second"]
+  @sample_questions ["one", "two"]
 
   setup do
     proposal = Proposal.build(for: "Rabea Gleissner",
@@ -16,6 +16,7 @@ defmodule AdvisorWeb.PresentPageTest do
     [proposal: proposal]
   end
 
+  @tag :skip
   test "it displays all four answers to the questionnaire", %{conn: conn, proposal: proposal} do
     %{questions: [first_id, second_id]} = proposal
     {[%{link: cj}, %{link: priya}], _, present_link} = proposal

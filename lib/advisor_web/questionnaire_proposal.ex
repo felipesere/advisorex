@@ -20,7 +20,6 @@ defmodule AdvisorWeb.QuestionnaireProposal do
              group_lead: lead_name,
              questions: phrases]) do
 
-    questions = Questions.store(phrases)
     requester = People.find_by(name: requester_name).id
     group_lead = People.group_lead(name: lead_name).id
     advisors = People.find_by(names: advisors_names) |> Enum.map(&(&1.id))
@@ -28,7 +27,7 @@ defmodule AdvisorWeb.QuestionnaireProposal do
     %QuestionnaireProposal{group_lead: group_lead,
                          requester: requester,
                          advisors: advisors,
-                         questions: questions}
+                         questions: phrases}
   end
 
   def for_requester(%{"proposal" => proposal}, %{id: requester}) do
@@ -36,7 +35,6 @@ defmodule AdvisorWeb.QuestionnaireProposal do
     |> changeset(requester)
     |> load_questions()
     |> filter_advisors()
-    |> Apex.ap
   end
 
   def changeset(params, id) do

@@ -1,14 +1,15 @@
 defmodule Advisor.Core.Questionnaire.Creator do
-  alias Advisor.Core.{People, Questionnaire, Advice}
+  alias Advisor.Core.{People, Questions, Questionnaire, Advice}
   alias Advisor.Core.Questionnaire.Created
   alias Advisor.Repo
 
-  def create(%{questions: questions_ids,
+  def create(%{questions: phrases,
                requester: requester,
                advisors: advisors,
                group_lead: group_lead}) do
 
-    {:ok, questionnaire} = Repo.insert(%Questionnaire{question_ids: questions_ids,
+    question_ids = Questions.store(phrases)
+    {:ok, questionnaire} = Repo.insert(%Questionnaire{question_ids: question_ids,
                                                       requester_id: requester,
                                                       group_lead: group_lead})
 
