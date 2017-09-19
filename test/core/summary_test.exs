@@ -9,7 +9,7 @@ defmodule Advisor.Core.SummaryTest do
     proposal = Proposal.build(for: "Rabea Gleissner",
                               advisors: ["Chris Jordan", "Priya Patil"],
                               group_lead: "Felipe Sere",
-                              questions: ["first", "second"])
+                              questions: [1, 2])
 
     [proposal: proposal]
   end

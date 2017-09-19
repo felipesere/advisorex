@@ -9,7 +9,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
     {links, progress, _} = create_questionnaire(for: "Rabea Gleissner",
                                                 advisors: ["Felipe Sere", "Chris Jordan"],
                                                 group_lead: "Jim Suchy",
-                                                questions: ["first", "second"])
+                                                questions: [1, 2])
 
     [links: links, progress: progress]
   end

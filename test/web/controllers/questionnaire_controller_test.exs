@@ -10,7 +10,7 @@ defmodule AdvisorWeb.QuestionnaireControllerTest do
     proposal = Proposal.build(for: "Felipe Sere",
                               advisors: ["Rabea Gleissner", "Nick Dyer"],
                               group_lead: "Jim Suchy",
-                              questions: ["first", "second"])
+                              questions: [1, 2])
 
     %Proposal{questions: [first_id, second_id]} = proposal
 

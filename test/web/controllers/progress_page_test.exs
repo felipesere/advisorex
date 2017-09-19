@@ -6,7 +6,7 @@ defmodule AdvisorWeb.ProgressPageTest do
   alias Advisor.Core.Questionnaire.Creator
   alias Advisor.Core.Questionnaire
 
-  @sample_questions ["first", "second"]
+  @sample_questions [1, 2]
 
   setup do
     proposal = Proposal.build(for: "Rabea Gleissner",
@@ -27,7 +27,7 @@ defmodule AdvisorWeb.ProgressPageTest do
     |> get(progress_page)
     |> html_response(200)
     |> has_requester("Rabea Gleissner")
-    |> has_advisors(["Chris Jordan", "Priya Patil"])
+    |> has_advisors(["Priya Patil", "Chris Jordan"])
   end
 
   test "shows that an advisors has completed the advice form", %{conn: conn,

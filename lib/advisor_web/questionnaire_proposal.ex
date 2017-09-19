@@ -1,4 +1,4 @@
-  # TODO: this needs to GO ASAP.
+  # FIXME: Maybe not...? Using it to do schema validation might bring life back to it
 
 defmodule AdvisorWeb.QuestionnaireProposal do
   import Ecto.Changeset
@@ -20,14 +20,22 @@ defmodule AdvisorWeb.QuestionnaireProposal do
              group_lead: lead_name,
              questions: phrases]) do
 
-    requester = People.find_by(name: requester_name).id
-    group_lead = People.group_lead(name: lead_name).id
-    advisors = People.find_by(names: advisors_names) |> Enum.map(&(&1.id))
+    requester = People.find_by(name: requester_name)
+    group_lead = People.group_lead(name: lead_name)
+    advisors = People.find_by(names: advisors_names)
+                          |> Enum.map(&(&1.id))
+                          |> Enum.map(fn(a) -> {Integer.to_string(a), "true"} end)
+                          |> Enum.into(%{})
+    questions = phrases
+                |> Enum.map(fn(a) -> {Integer.to_string(a), "true"} end)
+                |> Enum.into(%{})
 
-    %QuestionnaireProposal{group_lead: group_lead,
-                         requester: requester,
-                         advisors: advisors,
-                         questions: phrases}
+    proposal_form = %{"proposal" => %{
+      "group_lead" => Integer.to_string(group_lead.id),
+      "questions" => questions,
+      "advisors" => advisors
+    }}
+    for_requester(proposal_form, %{id: requester.id})
   end
 
   def for_requester(%{"proposal" => proposal}, %{id: requester}) do

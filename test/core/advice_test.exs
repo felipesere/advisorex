@@ -4,7 +4,7 @@ defmodule Advisor.Core.AdviceTest do
   alias Advisor.Core.Questionnaire.Creator
   alias AdvisorWeb.QuestionnaireProposal, as: Proposal
 
-  @phrases ["first", "second", "third"]
+  @phrases [1, 2, 3]
 
   # TODO: These tests look... aweful!
   test "can figure out if an advice has been answered fully" do

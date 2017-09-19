@@ -7,7 +7,7 @@ defmodule AdvisorWeb.DashboardPageTest do
   alias Advisor.Core.Answers
 
   @group_lead "Felipe Sere"
-  @questions ["first", "second"]
+  @questions [1, 2]
 
   def advice_for(person, advisors) do
       proposal = Proposal.build(for: person,

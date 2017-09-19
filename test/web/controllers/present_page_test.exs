@@ -2,11 +2,12 @@ defmodule AdvisorWeb.PresentPageTest do
   use AdvisorWeb.ConnCase
   import PageAssertions
 
+  alias Advisor.Core.Questionnaire
   alias AdvisorWeb.QuestionnaireProposal, as: Proposal
   alias AdvisorWeb.Links
   alias Advisor.Core.Questionnaire.Creator
 
-  @sample_questions ["one", "two"]
+  @sample_questions [1, 2]
 
   setup do
     proposal = Proposal.build(for: "Rabea Gleissner",
@@ -16,14 +17,16 @@ defmodule AdvisorWeb.PresentPageTest do
     [proposal: proposal]
   end
 
-  @tag :skip
   test "it displays all four answers to the questionnaire", %{conn: conn, proposal: proposal} do
-    %{questions: [first_id, second_id]} = proposal
-    {[%{link: cj}, %{link: priya}], _, present_link} = proposal
-                                                       |> Creator.create
+    questionnaire = {:ok, %{questionnaire: id}} = Creator.create(proposal)
+
+    {[%{link: cj}, %{link: priya}], _, present_link} = questionnaire
                                                        |> Links.generate
 
-    answers = ["#{first_id}": "something", "#{second_id}": "else"]
+    answers = id
+              |> Questionnaire.find()
+              |> Map.get(:question_ids)
+              |> Enum.map(fn(q) -> {q, "fooo"} end)
 
     conn
     |> ThroughTheWeb.login_as("Chris Jordan")
@@ -39,6 +42,6 @@ defmodule AdvisorWeb.PresentPageTest do
     |> html_response(200)
     |> has_title("Advice for Rabea Gleissner")
     |> has_feedback_questions(2)
-    |> has_answers(["something", "else"])
+    |> has_answers(["fooo", "fooo"])
   end
 end
