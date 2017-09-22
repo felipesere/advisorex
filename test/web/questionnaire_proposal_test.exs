@@ -9,7 +9,9 @@ defmodule AdvisorWeb.QuestionnaireProposalTest do
                          "questions" => %{"4" => "false", "13" => "true"}}}
 
   test "can extract group_lead from form data" do
-    proposal = QuestionnaireProposal.for_requester(@new, @user)
+    proposal = @new
+               |> QuestionnaireProposal.from_params()
+               |> QuestionnaireProposal.for_requester(@user)
 
     assert proposal.group_lead == 11
     assert proposal.advisors == [4, 5]

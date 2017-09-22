@@ -13,7 +13,7 @@ defmodule Advisor.Core.People do
 
   def find_by_id(id), do: find_by([id: id])
 
-  def find_by([names: names]) when is_list(names), do: Enum.map(names, &query_by_name/1)
+  def find_by([names: names]), do: Enum.map(names, &query_by_name/1)
   def find_by([name: name]), do: query_by_name(name)
   def find_by(%{advisor_id: id}), do: find_by(id: id)
   def find_by([email: email]), do: query_by_email(email)

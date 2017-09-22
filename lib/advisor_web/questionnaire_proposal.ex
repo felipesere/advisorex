@@ -14,17 +14,20 @@ defmodule AdvisorWeb.QuestionnaireProposal do
     field :advisors, {:map, :boolean}
   end
 
-  def for_requester(%{"proposal" => proposal}, %{id: requester}) do
+  def from_params(%{"proposal" => proposal}) do
     proposal
-    |> changeset(requester)
+    |> changeset()
     |> load_questions()
     |> filter_advisors()
   end
 
-  def changeset(params, id) do
+  def for_requester(proposal, %{id: requester}) do
+    %{proposal | requester: requester}
+  end
+
+  def changeset(params) do
     %QuestionnaireProposal{}
     |> cast(params, [:group_lead, :questions, :advisors])
-    |> put_change(:requester, id)
     |> apply_changes()
   end
 

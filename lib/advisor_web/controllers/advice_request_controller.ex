@@ -8,9 +8,10 @@ defmodule AdvisorWeb.AdviceRequestController do
 
   def create(conn, params) do
     {links, progress, _} = params
-                        |> QuestionnaireProposal.for_requester(found_in(conn))
-                        |> Creator.create
-                        |> Links.generate
+                           |> QuestionnaireProposal.from_params()
+                           |> QuestionnaireProposal.for_requester(found_in(conn))
+                           |> Creator.create
+                           |> Links.generate
 
     render conn, "links.html", links: links, progress_link: progress
   end

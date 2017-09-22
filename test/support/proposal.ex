@@ -1,5 +1,6 @@
 defmodule Advisor.Test.Support.Proposal do
   alias Advisor.Core.People
+  alias AdvisorWeb.QuestionnaireProposal
 
   def build([for: requester_name,
              advisors: advisors_names,
@@ -7,20 +8,50 @@ defmodule Advisor.Test.Support.Proposal do
              questions: phrases]) do
 
     requester = People.find_by(name: requester_name)
-    group_lead = People.group_lead(name: lead_name)
-    advisors = People.find_by(names: advisors_names)
+
+    proposal_form = basic()
+                    |> with_group_lead(lead_name)
+                    |> with_questions(phrases)
+                    |> with_advisors(advisors_names)
+
+    proposal_form
+    |> build(for: requester.id)
+  end
+
+  def build(params), do: build(params, for: 1)
+  def build(params, [for: id]) do
+    params
+    |> QuestionnaireProposal.from_params()
+    |> QuestionnaireProposal.for_requester(%{id: id})
+  end
+
+  def basic() do
+    %{
+      "proposal" => %{
+        "group_lead" => "1",
+        "questions" => as_html_form([1, 2]),
+        "advisors" => as_html_form([1, 2])
+      }
+    }
+  end
+
+  def with_group_lead(%{"proposal" => proposal}, lead_name) do
+    group_lead_id = People.group_lead(name: lead_name).id |> Integer.to_string()
+    %{"proposal" => %{proposal | "group_lead"  => group_lead_id}}
+  end
+
+  def with_advisors(%{"proposal" => proposal}, advisor_names) do
+    advisors = People.find_by(names: advisor_names)
                           |> Enum.map(&(&1.id))
                           |> as_html_form()
 
+    %{"proposal" => %{proposal | "advisors"  => advisors}}
+  end
+
+  def with_questions(%{"proposal" => proposal}, phrases) do
     questions = phrases |> as_html_form()
 
-    proposal_form = %{"proposal" => %{
-      "group_lead" => Integer.to_string(group_lead.id),
-      "questions" => questions,
-      "advisors" => advisors
-    }}
-
-    AdvisorWeb.QuestionnaireProposal.for_requester(proposal_form, %{id: requester.id})
+    %{"proposal" => %{proposal | "questions"  => questions}}
   end
 
   defp as_html_form(elements) do
