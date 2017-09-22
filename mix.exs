@@ -28,7 +28,7 @@ defmodule Advisor.Mixfile do
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
-  defp deps do
+  defp deps() do
     [
      {:apex, "~> 1.0"},
      {:bcrypt_elixir, "~> 0.12.1"},
@@ -50,7 +50,8 @@ defmodule Advisor.Mixfile do
       {:ex_unit_notifier, "~> 0.1.3", only: :test},
       {:excoveralls, "~> 0.7.1", only: :test},
       {:floki, "~> 0.18", only: :test},
-      {:mix_test_watch, "~> 0.4"}
+      {:mix_test_watch, "~> 0.4"},
+      {:dialyxir, "~> 0.5.1"}
     ]
   end
 
