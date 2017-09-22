@@ -15,13 +15,11 @@ defmodule Advisor.Core.Questions.PhrasesCatalog do
     |> extract()
   end
 
-  @spec path() :: string()
   defp path() do
     File.cwd!
     |> Path.join(@path)
     |> String.to_charlist()
   end
-
 
   defp read(file) do
     YamlElixir.read_from_file(file)
