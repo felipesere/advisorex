@@ -7,13 +7,10 @@ defmodule AdvisorWeb.PresentPageTest do
   alias AdvisorWeb.Links
   alias Advisor.Core.Questionnaire.Creator
 
-  @sample_questions [1, 2]
-
   setup do
-    proposal = Proposal.build(for: "Rabea Gleissner",
-                              advisors: ["Chris Jordan", "Priya Patil"],
-                              group_lead: "Felipe Sere",
-                              questions: @sample_questions)
+    proposal = Proposal.basic()
+               |> Proposal.build("Rabea Gleissner")
+
     [proposal: proposal]
   end
 

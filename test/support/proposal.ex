@@ -2,24 +2,13 @@ defmodule Advisor.Test.Support.Proposal do
   alias Advisor.Core.People
   alias AdvisorWeb.QuestionnaireProposal
 
-  def build([for: requester_name,
-             advisors: advisors_names,
-             group_lead: lead_name,
-             questions: phrases]) do
-
-    requester = People.find_by(name: requester_name)
-
-    proposal_form = basic()
-                    |> with_group_lead(lead_name)
-                    |> with_questions(phrases)
-                    |> with_advisors(advisors_names)
-
-    proposal_form
-    |> build(for: requester.id)
+  def build(params) do
+    build(params, 1)
   end
-
-  def build(params), do: build(params, for: 1)
-  def build(params, [for: id]) do
+  def build(params, name) when is_binary(name) do
+    build(params, People.find_by(name: name).id)
+  end
+  def build(params, id) do
     params
     |> QuestionnaireProposal.from_params()
     |> QuestionnaireProposal.for_requester(%{id: id})
@@ -30,7 +19,7 @@ defmodule Advisor.Test.Support.Proposal do
       "proposal" => %{
         "group_lead" => "1",
         "questions" => as_html_form([1, 2]),
-        "advisors" => as_html_form([1, 2])
+        "advisors"  => as_html_form([1, 2])
       }
     }
   end

@@ -6,10 +6,11 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
   import PageAssertions
 
   setup do
-    {links, progress, _} = create_questionnaire(for: "Rabea Gleissner",
-                                                advisors: ["Felipe Sere", "Chris Jordan"],
-                                                group_lead: "Jim Suchy",
-                                                questions: [1, 2])
+    {links, progress, _} = Proposal.basic()
+                           |> Proposal.with_advisors(["Felipe Sere", "Chris Jordan"])
+                           |> Proposal.build("Rabea Gleissner")
+                           |> Creator.create
+                           |> Links.generate
 
     [links: links, progress: progress]
   end
@@ -43,13 +44,6 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
     |> post(link)
     |> html_response(200)
     |> has_header("Thank you!")
-  end
-
-  def create_questionnaire(opts) do
-    opts
-    |> Proposal.build
-    |> Creator.create
-    |> Links.generate
   end
 
   def advisory_for(links, name) do

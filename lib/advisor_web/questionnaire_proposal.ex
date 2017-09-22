@@ -2,7 +2,6 @@
 defmodule AdvisorWeb.QuestionnaireProposal do
   import Ecto.Changeset
   use Ecto.Schema
-  alias Advisor.Core.People
   alias Advisor.Core.Questions
   alias Advisor.Core.Questions.PhrasesCatalog
   alias __MODULE__

@@ -26,10 +26,13 @@ defmodule Advisor.Core.AdviceTest do
   end
 
   def advised_by(person, questions) do
-    {:ok, %{advisories: [individual]}} = Proposal.build(for: "Felipe Sere",
-                                                       advisors: [person],
-                                                       group_lead: "Jim Suchy",
-                                                       questions: questions) |> Creator.create
+    proposal = Proposal.basic()
+               |> Proposal.with_advisors([person])
+               |> Proposal.with_questions(questions)
+               |> Proposal.build()
+
+
+    {:ok, %{advisories: [individual]}} = proposal |> Creator.create
     individual
   end
 end

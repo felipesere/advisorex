@@ -8,10 +8,8 @@ defmodule AdvisorWeb.QuestionnaireControllerTest do
   alias Advisor.Core.{Answers, Advice}
 
   test "will delete an entire questionnaire", %{conn: conn} do
-    proposal = Proposal.build(for: "Felipe Sere",
-                              advisors: ["Rabea Gleissner", "Nick Dyer"],
-                              group_lead: "Jim Suchy",
-                              questions: [1, 2])
+    proposal = Proposal.basic()
+               |> Proposal.build()
 
     %QuestionnaireProposal{questions: [first_id, second_id]} = proposal
 

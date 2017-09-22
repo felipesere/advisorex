@@ -6,10 +6,8 @@ defmodule AdvisorWeb.DownloadSummaryControllerTest do
   alias Advisor.Core.Questionnaire.Creator
 
   setup do
-    proposal = Proposal.build(for: "Rabea Gleissner",
-                              advisors: ["Chris Jordan", "Priya Patil"],
-                              group_lead: "Felipe Sere",
-                              questions: [1, 2])
+    proposal = Proposal.basic()
+               |> Proposal.build("Rabea Gleissner")
 
     %{questions: questions} = proposal
 

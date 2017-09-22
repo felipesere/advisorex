@@ -7,13 +7,13 @@ defmodule AdvisorWeb.DashboardPageTest do
   alias Advisor.Core.Answers
 
   @group_lead "Felipe Sere"
-  @questions [1, 2]
 
   def advice_for(person, advisors) do
-      proposal = Proposal.build(for: person,
-                     advisors: advisors,
-                     group_lead: @group_lead,
-                     questions: @questions)
+    proposal = Proposal.basic()
+               |> Proposal.with_advisors(advisors)
+               |> Proposal.with_group_lead(@group_lead)
+               |> Proposal.build(person)
+
     %{questions: questions} = proposal
     {:ok, questionnaire} = Creator.create(proposal)
 

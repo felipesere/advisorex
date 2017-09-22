@@ -6,13 +6,11 @@ defmodule AdvisorWeb.ProgressPageTest do
   alias Advisor.Core.Questionnaire.Creator
   alias Advisor.Core.Questionnaire
 
-  @sample_questions [1, 2]
-
   setup do
-    proposal = Proposal.build(for: "Rabea Gleissner",
-                              advisors: ["Chris Jordan", "Priya Patil"],
-                              group_lead: "Felipe Sere",
-                              questions: @sample_questions)
+    proposal = Proposal.basic()
+               |> Proposal.with_advisors(["Chris Jordan", "Priya Patil"])
+               |> Proposal.build("Rabea Gleissner")
+
     [proposal: proposal]
   end
 
