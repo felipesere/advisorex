@@ -9,12 +9,22 @@ defmodule Advisor.Core.Questions.PhrasesCatalog do
     |> Enum.filter(fn(%Phrase{id: id}) -> id in ids end)
   end
 
-  # TODO Consider moving the entire loading, path joining shenaningsn out of here
   def all() do
+    path()
+    |> read()
+    |> extract()
+  end
+
+  @spec path() :: string()
+  defp path() do
     File.cwd!
     |> Path.join(@path)
-    |> YamlElixir.read_from_file()
-    |> extract()
+    |> String.to_charlist()
+  end
+
+
+  defp read(file) do
+    YamlElixir.read_from_file(file)
   end
 
   defp extract(yaml) do
