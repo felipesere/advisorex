@@ -1,7 +1,8 @@
 defmodule AdvisorWeb.QuestionnaireControllerTest do
   use AdvisorWeb.ConnCase
 
-  alias AdvisorWeb.QuestionnaireProposal, as: Proposal
+  alias Advisor.Test.Support.Proposal
+  alias AdvisorWeb.QuestionnaireProposal
   alias Advisor.Core.Questionnaire.Creator
   alias Advisor.Core.Questionnaire
   alias Advisor.Core.{Answers, Advice}
@@ -12,7 +13,7 @@ defmodule AdvisorWeb.QuestionnaireControllerTest do
                               group_lead: "Jim Suchy",
                               questions: [1, 2])
 
-    %Proposal{questions: [first_id, second_id]} = proposal
+    %QuestionnaireProposal{questions: [first_id, second_id]} = proposal
 
     {:ok, %{questionnaire: id, advisories: advisories}} = Creator.create(proposal)
 

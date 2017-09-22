@@ -3,7 +3,7 @@ defmodule AdvisorWeb.PresentPageTest do
   import PageAssertions
 
   alias Advisor.Core.Questionnaire
-  alias AdvisorWeb.QuestionnaireProposal, as: Proposal
+  alias Advisor.Test.Support.Proposal
   alias AdvisorWeb.Links
   alias Advisor.Core.Questionnaire.Creator
 

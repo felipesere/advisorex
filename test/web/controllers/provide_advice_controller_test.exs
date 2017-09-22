@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.ProvideAdviceControllerTest do
   use AdvisorWeb.ConnCase
-  alias AdvisorWeb.QuestionnaireProposal, as: Proposal
+  alias Advisor.Test.Support.Proposal
   alias AdvisorWeb.Links
   alias Advisor.Core.Questionnaire.Creator
   import PageAssertions

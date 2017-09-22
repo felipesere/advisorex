@@ -1,8 +1,9 @@
 defmodule Advisor.Core.AdviceTest do
+  alias Advisor.Test.Support.Proposal
+
   use Advisor.DataCase
   alias Advisor.Core.Advice
   alias Advisor.Core.Questionnaire.Creator
-  alias AdvisorWeb.QuestionnaireProposal, as: Proposal
 
   @phrases [1, 2, 3]
 

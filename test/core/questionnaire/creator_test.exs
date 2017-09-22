@@ -3,6 +3,7 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
   alias Advisor.Core.Questionnaire.Creator
   alias AdvisorWeb.QuestionnaireProposal
 
+  # TODO: This shoudl be using the Support.Proposal as a builder
   test "creates a simple questionnaire" do
     phrases = ["first question", "second question"]
     proposal = %QuestionnaireProposal{group_lead: 1,

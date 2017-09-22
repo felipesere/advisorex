@@ -1,5 +1,4 @@
   # FIXME: Maybe not...? Using it to do schema validation might bring life back to it
-
 defmodule AdvisorWeb.QuestionnaireProposal do
   import Ecto.Changeset
   use Ecto.Schema
@@ -13,29 +12,6 @@ defmodule AdvisorWeb.QuestionnaireProposal do
     field :requester, :integer
     field :questions, {:map, :boolean}
     field :advisors, {:map, :boolean}
-  end
-
-  def build([for: requester_name,
-             advisors: advisors_names,
-             group_lead: lead_name,
-             questions: phrases]) do
-
-    requester = People.find_by(name: requester_name)
-    group_lead = People.group_lead(name: lead_name)
-    advisors = People.find_by(names: advisors_names)
-                          |> Enum.map(&(&1.id))
-                          |> Enum.map(fn(a) -> {Integer.to_string(a), "true"} end)
-                          |> Enum.into(%{})
-    questions = phrases
-                |> Enum.map(fn(a) -> {Integer.to_string(a), "true"} end)
-                |> Enum.into(%{})
-
-    proposal_form = %{"proposal" => %{
-      "group_lead" => Integer.to_string(group_lead.id),
-      "questions" => questions,
-      "advisors" => advisors
-    }}
-    for_requester(proposal_form, %{id: requester.id})
   end
 
   def for_requester(%{"proposal" => proposal}, %{id: requester}) do
