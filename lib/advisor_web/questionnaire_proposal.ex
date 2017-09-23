@@ -1,4 +1,3 @@
-  # FIXME: Maybe not...? Using it to do schema validation might bring life back to it
 defmodule AdvisorWeb.QuestionnaireProposal do
   import Ecto.Changeset
   use Ecto.Schema

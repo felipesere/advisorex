@@ -1,5 +1,8 @@
 defmodule Advisor.Core.Questions.PhrasesCatalog do
-  alias Advisor.Core.Questions.Phrase
+
+  defmodule Phrase do
+    defstruct [:phrase, :kind, :id]
+  end
 
   @path "lib/advisor/core/questions/questions.yml"
 
