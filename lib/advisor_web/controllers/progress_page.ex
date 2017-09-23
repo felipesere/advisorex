@@ -4,24 +4,23 @@ defmodule AdvisorWeb.ProgressPage do
 
   plug  AdvisorWeb.Authentication.Gatekeeper, only: :group_leads
 
-  # TODO: This bit here is attrociously long...
   def index(conn, %{"id" => id}) do
-    advisories = Advice.find_all(id)
     questionnaire = Questionnaire.find(id)
-    requester = People.requester(questionnaire)
 
-    number_of_answers = length(questionnaire.question_ids)
-    who_is_done = advisories
-                  |> Enum.group_by(&(Advice.completed?(&1, number_of_answers)),
-                                                       &People.advisor/1)
+    who_is_done = group_by_completion(questionnaire)
 
-    completed = Map.get(who_is_done, true, [])
+    completed  = Map.get(who_is_done, true, [])
     incomplete = Map.get(who_is_done, false, [])
 
-    render conn, "index.html", requester: requester,
+    render conn, "index.html", requester: People.requester(questionnaire),
                                completed: completed,
                                incomplete: incomplete,
                                all_complete:  incomplete == [],
                                questionnaire: questionnaire
+  end
+
+  defp  group_by_completion(%Questionnaire{advice: advice, question_ids: question_ids}) do
+    advice
+    |> Enum.group_by(&(Advice.completed?(&1, question_ids)), &People.advisor/1)
   end
 end
