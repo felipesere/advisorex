@@ -4,6 +4,7 @@ defmodule Advisor.Core.Question do
   alias Advisor.Repo
   alias __MODULE__
 
+  @type t :: %__MODULE__{id: String.t, phrase: String.t}
   @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "questions" do

@@ -6,7 +6,7 @@ defmodule AdvisorWeb.LoginController do
   plug AdvisorWeb.Authentication.Gatekeeper, redirect: false
 
   def index(conn, params) do
-    login(conn, params, redirect_to: destination(conn, params))
+    login(params, conn, redirect_to: destination(conn, params))
   end
 
   def destination(conn, params) do
@@ -17,18 +17,19 @@ defmodule AdvisorWeb.LoginController do
     end
   end
 
-  def login(conn, %{"email" => email, "password" => password}, destination) do
-    user = User.logged_in_with(email, password)
-    proceed(conn, user, destination)
+  def login(%{"email" => email, "password" => password}, conn, destination) do
+    User.logged_in_with(email, password)
+    |> proceed(conn, destination)
   end
 
-  def login(conn, _, destination) do
-    user = User.of(conn)
-    proceed(conn, user, destination)
+  def login(_, conn, destination) do
+    conn
+    |> User.extract()
+    |> proceed(conn, destination)
   end
 
-  def proceed(conn, nil, _), do: redirect(conn, to: "/")
-  def proceed(conn, %{id: id}, [redirect_to: destination]) do
+  def proceed(nil, conn , _), do: redirect(conn, to: "/")
+  def proceed(%{id: id}, conn, [redirect_to: destination]) do
     conn
     |> put_resp_cookie("user", "#{id}")
     |> put_resp_cookie("target", "deleted")
