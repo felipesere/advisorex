@@ -43,6 +43,9 @@ defmodule Advisor.Core.Questionnaire do
     Repo.one(questionnaire() |> where([q], q.requester_id == ^person))
   end
 
+  def find(%{questionnaire_id: id}) do
+    Repo.one(questionnaire() |> where([q], q.id == ^id))
+  end
   def find(id) do
     Repo.one(questionnaire() |> where([q], q.id == ^id))
   end

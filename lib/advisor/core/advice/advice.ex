@@ -42,6 +42,10 @@ defmodule Advisor.Core.Advice do
     Repo.one(advice() |> where([a], a.advisor_id == ^advisor and a.requester_id == ^requester.id))
   end
 
+  def from_advisor(advisor) do
+    Repo.all(advice() |> where([a], a.advisor_id == ^advisor))
+  end
+
   def ids(advisories) do
     Enum.map(advisories, &(&1.id))
   end
