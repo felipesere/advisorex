@@ -1,48 +1,19 @@
 defmodule Advisor.Core.Dashboard do
-  alias Advisor.Core.{People, Questionnaire, Advice}
-  alias Advisor.Core.Dashboard.GroupLeadSection
+  alias Advisor.Core.Dashboard.{GroupLeadSection, RequiredAdviceSection, AdviceForMeSection}
 
   defstruct [:group_lead_section, :required_advice_section, :personal_advice_section]
 
   def for_user(viewer) do
     %__MODULE__{
-      group_lead_section: GroupLeadSection.group_lead_section(viewer)
+      group_lead_section: GroupLeadSection.group_lead_section(viewer),
+      required_advice_section: RequiredAdviceSection.required_advice_section(viewer),
+      personal_advice_section: AdviceForMeSection.advice_for_me_section(viewer)
     }
   end
 
   def group_lead_section(viewer), do: GroupLeadSection.group_lead_section(viewer)
 
-  # TODO: this anonymous map function looks massive!
-  def required_advice_section(%{id: advisor}) do
-    advisor
-    |> Advice.from_advisor()
-    |> Enum.map(fn(advice) ->
-      questionnaire = Questionnaire.find(advice)
-      requester = People.requester(questionnaire)
-      completed = Advice.completed?(advice, questionnaire.question_ids) # temp...
-      %{requester:  requester, advice: advice, completed:  completed}
-    end)
-    |> Enum.reject(fn(%{completed: completed}) -> completed end)
-  end
+  def required_advice_section(advisor), do: RequiredAdviceSection.required_advice_section(advisor)
 
-  # TODO: Can I turn this into its own little struct?
-  def advice_for_me_section(%{id: person}) do
-    case Questionnaire.with_requester(person) do
-      nil -> :nothing
-      questionnaire -> section_for(questionnaire)
-    end
-  end
-
-  # TODO: Can I turn this into its own little struct?
-  defp section_for(questionnaire) do
-    questionnaire.advice
-    |> Enum.map(&(people_and_completeness(&1, questionnaire)))
-  end
-
-  def people_and_completeness(advice, %{question_ids: questions}) do
-    %{
-      advisor:   People.advisor(advice),
-      completed: Advice.completed?(advice, questions)
-    }
-  end
+  def advice_for_me_section(person), do: AdviceForMeSection.advice_for_me_section(person)
 end

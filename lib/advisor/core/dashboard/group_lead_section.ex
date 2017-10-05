@@ -1,6 +1,5 @@
 defmodule Advisor.Core.Dashboard.GroupLeadSection do
-  alias Advisor.Core.{People, Questionnaire, Advice}
-  alias Advisor.Core.Person
+  alias Advisor.Core.{Person, People, Questionnaire, Advice}
 
   defstruct groups: []
 
