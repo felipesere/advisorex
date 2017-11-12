@@ -1,3 +1,4 @@
-<%= render "_login_buttons.html" %>
+<a href="/request" class="button primary">Ask for advice</a>
+<a href="/dashboard" class="button primary">Go to your Dashboard</a>
 
 <a href="/logout" class="button primary full logout">Log out</a>

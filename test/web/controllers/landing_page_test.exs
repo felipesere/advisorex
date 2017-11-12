@@ -22,7 +22,7 @@ defmodule AdvisorWeb.LandingPageTest do
     |> get("/")
     |> html_response(200)
     |> has_title("Hello Felipe Sere!")
-    |> has_submit_buttons(["Ask for advice", "Go to your Dashboard"])
+    |> has_links(["Ask for advice", "Go to your Dashboard"])
     |> has_no_login()
   end
 
