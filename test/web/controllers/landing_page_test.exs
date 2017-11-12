@@ -37,8 +37,7 @@ defmodule AdvisorWeb.LandingPageTest do
   test "When the user is bounced back to the login page, that is all they can do"
 
   def has_no_login(html) do
-    assert html |> Floki.find("input[type=password]") == []
-    assert html |> Floki.find("input[type=email]") == []
+    assert html |> Floki.find(".login") == []
     html
   end
 
