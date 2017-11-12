@@ -2,6 +2,16 @@ defmodule Advisor.Core.People do
   alias Advisor.Repo
   alias Advisor.Core.Person
   import Ecto.Query
+  import Ecto.Changeset
+
+  def create(data) do
+    %Person{}
+    |> cast(data, [:name, :email])
+    |> validate_format(:email, ~r/@/)
+    |> unique_constraint(:email)
+    |> Repo.insert()
+  end
+
 
   def everybody_but(user) do
     Enum.filter(everybody(), fn(person) -> person.email !=  user.email end)

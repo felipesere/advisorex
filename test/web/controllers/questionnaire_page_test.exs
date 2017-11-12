@@ -13,7 +13,7 @@ defmodule AdvisorWeb.RequestPageTest do
 
   test "sees the page to create a questionnaire", %{conn: conn} do
     conn = conn
-           |> put_req_cookie("user", "11")
+           |> ThroughTheWeb.login_as("Felipe Sere")
            |> get("/request")
 
     response = html_response(conn, 200)

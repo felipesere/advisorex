@@ -3,6 +3,12 @@ defmodule PageAssertions do
   import PageQueries
   import ExUnit.Assertions
 
+  def has_link_to(html, value) do
+    links = html |> Floki.find("a") |> Enum.map(&Floki.text/1)
+    assert value in links
+    html
+  end
+
   def has_title(html, expected_title) do
     assert html |> Floki.find("h1") |> Floki.text() == expected_title
     html

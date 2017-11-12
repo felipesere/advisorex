@@ -1,4 +1,0 @@
-<%= render "_email_login.html" %>
-
-<input type="hidden" name="target" value="<%= @redirect_to %>">
-<button type="submit" class="button primary" name="submit" value="redirect"  >Login</button>
