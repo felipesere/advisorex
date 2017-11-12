@@ -9,7 +9,7 @@ defmodule Advisor.Core.People do
     |> cast(data, [:name, :email])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
-    |> Repo.insert()
+    |> Repo.insert!()
   end
 
 
