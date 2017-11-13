@@ -402,17 +402,12 @@ li {
 
 /* ======== LANDING PAGE ==============*/
 
-.login-form > form {
+.login-buttons {
   width: 200px;
   margin: 10px auto;
 }
 
-.login-form > form > input {
-  width: 100%;
-  padding: 5px;
-}
-
-.login-form > form > button {
+.login-buttons .button {
   width: 100%;
 }
 

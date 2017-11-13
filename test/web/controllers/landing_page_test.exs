@@ -8,7 +8,7 @@ defmodule AdvisorWeb.LandingPageTest do
 
     response
     |> has_title("Advisor")
-    |> has_submit_buttons(["Ask for advice", "Go to your Dashboard"])
+    |> has_link_to("Login with Google")
   end
 
   def has_submit_buttons(html, buttons) do
@@ -22,7 +22,7 @@ defmodule AdvisorWeb.LandingPageTest do
     |> get("/")
     |> html_response(200)
     |> has_title("Hello Felipe Sere!")
-    |> has_submit_buttons(["Ask for advice", "Go to your Dashboard"])
+    |> has_links(["Ask for advice", "Go to your Dashboard"])
     |> has_no_login()
   end
 
@@ -34,18 +34,8 @@ defmodule AdvisorWeb.LandingPageTest do
     |> has_logout_button()
   end
 
-  test "When the user is bounced back to the login page, that is all they can do", %{conn: conn} do
-    conn
-    |> ThroughTheWeb.login_as("Felipe Sere")
-    |> ThroughTheWeb.tried_to_access("/flubber")
-    |> get("/")
-    |> html_response(200)
-    |> has_submit_buttons(["Login"])
-  end
-
   def has_no_login(html) do
-    assert html |> Floki.find("input[type=password]") == []
-    assert html |> Floki.find("input[type=email]") == []
+    assert html |> Floki.find(".login") == []
     html
   end
 

@@ -2,11 +2,12 @@ defmodule AdvisorWeb.Authentication.GatekeeprTest do
   use AdvisorWeb.ConnCase
   alias AdvisorWeb.Authentication.Gatekeeper
   alias Advisor.Core.{Person, People}
+  alias Plug.Test, as: PlugSupport
 
   @default_opts Gatekeeper.init([])
 
   test "halts the request if not user_id found in session" do
-    conn = build_conn() |> Gatekeeper.call(@default_opts)
+    conn = get("/") |> Gatekeeper.call(@default_opts)
 
     assert conn.status == 302
   end
@@ -15,9 +16,9 @@ defmodule AdvisorWeb.Authentication.GatekeeprTest do
     conn = "/foo"
            |> get()
            |> Gatekeeper.call(@default_opts)
-           |> fetch_cookies()
+           |> fetch_session()
 
-    assert conn.cookies["target"] == "/foo"
+    assert get_session(conn, :target) == "/foo"
   end
 
   test "loads the user if it available" do
@@ -51,11 +52,12 @@ defmodule AdvisorWeb.Authentication.GatekeeprTest do
   defp with_user(conn, [name: name]) do
     case People.find_by(name: name) do
       nil -> raise "Could not finder user #{name}"
-      %{id: id} -> put_req_cookie(conn, "user", Integer.to_string(id))
+      %{id: id} -> PlugSupport.init_test_session(conn, %{"user" => Integer.to_string(id)})
     end
   end
 
   defp get(path) do
     build_conn(:get, path, [])
+    |> PlugSupport.init_test_session(%{})
   end
 end

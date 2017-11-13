@@ -13,8 +13,7 @@ defmodule AdvisorWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", LandingPage, :index
-    post "/begin", LoginController, :index
-    get "/logout", LoginController, :logout
+    get "/logout", AuthenticationController, :logout
 
     get "/request", QuestionnairePage, :index
     post "/request", AdviceRequestController, :create
@@ -29,5 +28,17 @@ defmodule AdvisorWeb.Router do
     get "/questionnaire/:id/delete", QuestionnaireController, :delete
 
     get "/healthcheck", HealthcheckController, :index
+
+  end
+
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
+
+  scope "/auth/", AdvisorWeb do
+    pipe_through :api
+    # I want custom request and callback urls!
+    get "/login", AuthenticationController, :login
+    get "/callback", AuthenticationController, :callback
   end
 end

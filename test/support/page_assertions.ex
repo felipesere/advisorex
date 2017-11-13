@@ -3,6 +3,18 @@ defmodule PageAssertions do
   import PageQueries
   import ExUnit.Assertions
 
+  def has_link_to(html, value) do
+    links = html |> Floki.find("a") |> Enum.map(&Floki.text/1)
+    assert value in links
+    html
+  end
+
+  def has_links(html, values) do
+    links = html |> Floki.find("a") |> Enum.map(&Floki.text/1) 
+    Enum.each(values, fn(value) -> assert value in links end)
+    html
+  end
+
   def has_title(html, expected_title) do
     assert html |> Floki.find("h1") |> Floki.text() == expected_title
     html
@@ -17,7 +29,7 @@ defmodule PageAssertions do
     html
     |> Floki.find(".feedback-answer > blockquote")
     |> Enum.map(&Floki.text/1)
-    |> Enum.each(&(assert Enum.member?(answers_to_look_for, &1)))
+    |> Enum.each(fn(answer) -> assert answer in answers_to_look_for end)
     html
   end
 

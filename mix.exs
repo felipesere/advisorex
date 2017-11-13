@@ -20,7 +20,7 @@ defmodule Advisor.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Advisor.Application, []},
-     extra_applications: [:logger, :runtime_tools, :comeonin]]
+     extra_applications: [:logger, :runtime_tools, :comeonin, :ueberauth, :ueberauth_google]]
   end
 
   # Specifies which paths to compile per environment.
@@ -42,7 +42,9 @@ defmodule Advisor.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:postgrex, ">= 0.0.0"},
-     {:yaml_elixir, "~> 1.3"}
+     {:yaml_elixir, "~> 1.3"},
+     {:ueberauth_google, "~> 0.6.0"},
+     {:guardian, "~> 0.14.5"}
     ] ++ test_deps()
   end
 
@@ -57,12 +59,6 @@ defmodule Advisor.Mixfile do
     ]
   end
 
-  # Aliases are shortcuts or tasks specific to the current project.
-  # For example, to create, migrate and run the seeds file at once:
-  #
-  #     $ mix ecto.setup
-  #
-  # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],

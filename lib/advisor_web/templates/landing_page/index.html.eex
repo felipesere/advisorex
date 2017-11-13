@@ -4,13 +4,7 @@
     <p>Let's help someone on the path to mastery today.</p>
   </header>
 
-  <div class="login-form">
-    <form action="/begin" method="post">
-
-      <%= login_form_for(@logged_in, @redirect_to) %>
-
-      <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
-    </form>
-
+  <div class="login-buttons">
+    <%= login_form_for(@logged_in) %>
   </div>
 </section>

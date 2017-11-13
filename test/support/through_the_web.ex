@@ -12,10 +12,8 @@ defmodule ThroughTheWeb do
 
   def login_as(conn, name) when is_binary(name) do
     person = Advisor.Core.People.find_by(name: name)
-    assign(conn, :user_id, person.id)
-  end
 
-  def tried_to_access(conn, target) do
-    put_req_cookie(conn, "target", target)
+    conn
+    |> assign(:user_id, person.id)
   end
 end
