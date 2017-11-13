@@ -10,6 +10,7 @@ defmodule AdvisorWeb.QuestionnaireProposal do
     field :requester, :integer
     field :questions, {:map, :boolean}
     field :advisors, {:map, :boolean}
+    field :message, :string
   end
 
   def from_params(%{"proposal" => proposal}) do
@@ -25,7 +26,7 @@ defmodule AdvisorWeb.QuestionnaireProposal do
 
   def changeset(params) do
     %QuestionnaireProposal{}
-    |> cast(params, [:group_lead, :questions, :advisors])
+    |> cast(params, [:group_lead, :questions, :advisors, :message])
     |> apply_changes()
   end
 

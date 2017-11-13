@@ -11,6 +11,7 @@ defmodule Advisor.Core.Questionnaire do
     field :question_ids, {:array, :binary}
     field :requester_id, :integer
     field :group_lead, :integer
+    field :message, :string
     has_many :advice, Advisor.Core.Advice,
       foreign_key: :questionnaire_id,
       on_delete: :delete_all

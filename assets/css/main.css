@@ -21,7 +21,7 @@ h1 {
 
 /* ==== BUTTONS ===== */
 
-button:focus {outline:0;}
+.button:focus {outline:0;}
 
 .button.full {
   width: 100%;
@@ -87,6 +87,7 @@ p.center {
   color: white;
   text-decoration: none;
 }
+
 
 /* ==== LAYOUT ==== */
 
@@ -282,6 +283,12 @@ li {
   list-style-type: none;
 }
 
+textarea.context-of-advice {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+}
+
 /* ==== PROVIDE ==== */
 
 .feedback-questions {
@@ -296,7 +303,7 @@ li {
   padding: 15px;
 }
 
-.feedback-question textarea {
+textarea {
   width: 100%;
   outline: none;
   resize: none;

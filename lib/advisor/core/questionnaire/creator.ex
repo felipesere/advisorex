@@ -6,12 +6,15 @@ defmodule Advisor.Core.Questionnaire.Creator do
   def create(%{questions: phrases,
                requester: requester,
                advisors: advisors,
-               group_lead: group_lead}) do
+               group_lead: group_lead} = proposal) do
+
+    message = Map.get(proposal, :message)
 
     question_ids = Questions.store(phrases)
     {:ok, questionnaire} = Repo.insert(%Questionnaire{question_ids: question_ids,
                                                       requester_id: requester,
-                                                      group_lead: group_lead})
+                                                      group_lead: group_lead,
+                                                      message: message })
 
     # TODO: Why is't this a proper struct?
     advice_requests = Enum.map(advisors, fn(advisor) ->

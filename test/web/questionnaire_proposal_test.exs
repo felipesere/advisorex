@@ -6,7 +6,8 @@ defmodule AdvisorWeb.QuestionnaireProposalTest do
 
   @new %{"proposal" => %{"advisors" => %{"1" => "false", "4" => "true", "5" => "true"},
                          "group_lead" => "11",
-                         "questions" => %{"4" => "false", "13" => "true"}}}
+                         "questions" => %{"4" => "false", "13" => "true"},
+                         "message" => "Bla bla bla"}}
 
   test "can extract group_lead from form data" do
     proposal = @new
@@ -17,5 +18,6 @@ defmodule AdvisorWeb.QuestionnaireProposalTest do
     assert proposal.advisors == [4, 5]
     assert proposal.questions == ["Is this person the technical lead for stories?"]
     assert proposal.requester == 1
+    assert proposal.message == "Bla bla bla"
   end
 end
