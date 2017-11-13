@@ -34,8 +34,6 @@ defmodule AdvisorWeb.LandingPageTest do
     |> has_logout_button()
   end
 
-  test "When the user is bounced back to the login page, that is all they can do"
-
   def has_no_login(html) do
     assert html |> Floki.find(".login") == []
     html
