@@ -16,9 +16,4 @@ defmodule ThroughTheWeb do
     conn
     |> assign(:user_id, person.id)
   end
-
-  def tried_to_access(conn, target) do
-    conn
-    |> put_session(:target, target)
-  end
 end

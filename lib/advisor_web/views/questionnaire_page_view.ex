@@ -3,14 +3,22 @@ defmodule AdvisorWeb.QuestionnairePageView do
 
   def image_url(person) do
     if person.profile_image == "" do
-      "https://secure.gravatar.com/avatar/#{hash_email(person.email)}?s=250"
+      gravatar_url(person.email)
     else
       person.profile_image
     end
   end
 
+  defp gravatar_url(email) do
+    "https://secure.gravatar.com/avatar/#{hash_email(email)}?s=250"
+  end
+
   defp hash_email(email) do
-    :crypto.hash(:md5, String.downcase(email))
+    email
+    |> String.downcase()
+    |> md5()
     |> Base.encode16(case: :lower)
   end
+
+  def md5(value), do: :crypto.hash(:md5, value)
 end

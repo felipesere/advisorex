@@ -1,14 +1,13 @@
 defmodule AdvisorWeb.ProvideAdviceController do
   use AdvisorWeb, :controller
   alias Advisor.Core.{People, Questions, Questionnaire, Answers, Advice}
-
-  import AdvisorWeb.Authentication.User, only: [found_in: 1]
+  alias AdvisorWeb.Authentication.User
 
   plug  AdvisorWeb.Authentication.Gatekeeper
 
   # TODO: This is long and by the way... did you notice the sneaky if/else?
   def index(conn, %{"id" => id}) do
-    advice = Advice.find(id, from_advisor: found_in(conn))
+    advice = Advice.find(id, from_advisor: User.found_in(conn))
 
     if advice do
       questions = advice.questionnaire_id
