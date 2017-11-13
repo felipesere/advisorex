@@ -2,9 +2,10 @@ defmodule Local.Strategy do
   use Ueberauth.Strategy
 
   alias Ueberauth.Auth.Info
+  alias Ueberauth.Strategy.Helpers
 
   def handle_request!(conn) do
-    redirect!(conn, Ueberauth.Strategy.Helpers.callback_path(conn))
+    redirect!(conn, Helpers.callback_path(conn))
   end
 
   def info(_conn) do

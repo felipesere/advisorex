@@ -1,3 +1,5 @@
 defmodule AdvisorWeb.Redirect do
-  def target(conn), do: Plug.Conn.get_session(conn, :target)
+  alias Plug.Conn
+
+  def target(conn), do: Conn.get_session(conn, :target)
 end

@@ -2,6 +2,7 @@ defmodule AdvisorWeb.Authentication.GatekeeprTest do
   use AdvisorWeb.ConnCase
   alias AdvisorWeb.Authentication.Gatekeeper
   alias Advisor.Core.{Person, People}
+  alias Plug.Test, as: PlugSupport
 
   @default_opts Gatekeeper.init([])
 
@@ -51,12 +52,12 @@ defmodule AdvisorWeb.Authentication.GatekeeprTest do
   defp with_user(conn, [name: name]) do
     case People.find_by(name: name) do
       nil -> raise "Could not finder user #{name}"
-      %{id: id} -> Plug.Test.init_test_session(conn, %{"user" => Integer.to_string(id)})
+      %{id: id} -> PlugSupport.init_test_session(conn, %{"user" => Integer.to_string(id)})
     end
   end
 
   defp get(path) do
     build_conn(:get, path, [])
-    |> Plug.Test.init_test_session(%{})
+    |> PlugSupport.init_test_session(%{})
   end
 end
