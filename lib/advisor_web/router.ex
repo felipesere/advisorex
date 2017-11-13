@@ -38,7 +38,7 @@ defmodule AdvisorWeb.Router do
   scope "/auth/", AdvisorWeb do
     pipe_through :api
     # I want custom request and callback urls!
-    get "/:provider", AuthenticationController, :login
-    get "/:provider/callback", AuthenticationController, :callback
+    get "/login", AuthenticationController, :login
+    get "/callback", AuthenticationController, :callback
   end
 end

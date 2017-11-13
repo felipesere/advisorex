@@ -7,8 +7,4 @@ defmodule AdvisorWeb.LandingPageView do
   def login_form_for(true) do
     render "_logged_in.html"
   end
-
-  def auth_url() do
-    "/auth/google"
-  end
 end
