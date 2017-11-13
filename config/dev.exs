@@ -39,3 +39,10 @@ config :advisor, AdvisorWeb.Authentication.Password,
   checker: AdvisorWeb.Authentication.Password.SimplePassword,
   password: "secret"
 
+
+config :ueberauth, Ueberauth,
+  base_path: "/auth",
+  providers: [
+    google: {Local.Strategy, [request_path: "/auth/login",
+                              callback_path: "/auth/callback"]}
+    ]
