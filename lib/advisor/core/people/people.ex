@@ -12,7 +12,6 @@ defmodule Advisor.Core.People do
     |> Repo.insert!()
   end
 
-
   def everybody_but(user) do
     Enum.filter(everybody(), fn(person) -> person.email !=  user.email end)
   end

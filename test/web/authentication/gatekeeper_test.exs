@@ -17,7 +17,7 @@ defmodule AdvisorWeb.Authentication.GatekeeprTest do
            |> Gatekeeper.call(@default_opts)
            |> fetch_session()
 
-    assert get_session(conn,:target) == "/foo"
+    assert get_session(conn, :target) == "/foo"
   end
 
   test "loads the user if it available" do
