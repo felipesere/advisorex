@@ -6,7 +6,7 @@
 
     <%= if @message do %>
       <div class="message-area">
-        <p>A little note from Ron Swanson:</p>
+        <p>A little note from <%= @requester.name %>:</p>
         <blockquote class="message">
           <%= @message %>
         </blockquote>
