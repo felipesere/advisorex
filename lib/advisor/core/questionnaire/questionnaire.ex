@@ -1,7 +1,6 @@
 defmodule Advisor.Core.Questionnaire do
   use Ecto.Schema
   import Ecto.Query
-  alias Advisor.Core.Advice
   alias Advisor.Repo
   alias __MODULE__
 
@@ -11,6 +10,7 @@ defmodule Advisor.Core.Questionnaire do
     field :question_ids, {:array, :binary}
     field :requester_id, :integer
     field :group_lead, :integer
+    field :message, :string
     has_many :advice, Advisor.Core.Advice,
       foreign_key: :questionnaire_id,
       on_delete: :delete_all
@@ -26,15 +26,7 @@ defmodule Advisor.Core.Questionnaire do
     Repo.all(questionnaire() |> where([q], q.group_lead == ^group_lead_id))
   end
 
-  def with_advisor(person) do
-    advisories = Repo.all(from a in Advice,
-                          where: a.advisor_id == ^person)
-
-   ids = Enum.map(advisories, fn(x) -> x.questionnaire_id end)
-
-    Repo.all(questionnaire() |> where([q], q.id in ^ids))
-  end
-
+  def questions(%__MODULE__{id: id}), do: questions(id)
   def questions(id) do
     Repo.one(from q in Questionnaire, where: q.id == ^id, select: q.question_ids)
   end

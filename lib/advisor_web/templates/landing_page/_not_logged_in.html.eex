@@ -1,3 +1,8 @@
-<a href="/auth/login" class="button primary login">Login with Google</a>
+<%= if Mix.env == :dev do  %>
+  <a href="/auth/login?user=ron" class="button primary login">Login as Ron Swanson</a>
+  <a href="/auth/login?user=leslie" class="button primary login">Login as Leslie Knope</a>
+<%= else %>
+  <a href="/auth/login" class="button primary login">Login with Google</a>
+<% end %>
 
 

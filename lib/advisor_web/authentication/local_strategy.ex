@@ -3,16 +3,28 @@ defmodule Local.Strategy do
 
   alias Ueberauth.Auth.Info
   alias Ueberauth.Strategy.Helpers
+  alias Plug.Conn.Query
 
   def handle_request!(conn) do
-    redirect!(conn, Helpers.callback_path(conn))
+    path = Helpers.callback_path(conn)
+    query = conn.query_string
+    redirect!(conn, "#{path}?#{query}")
   end
 
-  def info(_conn) do
-    %Info{
-      urls: %{website: "8thlight.com"},
-      email: "rswanson@8thlight.com",
-      name: "Ron Swanson"
-    }
+  def info(conn) do
+    params = Query.decode(conn.query_string)
+    if params["user"] == "ron" do
+      %Info{
+        urls: %{website: "8thlight.com"},
+        email: "rswanson@8thlight.com",
+        name: "Ron Swanson"
+      }
+    else
+      %Info{
+        urls: %{website: "8thlight.com"},
+        email: "lknope@8thlight.com",
+        name: "Leslie Knope"
+      }
+    end
   end
 end

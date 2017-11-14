@@ -67,6 +67,13 @@ defmodule PageAssertions do
             |> Floki.text
 
     assert value ==  header
+    html
   end
 
+  def has_message(html, expected_message) do
+    message = html |> Floki.find(".message") |> Floki.text() |> String.trim
+
+    assert message == expected_message
+    html
+  end
 end

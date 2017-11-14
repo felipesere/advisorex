@@ -19,7 +19,8 @@ defmodule Advisor.Test.Support.Proposal do
       "proposal" => %{
         "group_lead" => "1",
         "questions" => as_html_form([1, 2]),
-        "advisors"  => as_html_form([1, 2])
+        "advisors"  => as_html_form([1, 2]),
+        "message" => nil
       }
     }
   end
@@ -37,10 +38,8 @@ defmodule Advisor.Test.Support.Proposal do
     %{"proposal" => %{proposal | "advisors"  => advisors}}
   end
 
-  def with_questions(%{"proposal" => proposal}, phrases) do
-    questions = phrases |> as_html_form()
-
-    %{"proposal" => %{proposal | "questions"  => questions}}
+  def with_message(%{"proposal" => proposal}, message) do
+    %{"proposal" => %{proposal | "message" => message}}
   end
 
   defp as_html_form(elements) do

@@ -8,6 +8,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
   setup do
     {links, progress, _} = Proposal.basic()
                            |> Proposal.with_advisors(["Felipe Sere", "Chris Jordan"])
+                           |> Proposal.with_message("Clever message")
                            |> Proposal.build("Rabea Gleissner")
                            |> Creator.create
                            |> Links.generate
@@ -23,6 +24,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
     |> get(felipes_advice)
     |> html_response(200)
     |> has_header("Advice for Rabea Gleissner")
+    |> has_message("Clever message")
   end
 
   test "force login if incorrect advisor is authenticated", %{conn: conn, links: links} do

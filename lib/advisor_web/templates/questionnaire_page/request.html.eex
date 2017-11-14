@@ -13,6 +13,16 @@
 
     <section class="module">
       <header class="module-header">
+        <h1>Tell us why you are looking for advice:</h1>
+        <p>(max 140 characters, like Twitter!</p>
+      </header>
+      <%= textarea(f, :message, rows: 3, maxlength: 140, class: "context-of-advice") %>
+    </section>
+
+    <hr class="separator" />
+
+    <section class="module">
+      <header class="module-header">
         <h1>Choose topics for advice</h1>
       </header>
       <%= render "_questions.html", questions: @questions, form: f %>
@@ -27,10 +37,10 @@
       <%= render "_advisors.html", everybody: @everybody, form: f %>
     </section>
 
-  <section class="module">
-    <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
-    <button type="submit" class="request-advice button primary full">Ask for advice</button>
-  </section>
+    <section class="module">
+      <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
+      <button type="submit" class="request-advice button primary full">Ask for advice</button>
+    </section>
 <% end %>
 
 <div class="notice invisible">
