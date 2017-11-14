@@ -15,9 +15,9 @@
       <hr class="separator" />
     <% end %>
 
-    <div class="feedback-questions">
+    <div class="advice-questions">
       <%= for question <- @questions do  %>
-        <div class="feedback-question">
+        <div class="advice-question">
           <h3><%= question.phrase %></h3>
           <textarea name="<%= question.id %>" rows="5"></textarea>
         </div>

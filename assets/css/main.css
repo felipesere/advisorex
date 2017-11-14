@@ -312,12 +312,12 @@ blockquote {
   text-align: left;
 }
 
-.feedback-questions {
+.advice-questions {
   margin: 0px auto;
   max-width: 600px;
 }
 
-.feedback-question {
+.advice-question {
   margin: 40px auto;
   position: relative;
   border-radius: 3px;
@@ -334,7 +334,7 @@ textarea {
   padding: 5px;
 }
 
-.feedback-question > h3 {
+.advice-question > h3 {
   margin-top: 0px;
   margin-bottom: 15px;
 }
@@ -390,17 +390,17 @@ textarea {
 
 /* ==== LINKS ==== */
 
-.feedback-links {
+.advice-links {
   padding: 0;
 }
 
 /* ==== PRESENT ==== */
 
-.feedback-answer {
+.advice-answer {
   margin: 30px auto;
 }
 
-.feedback-answer > blockquote {
+.advice-answer > blockquote {
   margin: 10px 0;
 }
 

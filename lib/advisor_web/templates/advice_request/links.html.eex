@@ -3,7 +3,7 @@
     <h1>Here are your links</h1>
   </header>
 
-  <ul class="feedback-links">
+  <ul class="advice-links">
     <%= for link <- @links do %>
       <li>
         <p><%= link.person.name %>

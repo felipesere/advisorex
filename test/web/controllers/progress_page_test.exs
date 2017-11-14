@@ -53,7 +53,7 @@ defmodule AdvisorWeb.ProgressPageTest do
     |> has_continue_button_with("Waiting for further responses")
   end
 
-  test "all completed feedback", %{conn: conn, proposal: proposal} do
+  test "all completed advice questions", %{conn: conn, proposal: proposal} do
     questionnaire = Creator.create(proposal)
     {[%{link: cj}, %{link: priya}], progress_page, _} = Links.generate(questionnaire)
 

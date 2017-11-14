@@ -38,7 +38,7 @@ defmodule AdvisorWeb.PresentPageTest do
     |> get(present_link)
     |> html_response(200)
     |> has_title("Advice for Rabea Gleissner")
-    |> has_feedback_questions(2)
+    |> has_advice_questions(2)
     |> has_answers(["fooo", "fooo"])
   end
 end

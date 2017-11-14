@@ -4,12 +4,12 @@
     <a href="/present/<%= @id %>/download.csv"><img class="download-link" src="/assets/images/download-csv.png" alt="Download the file"></a>
   </header>
 
-  <div class="feedback-questions">
+  <div class="advice-questions">
     <%= for question <- @answered_questions do %>
-    <div class="feedback-question">
+    <div class="advice-question">
       <h3><%= question.question_phrase %></h3>
       <%= for answer <- question.answers do %>
-      <div class="feedback-answer">
+      <div class="advice-answer">
         <aside class="provider">
           <img class="profile-image" src="<%= answer.person.profile_image %>" alt="<%= answer.person.name %>" />
           <span><%= answer.person.name %></span>

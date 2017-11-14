@@ -10,7 +10,7 @@ defmodule PageAssertions do
   end
 
   def has_links(html, values) do
-    links = html |> Floki.find("a") |> Enum.map(&Floki.text/1) 
+    links = html |> Floki.find("a") |> Enum.map(&Floki.text/1)
     Enum.each(values, fn(value) -> assert value in links end)
     html
   end
@@ -20,14 +20,14 @@ defmodule PageAssertions do
     html
   end
 
-  def has_feedback_questions(html, amount) do
-    assert html |> Floki.find(".feedback-question") |> length == amount
+  def has_advice_questions(html, amount) do
+    assert html |> Floki.find(".advice-question") |> length == amount
     html
   end
 
   def has_answers(html, answers_to_look_for) do
     html
-    |> Floki.find(".feedback-answer > blockquote")
+    |> Floki.find(".advice-answer > blockquote")
     |> Enum.map(&Floki.text/1)
     |> Enum.each(fn(answer) -> assert answer in answers_to_look_for end)
     html
