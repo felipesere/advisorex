@@ -21,25 +21,17 @@ defmodule Advisor.Core.Advice do
     |> preload(:answers)
   end
 
-  def find_all(%{id: id}), do: find_all(id)
   def find_all(id) do
     Repo.all(advice() |> where([advice], advice.questionnaire_id == ^id))
   end
 
-  def find(advisories) when is_list(advisories) do
+  def find(advisories) do
     ids = ids(advisories)
     Repo.all(advice() |> where([a], a.id in ^ids))
-  end
-  def find(id) do
-    Repo.one(advice() |> where([advice], advice.id == ^id))
   end
 
   def find(advice_id, [from_advisor: %{id: advisor_id}]) do
     Repo.one(advice() |> where([a], a.id == ^advice_id and a.advisor_id == ^advisor_id))
-  end
-
-  def from_advisor(advisor, [for: requester]) do
-    Repo.one(advice() |> where([a], a.advisor_id == ^advisor and a.requester_id == ^requester.id))
   end
 
   def from_advisor(advisor) do

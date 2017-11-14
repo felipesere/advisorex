@@ -38,12 +38,6 @@ defmodule Advisor.Test.Support.Proposal do
     %{"proposal" => %{proposal | "advisors"  => advisors}}
   end
 
-  def with_questions(%{"proposal" => proposal}, phrases) do
-    questions = phrases |> as_html_form()
-
-    %{"proposal" => %{proposal | "questions"  => questions}}
-  end
-
   def with_message(%{"proposal" => proposal}, message) do
     %{"proposal" => %{proposal | "message" => message}}
   end
