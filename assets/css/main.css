@@ -88,7 +88,6 @@ p.center {
   text-decoration: none;
 }
 
-
 /* ==== LAYOUT ==== */
 
 .top {
@@ -132,7 +131,6 @@ hr.separator {
   background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
 }
 
-
 /* ==== QUESTION PICKER ==== */
 
 .question-picker {
@@ -146,7 +144,7 @@ hr.separator {
   flex-grow: 1;
   min-width: 200px;
   width: 100%;
-  padding: 0px;
+  padding: 0;
 }
 
 .question-picker > ul h3 {
@@ -212,7 +210,6 @@ hr.separator {
   background: #4992F9;
   border: 1px solid #165FC6;
 }
-
 
 /* ==== PEOPLE PICKER ==== */
 
@@ -300,11 +297,10 @@ textarea.context-of-advice {
 }
 
 blockquote {
-  background: #ececec;;
+  background: #ececec;
   border-left: 5px solid #888282;
   margin: 1.5em 0;
   padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
   font-style: italic;
 }
 
@@ -385,8 +381,6 @@ textarea {
   filter: grayscale(100%);
   opacity: 0.5;
 }
-
-
 
 /* ==== LINKS ==== */
 
