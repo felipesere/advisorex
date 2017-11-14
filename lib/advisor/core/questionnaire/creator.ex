@@ -14,7 +14,7 @@ defmodule Advisor.Core.Questionnaire.Creator do
     {:ok, questionnaire} = Repo.insert(%Questionnaire{question_ids: question_ids,
                                                       requester_id: requester,
                                                       group_lead: group_lead,
-                                                      message: message })
+                                                      message: message})
 
     # TODO: Why is't this a proper struct?
     advice_requests = Enum.map(advisors, fn(advisor) ->

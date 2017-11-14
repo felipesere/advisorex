@@ -32,6 +32,4 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
 
     assert questionnaire.message == nil
   end
-
-
 end

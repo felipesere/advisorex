@@ -4,6 +4,17 @@
       <h1>Advice for <%= @requester.name %></h1>
     </header>
 
+    <%= if @message do %>
+      <div class="message-area">
+        <p>A little note from Ron Swanson:</p>
+        <blockquote class="message">
+          <%= @message %>
+        </blockquote>
+      </div>
+
+      <hr class="separator" />
+    <% end %>
+
     <div class="feedback-questions">
       <%= for question <- @questions do  %>
         <div class="feedback-question">

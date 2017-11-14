@@ -36,6 +36,7 @@ defmodule Advisor.Core.Questionnaire do
     Repo.all(questionnaire() |> where([q], q.id in ^ids))
   end
 
+  def questions(%__MODULE__{id: id}), do: questions(id)
   def questions(id) do
     Repo.one(from q in Questionnaire, where: q.id == ^id, select: q.question_ids)
   end

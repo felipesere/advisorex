@@ -10,13 +10,17 @@ defmodule AdvisorWeb.ProvideAdviceController do
     advice = Advice.find(id, from_advisor: User.found_in(conn))
 
     if advice do
-      questions = advice.questionnaire_id
+      questionnaire = Questionnaire.find(advice.questionnaire_id)
+
+      questions = questionnaire
                   |> Questionnaire.questions()
                   |> Questions.load()
+
       requester = People.find_by(id: advice.requester_id)
       render(conn, "advice-form.html", requester: requester,
                                        questions: questions,
-                                       advice_id: id)
+                                       advice_id: id,
+                                       message: questionnaire.message)
     else
       conn
       |> put_resp_cookie("target", conn.request_path)

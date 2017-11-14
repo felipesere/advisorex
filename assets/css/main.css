@@ -291,6 +291,27 @@ textarea.context-of-advice {
 
 /* ==== PROVIDE ==== */
 
+.message-area {
+  margin: 0px auto;
+  max-width: 600px;
+  text-align: center;
+  padding: 15px;
+
+}
+
+blockquote {
+  background: #ececec;;
+  border-left: 5px solid #888282;
+  margin: 1.5em 0;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+  font-style: italic;
+}
+
+.message-area > p {
+  text-align: left;
+}
+
 .feedback-questions {
   margin: 0px auto;
   max-width: 600px;
