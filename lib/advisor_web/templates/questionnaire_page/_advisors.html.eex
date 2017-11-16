@@ -2,7 +2,7 @@
   <%= inputs_for @form, :advisors, fn advisors_form -> %>
     <%= for person <- @everybody do %>
       <li class="advisor">
-        <%= checkbox(advisors_form, String.to_atom("#{person.id}")) %>
+        <%= checkbox(advisors_form, String.to_atom("#{person.id}"), class: "advisor-select") %>
         <%= label(advisors_form, :advisor, "", for: "proposal_advisors_#{person.id}", class: "people-picker", style: "background: url(#{image_url(person)}); background-size: cover;") %>
         <span class="name"><%= person.name %></span>
       </li>

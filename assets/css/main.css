@@ -268,7 +268,7 @@ input[type="radio"]:checked + label {
   text-align: center;
 }
 
-input[type="checkbox"] {
+.advisor-select input[type="checkbox"] {
   display: none;
 }
 
@@ -488,6 +488,11 @@ img.dashboard_action_icon {
 .dashboard_actions img {
   height: 30px;
   display: block;
+}
+
+.save-user-settings {
+  padding: 0.3em 1em;
+  width: 200px;
 }
 
 /* ======== NOTICE ================*/

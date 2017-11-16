@@ -10,7 +10,7 @@
   <%= render "_group_lead_section.html", section: @group_lead_section %>
 <% end %>
 
-<%= if length(@required_advice_section) > 0 do %>
+<%= if Enum.any?(@required_advice_section) do %>
   <hr class="separator" />
 
   <section class="module">
@@ -45,3 +45,23 @@
     </ul>
   </section>
 <% end %>
+
+<hr class="separator" />
+
+<section class="module">
+  <header class="module-header medium-header">
+    Your settings:
+  </header>
+
+  <div>
+    <%= form_for @user, "/dashboard/settings", [method: "post", class: "user-settings-form"], fn f -> %>
+      <label>
+        Are you a group lead? <%= checkbox f, :is_group_lead, id: "is_group_lead"  %>
+      </label>
+      <label>
+        Image URL: <%= url_input f, :profile_image, id: "profile_image" %>
+      </label>
+      <%= submit "Save", class: "button primary small save-user-settings" %>
+    <% end %>
+  </div>
+</section>
