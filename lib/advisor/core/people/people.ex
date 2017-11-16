@@ -4,6 +4,10 @@ defmodule Advisor.Core.People do
   import Ecto.Query
   import Ecto.Changeset
 
+  def update(person) do
+    Repo.update(person)
+  end
+
   def create(data) do
     %Person{}
     |> cast(data, [:name, :email])

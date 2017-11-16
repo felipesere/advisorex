@@ -2,7 +2,13 @@ defmodule AdvisorWeb.DashboardPageView do
   use AdvisorWeb, :view
   alias Advisor.Core.Dashboard.GroupLeadSection
 
-  def has_advice(%GroupLeadSection{groups: groups}), do: Enum.any?(groups)
+  def has_advice(%{group_lead_section: %GroupLeadSection{groups: groups}}), do: Enum.any?(groups)
+
+  def needs_to_give_advice(%{required_advice_section: advice}) do
+    Enum.any?(advice)
+  end
+
+  def awaiting_advice(%{personal_advice_section: personal}), do: personal != :nothing
 
   def path_to_questionnaire(id) do
     questionnaire_path(AdvisorWeb.Endpoint, :delete, id)

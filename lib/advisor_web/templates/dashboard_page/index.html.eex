@@ -1,16 +1,16 @@
 <section class="module center">
   <header class="module-header">
-    <h1>Hello <%= @viewer.name %>!</h1>
+    <h1>Hello <%= @user.name %>!</h1>
   </header>
 
   <a href="/request" class="button primary">Request advice for yourself</a>
 </section>
 
-<%= if @viewer.is_group_lead && has_advice(@group_lead_section) do %>
-  <%= render "_group_lead_section.html", section: @group_lead_section %>
+<%= if @user.is_group_lead && has_advice(@dashboard) do %>
+  <%= render "_group_lead_section.html", section: @dashboard.group_lead_section %>
 <% end %>
 
-<%= if length(@required_advice_section) > 0 do %>
+<%= if needs_to_give_advice(@dashboard) do %>
   <hr class="separator" />
 
   <section class="module">
@@ -19,14 +19,14 @@
     </header>
 
     <ul class="row" >
-      <%= for advice <- @required_advice_section do %>
+      <%= for advice <- @dashboard.required_advice_section do %>
         <%= render "dashboard_requester.html", advice: advice %>
       <% end %>
     </ul>
   </section>
 <% end %>
 
-<%= if @advice_for_me != :nothing do %>
+<%= if awaiting_advice(@dashboard) do %>
   <hr class="separator" />
 
   <section class="module">
@@ -35,7 +35,7 @@
     </header>
 
     <ul class="row">
-      <%= for advice <- @advice_for_me do %>
+      <%= for advice <- @dashboard.personal_advice_section do %>
         <li class="status-of-my-advisors">
           <img class="profile-image <%= completed?(advice) %>"  src="<%= advice.advisor.profile_image %>">
           <p><%= advice.advisor.name %></p>
@@ -45,3 +45,21 @@
     </ul>
   </section>
 <% end %>
+
+<hr class="separator" />
+
+<section class="module">
+  <header class="module-header medium-header">
+    Your settings:
+  </header>
+
+  <%= form_for @update_user, "/dashboard/settings", [method: "post", class: "user-settings-form"], fn f -> %>
+    <label>
+      Are you a group lead? <%= checkbox f, :is_group_lead, id: "is_group_lead"  %>
+    </label>
+    <label>
+      Image URL: <%= url_input f, :profile_image, id: "profile_image" %>
+    </label>
+    <%= submit "Save", class: "button primary small save-user-settings" %>
+  <% end %>
+</section>

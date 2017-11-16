@@ -5,6 +5,7 @@ defmodule AdvisorWeb.DashboardPageTest do
   alias Advisor.Test.Support.Proposal
   alias Advisor.Core.Questionnaire.Creator
   alias Advisor.Core.Answers
+  alias Advisor.Core.People
 
   @group_lead "Felipe Sere"
 
@@ -70,6 +71,15 @@ defmodule AdvisorWeb.DashboardPageTest do
     |> html_response(200)
     |> still_has_to_give_me_advice("Priya Patil")
     |> still_has_to_give_me_advice("Sarah Johnston")
+  end
+
+  test "it allows you to become a group lead", %{conn: conn} do
+    assert conn
+           |> ThroughTheWeb.login_as("Rabea Gleissner")
+           |> post("/dashboard/settings", %{"person" => %{"is_group_lead" => "true"}})
+           |> redirected_to() == "/dashboard"
+
+    assert People.find_by(name: "Rabea Gleissner").is_group_lead
   end
 
   def delete_questionnaire_for(html, _name) do
