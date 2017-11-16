@@ -53,15 +53,13 @@
     Your settings:
   </header>
 
-  <div>
-    <%= form_for @update_user, "/dashboard/settings", [method: "post", class: "user-settings-form"], fn f -> %>
-      <label>
-        Are you a group lead? <%= checkbox f, :is_group_lead, id: "is_group_lead"  %>
-      </label>
-      <label>
-        Image URL: <%= url_input f, :profile_image, id: "profile_image" %>
-      </label>
-      <%= submit "Save", class: "button primary small save-user-settings" %>
-    <% end %>
-  </div>
+  <%= form_for @update_user, "/dashboard/settings", [method: "post", class: "user-settings-form"], fn f -> %>
+    <label>
+      Are you a group lead? <%= checkbox f, :is_group_lead, id: "is_group_lead"  %>
+    </label>
+    <label>
+      Image URL: <%= url_input f, :profile_image, id: "profile_image" %>
+    </label>
+    <%= submit "Save", class: "button primary small save-user-settings" %>
+  <% end %>
 </section>
