@@ -10,10 +10,4 @@ defmodule Advisor.Core.Dashboard do
       personal_advice_section: AdviceForMeSection.advice_for_me_section(viewer)
     }
   end
-
-  def group_lead_section(viewer), do: GroupLeadSection.group_lead_section(viewer)
-
-  def required_advice_section(advisor), do: RequiredAdviceSection.required_advice_section(advisor)
-
-  def advice_for_me_section(person), do: AdviceForMeSection.advice_for_me_section(person)
 end
