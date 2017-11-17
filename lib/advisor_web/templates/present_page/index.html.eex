@@ -14,7 +14,7 @@
           <img class="profile-image" src="<%= answer.person.profile_image %>" alt="<%= answer.person.name %>" />
           <span><%= answer.person.name %></span>
         </aside>
-        <blockquote><%= answer.answer_phrase %></blockquote>
+        <p><%= answer.answer_phrase %></p>
       </div>
       <% end %>
     </div>
