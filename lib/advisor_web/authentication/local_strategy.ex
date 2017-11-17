@@ -4,6 +4,7 @@ defmodule Local.Strategy do
   alias Ueberauth.Auth.Info
   alias Ueberauth.Strategy.Helpers
   alias Plug.Conn.Query
+  alias Advisor.Core.People
 
   def handle_request!(conn) do
     path = Helpers.callback_path(conn)
@@ -13,18 +14,12 @@ defmodule Local.Strategy do
 
   def info(conn) do
     params = Query.decode(conn.query_string)
-    if params["user"] == "ron" do
-      %Info{
-        urls: %{website: "8thlight.com"},
-        email: "rswanson@8thlight.com",
-        name: "Ron Swanson"
-      }
-    else
-      %Info{
-        urls: %{website: "8thlight.com"},
-        email: "lknope@8thlight.com",
-        name: "Leslie Knope"
-      }
-    end
+    user = People.find_by(email: params["email"])
+
+    %Info{
+      urls: %{website: "8thlight.com"},
+      email: user.email,
+      name: user.name
+    }
   end
 end
