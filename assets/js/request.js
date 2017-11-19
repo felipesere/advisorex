@@ -1,18 +1,18 @@
 module.exports = {
   bind: function() {
     var countCheckmarks = function() {
-      return  $(".question-picker ul li input[type=checkbox]:checked").length;
+      return  $(".question-picker input[type=checkbox]:checked").length;
     };
 
     var showNotification = function(numberOfQuestions) {
       $(".notice").removeClass("invisible");
-      $("p.notice-message").text("You have selected too many questions: "+ numberOfQuestions);
-      $("button.request-advice").addClass("disabled").prop("disabled", true);
+      $(".notice-message").text("You have selected too many questions: "+ numberOfQuestions);
+      $(".request-advice").addClass("disabled").prop("disabled", true);
     };
 
     var hideNotification = function() {
       $(".notice").addClass("invisible");
-      $("button.request-advice").removeClass("disabled").prop("disabled", false);
+      $(".request-advice").removeClass("disabled").prop("disabled", false);
     };
 
     var notification = function(numberOfQuestions) {
@@ -23,7 +23,7 @@ module.exports = {
       }
     };
 
-    $(".question-picker ul li input[type=checkbox]").click(function() {
+    $(".question-picker input[type=checkbox]").click(function() {
       var marks = countCheckmarks();
       notification(marks);
     });
