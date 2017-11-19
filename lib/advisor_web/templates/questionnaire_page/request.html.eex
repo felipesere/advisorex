@@ -46,4 +46,3 @@
 <div class="notice invisible">
   <p class="notice-message"></p>
 </div>
-<script src="/assets/js/request.js"></script>
