@@ -1,3 +1,5 @@
+var debounce = require('debounce');
+
 module.exports = {
   bind: function(selector) {
     if(localStorage) {
@@ -8,9 +10,11 @@ module.exports = {
           answerNode.text(localStorage[answer.name]);
         }
 
-        answerNode.change(function() {
+        var saveToStorage = function() {
           localStorage[answer.name] = answerNode.val();
-        });
+        };
+
+        answerNode.keyup(debounce(saveToStorage, 300));
       });
 
       $('button[type=submit]').click(function() {
