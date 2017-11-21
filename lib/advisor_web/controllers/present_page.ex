@@ -1,16 +1,24 @@
 defmodule AdvisorWeb.PresentPage do
   use AdvisorWeb, :controller
   alias Advisor.Core.{People, Questions, Questionnaire}
+  alias AdvisorWeb.Authentication.User
+
+  plug  AdvisorWeb.Authentication.Gatekeeper, only: :group_leads
 
   def index(conn, %{"id" => questionnaire_id}) do
+    user = User.of(conn)
     questionnaire = Questionnaire.find(questionnaire_id)
 
-    answered_questions = answers_per_question(questionnaire)
+    if questionnaire.group_lead == user.id do
+      answered_questions = answers_per_question(questionnaire)
 
-    requester = People.requester(questionnaire)
-    render conn, "index.html", id: questionnaire_id,
-                               request: requester,
-                               answered_questions: answered_questions
+      requester = People.requester(questionnaire)
+      render conn, "index.html", id: questionnaire_id,
+                                 request: requester,
+                                 answered_questions: answered_questions
+    else
+      conn |> redirect(to: "/")
+    end
   end
 
   defp answers_per_question(questionnaire) do

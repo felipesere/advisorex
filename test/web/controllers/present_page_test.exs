@@ -9,6 +9,7 @@ defmodule AdvisorWeb.PresentPageTest do
 
   setup do
     proposal = Proposal.basic()
+               |> Proposal.with_group_lead("Felipe Sere")
                |> Proposal.build("Rabea Gleissner")
 
     [proposal: proposal]
@@ -40,5 +41,30 @@ defmodule AdvisorWeb.PresentPageTest do
     |> has_title("Advice for Rabea Gleissner")
     |> has_advice_questions(2)
     |> has_answers(["fooo", "fooo"])
+  end
+
+  test "only the selected group lead can see the advice", %{conn: conn, proposal: proposal} do
+    questionnaire = {:ok, %{questionnaire: id}} = Creator.create(proposal)
+
+    {[%{link: cj}, %{link: priya}], _, present_link} = questionnaire
+                                                       |> Links.generate
+
+    answers = id
+              |> Questionnaire.find()
+              |> Map.get(:question_ids)
+              |> Enum.map(fn(q) -> {q, "fooo"} end)
+
+    conn
+    |> ThroughTheWeb.login_as("Chris Jordan")
+    |> post(cj, answers)
+
+    conn
+    |> ThroughTheWeb.login_as("Priya Patil")
+    |> post(priya, answers)
+
+    assert conn
+           |> ThroughTheWeb.login_as("Jim Suchy")
+           |> get(present_link)
+           |> redirected_to() == "/"
   end
 end
