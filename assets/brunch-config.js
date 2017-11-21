@@ -20,6 +20,12 @@ exports.config = {
   plugins: {
     babel: {
       ignore: [/vendor/]
+    },
+    postcss: {
+      processors: [
+        require('autoprefixer')(['last 2 versions']),
+        require('csswring')()
+      ]
     }
   },
 

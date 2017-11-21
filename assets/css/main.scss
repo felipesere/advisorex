@@ -1,3 +1,26 @@
+// ==== COLOURS =====
+$background: #f6f7f8;
+$text-color: #495561;
+$primary: #27a8e0;
+
+$green: #66b850;
+$red: #df413a;
+$blue: #4992f9;
+
+// Consider using these for the regular red and green?
+$dashboard-green: #52aa5e;
+$dashboard-red: #ea635e;
+
+$grey: #9a9a9a;
+$border-grey: #8894a0;
+$separator-grey: #8c8b8b;
+$separator-run-off: $background;
+
+$notice: rgba(46, 177, 102, 0.9);
+
+$white: #fff;
+
+
 html {
   box-sizing: border-box;
 }
@@ -8,54 +31,43 @@ html {
 
 
 body {
-   font-family: 'Lato', sans-serif;
-   background: #F6F7F8;
-   color: #495561;
-   font-weight: 300;
+  background: $background;
+  color: $text-color;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
 }
 
 
-/* ==== BUTTONS ===== */
+// ==== BUTTONS ===== //
 
-.button:focus {outline:0;}
+.button:focus {
+  outline:0;
+}
 
 .button.full {
   width: 100%;
   display: block;
 }
 
-.button.primary {
-  background: #27a8e0;
-  -moz-box-shadow: inset 0 -3px 0 #187eab;
-  -webkit-box-shadow: inset 0 -3px 0 #187eab;
-  box-shadow: inset 0 -3px 0 #187eab;
+.primary {
+  background: $primary;
+  box-shadow: inset 0 -3px 0 darken($primary, 10%);
 }
 
 .button {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
   border-radius: 3px;
-  margin-top: 1em;
-  background: #eef2f5;
   border: none;
-  color: #fff;
+  color: $white;
   cursor: pointer;
   display: inline-block;
+  font-style: normal;
+  line-height: 1.5em;
+  margin-top: 1em;
   padding: 0.6em 2em;
   text-align: center;
   text-decoration: none;
-  -moz-transition: background-color 150ms ease-in-out;
-  -o-transition: background-color 150ms ease-in-out;
-  -webkit-transition: background-color 150ms ease-in-out;
   transition: background-color 150ms ease-in-out;
   white-space: nowrap;
-  font-style: normal;
-  line-height: 1.5em;
-  -moz-box-shadow: inset 0 -3px 0 #808080;
-  -webkit-box-shadow: inset 0 -3px 0 #808080;
-  box-shadow: inset 0 -3px 0 #808080;
 }
 
 .button:active {
@@ -73,25 +85,23 @@ p.center {
 }
 
 .button.disabled, .button.logout {
-  background-color: #9a9a9a;
-  -moz-box-shadow: inset 0 -3px 0 #676767;
-  -webkit-box-shadow: inset 0 -3px 0 #187eab;
-  box-shadow: inset 0 -3px 0 #676767;
+  background-color: $grey;
+  box-shadow: inset 0 -3px 0 darken($grey, 10%);
 }
 
 .logout > a {
-  color: white;
+  color: $white;
   text-decoration: none;
 }
 
-/* ==== LAYOUT ==== */
+// ==== LAYOUT ==== //
 
 .top {
+  background: $white;
+  border-bottom: 1px solid $border-grey;
   height: 60px;
   padding: 10px;
-  border-bottom: 1px solid #8894A0;
   text-align: center;
-  background: white;
 }
 
 .logo {
@@ -99,8 +109,8 @@ p.center {
 }
 
 .module {
-  max-width: 1200px;
   margin: 0px auto;
+  max-width: 1200px;
   padding: 50px;
 }
 
@@ -121,13 +131,10 @@ hr.separator {
   width: 95%;
   border: 0;
   height: 1px;
-  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: linear-gradient(to left, $background, $separator-grey, $background);
 }
 
-/* ==== QUESTION PICKER ==== */
+// ==== QUESTION PICKER ==== //
 
 .question-picker {
   position: relative;
@@ -174,10 +181,6 @@ hr.separator {
   padding: 10px;
   padding-left: 20px;
 
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
   user-select: none;
 }
 
@@ -193,21 +196,21 @@ hr.separator {
 }
 
 .green-questions label {
-  background: #66B850;
-  border: 1px solid #33851D;
+  background: $green;
+  border: 1px solid darken($green, 10%);
 }
 
 .red-questions label {
-  background: #DF413A;
-  border: 1px solid #AC0E07;
+  background: $red;
+  border: 1px solid darken($red, 10%);
 }
 
 .blue-questions label {
-  background: #4992F9;
-  border: 1px solid #165FC6;
+  background: $blue;
+  border: 1px solid darken($blue, 10%);
 }
 
-/* ==== PEOPLE PICKER ==== */
+// ==== PEOPLE PICKER ==== //
 
 .people-picker {
   padding: 0px;
@@ -231,7 +234,7 @@ hr.separator {
 }
 
 .people-picker > li.selected > .profile-image {
-  box-shadow: 0px 0px 10px 4px #27A8E0;
+  box-shadow: 0px 0px 10px 4px $primary;
 }
 
 .people-picker > li:hover {
@@ -243,11 +246,11 @@ hr.separator {
 }
 
 input[type="checkbox"]:checked + label {
-  box-shadow: 0px 0px 10px 4px #27A8E0;
+  box-shadow: 0px 0px 10px 4px $primary;
 }
 
 input[type="radio"]:checked + label {
-  box-shadow: 0px 0px 10px 4px #27A8E0;
+  box-shadow: 0px 0px 10px 4px $primary;
 }
 
 .profile-image {
@@ -282,7 +285,7 @@ textarea.context-of-advice {
   width: 50%;
 }
 
-/* ==== PROVIDE ==== */
+// ==== PROVIDE ==== //
 
 .message-area {
   margin: 0px auto;
@@ -293,8 +296,8 @@ textarea.context-of-advice {
 }
 
 blockquote {
-  background: #ececec;
-  border-left: 5px solid #888282;
+  background: darken($background, 10%);
+  border-left: 5px solid darken($background, 40%);
   margin: 1.5em 0;
   padding: 0.5em 10px;
   font-style: italic;
@@ -321,8 +324,8 @@ textarea {
   outline: none;
   resize: none;
   border-radius: 3px;
-  border: 1px solid #8894A0;
-  color: #495561;
+  border: 1px solid $border-grey;
+  color: $text-color;
   padding: 5px;
 }
 
@@ -331,7 +334,7 @@ textarea {
   margin-bottom: 15px;
 }
 
-/* ==== ADVISORS ====*/
+// ==== ADVISORS ====//
 
 .advisors {
   padding: 0px;
@@ -378,13 +381,13 @@ textarea {
   opacity: 0.5;
 }
 
-/* ==== LINKS ==== */
+// ==== LINKS ==== //
 
 .advice-links {
   padding: 0;
 }
 
-/* ==== PRESENT ==== */
+// ==== PRESENT ==== //
 
 .advice-answer {
   margin: 30px auto;
@@ -418,7 +421,7 @@ textarea {
   width: 30px;
 }
 
-/* ======== LANDING PAGE ==============*/
+// ======== LANDING PAGE ==============//
 
 .login-buttons {
   width: 200px;
@@ -429,7 +432,7 @@ textarea {
   width: 100%;
 }
 
-/* ======== DASHBOARD ================*/
+// ======== DASHBOARD ================//
 
 img.small-circle {
   width: 50px;
@@ -464,11 +467,11 @@ img.dashboard_action_icon {
 }
 
 .groups-advice-section > li:nth-child(even) {
-  background-color: #d3d4d6;
+  background-color: darken($background, 15%);
 }
 
 .groups-advice-section > li:nth-child(odd) {
-  background-color: #ecedef;
+  background-color: darken($background, 5%);
 }
 
 .groups-advice {
@@ -482,13 +485,13 @@ img.dashboard_action_icon {
 }
 
 .button.green {
-  background: #52AA5E;
-  box-shadow: inset 0 -3px 0 #3F8448;
+  background: $dashboard-green;
+  box-shadow: inset 0 -3px 0 darken($dashboard-green, 10%);
 }
 
 .button.red {
-  background: #ea635e;
-  box-shadow: inset 0 -3px 0 #b54642;
+  background: $dashboard-red;
+  box-shadow: inset 0 -3px 0 darken($dashboard-red, 10%);
 }
 
 .dashboard_actions img {
@@ -511,10 +514,10 @@ img.dashboard_action_icon {
 }
 
 
-/* ======== NOTICE ================*/
+// ======== NOTICE ================//
 
 .notice {
-  background: rgba(46, 177, 102, 0.9);
+  background: $notice;
   border-radius: 0 3px 3px 0;
   bottom: 0;
   left: 0;
@@ -537,10 +540,6 @@ img.dashboard_action_icon {
   to {
     opacity: 0;
   }
-}
-
-.notice.error {
-  background: rgba(255, 83, 13, 0.9);
 }
 
 .fadeOut {
