@@ -3,13 +3,9 @@ $background: #f6f7f8;
 $text-color: #495561;
 $primary: #27a8e0;
 
-$green: #66b850;
-$red: #df413a;
 $blue: #4992f9;
-
-// Consider using these for the regular red and green?
-$dashboard-green: #52aa5e;
-$dashboard-red: #ea635e;
+$green: #52aa5e;
+$red: #ea635e;
 
 $grey: #9a9a9a;
 $border-grey: #8894a0;
@@ -485,13 +481,13 @@ img.dashboard_action_icon {
 }
 
 .button.green {
-  background: $dashboard-green;
-  box-shadow: inset 0 -3px 0 darken($dashboard-green, 10%);
+  background: $green;
+  box-shadow: inset 0 -3px 0 darken($green, 10%);
 }
 
 .button.red {
-  background: $dashboard-red;
-  box-shadow: inset 0 -3px 0 darken($dashboard-red, 10%);
+  background: $red;
+  box-shadow: inset 0 -3px 0 darken($red, 10%);
 }
 
 .dashboard_actions img {
