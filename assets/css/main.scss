@@ -169,14 +169,13 @@ hr.separator {
 .question-picker  label {
   display: block;
   border-radius: 2px;
-  color: white;
+  color: $white;
   line-height: 25px;
   list-style-type: none;
   margin: 10px;
   min-height: 50px;
   padding: 10px;
   padding-left: 20px;
-
   user-select: none;
 }
 
@@ -226,7 +225,9 @@ hr.separator {
   width: 249px;
   flex-grow: 1;
   list-style-type: none;
-  text-align: center
+  text-align: center;
+
+  background-color: darken($background, 10%);
 }
 
 .people-picker > li.selected > .profile-image {

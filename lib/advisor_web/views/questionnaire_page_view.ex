@@ -1,10 +1,9 @@
 defmodule AdvisorWeb.QuestionnairePageView do
   use AdvisorWeb, :view
-  alias Advisor.Core.Gravatar
 
   def image_url(person) do
     if person.profile_image == "" do
-      Gravatar.url(person.email)
+      "https://maxcdn.icons8.com/Share/icon/p1em/Users//user1600.png"
     else
       person.profile_image
     end

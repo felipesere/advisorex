@@ -2,7 +2,7 @@
   <%= for person <- @leads do %>
     <li class="group-lead">
       <%= radio_button(@form ,:group_lead, person.id) %>
-      <%= label(@form, :group_lead, "", for: "proposal_group_lead_#{person.id}", class: "people-picker", style: "background: url(#{image_url(person)}); background-size: cover;") %>
+      <%= label(@form, :group_lead, "", for: "proposal_group_lead_#{person.id}", class: "people-picker", style: "background-image: url(#{image_url(person)}); background-size: cover;") %>
       <span class="name"><%= person.name %></span>
     </li>
   <% end %>
