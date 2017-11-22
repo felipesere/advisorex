@@ -14,7 +14,7 @@
     <section class="module">
       <header class="module-header">
         <h1>Tell us why you are looking for advice:</h1>
-        <p>(max 140 characters, like Twitter!</p>
+        <p>(max 140 characters, like Twitter!)</p>
       </header>
       <%= textarea(f, :message, rows: 3, maxlength: 140, class: "context-of-advice") %>
     </section>
