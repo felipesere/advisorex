@@ -28,7 +28,8 @@ You can find me [here](lib/advisor/core/README.md)
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
+  * Create and migrate your database with `mix ecto.create && mix ecto.migrate` 
+    *  make sure to have a user `postgres` without password and superuser role
   * Install Node.js dependencies with `cd assets && npm install`
   * Start Phoenix endpoint with `mix phx.server`
 
