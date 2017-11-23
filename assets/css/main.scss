@@ -1,6 +1,7 @@
 // ==== COLOURS =====
 $background: #f6f7f8;
 $text-color: #495561;
+
 $primary: #27a8e0;
 
 $blue: #4992f9;
@@ -12,7 +13,8 @@ $border-grey: #8894a0;
 $separator-grey: #8c8b8b;
 $separator-run-off: $background;
 
-$notice: rgba(46, 177, 102, 0.9);
+// #2eb166 ?
+$notice: rgba(46, 177, 102, .9);
 
 $white: #fff;
 
@@ -21,7 +23,9 @@ html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -37,12 +41,12 @@ body {
 // ==== BUTTONS ===== //
 
 .button:focus {
-  outline:0;
+  outline: 0;
 }
 
 .button.full {
-  width: 100%;
   display: block;
+  width: 100%;
 }
 
 .primary {
@@ -51,15 +55,15 @@ body {
 }
 
 .button {
+  border: 0;
   border-radius: 3px;
-  border: none;
   color: $white;
   cursor: pointer;
   display: inline-block;
   font-style: normal;
   line-height: 1.5em;
   margin-top: 1em;
-  padding: 0.6em 2em;
+  padding: .6em 2em;
   text-align: center;
   text-decoration: none;
   transition: background-color 150ms ease-in-out;
@@ -69,7 +73,7 @@ body {
 .button:active {
   box-shadow: none;
   margin-top: calc(1em + 3px);
-  padding: calc(0.6em - 1.5px) 2em;
+  padding: calc(.6em - 1.5px) 2em;
 }
 
 .center {
@@ -80,7 +84,8 @@ p.center {
   text-align: center;
 }
 
-.button.disabled, .button.logout {
+.button.disabled,
+.button.logout {
   background-color: $grey;
   box-shadow: inset 0 -3px 0 darken($grey, 10%);
 }
@@ -105,14 +110,14 @@ p.center {
 }
 
 .module {
-  margin: 0px auto;
+  margin: 0 auto;
   max-width: 1200px;
   padding: 50px;
 }
 
 .module-header {
-  text-align: center;
   margin: 70px auto;
+  text-align: center;
 }
 
 .large-header {
@@ -124,26 +129,26 @@ p.center {
 }
 
 hr.separator {
-  width: 95%;
+  background-image: linear-gradient(to left, $background, $separator-grey, $background);
   border: 0;
   height: 1px;
-  background-image: linear-gradient(to left, $background, $separator-grey, $background);
+  width: 95%;
 }
 
 // ==== QUESTION PICKER ==== //
 
 .question-picker {
-  position: relative;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .question-picker > ul li {
-  position: relative;
   flex-grow: 1;
   min-width: 200px;
-  width: 100%;
   padding: 0;
+  position: relative;
+  width: 100%;
 }
 
 .question-picker > ul h3 {
@@ -162,14 +167,14 @@ hr.separator {
   }
 }
 
-.question-picker input[type="checkbox"] {
+.question-picker input[type='checkbox'] {
   display: none;
 }
 
 .question-picker  label {
-  display: block;
   border-radius: 2px;
   color: $white;
+  display: block;
   line-height: 25px;
   list-style-type: none;
   margin: 10px;
@@ -180,14 +185,14 @@ hr.separator {
 }
 
 .question-picker label:hover {
-  opacity: 0.9;
   cursor: pointer;
+  opacity: .9;
 }
 
-.question-picker > ul > li input[type="checkbox"]:checked + span:before {
-  position: absolute;
+.question-picker > ul > li input[type='checkbox']:checked + span::before {
+  content:  '\2713  ';
   left: 15px;
-  content:  "\2713  ";
+  position: absolute;
 }
 
 .green-questions label {
@@ -208,11 +213,11 @@ hr.separator {
 // ==== PEOPLE PICKER ==== //
 
 .people-picker {
-  padding: 0px;
-  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 0;
+  position: relative;
 }
 
 .people-picker > li {
@@ -220,18 +225,18 @@ hr.separator {
 }
 
 .people-picker > li > label {
-  margin: 15px auto 15px;
-  height: 250px;
-  width: 249px;
-  flex-grow: 1;
-  list-style-type: none;
-  text-align: center;
 
   background-color: darken($background, 10%);
+  flex-grow: 1;
+  height: 250px;
+  list-style-type: none;
+  margin: 15px auto;
+  text-align: center;
+  width: 249px;
 }
 
 .people-picker > li.selected > .profile-image {
-  box-shadow: 0px 0px 10px 4px $primary;
+  box-shadow: 0 0 10px 4px $primary;
 }
 
 .people-picker > li > label:hover {
@@ -239,15 +244,15 @@ hr.separator {
 }
 
 .people-picker > li:hover > .profile-image {
-  opacity: 0.8;
+  opacity: .8;
 }
 
-input[type="checkbox"]:checked + label {
-  box-shadow: 0px 0px 10px 4px $primary;
+input[type='checkbox']:checked + label {
+  box-shadow: 0 0 10px 4px $primary;
 }
 
-input[type="radio"]:checked + label {
-  box-shadow: 0px 0px 10px 4px $primary;
+input[type='radio']:checked + label {
+  box-shadow: 0 0 10px 4px $primary;
 }
 
 .profile-image {
@@ -268,7 +273,7 @@ input[type="radio"]:checked + label {
   display: none;
 }
 
-input[type="radio"] {
+input[type='radio'] {
   display: none;
 }
 
@@ -285,19 +290,18 @@ textarea.context-of-advice {
 // ==== PROVIDE ==== //
 
 .message-area {
-  margin: 0px auto;
+  margin: 0 auto;
   max-width: 600px;
-  text-align: center;
   padding: 15px;
-
+  text-align: center;
 }
 
 blockquote {
   background: darken($background, 10%);
   border-left: 5px solid darken($background, 40%);
-  margin: 1.5em 0;
-  padding: 0.5em 10px;
   font-style: italic;
+  margin: 1.5em 0;
+  padding: .5em 10px;
 }
 
 .message-area > p {
@@ -305,40 +309,40 @@ blockquote {
 }
 
 .advice-questions {
-  margin: 0px auto;
+  margin: 0 auto;
   max-width: 600px;
 }
 
 .advice-question {
-  margin: 40px auto;
-  position: relative;
   border-radius: 3px;
+  margin: 40px auto;
   padding: 15px;
+  position: relative;
 }
 
 textarea {
-  width: 100%;
-  outline: none;
-  resize: none;
-  border-radius: 3px;
   border: 1px solid $border-grey;
+  border-radius: 3px;
   color: $text-color;
+  outline: none;
   padding: 5px;
+  resize: none;
+  width: 100%;
 }
 
 .advice-question > h3 {
-  margin-top: 0px;
   margin-bottom: 15px;
+  margin-top: 0;
 }
 
 // ==== ADVISORS ====//
 
 .advisors {
-  padding: 0px;
-  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 0;
+  position: relative;
   text-align: center;
 }
 
@@ -348,12 +352,12 @@ textarea {
 }
 
 .advisors > li > label {
-  margin: 15px auto 15px;
-  height: 250px;
-  width: 249px;
   flex-grow: 1;
+  height: 250px;
   list-style-type: none;
-  text-align: center
+  margin: 15px auto;
+  text-align: center;
+  width: 249px;
 }
 
 .advisor {
@@ -375,7 +379,7 @@ textarea {
 
 .profile-image.incomplete {
   filter: grayscale(100%);
-  opacity: 0.5;
+  opacity: .5;
 }
 
 // ==== LINKS ==== //
@@ -396,22 +400,22 @@ textarea {
 
 
 .provider {
+  margin-top: 25px;
   position: relative;
   width: 100%;
-  margin-top: 25px;
 }
 
 .provider > img {
+  border-radius: 22px;
   transform: translateY(5px);
   width: 22px;
-  border-radius: 22px;
 }
 
 .provider > span {
-  line-height: 25px;
-  margin-left: 5px;
   font-size: 16px;
   font-weight: bold;
+  line-height: 25px;
+  margin-left: 5px;
 }
 
 .download-link {
@@ -421,8 +425,8 @@ textarea {
 // ======== LANDING PAGE ==============//
 
 .login-buttons {
-  width: 200px;
   margin: 10px auto;
+  width: 200px;
 }
 
 .login-buttons .button {
@@ -432,9 +436,9 @@ textarea {
 // ======== DASHBOARD ================//
 
 img.small-circle {
-  width: 50px;
   border-radius: 25px;
-  margin-right:10px;
+  margin-right: 10px;
+  width: 50px;
 }
 
 img.dashboard_action_icon {
@@ -443,8 +447,8 @@ img.dashboard_action_icon {
 
 .row {
   display: flex;
+  justify-content: center;
   margin: 5px;
-  justify-content:center;
 }
 
 .row > p {
@@ -477,8 +481,8 @@ img.dashboard_action_icon {
 
 .dashboard_actions a.button {
   margin: 0;
+  margin-left: .5em;
   padding: 10px;
-  margin-left: 0.5em;
 }
 
 .button.green {
@@ -492,18 +496,18 @@ img.dashboard_action_icon {
 }
 
 .dashboard_actions img {
-  height: 30px;
   display: block;
+  height: 30px;
 }
 
 .save-user-settings {
-  padding: 0.3em 1em;
+  padding: .3em 1em;
   width: 200px;
 }
 
 .user-settings-form label {
   display: block;
-  margin: 0.5em 0em;
+  margin: .5em 0;
 }
 
 .user-settings-form {
@@ -529,7 +533,7 @@ img.dashboard_action_icon {
   opacity: 0;
 }
 
-@keyframes fadeOut {
+@keyframes fade-out {
   from {
     opacity: 1;
   }
@@ -539,10 +543,10 @@ img.dashboard_action_icon {
   }
 }
 
-.fadeOut {
-  animation-name: fadeOut;
-  animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-  animation-fill-mode: both;
+.fade-out {
   animation-duration: 2s;
+  animation-fill-mode: both;
+  animation-name: fade-out;
+  animation-timing-function: cubic-bezier(.755, .05, .855, .06);
 }
 
