@@ -8,15 +8,10 @@ defmodule Advisor.Core.Dashboard.AdviceForMeSection do
     end
   end
 
-  defp section_for(questionnaire) do
-    questionnaire.advice
-    |> Enum.map(&(people_and_completeness(&1, questionnaire)))
-  end
-
-  def people_and_completeness(advice, %{question_ids: questions}) do
-    %{
-      advisor:   People.advisor(advice),
+  defp section_for(%{advice: advices, question_ids: questions}) do
+    Enum.map(advices, fn(advice) -> %{
+      advisor: People.advisor(advice),
       completed: Advice.completed?(advice, questions)
-    }
+    } end)
   end
 end
