@@ -258,6 +258,7 @@ input[type='radio']:checked + label {
 .profile-image {
   border-radius: 3px;
   width: 200px;
+  height: 200px;
 }
 
 .name {
@@ -409,6 +410,7 @@ textarea {
   border-radius: 22px;
   transform: translateY(5px);
   width: 22px;
+  height: 22px;
 }
 
 .provider > span {
@@ -437,6 +439,7 @@ textarea {
 
 img.small-circle {
   border-radius: 25px;
+  height: 50px;
   margin-right: 10px;
   width: 50px;
 }
