@@ -11,10 +11,7 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
 
   # TODO: This should be using the Support.Proposal as a builder
   test "creates a simple questionnaire" do
-    felipe = Users.with("Felipe Sere")
-    rabea = Users.with("Rabea Gleissner")
-    cj = Users.with("Chris Jordan")
-    priya = Users.with("Priya Patil")
+    [felipe, rabea, cj, priya] = Users.with(["Felipe Sere", "Rabea Gleissner", "Chris Jordan", "Priya Patil"])
 
     phrases = ["first question", "second question"]
     proposal = %QuestionnaireProposal{group_lead: felipe.id,
@@ -32,9 +29,7 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
   end
 
   test "message is optional" do
-    felipe = Users.with("Felipe Sere")
-    rabea = Users.with("Rabea Gleissner")
-    cj = Users.with("Chris Jordan")
+    [felipe, rabea, cj] = Users.with(["Felipe Sere", "Rabea Gleissner", "Chris Jordan"])
 
     proposal = %QuestionnaireProposal{group_lead: felipe.id,
                                       requester: rabea.id,
