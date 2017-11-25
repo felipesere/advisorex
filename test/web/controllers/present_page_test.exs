@@ -2,71 +2,31 @@ defmodule AdvisorWeb.PresentPageTest do
   use AdvisorWeb.ConnCase
   import PageAssertions
 
-  alias Advisor.Core.Questionnaire
-  alias Advisor.Test.Support.{Users, Proposal}
-  alias AdvisorWeb.Links
-  alias Advisor.Core.Questionnaire.Creator
+  alias Advisor.Test.Support.{Sample, Users}
 
-  setup do
-    Users.with(["Felipe Sere", "Rabea Gleissner", "Priya Patil", "Chris Jordan", "Jim Suchy"])
-
-    proposal = Proposal.basic()
-               |> Proposal.with_group_lead("Felipe Sere")
-               |> Proposal.build("Rabea Gleissner")
-
-    [proposal: proposal]
-  end
-
-  test "it displays all four answers to the questionnaire", %{conn: conn, proposal: proposal} do
-    questionnaire = {:ok, %{questionnaire: id}} = Creator.create(proposal)
-
-    {[%{link: cj}, %{link: priya}], _, present_link} = questionnaire
-                                                       |> Links.generate
-
-    answers = id
-              |> Questionnaire.find()
-              |> Map.get(:question_ids)
-              |> Enum.map(fn(q) -> {q, "fooo"} end)
-
-    conn
-    |> ThroughTheWeb.login_as("Chris Jordan")
-    |> post(cj, answers)
-
-    conn
-    |> ThroughTheWeb.login_as("Priya Patil")
-    |> post(priya, answers)
+  test "it displays all four answers to the questionnaire", %{conn: conn} do
+    q = Sample.questionnaire()
+        |> Sample.answer("Priya Patil", all: "some answer")
+        |> Sample.answer("Rabea Gleissner", all: "other answer")
 
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")
-    |> get(present_link)
+    |> get(Routes.present_page_path(@endpoint, :index, q.id))
     |> html_response(200)
-    |> has_title("Advice for Rabea Gleissner")
+    |> has_title("Advice for Chris Jordan")
     |> has_advice_questions(2)
-    |> has_answers(["fooo", "fooo"])
+    |> has_answers(["some answer", "other answer"])
   end
 
-  test "only the selected group lead can see the advice", %{conn: conn, proposal: proposal} do
-    questionnaire = {:ok, %{questionnaire: id}} = Creator.create(proposal)
+  test "only the selected group lead can see the advice", %{conn: conn} do
+    q = Sample.questionnaire()
+        |> Sample.answer("Priya Patil", all: "some answer")
+        |> Sample.answer("Rabea Gleissner", all: "other answer")
 
-    {[%{link: cj}, %{link: priya}], _, present_link} = questionnaire
-                                                       |> Links.generate
-
-    answers = id
-              |> Questionnaire.find()
-              |> Map.get(:question_ids)
-              |> Enum.map(fn(q) -> {q, "fooo"} end)
-
-    conn
-    |> ThroughTheWeb.login_as("Chris Jordan")
-    |> post(cj, answers)
-
-    conn
-    |> ThroughTheWeb.login_as("Priya Patil")
-    |> post(priya, answers)
-
+    Users.with("Jim Suchy")
     assert conn
            |> ThroughTheWeb.login_as("Jim Suchy")
-           |> get(present_link)
+           |> get(Routes.present_page_path(@endpoint, :index, q.id))
            |> redirected_to() == "/"
   end
 end
