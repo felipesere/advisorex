@@ -3,11 +3,13 @@ defmodule AdvisorWeb.PresentPageTest do
   import PageAssertions
 
   alias Advisor.Core.Questionnaire
-  alias Advisor.Test.Support.Proposal
+  alias Advisor.Test.Support.{Users, Proposal}
   alias AdvisorWeb.Links
   alias Advisor.Core.Questionnaire.Creator
 
   setup do
+    Users.with(["Felipe Sere", "Rabea Gleissner", "Priya Patil", "Chris Jordan", "Jim Suchy"])
+
     proposal = Proposal.basic()
                |> Proposal.with_group_lead("Felipe Sere")
                |> Proposal.build("Rabea Gleissner")

@@ -1,10 +1,13 @@
 defmodule AdvisorWeb.AdviceRequestControllerTest do
   use AdvisorWeb.ConnCase
+  alias Advisor.Test.Support.Users
 
   test "creates the proper questionnaire", %{conn: conn} do
+    felipe = Users.with("Felipe Sere")
+    cj = Users.with("Chris Jordan")
 
-    proposal = %{:group_lead => "11",
-                 :advisors => %{"4" => "true"},
+    proposal = %{:group_lead => Integer.to_string(felipe.id),
+                 :advisors => %{Integer.to_string(cj.id) => "true"},
                  :questions =>  %{"13" => "true"}}
     conn = conn
            |> ThroughTheWeb.login_as("Felipe Sere")

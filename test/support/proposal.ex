@@ -14,12 +14,17 @@ defmodule Advisor.Test.Support.Proposal do
     |> QuestionnaireProposal.for_requester(%{id: id})
   end
 
+  # This needs to beome better
   def basic() do
+    felipe = Advisor.Core.People.find_by(name: "Felipe Sere")
+    rabea = Advisor.Core.People.find_by(name: "Rabea Gleissner")
+    cj = Advisor.Core.People.find_by(name: "Chris Jordan")
+
     %{
       "proposal" => %{
-        "group_lead" => "1",
+        "group_lead" => Integer.to_string(felipe.id),
         "questions" => as_html_form([1, 2]),
-        "advisors"  => as_html_form([1, 2]),
+        "advisors"  => as_html_form([rabea.id, cj.id]),
         "message" => nil
       }
     }

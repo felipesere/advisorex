@@ -1,11 +1,12 @@
 defmodule AdvisorWeb.ProvideAdviceControllerTest do
   use AdvisorWeb.ConnCase
-  alias Advisor.Test.Support.Proposal
+  alias Advisor.Test.Support.{Users, Proposal}
   alias AdvisorWeb.Links
   alias Advisor.Core.Questionnaire.Creator
   import PageAssertions
 
   setup do
+    Users.with(["Felipe Sere", "Chris Jordan", "Rabea Gleissner"])
     {links, progress, _} = Proposal.basic()
                            |> Proposal.with_advisors(["Felipe Sere", "Chris Jordan"])
                            |> Proposal.with_message("Clever message")

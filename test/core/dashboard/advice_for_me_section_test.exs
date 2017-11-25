@@ -1,7 +1,9 @@
 defmodule Advisor.Core.Dashboard.AdviceForMeSectionTest do
   use Advisor.DataCase
 
-  test "there might not be any advice waiting for you"
+  test "there might not be any advice waiting for you" do
+
+  end
   describe "there might be advice waiting for" do
     test "that might not be completed"
     test "that might be ready for you"

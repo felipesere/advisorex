@@ -1,5 +1,6 @@
 defmodule AdvisorWeb.RequestPageTest do
   use AdvisorWeb.ConnCase
+  alias Advisor.Test.Support.Users
   alias Advisor.Core.People
   alias Advisor.Core.Questions.PhrasesCatalog
 
@@ -12,6 +13,8 @@ defmodule AdvisorWeb.RequestPageTest do
   end
 
   test "sees the page to create a questionnaire", %{conn: conn} do
+    Users.with("Felipe Sere")
+
     conn = conn
            |> ThroughTheWeb.login_as("Felipe Sere")
            |> get("/request")

@@ -1,6 +1,7 @@
 defmodule AdvisorWeb.LandingPageTest do
   use AdvisorWeb.ConnCase
   import PageAssertions
+  alias Advisor.Test.Support.Users
 
   test "Hit the landing page", %{conn: conn} do
     conn = get conn, "/"
@@ -17,6 +18,8 @@ defmodule AdvisorWeb.LandingPageTest do
   end
 
   test "No need to login again", %{conn: conn} do
+    Users.with("Felipe Sere")
+
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")
     |> get("/")
@@ -27,6 +30,8 @@ defmodule AdvisorWeb.LandingPageTest do
   end
 
   test "Can log out if you are logged in", %{conn: conn} do
+    Users.with("Felipe Sere")
+
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")
     |> get("/")

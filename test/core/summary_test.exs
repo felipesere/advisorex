@@ -1,11 +1,12 @@
 defmodule Advisor.Core.SummaryTest do
   use Advisor.DataCase
 
-  alias Advisor.Test.Support.Proposal
+  alias Advisor.Test.Support.{Users, Proposal}
   alias Advisor.Core.Questionnaire.Creator
   alias Advisor.Core.Summary
 
   setup do
+    Users.with(["Felipe Sere", "Rabea Gleissner", "Chris Jordan"])
     proposal = Proposal.basic()
                |> Proposal.build("Rabea Gleissner")
 

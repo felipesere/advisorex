@@ -3,13 +3,23 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
   alias Advisor.Core.Questionnaire.Creator
   alias AdvisorWeb.QuestionnaireProposal
   alias Advisor.Core.Questionnaire
+  alias Advisor.Test.Support.Users
+
+  setup do
+    :ok
+  end
 
   # TODO: This should be using the Support.Proposal as a builder
   test "creates a simple questionnaire" do
+    felipe = Users.with("Felipe Sere")
+    rabea = Users.with("Rabea Gleissner")
+    cj = Users.with("Chris Jordan")
+    priya = Users.with("Priya Patil")
+
     phrases = ["first question", "second question"]
-    proposal = %QuestionnaireProposal{group_lead: 1,
-                                      requester: 2,
-                                      advisors: [2, 9],
+    proposal = %QuestionnaireProposal{group_lead: felipe.id,
+                                      requester: rabea.id,
+                                      advisors: [cj.id, priya.id],
                                       questions: phrases,
                                       message: "bla"}
 
@@ -17,14 +27,18 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
 
     questionnaire = Questionnaire.find(created.questionnaire)
 
-    assert Enum.map(created.advisories, &(&1.advisor.id)) == [2, 9]
+    assert Enum.map(created.advisories, &(&1.advisor.id)) == [cj.id, priya.id]
     assert questionnaire.message == "bla"
   end
 
   test "message is optional" do
-    proposal = %QuestionnaireProposal{group_lead: 1,
-                                      requester: 2,
-                                      advisors: [2, 9],
+    felipe = Users.with("Felipe Sere")
+    rabea = Users.with("Rabea Gleissner")
+    cj = Users.with("Chris Jordan")
+
+    proposal = %QuestionnaireProposal{group_lead: felipe.id,
+                                      requester: rabea.id,
+                                      advisors: [cj.id],
                                       questions: []}
 
     {:ok, created} = Creator.create(proposal)

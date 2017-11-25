@@ -2,12 +2,19 @@ defmodule AdvisorWeb.DashboardPageTest do
   use AdvisorWeb.ConnCase
   import PageAssertions
 
-  alias Advisor.Test.Support.Proposal
+  alias Advisor.Test.Support.{Users, Proposal}
   alias Advisor.Core.Questionnaire.Creator
   alias Advisor.Core.Answers
   alias Advisor.Core.People
 
   @group_lead "Felipe Sere"
+
+  setup do
+    Users.with(["Felipe Sere", "Rabea Gleissner",
+                "Priya Patil", "Sarah Johnston",
+                "Chris Jordan", "Nick Dyer", "Jim Suchy"])
+    :ok
+  end
 
   def advice_for(person, advisors) do
     proposal = Proposal.basic()

@@ -1,13 +1,12 @@
 defmodule AdvisorWeb.QuestionnaireControllerTest do
   use AdvisorWeb.ConnCase
 
-  alias Advisor.Test.Support.Proposal
+  alias Advisor.Test.Support.{Proposal, Users}
   alias AdvisorWeb.QuestionnaireProposal
-  alias Advisor.Core.Questionnaire.Creator
-  alias Advisor.Core.Questionnaire
-  alias Advisor.Core.{Answers, Advice}
+  alias Advisor.Core.{Answers, Advice, Questionnaire, Questionnaire.Creator}
 
   test "will delete an entire questionnaire", %{conn: conn} do
+    Users.with(["Felipe Sere", "Rabea Gleissner", "Chris Jordan"])
     proposal = Proposal.basic()
                |> Proposal.build()
 

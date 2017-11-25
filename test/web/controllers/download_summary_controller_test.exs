@@ -1,12 +1,16 @@
 defmodule AdvisorWeb.DownloadSummaryControllerTest do
   use AdvisorWeb.ConnCase
+  alias Advisor.Test.Support.Users
 
   alias Advisor.Test.Support.Proposal
   alias AdvisorWeb.Links
   alias Advisor.Core.Questionnaire.Creator
 
   setup do
+    Users.with(["Rabea Gleissner", "Felipe Sere", "Jim Suchy", "Chris Jordan"])
+
     proposal = Proposal.basic()
+               |> Proposal.with_advisors(["Jim Suchy", "Chris Jordan"])
                |> Proposal.build("Rabea Gleissner")
 
     %{questions: questions} = proposal
@@ -22,6 +26,7 @@ defmodule AdvisorWeb.DownloadSummaryControllerTest do
     answers = questions
               |> Enum.map(fn(id) -> {String.to_atom(id), "some answer"} end)
               |> Keyword.new
+
     ThroughTheWeb.answer!(conn, links, answers)
 
     conn

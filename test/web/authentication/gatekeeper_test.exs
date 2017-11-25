@@ -3,8 +3,15 @@ defmodule AdvisorWeb.Authentication.GatekeeprTest do
   alias AdvisorWeb.Authentication.Gatekeeper
   alias Advisor.Core.{Person, People}
   alias Plug.Test, as: PlugSupport
+  alias Advisor.Test.Support.Users
 
   @default_opts Gatekeeper.init([])
+
+  setup do
+    Users.with("Chris Jordan")
+
+    :ok
+  end
 
   test "halts the request if not user_id found in session" do
     conn = get("/") |> Gatekeeper.call(@default_opts)
