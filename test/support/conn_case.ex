@@ -19,7 +19,7 @@ defmodule AdvisorWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      import AdvisorWeb.Router.Helpers
+      alias AdvisorWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
       @endpoint AdvisorWeb.Endpoint

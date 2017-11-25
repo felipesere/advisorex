@@ -23,7 +23,8 @@ defmodule AdvisorWeb.ProvideAdviceController do
                                        message: questionnaire.message)
     else
       conn
-      |> put_resp_cookie("target", conn.request_path)
+      |> fetch_session()
+      |> put_session(:target, conn.request_path)
       |> redirect(to: "/")
     end
   end

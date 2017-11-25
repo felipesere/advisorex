@@ -1,57 +1,40 @@
 defmodule AdvisorWeb.ProvideAdviceControllerTest do
   use AdvisorWeb.ConnCase
-  alias Advisor.Test.Support.{Users, Proposal}
-  alias AdvisorWeb.Links
-  alias Advisor.Core.Questionnaire.Creator
   import PageAssertions
+  alias Advisor.Test.Support.Sample
 
   setup do
-    Users.with(["Felipe Sere", "Chris Jordan", "Rabea Gleissner"])
-    {links, progress, _} = Proposal.basic()
-                           |> Proposal.with_advisors(["Felipe Sere", "Chris Jordan"])
-                           |> Proposal.with_message("Clever message")
-                           |> Proposal.build("Rabea Gleissner")
-                           |> Creator.create
-                           |> Links.generate
+    advice = Sample.questionnaire()
+             |> Sample.advice_from("Rabea Gleissner")
 
-    [links: links, progress: progress]
+    [advice: advice]
   end
 
-  test "renders the form", %{conn: conn, links: links} do
-    felipes_advice = advisory_for(links, "Felipe Sere")
+  test "renders the form", %{conn: conn, advice: advice} do
+    path = Routes.provide_advice_path(@endpoint, :index, advice.id)
 
     conn
-    |> ThroughTheWeb.login_as("Felipe Sere")
-    |> get(felipes_advice)
+    |> ThroughTheWeb.login_as("Rabea Gleissner")
+    |> get(path)
     |> html_response(200)
-    |> has_header("Advice for Rabea Gleissner")
-    |> has_message("Clever message")
+    |> has_header("Advice for Chris Jordan")
+    |> has_message("This is a random message")
   end
 
-  test "force login if incorrect advisor is authenticated", %{conn: conn, links: links} do
-    felipes_advice_link = advisory_for(links, "Felipe Sere")
-
-    conn = conn
-           |> ThroughTheWeb.login_as("Rabea Gleissner")
-           |> get(felipes_advice_link)
-
-    assert conn |> redirected_to() == "/"
-    assert conn.cookies["target"] == felipes_advice_link
+  test "force login if incorrect advisor is authenticated", %{conn: conn, advice: advice} do
+    assert conn
+           |> ThroughTheWeb.login_as("Priya Patil")
+           |> get(Routes.provide_advice_path(@endpoint, :index, advice.id))
+           |> redirected_to() == "/"
   end
 
-  test "renders thank you page", %{conn: conn, links: links} do
-    [%{link: link} | _] = links
+  test "renders thank you page", %{conn: conn, advice: advice} do
+    path = Routes.provide_advice_path(@endpoint, :create, advice.id)
 
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")
-    |> post(link)
+    |> post(path)
     |> html_response(200)
     |> has_header("Thank you!")
-  end
-
-  def advisory_for(links, name) do
-    links
-    |> Enum.find(&(&1.person.name == name))
-    |> Map.fetch!(:link)
   end
 end

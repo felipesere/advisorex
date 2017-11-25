@@ -21,6 +21,7 @@ defmodule Advisor.Core.Advice do
     |> preload(:answers)
   end
 
+  def find_all(%{id: id}), do: find_all(id)
   def find_all(id) do
     Repo.all(advice() |> where([advice], advice.questionnaire_id == ^id))
   end

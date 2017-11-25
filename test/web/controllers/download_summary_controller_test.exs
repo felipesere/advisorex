@@ -1,7 +1,6 @@
 defmodule AdvisorWeb.DownloadSummaryControllerTest do
   use AdvisorWeb.ConnCase
   alias Advisor.Test.Support.Sample
-  alias AdvisorWeb.Router.Helpers, as: Routes
 
   test "downloads answers as CSV", %{conn: conn} do
     questionnaire = Sample.questionnaire()

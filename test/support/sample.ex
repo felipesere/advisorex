@@ -2,6 +2,7 @@ defmodule Advisor.Test.Support.Sample do
   alias Advisor.Core.Questionnaire
   alias Advisor.Core.Advice
   alias Advisor.Core.Question
+  alias Advisor.Core.People
   alias Advisor.Repo
   alias Advisor.Test.Support.Users
 
@@ -27,5 +28,13 @@ defmodule Advisor.Test.Support.Sample do
     |> Repo.insert!()
 
     Questionnaire.find(q.id)
+  end
+
+  def advice_from(questionnaire, name) do
+    questionnaire
+    |> Advice.find_all()
+    |> Enum.map(fn(a) -> {a, People.find_by(id: a.advisor_id)} end)
+    |> Enum.find(fn({_, p}) -> p.name == name end)
+    |> elem(0)
   end
 end
