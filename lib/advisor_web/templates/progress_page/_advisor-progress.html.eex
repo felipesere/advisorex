@@ -5,5 +5,5 @@
     <span class="completeness">Incomplete</span>
   <% else %>
     <span class="completeness">Completed</span>
-    <%= end %>
+    <% end %>
 </li>
