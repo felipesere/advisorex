@@ -1,25 +1,16 @@
 defmodule Advisor.Core.SummaryTest do
   use Advisor.DataCase
 
-  alias Advisor.Test.Support.{Users, Proposal}
-  alias Advisor.Core.Questionnaire.Creator
-  alias Advisor.Core.Summary
+  alias Advisor.Test.Support.Sample
+  alias Advisor.Core.{Advice, Summary}
 
-  setup do
-    Users.with(["Felipe Sere", "Rabea Gleissner", "Chris Jordan"])
-    proposal = Proposal.basic()
-               |> Proposal.build("Rabea Gleissner")
-
-    [proposal: proposal]
-  end
-
-  test "presents tabular data for a given questionnaire", %{proposal: proposal} do
-    {:ok, created} = Creator.create(proposal)
-    %{advisories: advisories, questionnaire: id} = created
+  test "presents tabular data for a given questionnaire" do
+    questionnaire = Sample.questionnaire()
+    advisories = Advice.find_all(questionnaire)
 
     ThroughTheCore.answer!(advisories, with: %{"1" => "Foo", "2" => "Bar"})
 
-    [_headers, first, _second] = Summary.for_download(id)
-    assert length(first) == 5
+    [_headers, columns, _second] = Summary.for_download(questionnaire.id)
+    assert length(columns) == 5
   end
 end
