@@ -3,6 +3,7 @@ defmodule Advisor.Test.Support.Sample do
   alias Advisor.Core.Advice
   alias Advisor.Core.Question
   alias Advisor.Core.People
+  alias Advisor.Core.Answer
   alias Advisor.Repo
   alias Advisor.Test.Support.Users
 
@@ -36,5 +37,19 @@ defmodule Advisor.Test.Support.Sample do
     |> Enum.map(fn(a) -> {a, People.find_by(id: a.advisor_id)} end)
     |> Enum.find(fn({_, p}) -> p.name == name end)
     |> elem(0)
+  end
+
+  def answer(questionnaire, name, [all: answer]) do
+    person = People.find_by(name: name)
+    advice = advice_from(questionnaire, name)
+    questions = questionnaire.question_ids
+
+    Enum.each(questions, fn(question) ->
+      advice
+      |> Ecto.build_assoc(:answers, %{answer: answer, question_id: question})
+      |> Repo.insert!()
+    end)
+
+    questionnaire
   end
 end
