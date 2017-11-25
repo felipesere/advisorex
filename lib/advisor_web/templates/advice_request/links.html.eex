@@ -4,14 +4,14 @@
   </header>
 
   <ul class="advice-links">
-    <%= for link <- @links do %>
+    <%= for advice <- @advice do %>
       <li>
-        <p><%= link.person.name %>
-        <a class="individual" href="<%= link.link %>"><%= link.link %></a>
+        <p><%= advice.advisor.name %>
+        <a class="individual" href="<%= a_link(advice) %>"><%= advice.id %></a>
         </p>
       </li>
     <% end %>
   </ul>
 
-  <p>See advice <a class="see-advice-link" href="<%= @progress_link %>"><%= @progress_link %></a></p>
+  <p>See advice <a class="see-advice-link" href="<%= progress_link(@questionnaire) %>"><%= @questionnaire.id %></a></p>
 </section>

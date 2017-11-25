@@ -12,15 +12,15 @@ defmodule AdvisorWeb.QuestionnaireControllerTest do
 
     %QuestionnaireProposal{questions: [first_id, second_id]} = proposal
 
-    {:ok, %{questionnaire: id, advisories: advisories}} = Creator.create(proposal)
+    {:ok, %{questionnaire: q, advisories: advisories}} = Creator.create(proposal)
 
     ThroughTheCore.answer!(advisories, with: %{first_id => "Foo", second_id => "Bar"})
 
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")
-    |> get("/questionnaire/#{id}/delete")
+    |> get("/questionnaire/#{q.id}/delete")
 
-    refute Questionnaire.find(id)
+    refute Questionnaire.find(q)
     assert [] == Answers.find(advisories)
     assert [] == Advice.find(advisories)
   end

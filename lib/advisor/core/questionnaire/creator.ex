@@ -28,7 +28,7 @@ defmodule Advisor.Core.Questionnaire.Creator do
                  |> elem(1) # TODO: There is something off here too
                  |> Enum.map(&expanded_advisor/1)
 
-    {:ok, %Created{questionnaire:  questionnaire.id, advisories: advisories}}
+    {:ok, %Created{questionnaire:  questionnaire, advisories: advisories}}
   end
 
   defp expanded_advisor(%{id: id} = advice) do

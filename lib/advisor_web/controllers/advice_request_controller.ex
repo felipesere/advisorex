@@ -1,18 +1,17 @@
 defmodule AdvisorWeb.AdviceRequestController do
   use AdvisorWeb, :controller
-  alias AdvisorWeb.{Links, QuestionnaireProposal, Authentication.User}
+  alias AdvisorWeb.QuestionnaireProposal
   alias Advisor.Core.Questionnaire.Creator
-  import User, only: [found_in: 1]
+  alias AdvisorWeb.Authentication.User
 
   plug  AdvisorWeb.Authentication.Gatekeeper
 
   def create(conn, params) do
-    {links, progress, _} = params
-                           |> QuestionnaireProposal.from_params()
-                           |> QuestionnaireProposal.for_requester(found_in(conn))
-                           |> Creator.create
-                           |> Links.generate
+    {:ok, %{advisories: a, questionnaire: q}} = params
+                                  |> QuestionnaireProposal.from_params()
+                                  |> QuestionnaireProposal.for_requester(User.found_in(conn))
+                                  |> Creator.create
 
-    render conn, "links.html", links: links, progress_link: progress
+    render conn, "links.html", advice: a, questionnaire: q
   end
 end

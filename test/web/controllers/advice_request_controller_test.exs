@@ -17,7 +17,7 @@ defmodule AdvisorWeb.AdviceRequestControllerTest do
 
     assert response |> Floki.find("h1") |> Floki.text == "Here are your links"
     assert response |> Floki.find(".individual") |> Enum.count == 1
-    assert advice_link(response) =~ "/progress/"
+    assert advice_link(response)
   end
 
   def advice_link(html) do

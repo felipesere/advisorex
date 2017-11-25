@@ -39,6 +39,8 @@ defmodule AdvisorWeb do
 
       import AdvisorWeb.Router.Helpers
       import AdvisorWeb.ErrorHelpers
+
+      @endpoint AdvisorWeb.Endpoint
     end
   end
 
