@@ -1,7 +1,7 @@
 # Advisor
 
 [![Build Status](https://travis-ci.org/felipesere/advisorex.svg?branch=master)](https://travis-ci.org/felipesere/advisorex)
-[![Deps Status](https://beta.hexfaktor.org/badge/all/github/felipesere/advisorex.svg)](https://beta.hexfaktor.org/github/felipesere/advisorex)
+[![Dependency Status](https://dependencyci.com/github/felipesere/advisorex/badge)](https://dependencyci.com/github/felipesere/advisorex)
 [![Coverage Status](https://coveralls.io/repos/github/felipesere/advisorex/badge.svg?branch=master)](https://coveralls.io/github/felipesere/advisorex?branch=master)
 
 This little app sprung to life as an attempt to improve upon the current peer-feedback process.
