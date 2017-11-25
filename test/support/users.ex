@@ -1,5 +1,5 @@
 defmodule Advisor.Test.Support.Users do
-  alias Advisor.Core.Person
+  alias Advisor.Core.{Person, People}
   alias Advisor.Repo
 
   @people [
@@ -18,6 +18,13 @@ defmodule Advisor.Test.Support.Users do
   end
 
   def with(name) do
+    case People.find_by(name: name) do
+      nil -> add(name)
+      person -> person
+    end
+  end
+
+  def add(name) do
     @people
     |> Enum.find(fn(p) -> p.name == name end)
     |> Repo.insert!()

@@ -18,6 +18,7 @@ defmodule AdvisorWeb.ProgressPageTest do
 
   test "shows the progress filling in the questionnaires", %{conn: conn,
                                                              proposal: proposal} do
+
     {_, progress_page, _} = proposal
                             |> Creator.create
                             |> Links.generate
