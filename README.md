@@ -31,6 +31,7 @@ To start your Phoenix server:
   * Create and migrate your database with `mix ecto.create && mix ecto.migrate` 
     *  make sure to have a user `postgres` without password and superuser role
   * Install Node.js dependencies with `cd assets && npm install`
+  * Seed the database with `mix seed`
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
@@ -57,5 +58,6 @@ To start the server for the advisorex project, run:
 ``` unix
 vagrant ssh
 cd /advisorex
+mix seed
 mix phx.server
 ```
