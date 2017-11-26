@@ -13,7 +13,6 @@ defmodule AdvisorWeb.AuthenticationController do
       |> LoginUser.find_or_create()
       |> proceed(conn, redirect_to: target)
     else
-      # Flash?
       conn |> redirect(to: "/")
     end
   end
@@ -24,7 +23,6 @@ defmodule AdvisorWeb.AuthenticationController do
     |> get_session(:target) || "/"
   end
 
-  # Flash?
   def proceed(nil, conn,  _), do: conn |> redirect(to: "/")
   def proceed(%{id: id}, conn, [redirect_to: destination]) do
     conn
