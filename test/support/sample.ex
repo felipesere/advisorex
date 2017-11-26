@@ -44,7 +44,6 @@ defmodule Advisor.Test.Support.Sample do
   end
 
   def answer(questionnaire, name, [all: answer]) do
-    person = People.find_by(name: name)
     advice = advice_from(questionnaire, name)
     questions = questionnaire.question_ids
 
