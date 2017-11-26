@@ -24,6 +24,6 @@ if Mix.env == :dev do
   Repo.insert!(%Person{name: "Ann Perkins", email: "ann@parks.com", profile_image: "https://upload.wikimedia.org/wikipedia/en/3/33/Ann_Perkins.jpg"})
   Repo.insert!(%Person{name: "Donna Meagle", email: "donna@parks.com", profile_image: "http://vignette4.wikia.nocookie.net/parksandrecreation/images/5/59/Donna_2.jpg/revision/latest?cb=20111015210204"})
   Repo.insert!(%Person{name: "Ben Wyatt", email: "ben@parks.com", profile_image: "https://vignette.wikia.nocookie.net/parksandrecreation/images/0/0a/Ben.jpg/revision/latest/scale-to-width-down/350?cb=20110809181418"})
-  Repo.insert!(%Person{name: "Jerry Gergich", email: "jerry@parks.com", profile_image: "http://www.blursto.com/inc/images/r/113.jpg"})
+  Repo.insert!(%Person{name: "Jerry Gergich", email: "jerry@parks.com"})
   Repo.insert!(%Person{name: "Chris Traeger", email: "chris@parks.com", is_group_lead: true, profile_image: "https://memegenerator.net/img/images/600x600/1993394/chris-traeger.jpg"})
 end
