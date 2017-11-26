@@ -3,7 +3,9 @@
     <h1>Hello <%= @user.name %>!</h1>
   </header>
 
-  <a href="/request" class="button primary">Request advice for yourself</a>
+  <%= if ! @dashboard.existing_questionnaire do %>
+    <a href="/request" class="button primary">Request advice for yourself</a>
+  <% end %>
 </section>
 
 <%= if @user.is_group_lead && has_advice(@dashboard) do %>

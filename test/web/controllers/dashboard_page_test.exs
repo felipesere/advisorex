@@ -7,6 +7,16 @@ defmodule AdvisorWeb.DashboardPageTest do
 
   @group_lead "Felipe Sere"
 
+  test "you can only have a single questionnaire open", %{conn: conn} do
+    Sample.questionnaire(group_lead: "Jim Suchy", requester: "Felipe Sere", advisors: ["Priya Patil"])
+
+    conn
+    |> ThroughTheWeb.login_as(@group_lead)
+    |> get("/dashboard")
+    |> html_response(200)
+    |> has_no_link("Request advice for yourself")
+  end
+
   test "it shows a section for group leads", %{conn: conn} do
     Sample.questionnaire(group_lead: @group_lead,
                          requester: "Rabea Gleissner",
