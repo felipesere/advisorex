@@ -3,30 +3,34 @@ defmodule Advisor.Test.Support.Sample do
   alias Advisor.Core.Advice
   alias Advisor.Core.Question
   alias Advisor.Core.People
-  alias Advisor.Core.Answer
   alias Advisor.Repo
   alias Advisor.Test.Support.Users
 
   def questionnaire() do
-    [felipe, cj, rabea, priya] = Users.with(["Felipe Sere", "Chris Jordan", "Rabea Gleissner", "Priya Patil"])
+    questionnaire(group_lead: "Felipe Sere", requester: "Chris Jordan", advisors: ["Rabea Gleissner", "Priya Patil"])
+  end
+
+
+  def questionnaire(group_lead: lead, requester: requester, advisors: advisors) do
+    lead = Users.with(lead)
+    requester = Users.with(requester)
+    advisors = Users.with(advisors)
 
     ids = Question.store(["foo", "bar"])
 
     q = %Questionnaire{
       question_ids: ids,
-      group_lead: felipe.id,
-      requester_id: cj.id,
+      group_lead: lead.id,
+      requester_id: requester.id,
       message: "This is a random message"
     }
     |> Repo.insert!()
 
-    q
-    |> Ecto.build_assoc(:advice, %{requester_id: cj.id, advisor_id: rabea.id})
-    |> Repo.insert!()
-
-    q
-    |> Ecto.build_assoc(:advice, %{requester_id: cj.id, advisor_id: priya.id})
-    |> Repo.insert!()
+    Enum.each(advisors, fn(advisor) ->
+      q
+      |> Ecto.build_assoc(:advice, %{requester_id: requester.id, advisor_id: advisor.id})
+      |> Repo.insert!()
+    end)
 
     Questionnaire.find(q.id)
   end
