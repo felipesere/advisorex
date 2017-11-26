@@ -1,6 +1,5 @@
 defmodule PageAssertions do
   use Phoenix.ConnTest
-  import PageQueries
   import ExUnit.Assertions
 
   def has_link_to(html, value) do
@@ -45,16 +44,6 @@ defmodule PageAssertions do
              |> Floki.text
 
     assert button =~ text
-    html
-  end
-
-  def has_requester(html, requester_name) do
-    assert requester(html) =~ requester_name
-    html
-  end
-
-  def has_advisors(html, advisors_names) do
-    assert advisors(html) == advisors_names
     html
   end
 

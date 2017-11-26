@@ -33,7 +33,4 @@ defmodule Advisor.Core.Answers do
 
     Repo.all(from a in Answer, where: a.advice_request_id in ^ids)
   end
-  def find(advisory) do
-    Repo.all(from a in Answer, where: a.advice_request_id == ^advisory.id)
-  end
 end

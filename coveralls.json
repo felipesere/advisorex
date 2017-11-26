@@ -8,7 +8,8 @@
     "lib/advisor/web/web.ex",
     "lib/advisor_web/controllers/healthcheck_controller.ex",
     "lib/mix/tasks/*",
-    "lib/advisor_web/router.ex"
+    "lib/advisor_web/router.ex",
+    "test/support/*"
   ]
 }
 
