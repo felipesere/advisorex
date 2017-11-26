@@ -1,7 +1,7 @@
 defmodule AdvisorWeb.LandingPageTest do
   use AdvisorWeb.ConnCase
   import PageAssertions
-  alias Advisor.Test.Support.Users
+  alias Advisor.Test.Support.{Sample, Users}
 
   test "Hit the landing page", %{conn: conn} do
     conn = get conn, "/"
@@ -46,5 +46,15 @@ defmodule AdvisorWeb.LandingPageTest do
 
   def has_logout_button(html) do
     assert html |> Floki.find(".button.logout") |> length() == 1
+  end
+
+  test "can only have one questionnaire open at a time", %{conn: conn} do
+    Sample.questionnaire(for: "Felipe Sere")
+
+    conn
+    |> ThroughTheWeb.login_as("Felipe Sere")
+    |> get("/")
+    |> html_response(200)
+    |> has_no_link("Ask for advice")
   end
 end

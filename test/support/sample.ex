@@ -10,6 +10,9 @@ defmodule Advisor.Test.Support.Sample do
     questionnaire(group_lead: "Felipe Sere", requester: "Chris Jordan", advisors: ["Rabea Gleissner", "Priya Patil"])
   end
 
+  def questionnaire([for: requester]) do
+    questionnaire(group_lead: "Felipe Sere", requester: requester, advisors: ["Rabea Gleissner", "Priya Patil"])
+  end
 
   def questionnaire(group_lead: lead, requester: requester, advisors: advisors) do
     lead = Users.with(lead)

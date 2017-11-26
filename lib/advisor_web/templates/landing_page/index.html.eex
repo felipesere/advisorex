@@ -5,6 +5,10 @@
   </header>
 
   <div class="login-buttons">
-    <%= login_form_for(@logged_in) %>
+    <%= if @logged_in do %>
+      <%= render "_logged_in.html", existing_questionnaire: @existing_questionnaire %>
+    <% else %>
+      <%= render "_not_logged_in.html" %>
+    <% end %>
   </div>
 </section>
