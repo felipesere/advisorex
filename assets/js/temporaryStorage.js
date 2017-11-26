@@ -4,7 +4,7 @@ module.exports = {
   bind: function(selector) {
     if(localStorage) {
       $(selector).each(function(idx, answer) {
-        let answerNode = $(answer)
+        var answerNode = $(answer)
 
         if(localStorage[answer.name]) {
           answerNode.text(localStorage[answer.name]);
