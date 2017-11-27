@@ -34,3 +34,6 @@ cover
 
 terraform/terraform.tfvars
 terraform/terraform.tfstate
+
+assets/backstop_data/bitmaps_test/**
+assets/backstop_data/html_report/**

@@ -3,10 +3,15 @@
   "license": "MIT",
   "scripts": {
     "deploy": "brunch build --production",
-    "watch": "brunch watch --stdin"
+    "watch": "brunch watch --stdin",
+    "approve": "backstop approve",
+    "test": "backstop test",
+    "init": "backstop init",
+    "reference": "backstop reference"
   },
   "dependencies": {
     "autoprefixer": "^7.1.6",
+    "backstopjs": "^3.0.32",
     "csswring": "^6.0.2",
     "debounce": "^1.1.0",
     "phoenix": "file:../deps/phoenix",
