@@ -228,6 +228,10 @@ hr.separator {
 
   .advisor-label {
     align-self: start;
+
+    :hover {
+      cursor: pointer;
+    }
   }
 
   .advisor-name {
@@ -242,50 +246,6 @@ hr.separator {
   input[type=checkbox]:checked + .advisor-image {
     box-shadow: 0 0 10px 4px $primary;
   }
-}
-
-
-
-.people-picker {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 0;
-  position: relative;
-}
-
-.people-picker > li {
-  flex-grow: 1;
-}
-
-.people-picker > li > label {
-  background-color: darken($background, 10%);
-  flex-grow: 1;
-  height: 250px;
-  list-style-type: none;
-  margin: 15px auto;
-  text-align: center;
-  width: 249px;
-}
-
-.people-picker > li.selected > .profile-image {
-  box-shadow: 0 0 10px 4px $primary;
-}
-
-.people-picker > li > label:hover {
-  cursor: pointer;
-}
-
-.people-picker > li:hover > .profile-image {
-  opacity: .8;
-}
-
-input[type='checkbox']:checked + label {
-  box-shadow: 0 0 10px 4px $primary;
-}
-
-input[type='radio']:checked + label {
-  box-shadow: 0 0 10px 4px $primary;
 }
 
 .profile-image {
