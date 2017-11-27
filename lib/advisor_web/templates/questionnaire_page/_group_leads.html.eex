@@ -1,9 +1,12 @@
-<ul class="people-picker collection-wrapper">
-  <%= for person <- @leads do %>
-    <li class="group-lead">
-      <%= radio_button(@form ,:group_lead, person.id) %>
-      <%= label(@form, :group_lead, "", for: "proposal_group_lead_#{person.id}", class: "people-picker", style: "background-image: url(#{image_url(person)}); background-size: cover;") %>
-      <span class="name"><%= person.name %></span>
+  <ul class="people-grid">
+    <%= for person <- @leads do %>
+    <li class="advisor-grid-tile">
+      <%= label @form, :group_lead, [for: "proposal_group_lead_#{person.id}", class: "advisor-label"] do %>
+        <%= radio_button(@form ,:group_lead, person.id) %>
+        <div class="advisor-image" style="background-image: url(<%= image_url(person) %>);" >
+        </div>
+      <% end %>
+      <p class="advisor-name"><%= person.name %></p>
     </li>
-  <% end %>
-</ul>
+    <% end %>
+  </ul>

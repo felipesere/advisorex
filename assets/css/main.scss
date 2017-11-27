@@ -238,6 +238,7 @@ hr.separator {
     text-align: center;
   }
 
+  input[type=radio]:checked + .advisor-image,
   input[type=checkbox]:checked + .advisor-image {
     box-shadow: 0 0 10px 4px $primary;
   }
