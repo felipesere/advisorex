@@ -211,6 +211,46 @@ hr.separator {
 }
 
 // ==== PEOPLE PICKER ==== //
+//
+.people-grid {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.advisor-grid-tile {
+  .xyz {
+    padding-bottom: 100%;
+    position: relative;
+    overflow: hidden;
+    object-fit: cover;
+  }
+  // Heihgt and width still need some work to be 100% responseive
+  .advisor-image {
+    position: absolute;
+    background-color: darken($background, 10%);
+    width: 100%;
+  }
+
+  .advisor-label {
+    align-self: start;
+  }
+
+  .advisor-name {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 26px;
+    margin: 0;
+    text-align: center;
+  }
+
+  input[type=checkbox]:checked + .xyz {
+      box-shadow: 0 0 10px 4px $primary;
+  }
+}
+
+
 
 .people-picker {
   display: flex;
@@ -225,7 +265,6 @@ hr.separator {
 }
 
 .people-picker > li > label {
-
   background-color: darken($background, 10%);
   flex-grow: 1;
   height: 250px;
