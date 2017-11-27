@@ -211,7 +211,7 @@ hr.separator {
 }
 
 // ==== PEOPLE PICKER ==== //
-//
+
 .people-grid {
   display: grid;
   grid-auto-rows: 1fr;
@@ -220,17 +220,10 @@ hr.separator {
 }
 
 .advisor-grid-tile {
-  .xyz {
-    padding-bottom: 100%;
-    position: relative;
-    overflow: hidden;
-    object-fit: cover;
-  }
-  // Heihgt and width still need some work to be 100% responseive
   .advisor-image {
-    position: absolute;
     background-color: darken($background, 10%);
-    width: 100%;
+    background-size: cover;
+    padding-bottom: 100%;
   }
 
   .advisor-label {
@@ -245,8 +238,8 @@ hr.separator {
     text-align: center;
   }
 
-  input[type=checkbox]:checked + .xyz {
-      box-shadow: 0 0 10px 4px $primary;
+  input[type=checkbox]:checked + .advisor-image {
+    box-shadow: 0 0 10px 4px $primary;
   }
 }
 
