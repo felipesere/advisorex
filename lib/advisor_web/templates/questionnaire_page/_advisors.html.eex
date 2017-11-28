@@ -1,11 +1,14 @@
-<ul class="people-picker collection-wrapper">
-  <%= inputs_for @form, :advisors, fn advisors_form -> %>
+<%= inputs_for @form, :advisors, fn advisors_form -> %>
+  <ul class="people-grid">
     <%= for person <- @everybody do %>
-      <li class="advisor">
-        <%= checkbox(advisors_form, String.to_atom("#{person.id}"), class: "advisor-select") %>
-        <%= label(advisors_form, :advisor, "", for: "proposal_advisors_#{person.id}", class: "people-picker", style: "background-image: url(#{image_url(person)}); background-size: cover;") %>
-        <span class="name"><%= person.name %></span>
+      <li class="advisor-grid-tile">
+        <%= label advisors_form, :advisor, [for: "proposal_advisors_#{person.id}", class: "advisor-label"] do %>
+           <%= checkbox(advisors_form, String.to_atom("#{person.id}"), class: "advisor-select") %>
+           <div class="advisor-image" style="background-image: url(<%= image_url(person) %>);" >
+           </div>
+        <% end %>
+        <p class="advisor-name"><%= person.name %></p>
       </li>
     <% end %>
-  <% end %>
 </ul>
+<% end %>

@@ -212,62 +212,48 @@ hr.separator {
 
 // ==== PEOPLE PICKER ==== //
 
-.people-picker {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+.people-grid {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, 250px);
+  justify-content: center;
   padding: 0;
-  position: relative;
 }
 
-.people-picker > li {
-  flex-grow: 1;
-}
+.advisor-grid-tile {
+  .advisor-image {
+    background-color: darken($background, 10%);
+    background-size: cover;
+    padding-bottom: 100%;
+  }
 
-.people-picker > li > label {
+  .advisor-label {
+    align-self: start;
 
-  background-color: darken($background, 10%);
-  flex-grow: 1;
-  height: 250px;
-  list-style-type: none;
-  margin: 15px auto;
-  text-align: center;
-  width: 249px;
-}
+    :hover {
+      cursor: pointer;
+    }
+  }
 
-.people-picker > li.selected > .profile-image {
-  box-shadow: 0 0 10px 4px $primary;
-}
+  .advisor-name {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 26px;
+    margin: 0;
+    text-align: center;
+  }
 
-.people-picker > li > label:hover {
-  cursor: pointer;
-}
-
-.people-picker > li:hover > .profile-image {
-  opacity: .8;
-}
-
-input[type='checkbox']:checked + label {
-  box-shadow: 0 0 10px 4px $primary;
-}
-
-input[type='radio']:checked + label {
-  box-shadow: 0 0 10px 4px $primary;
+  input[type=radio]:checked + .advisor-image,
+  input[type=checkbox]:checked + .advisor-image {
+    box-shadow: 0 0 10px 4px $primary;
+  }
 }
 
 .profile-image {
   border-radius: 3px;
   width: 200px;
   height: 200px;
-}
-
-.name {
-  display: block;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 26px;
-  margin-bottom: 50px;
-  text-align: center;
 }
 
 .advisor-select {
