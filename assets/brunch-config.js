@@ -9,7 +9,8 @@ exports.config = {
   },
 
   conventions: {
-    assets: /^(static)/
+    assets: /^(static)/,
+    ignored: /(backstop_data)/
   },
 
   paths: {
