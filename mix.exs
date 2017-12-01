@@ -20,7 +20,7 @@ defmodule Advisor.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Advisor.Application, []},
-     extra_applications: [:logger, :runtime_tools, :ueberauth, :ueberauth_google]]
+     extra_applications: [:logger, :runtime_tools, :bamboo, :ueberauth, :ueberauth_google]]
   end
 
   # Specifies which paths to compile per environment.
@@ -42,7 +42,8 @@ defmodule Advisor.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:yaml_elixir, "~> 1.3"},
      {:ueberauth_google, "~> 0.7.0"},
-     {:guardian, "~> 1.0"}
+     {:guardian, "~> 1.0"},
+     {:bamboo, "~> 0.8.0"},
     ] ++ test_deps()
   end
 

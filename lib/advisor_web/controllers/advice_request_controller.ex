@@ -12,6 +12,7 @@ defmodule AdvisorWeb.AdviceRequestController do
                     |> QuestionnaireProposal.for_requester(User.found_in(conn))
                     |> Creator.create
 
+    Advisor.Core.Notifications.about_new_questionnaire(q)
     render conn, "links.html", advice: questionnaire.advice, questionnaire: questionnaire
   end
 end

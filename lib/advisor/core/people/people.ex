@@ -38,6 +38,7 @@ defmodule Advisor.Core.People do
   end
 
   def advisor(%{advisor_id: id}), do: find_by_id(id)
+  def advisor(%{id: id}), do: find_by_id(id)
 
   defp query_by_user(id),     do: Repo.one(from p in Person, where: p.id == ^id)
 
@@ -51,5 +52,4 @@ defmodule Advisor.Core.People do
       _ -> :bad_parse
     end
   end
-
 end

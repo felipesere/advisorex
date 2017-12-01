@@ -41,3 +41,6 @@ config :ueberauth, Ueberauth,
     google: {Local.Strategy, [request_path: "/auth/login",
                               callback_path: "/auth/callback"]}
     ]
+
+config :advisor, Advisor.Core.Notifications.Email.Mailer,
+  adapter: Bamboo.LocalAdapter
