@@ -23,6 +23,11 @@
       "label": "ask for advice",
       "url": "http://localhost:4000/request",
       "onReadyScript": "./ask_for_advice.js"
+    },
+    {
+      "label": "look at your dashboard",
+      "url": "http://localhost:4000/dashboard",
+      "onReadyScript": "./look_at_dashboard.js"
     }
   ],
   "paths": {
