@@ -4,7 +4,7 @@
       <li class="advisor-grid-tile">
         <%= label advisors_form, :advisor, [for: "proposal_advisors_#{person.id}", class: "advisor-label"] do %>
            <%= checkbox(advisors_form, String.to_atom("#{person.id}"), class: "advisor-select") %>
-           <div class="advisor-image" style="background-image: url(<%= image_url(person) %>);" >
+           <div class="advisor-image" style="background-image: url(<%= person.profile_image %>);" >
            </div>
         <% end %>
         <p class="advisor-name"><%= person.name %></p>

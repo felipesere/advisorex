@@ -3,7 +3,7 @@
     <li class="advisor-grid-tile">
       <%= label @form, :group_lead, [for: "proposal_group_lead_#{person.id}", class: "advisor-label"] do %>
         <%= radio_button(@form ,:group_lead, person.id) %>
-        <div class="advisor-image" style="background-image: url(<%= image_url(person) %>);" >
+        <div class="advisor-image" style="background-image: url(<%= person.profile_image %>);" >
         </div>
       <% end %>
       <p class="advisor-name"><%= person.name %></p>
