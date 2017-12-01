@@ -62,7 +62,7 @@
       Are you a group lead? <%= checkbox f, :is_group_lead, id: "is_group_lead"  %>
     </label>
     <label>
-      Image URL: <%= url_input f, :profile_image, id: "profile_image", class: "js_user-image-input" %>
+      Image URL: <%= url_input f, :profile_image, id: "profile_image", class: "js_user-image-input user-image-input" %>
     </label>
     <div>
       <img class="profile-image js_user-image-display" src="<%= @update_user.data.profile_image %>" />
