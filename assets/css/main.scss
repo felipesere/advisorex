@@ -275,7 +275,12 @@ li {
 textarea.context-of-advice {
   display: block;
   margin: 0 auto;
-  width: 50%;
+}
+
+@media (min-width: 800px) {
+  textarea.context-of-advice {
+    width: 50%;
+  }
 }
 
 // ==== PROVIDE ==== //
