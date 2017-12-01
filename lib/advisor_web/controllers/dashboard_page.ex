@@ -16,10 +16,20 @@ defmodule AdvisorWeb.DashboardPage do
   end
 
   def settings(conn, %{"person" => person}) do
-    User.of(conn)
-    |> Person.changeset(person)
-    |> People.update()
+    changeset = User.of(conn)
+                |> Person.changeset(person)
 
-    redirect(conn, to: "/dashboard")
+    case People.update(changeset) do
+      {:ok, _} ->
+        redirect_with_flash(conn, :info, "Settings updated!")
+      {:error, _} ->
+        redirect_with_flash(conn, :error, "Sorry, something went wrong")
+    end
+  end
+
+  def redirect_with_flash(conn, status, message) do
+    conn
+    |> put_flash(status, message)
+    |> redirect(to: "/dashboard")
   end
 end

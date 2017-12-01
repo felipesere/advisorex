@@ -50,11 +50,13 @@
 
 <hr class="separator" />
 
+<% info = get_flash(@conn, :info) %>
+<% error = get_flash(@conn, :error) %>
+<div class="flash-notification" role="alert"><%= if info, do: info, else: error %></div>
 <section class="module">
   <header class="module-header medium-header">
     Your settings:
   </header>
-
   <%= form_for @update_user, "/dashboard/settings", [method: "post", class: "user-settings-form"], fn f -> %>
     <label>
       Are you a group lead? <%= checkbox f, :is_group_lead, id: "is_group_lead"  %>
