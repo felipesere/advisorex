@@ -143,6 +143,10 @@ hr.separator {
   position: relative;
 }
 
+.question-picker > ul {
+  padding: 0;
+}
+
 .question-picker > ul li {
   flex-grow: 1;
   min-width: 200px;
