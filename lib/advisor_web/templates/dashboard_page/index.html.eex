@@ -62,7 +62,11 @@
     <label>
       Image URL: <%= url_input f, :profile_image, id: "profile_image", class: "js_user-image-input" %>
     </label>
+    <div>
       <img class="profile-image js_user-image-display" src="<%= @update_user.data.profile_image %>" />
+    </div>
+    <div>
       <%= submit "Save", class: "button primary small save-user-settings" %>
+    </div>
   <% end %>
 </section>
