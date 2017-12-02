@@ -116,7 +116,7 @@ p.center {
 }
 
 .module-header {
-  margin: 70px auto;
+  margin: 0px auto 40px;
   text-align: center;
 }
 
@@ -512,6 +512,10 @@ img.dashboard_action_icon {
   text-align: center;
 }
 
+.user-image-input {
+  text-overflow: ellipsis;
+}
+
 
 // ======== NOTICE ================//
 
@@ -548,3 +552,21 @@ img.dashboard_action_icon {
   animation-timing-function: cubic-bezier(.755, .05, .855, .06);
 }
 
+/* ==== FLASH NOTIFICATION ==== */
+
+.flash-notification {
+  text-align: center;
+  height: 40px;
+  width: 200px;
+  margin: 40px auto 0;
+  padding-top: 10px;
+}
+
+.flash-notification:not(:empty) {
+  animation: background-fade 2s linear 0s;
+}
+
+@keyframes background-fade {
+  from { background-color: #ffb3c9}
+  to {background-color: transparent}
+}
