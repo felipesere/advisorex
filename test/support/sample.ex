@@ -23,7 +23,7 @@ defmodule Advisor.Test.Support.Sample do
 
     q = %Questionnaire{
       question_ids: ids,
-      group_lead: lead.id,
+      group_lead_id: lead.id,
       requester_id: requester.id,
       message: "This is a random message"
     }

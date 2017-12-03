@@ -9,7 +9,7 @@ defmodule AdvisorWeb.PresentPage do
     user = User.of(conn)
     questionnaire = Questionnaire.find(questionnaire_id)
 
-    if questionnaire.group_lead == user.id do
+    if questionnaire.group_lead_id == user.id do
       answered_questions = answers_per_question(questionnaire)
 
       requester = People.requester(questionnaire)

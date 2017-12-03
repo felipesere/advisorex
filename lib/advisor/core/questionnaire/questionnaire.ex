@@ -9,7 +9,7 @@ defmodule Advisor.Core.Questionnaire do
   schema "questionnaires" do
     field :question_ids, {:array, :binary}
     field :requester_id, :integer
-    field :group_lead, :integer
+    field :group_lead_id, :integer
     field :message, :string
     has_many :advice, Advisor.Core.Advice,
       foreign_key: :questionnaire_id,
@@ -23,7 +23,7 @@ defmodule Advisor.Core.Questionnaire do
   end
 
   def all_for_group_lead(group_lead_id) do
-    Repo.all(questionnaire() |> where([q], q.group_lead == ^group_lead_id))
+    Repo.all(questionnaire() |> where([q], q.group_lead_id == ^group_lead_id))
   end
 
   def questions(%__MODULE__{id: id}), do: questions(id)
@@ -48,7 +48,7 @@ defmodule Advisor.Core.Questionnaire do
   def create(%{question_ids: ids}, requester, group_lead, message) do
     Repo.insert(%Questionnaire{question_ids: ids,
                                 requester_id: requester,
-                                group_lead: group_lead,
+                                group_lead_id: group_lead,
                                 message: message}, returning: true)
   end
 end
