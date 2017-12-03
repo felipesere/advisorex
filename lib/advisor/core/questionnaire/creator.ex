@@ -1,5 +1,7 @@
 defmodule Advisor.Core.Questionnaire.Creator do
   alias Advisor.Core.{People, Questions, Questionnaire, Advice}
+  alias Ecto.Multi
+  alias Advisor.Repo
 
   def create(%{questions: phrases,
                requester: requester,
@@ -7,14 +9,20 @@ defmodule Advisor.Core.Questionnaire.Creator do
                group_lead: group_lead} = proposal) do
     message = Map.get(proposal, :message)
 
-    question_ids = Questions.store(phrases)
-    questionnaire = Questionnaire.create(question_ids, requester, group_lead, message)
-    advisories = Advice.create(questionnaire, requester, advisors) |> expanded_advisor()
+    m = Multi.new()
+    |> Multi.run(:question_ids,  fn(_) -> Questions.store(phrases) end)
+    |> Multi.run(:questionnaire, fn(params) -> Questionnaire.create(params, requester, group_lead, message) end)
+    |> Multi.run(:advisories,    fn(params) -> Advice.create(params, requester, advisors)  end)
+    |> Multi.run(:q,             fn(%{questionnaire: q}) -> {:ok, Questionnaire.find(q.id)} end)
+    |> Repo.transaction()
 
-    %{questionnaire:  questionnaire, advisories: advisories}
+    case m do
+      {:ok, data} -> %{questionnaire: data.q, advisories: data.advisories |> expand()}
+      _ -> :error
+    end
   end
 
-  defp expanded_advisor({_, advisories}) do
+  defp expand(advisories) do
     Enum.map(advisories, fn(advice) ->
       %{advisor: People.advisor(advice), id: advice.id}
     end)
