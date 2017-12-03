@@ -49,4 +49,14 @@ defmodule Advisor.Core.Advice do
   def completed?(%Advice{answers: answers}, number_of_answers) do
     length(answers) == number_of_answers
   end
+
+  def create(questionnaire, requester, advisors) do
+    advice_requests = Enum.map(advisors, fn(advisor) ->
+      %{questionnaire_id: questionnaire.id,
+        requester_id: requester,
+        advisor_id: advisor}
+   end)
+
+    Repo.insert_all(Advice, advice_requests, returning: true)
+  end
 end

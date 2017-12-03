@@ -20,7 +20,7 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
                                       questions: phrases,
                                       message: "bla"}
 
-    {:ok, created} = Creator.create(proposal)
+    created = Creator.create(proposal)
 
     questionnaire = Questionnaire.find(created.questionnaire)
 
@@ -36,7 +36,7 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
                                       advisors: [cj.id],
                                       questions: []}
 
-    {:ok, created} = Creator.create(proposal)
+    created = Creator.create(proposal)
     questionnaire = Questionnaire.find(created.questionnaire)
 
     assert questionnaire.message == nil

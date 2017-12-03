@@ -45,8 +45,10 @@ defmodule Advisor.Core.Questionnaire do
     Repo.delete_all(from q in Questionnaire, where: q.id == ^id)
   end
 
-  # This needs to go away!
-  defmodule Created do
-    defstruct questionnaire: :unassigned, advisories: []
+  def create(question_ids, requester, group_lead, message) do
+    Repo.insert!(%Questionnaire{question_ids: question_ids,
+                                requester_id: requester,
+                                group_lead: group_lead,
+                                message: message}, returning: true)
   end
 end
