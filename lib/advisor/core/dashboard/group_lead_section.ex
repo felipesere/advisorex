@@ -24,7 +24,7 @@ defmodule Advisor.Core.Dashboard.GroupLeadSection do
   defp to_group(%{id: id} = questionnaire) do
     %Group{
       questionnaire_id: id,
-      requester: People.requester(questionnaire),
+      requester: questionnaire.requester,
       advisors: all_advisors(questionnaire)
     }
   end

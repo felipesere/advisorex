@@ -6,7 +6,7 @@ defmodule Advisor.Core.Dashboard.RequiredAdviceSection do
     |> Advice.from_advisor()
     |> Enum.map(fn(advice) ->
       questionnaire = Questionnaire.find(advice)
-      requester = People.requester(questionnaire)
+      requester = questionnaire.requester
       completed = Advice.completed?(advice, questionnaire.question_ids) # temp...
       %{requester:  requester, advice: advice, completed:  completed}
     end)
