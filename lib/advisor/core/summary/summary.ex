@@ -11,7 +11,8 @@ defmodule Advisor.Core.Summary do
 
   defp content(id) do
     query = from advice in Advice,
-      join: r in Person, on: [id: advice.requester_id],
+      join: q in Questionnaire, on: [id: advice.questionnaire_id],
+      join: r in Person, on: [id: q.requester_id],
       join: a in Person, on: [id: advice.advisor_id],
       join: answer in Answer, on: [advice_request_id: advice.id],
       where: advice.questionnaire_id == ^id,

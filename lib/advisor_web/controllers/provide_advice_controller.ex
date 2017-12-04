@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.ProvideAdviceController do
   use AdvisorWeb, :controller
-  alias Advisor.Core.{People, Questions, Questionnaire, Answers, Advice}
+  alias Advisor.Core.{Questions, Questionnaire, Answers, Advice}
   alias AdvisorWeb.Authentication.User
 
   plug  AdvisorWeb.Authentication.Gatekeeper
@@ -16,8 +16,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
                   |> Questionnaire.questions()
                   |> Questions.load()
 
-      requester = People.find_by(id: advice.requester_id)
-      render(conn, "advice-form.html", requester: requester,
+      render(conn, "advice-form.html", requester: questionnaire.requester,
                                        questions: questions,
                                        advice_id: id,
                                        message: questionnaire.message)

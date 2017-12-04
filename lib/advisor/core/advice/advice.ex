@@ -8,7 +8,6 @@ defmodule Advisor.Core.Advice do
 
   schema "advice_requests" do
     field :questionnaire_id,  :binary_id
-    field :requester_id,      :integer
     belongs_to :advisor, Advisor.Core.Person,
       foreign_key: :advisor_id
     has_many :answers,        Advisor.Core.Answer,
@@ -48,7 +47,6 @@ defmodule Advisor.Core.Advice do
   def create(%{questionnaire: %{id: id}}, requester, advisors) do
     advice_requests = Enum.map(advisors, fn(advisor) ->
       %{questionnaire_id: id,
-        requester_id: requester,
         advisor_id: advisor}
     end)
 
