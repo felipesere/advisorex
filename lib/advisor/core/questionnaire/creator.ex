@@ -19,14 +19,8 @@ defmodule Advisor.Core.Questionnaire.Creator do
     |> Repo.transaction()
 
     case m do
-      {:ok, data} -> %{questionnaire: data.q, advisories: data.advisories |> expand()}
+      {:ok, data} -> data.q
       error -> error
     end
-  end
-
-  defp expand(advisories) do
-    Enum.map(advisories, fn(advice) ->
-      %{advisor: People.advisor(advice), id: advice.id}
-    end)
   end
 end

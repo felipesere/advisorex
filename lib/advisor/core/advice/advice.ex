@@ -9,7 +9,8 @@ defmodule Advisor.Core.Advice do
   schema "advice_requests" do
     field :questionnaire_id,  :binary_id
     field :requester_id,      :integer
-    field :advisor_id,        :integer
+    belongs_to :advisor, Advisor.Core.Person,
+      foreign_key: :advisor_id
     has_many :answers,        Advisor.Core.Answer,
       foreign_key: :advice_request_id,
       on_delete: :delete_all
@@ -18,7 +19,7 @@ defmodule Advisor.Core.Advice do
   defp advice() do
     Advice
     |> select([ar], ar)
-    |> preload(:answers)
+    |> preload([:answers, :advisor])
   end
 
   def find_all(%{id: id}), do: find_all(id)
