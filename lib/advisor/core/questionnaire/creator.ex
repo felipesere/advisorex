@@ -3,18 +3,15 @@ defmodule Advisor.Core.Questionnaire.Creator do
   alias Ecto.Multi
   alias Advisor.Repo
 
-  def create(%{questions: phrases,
-               requester: requester_id,
-               advisors: advisors,
-               group_lead: group_lead} = proposal) do
-    message = Map.get(proposal, :message)
+  def create(%{questions: phrases} = proposal) do
 
-    requester = People.find_by(id: requester_id)
+    proposal = proposal
+               |> Map.update!(:requester, & People.find_by(id: &1))
 
     m = Multi.new()
     |> Multi.run(:question_ids,  fn(_) -> Questions.store(phrases) end)
-    |> Multi.run(:questionnaire, fn(params) -> Questionnaire.create(params, requester, group_lead, message) end)
-    |> Multi.run(:advisories,    fn(params) -> Advice.create(params, requester_id, advisors)  end)
+    |> Multi.run(:questionnaire, fn(params) -> Questionnaire.create(params, proposal) end)
+    |> Multi.run(:advisories,    fn(params) -> Advice.create(params, proposal)  end)
     |> Multi.run(:q,             fn(%{questionnaire: q}) -> {:ok, Questionnaire.find(q.id)} end)
     |> Repo.transaction()
 

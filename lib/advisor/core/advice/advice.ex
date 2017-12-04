@@ -44,7 +44,7 @@ defmodule Advisor.Core.Advice do
     length(answers) == number_of_answers
   end
 
-  def create(%{questionnaire: %{id: id}}, requester, advisors) do
+  def create(%{questionnaire: %{id: id}}, %{advisors: advisors}) do
     advice_requests = Enum.map(advisors, fn(advisor) ->
       %{questionnaire_id: id,
         advisor_id: advisor}

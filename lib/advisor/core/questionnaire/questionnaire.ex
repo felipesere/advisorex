@@ -50,10 +50,10 @@ defmodule Advisor.Core.Questionnaire do
     Repo.delete_all(from q in Questionnaire, where: q.id == ^id)
   end
 
-  def create(%{question_ids: ids}, requester, group_lead, message) do
+  def create(%{question_ids: ids}, %{requester: r, group_lead: gl, message: m}) do
     Repo.insert(%Questionnaire{question_ids: ids,
-                                group_lead_id: group_lead,
-                                requester: requester,
-                                message: message}, returning: true)
+                                group_lead_id: gl,
+                                requester: r,
+                                message: m}, returning: true)
   end
 end
