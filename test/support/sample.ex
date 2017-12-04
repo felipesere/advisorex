@@ -1,6 +1,7 @@
 defmodule Advisor.Test.Support.Sample do
   alias Advisor.Core.Questionnaire
   alias Advisor.Core.Advice
+  alias Advisor.Core.Answer
   alias Advisor.Core.Question
   alias Advisor.Core.People
   alias Advisor.Repo
@@ -24,7 +25,7 @@ defmodule Advisor.Test.Support.Sample do
     q = %Questionnaire{
       question_ids: ids,
       group_lead_id: lead.id,
-      requester_id: requester.id,
+      requester: requester,
       message: "This is a random message"
     }
     |> Repo.insert!()
@@ -46,16 +47,26 @@ defmodule Advisor.Test.Support.Sample do
     |> elem(0)
   end
 
+  def answer(questionnaire, [all: answer]) do
+    advisories = questionnaire.advice
+    questions = questionnaire.question_ids
+
+    Enum.each(advisories, fn(advice) ->
+      save_answers(questions, answer, advice.id)
+    end)
+  end
+
   def answer(questionnaire, name, [all: answer]) do
     advice = advice_from(questionnaire, name)
     questions = questionnaire.question_ids
-
-    Enum.each(questions, fn(question) ->
-      advice
-      |> Ecto.build_assoc(:answers, %{answer: answer, question_id: question})
-      |> Repo.insert!()
-    end)
-
+    save_answers(questions, answer, advice.id)
     questionnaire
+  end
+
+  defp save_answers(questions, answer, advice) do
+    data = questions
+           |> Enum.map(fn(q) -> %{question_id: q, answer: answer, advice_request_id: advice} end)
+
+    Repo.insert_all(Answer, data)
   end
 end

@@ -5,10 +5,6 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
   alias Advisor.Core.Questionnaire
   alias Advisor.Test.Support.Users
 
-  setup do
-    :ok
-  end
-
   # TODO: This should be using the Support.Proposal as a builder
   test "creates a simple questionnaire" do
     [felipe, rabea, cj, priya] = Users.with(["Felipe Sere", "Rabea Gleissner", "Chris Jordan", "Priya Patil"])

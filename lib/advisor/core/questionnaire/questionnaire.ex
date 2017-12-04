@@ -8,8 +8,13 @@ defmodule Advisor.Core.Questionnaire do
 
   schema "questionnaires" do
     field :question_ids, {:array, :binary}
-    field :requester_id, :integer
-    field :group_lead_id, :integer
+
+    belongs_to :requester, Advisor.Core.Person,
+      foreign_key: :requester_id
+
+    belongs_to :group_lead, Advisor.Core.Person,
+      foreign_key: :group_lead_id
+
     field :message, :string
     has_many :advice, Advisor.Core.Advice,
       foreign_key: :questionnaire_id,
@@ -19,7 +24,7 @@ defmodule Advisor.Core.Questionnaire do
   defp questionnaire() do
     Questionnaire
     |> select([q], q)
-    |> preload([:advice, {:advice, :answers}])
+    |> preload([:advice, {:advice, :answers}, :requester, :group_lead])
   end
 
   def all_for_group_lead(group_lead_id) do
@@ -47,8 +52,8 @@ defmodule Advisor.Core.Questionnaire do
 
   def create(%{question_ids: ids}, requester, group_lead, message) do
     Repo.insert(%Questionnaire{question_ids: ids,
-                                requester_id: requester,
                                 group_lead_id: group_lead,
+                                requester: requester,
                                 message: message}, returning: true)
   end
 end
