@@ -28,8 +28,8 @@ defmodule Advisor.Core.Answers do
     |> Enum.map(&(Map.put(&1, :advice_request_id, advice_request_id)))
   end
 
-  def find(advisories) when is_list(advisories) do
-    ids = Advice.ids(advisories)
+  def find(questionnaire) do
+    ids = Advice.ids(questionnaire.advice)
 
     Repo.all(from a in Answer, where: a.advice_request_id in ^ids)
   end
