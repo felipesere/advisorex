@@ -28,7 +28,7 @@ defmodule Advisor.Core.People do
 
   def find_by([name: name]), do: query_by_name(name)
   def find_by([email: email]), do: query_by_email(email)
-  def find_by([id: nil]), do: nil # nill is annoying! Maybe there is a better pattern here?
+  def find_by([id: nil]), do: nil # TODO: nill is annoying! Maybe there is a better pattern here?
   def find_by([id: id]) when is_integer(id), do: query_by_user(id)
   def find_by([id: id]) do
     case parse(id) do
@@ -38,10 +38,6 @@ defmodule Advisor.Core.People do
   end
 
   def advisor(%{advisor_id: id}), do: find_by_id(id)
-
-  def group_lead([name: name]) do
-    Repo.one(from p in Person, where: p.name == ^name and p.is_group_lead)
-  end
 
   defp query_by_user(id),     do: Repo.one(from p in Person, where: p.id == ^id)
 
