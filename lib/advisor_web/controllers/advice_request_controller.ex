@@ -7,11 +7,11 @@ defmodule AdvisorWeb.AdviceRequestController do
   plug  AdvisorWeb.Authentication.Gatekeeper
 
   def create(conn, params) do
-    {:ok, %{advisories: a, questionnaire: q}} = params
-                                  |> QuestionnaireProposal.from_params()
-                                  |> QuestionnaireProposal.for_requester(User.found_in(conn))
-                                  |> Creator.create
+    questionnaire = params
+                    |> QuestionnaireProposal.from_params()
+                    |> QuestionnaireProposal.for_requester(User.found_in(conn))
+                    |> Creator.create
 
-    render conn, "links.html", advice: a, questionnaire: q
+    render conn, "links.html", advice: questionnaire.advice, questionnaire: questionnaire
   end
 end

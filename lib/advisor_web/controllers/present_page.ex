@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.PresentPage do
   use AdvisorWeb, :controller
-  alias Advisor.Core.{People, Questions, Questionnaire}
+  alias Advisor.Core.{Questions, Questionnaire}
   alias AdvisorWeb.Authentication.User
 
   plug  AdvisorWeb.Authentication.Gatekeeper, only: :group_leads
@@ -9,12 +9,11 @@ defmodule AdvisorWeb.PresentPage do
     user = User.of(conn)
     questionnaire = Questionnaire.find(questionnaire_id)
 
-    if questionnaire.group_lead == user.id do
+    if questionnaire.group_lead == user do
       answered_questions = answers_per_question(questionnaire)
 
-      requester = People.requester(questionnaire)
       render conn, "index.html", id: questionnaire_id,
-                                 request: requester,
+                                 request: questionnaire.requester,
                                  answered_questions: answered_questions
     else
       conn |> redirect(to: "/")
@@ -33,7 +32,7 @@ defmodule AdvisorWeb.PresentPage do
   end
 
   defp advisors(%Questionnaire{advice: advisories}) do
-    for advisory <- advisories, into: %{}, do: {advisory.id, People.find_by(advisory)}
+    for advice <- advisories, into: %{}, do: {advice.id, advice.advisor}
   end
 
   defp join(answers, advisors) do

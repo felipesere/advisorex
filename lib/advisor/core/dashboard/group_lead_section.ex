@@ -1,5 +1,5 @@
 defmodule Advisor.Core.Dashboard.GroupLeadSection do
-  alias Advisor.Core.{Person, People, Questionnaire, Advice}
+  alias Advisor.Core.{Person, People, Questionnaire}
 
   defstruct groups: []
 
@@ -24,14 +24,10 @@ defmodule Advisor.Core.Dashboard.GroupLeadSection do
   defp to_group(%{id: id} = questionnaire) do
     %Group{
       questionnaire_id: id,
-      requester: People.requester(questionnaire),
-      advisors: all_advisors(id)
+      requester: questionnaire.requester,
+      advisors: all_advisors(questionnaire)
     }
   end
 
-  defp all_advisors(questionnaire_id) do
-    questionnaire_id
-    |> Advice.find_all()
-    |> Enum.map(&People.advisor/1)
-  end
+  defp all_advisors(%{advice: advice}), do: Enum.map(advice, &People.advisor/1)
 end

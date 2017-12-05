@@ -1,8 +1,5 @@
 defmodule Advisor.Test.Support.Sample do
-  alias Advisor.Core.Questionnaire
-  alias Advisor.Core.Advice
-  alias Advisor.Core.Question
-  alias Advisor.Core.People
+  alias Advisor.Core.{Answer, Question, Questionnaire}
   alias Advisor.Repo
   alias Advisor.Test.Support.Users
 
@@ -23,8 +20,8 @@ defmodule Advisor.Test.Support.Sample do
 
     q = %Questionnaire{
       question_ids: ids,
-      group_lead: lead.id,
-      requester_id: requester.id,
+      group_lead_id: lead.id,
+      requester: requester,
       message: "This is a random message"
     }
     |> Repo.insert!()
@@ -39,23 +36,30 @@ defmodule Advisor.Test.Support.Sample do
   end
 
   def advice_from(questionnaire, name) do
-    questionnaire
-    |> Advice.find_all()
-    |> Enum.map(fn(a) -> {a, People.find_by(id: a.advisor_id)} end)
-    |> Enum.find(fn({_, p}) -> p.name == name end)
-    |> elem(0)
+    questionnaire.advice
+    |> Enum.find(fn(advice) -> advice.advisor.name == name end)
+  end
+
+  def answer(questionnaire, [all: answer]) do
+    advisories = questionnaire.advice
+    questions = questionnaire.question_ids
+
+    Enum.each(advisories, fn(advice) ->
+      save_answers(questions, answer, advice.id)
+    end)
   end
 
   def answer(questionnaire, name, [all: answer]) do
     advice = advice_from(questionnaire, name)
     questions = questionnaire.question_ids
-
-    Enum.each(questions, fn(question) ->
-      advice
-      |> Ecto.build_assoc(:answers, %{answer: answer, question_id: question})
-      |> Repo.insert!()
-    end)
-
+    save_answers(questions, answer, advice.id)
     questionnaire
+  end
+
+  defp save_answers(questions, answer, advice) do
+    data = questions
+           |> Enum.map(fn(q) -> %{question_id: q, answer: answer, advice_request_id: advice} end)
+
+    Repo.insert_all(Answer, data)
   end
 end

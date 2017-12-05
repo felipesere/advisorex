@@ -9,6 +9,6 @@ defmodule Advisor.Core.QuestionnaireTest do
                                          requester: "Rabea Gleissner",
                                          advisors: ["Priya Patil"])
 
-    assert [questionnaire] == Questionnaire.all_for_group_lead(questionnaire.group_lead)
+    assert [questionnaire] == Questionnaire.all_for_group_lead(questionnaire.group_lead_id)
   end
 end

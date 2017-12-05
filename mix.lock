@@ -1,4 +1,4 @@
-%{"apex": {:hex, :apex, "1.1.0", "d7a03b8d3e4d9241bd33d986f7bc440f32987ca92dfbec07d491f85593791c82", [:mix], []},
+%{"apex": {:hex, :apex, "1.1.0", "d7a03b8d3e4d9241bd33d986f7bc440f32987ca92dfbec07d491f85593791c82", [:mix], [], "hexpm"},
   "base64url": {:hex, :base64url, "0.0.1", "36a90125f5948e3afd7be97662a1504b934dd5dac78451ca6e9abf85a10286be", [:rebar], []},
   "bcrypt_elixir": {:hex, :bcrypt_elixir, "0.12.1", "41ff5a4739fcff365fe840637462dc9e22beac07a9dcf3cb5e79b127f5b3a099", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
   "bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], []},
@@ -47,5 +47,5 @@
   "ueberauth_google": {:hex, :ueberauth_google, "0.7.0", "835ae570548b236e9a91fe600ed1b817a7abf7c05650f1c74798078e366ddd46", [:mix], [{:oauth2, "~> 0.9", [hex: :oauth2, optional: false]}, {:ueberauth, "~> 0.4", [hex: :ueberauth, optional: false]}]},
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.3.1", "a1f612a7b512638634a603c8f401892afbf99b8ce93a45041f8aaca99cadb85e", [:rebar3], []},
   "uuid": {:hex, :uuid, "1.1.8", "e22fc04499de0de3ed1116b770c7737779f226ceefa0badb3592e64d5cfb4eb9", [:mix], []},
-  "yamerl": {:hex, :yamerl, "0.5.0", "6ec55a5d830f6f0d65a4030f5c5db24b0e72b813dfbde32fea44b4951ed9417c", [:rebar3], []},
+  "yamerl": {:hex, :yamerl, "0.5.0", "6ec55a5d830f6f0d65a4030f5c5db24b0e72b813dfbde32fea44b4951ed9417c", [:rebar3], [], "hexpm"},
   "yaml_elixir": {:hex, :yaml_elixir, "1.3.1", "b84b6333343b0cba176c43c463e622f838825e7476e35334f719b83df4535bff", [:mix], [{:yamerl, "~> 0.5", [hex: :yamerl, optional: false]}]}}
