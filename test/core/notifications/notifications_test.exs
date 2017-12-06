@@ -8,7 +8,7 @@ defmodule Advisor.Core.NotificationsTest do
     questionnaire = Sample.questionnaire
     Notifications.about_new_questionnaire(questionnaire)
 
-    #assert_delivered_email Bamboo.Email.new_email(to: "fsere@8thlight.com",
-    #                                             from: "advisor@8thlight.com")
+    assert_delivered_with(to: [{"Rabea Gleissner", "rabea@example.com"}])
+    assert_delivered_with(to: [{"Priya Patil", "priya@example.com"}])
   end
 end

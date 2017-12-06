@@ -2,6 +2,7 @@ defmodule AdvisorWeb.AdviceRequestController do
   use AdvisorWeb, :controller
   alias AdvisorWeb.QuestionnaireProposal
   alias Advisor.Core.Questionnaire.Creator
+  alias Advisor.Core.Notifications
   alias AdvisorWeb.Authentication.User
 
   plug  AdvisorWeb.Authentication.Gatekeeper
@@ -12,7 +13,7 @@ defmodule AdvisorWeb.AdviceRequestController do
                     |> QuestionnaireProposal.for_requester(User.found_in(conn))
                     |> Creator.create
 
-    Advisor.Core.Notifications.about_new_questionnaire(questionnaire)
+    Notifications.about_new_questionnaire(questionnaire)
     render conn, "links.html", advice: questionnaire.advice, questionnaire: questionnaire
   end
 end

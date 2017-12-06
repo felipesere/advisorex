@@ -1,15 +1,15 @@
 defmodule AdvisorWeb.EmailView do
   use AdvisorWeb, :view
 
-  def advice_path(advice) do
-    provide_advice_path(AdvisorWeb.Endpoint, :index, advice.id)
-  end
+  def advice_path(advice),  do: provide_advice_path(AdvisorWeb.Endpoint, :index, advice.id)
 
-  def color(:green), do: "#52aa5e"
-  def color(:primary), do: "#27a8e0"
-  def color(:text), do: "#495561"
+  def landing_page(), do: landing_page_path(AdvisorWeb.Endpoint, :index)
+
+  def color(:green),      do: "#52aa5e"
+  def color(:primary),    do: "#27a8e0"
+  def color(:text),       do: "#495561"
   def color(:background), do: "#f6f7f8"
-  def color(:dark_grey), do: "#83919f"
+  def color(:dark_grey),  do: "#83919f"
   def color(:light_grey), do: "#d9dee2"
 
   def questions(1), do: "a single question"

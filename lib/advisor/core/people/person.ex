@@ -9,7 +9,6 @@ defmodule Advisor.Core.Person do
     field :email,         :string
   end
 
-
   defimpl Bamboo.Formatter, for: Advisor.Core.Person do
     def format_email_address(person, _opts) do
       {person.name, person.email}
