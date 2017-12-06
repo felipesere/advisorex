@@ -12,7 +12,7 @@ defmodule AdvisorWeb.EmailView do
   def color(:dark_grey), do: "#83919f"
   def color(:light_grey), do: "#d9dee2"
 
-  def questions(1), do: "a signle question"
+  def questions(1), do: "a single question"
   def questions(2), do: "two questions"
   def questions(n), do: "#{n} questions"
 end
