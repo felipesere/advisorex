@@ -69,12 +69,12 @@
     div[style*="margin: 16px 0;"] { margin: 0 !important; }
 </style>
 </head>
-<body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;">
+<body style="background-color: <%= color(:background) %>; margin: 0 !important; padding: 0 !important;">
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <!-- LOGO -->
     <tr>
-        <td bgcolor="#66BB7F" align="center">
+        <td bgcolor="<%= color(:primary) %>" align="center">
             <!--[if (gte mso 9)|(IE)]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
             <tr>
@@ -84,7 +84,7 @@
                 <tr>
                     <td align="center" valign="top" style="padding: 40px 10px 40px 10px;">
                         <a href="http://litmus.com" target="_blank">
-                            <img alt="Logo" src="https://8thlight.com/images/branding/8th-Light-Logo-Color-No-Text-28048670.png" width="40" height="40" style="display: block; width: 40px; max-width: 40px; min-width: 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;" border="0">
+                            <img alt="Logo" src="https://8thlight.com/images/branding/8th-Light-Logo-Color-No-Text-28048670.png" width="40" height="40" style="display: block; width: 40px; max-width: 40px; min-width: 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;background: white;border-radius: 100%;padding: 5px;" border="0">
                         </a>
                     </td>
                 </tr>
@@ -98,7 +98,7 @@
     </tr>
     <!-- HERO -->
     <tr>
-        <td bgcolor="#66BB7F" align="center" style="padding: 0px 10px 0px 10px;">
+        <td bgcolor="<%= color(:primary) %>" align="center" style="padding: 0px 10px 0px 10px;">
             <!--[if (gte mso 9)|(IE)]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
             <tr>
@@ -107,7 +107,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
                 <tr>
                     <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                      <h1 style="font-size: 48px; font-weight: 400; margin: 0;">Hi Felipe Sere</h1>
+                      <h1 style="font-size: 48px; font-weight: 400; margin: 0;">Hi <%= @advice.advisor.name %></h1>
                     </td>
                 </tr>
             </table>
@@ -120,7 +120,7 @@
     </tr>
     <!-- COPY BLOCK -->
     <tr>
-        <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
+        <td bgcolor="<%= color(:background) %>" align="center" style="padding: 0px 10px 0px 10px;">
             <!--[if (gte mso 9)|(IE)]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
             <tr>
@@ -130,15 +130,17 @@
               <!-- COPY -->
               <tr>
                 <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
-                  <p style="margin: 0;">This is an interesting paragraph about stuff that you should know!</p>
+                  <p style="margin: 0;"><%= @requester.name %> is asking if you could take a few minutes to give some advice with <%= questions(@nr_of_questions) %>.</p>
                 </td>
               </tr>
-              <!-- COPY -->
+              <%= if @message do %>
               <tr>
                 <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
-                  <p style="margin: 0;">This is another important paragraph that I will probabkly turn into a loop</p>
+                  <p style="margin: 0;">They are looking for your advice in the following context:</p>
+                  <p style="margin: 0;background: <%= color(:light_grey) %>;border-left: 5px solid <%= color(:dark_grey) %>;font-style: italic;margin: 1.5em 0;padding: .5em 10px;"><%= @message %></p>
                 </td>
               </tr>
+            <% end %>
               <!-- BULLETPROOF BUTTON -->
               <tr>
                 <td bgcolor="#ffffff" align="left">
@@ -147,7 +149,7 @@
                       <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
                         <table border="0" cellspacing="0" cellpadding="0">
                           <tr>
-                              <td align="center" style="border-radius: 3px;" bgcolor="#66BB7F"><a href="https://litmus.com" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #66BB7F; display: inline-block;">Reactivate Account</a></td>
+                            <td align="center" style="border-radius: 3px;" bgcolor="<%= color(:primary) %>"><a href="<%= advice_path(@advice) %>" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid <%= color(:primary) %>; display: inline-block;">Give advice now</a></td>
                           </tr>
                         </table>
                       </td>
@@ -165,7 +167,7 @@
     </tr>
     <!-- FOOTER -->
     <tr>
-        <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
+        <td bgcolor="<%= color(:background) %>" align="center" style="padding: 0px 10px 0px 10px;">
             <!--[if (gte mso 9)|(IE)]>
             <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
             <tr>
@@ -174,7 +176,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
               <!-- UNSUBSCRIBE -->
               <tr>
-                <td bgcolor="#f4f4f4" align="left" style="padding: 0px 30px 30px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 18px;" >
+                <td bgcolor="<%= color(:background) %>" align="left" style="padding: 0px 30px 30px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 18px;" >
                   <p style="margin: 0; margin-top: 20px; text-align: center;">If these emails get annoying, please feel free to <a href="http://litmus.com" target="_blank" style="color: #111111; font-weight: 700;">unsubscribe</a>.</p>
                 </td>
               </tr>
@@ -187,6 +189,5 @@
         </td>
     </tr>
 </table>
-
 </body>
 </html>

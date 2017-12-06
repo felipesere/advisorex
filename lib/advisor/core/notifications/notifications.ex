@@ -4,12 +4,17 @@ defmodule Advisor.Core.Notifications do
   use Bamboo.Phoenix, view: AdvisorWeb.EmailView
 
   def about_new_questionnaire(questionnaire) do
-   requester = questionnaire.requester
+    requester = questionnaire.requester
+
+    nr_of_questions = length(questionnaire.question_ids)
+
+    message = questionnaire.message
 
     Enum.each(questionnaire.advice, fn(advice) ->
       basic_mail()
       |> to(advice.advisor)
-      |> render("request-advice.html", advice: advice, requester: requester)
+      |> render("request-advice.html", advice: advice, requester: requester,
+                                       message: message, nr_of_questions: nr_of_questions)
       |> Mailer.deliver_now
     end)
   end
