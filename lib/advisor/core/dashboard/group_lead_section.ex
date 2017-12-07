@@ -1,5 +1,5 @@
 defmodule Advisor.Core.Dashboard.GroupLeadSection do
-  alias Advisor.Core.{Person, People, Questionnaire}
+  alias Advisor.Core.{Person, Questionnaire}
 
   defstruct groups: []
 
@@ -29,5 +29,5 @@ defmodule Advisor.Core.Dashboard.GroupLeadSection do
     }
   end
 
-  defp all_advisors(%{advice: advice}), do: Enum.map(advice, &People.advisor/1)
+  defp all_advisors(%{advice: advice}), do: Enum.map(advice, fn(a) -> a.advisor end)
 end
