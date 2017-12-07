@@ -28,9 +28,3 @@ config :advisor, Advisor.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "15")
-
-config :comeonin, :bcrypt_log_rounds, 15
-
-config :advisor, AdvisorWeb.Authentication.Password,
-  checker: AdvisorWeb.Authentication.Password.HashedPassword,
-  password: System.get_env("PASSWORD")

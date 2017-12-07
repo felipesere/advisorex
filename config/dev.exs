@@ -35,11 +35,6 @@ config :advisor, Advisor.Repo,
   hostname: "localhost",
   pool_size: 10
 
-config :advisor, AdvisorWeb.Authentication.Password,
-  checker: AdvisorWeb.Authentication.Password.SimplePassword,
-  password: "secret"
-
-
 config :ueberauth, Ueberauth,
   base_path: "/auth",
   providers: [
