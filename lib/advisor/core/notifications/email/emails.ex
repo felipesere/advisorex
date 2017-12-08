@@ -5,6 +5,7 @@ defmodule Advisor.Core.Notifications.Emails do
   def request_advice(advice, data) do
     new_email()
     |> from("advisor@8thlight.com")
+    |> subject("#{data.requester.name} would like to get some advice from you!")
     |> to(advice.advisor)
     |> render("request-advice.html", advice: advice, data: data)
   end
