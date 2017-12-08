@@ -1,5 +1,5 @@
 defmodule Advisor.Core.Dashboard.AdviceForMeSection do
-  alias Advisor.Core.{People, Questionnaire, Advice}
+  alias Advisor.Core.{Questionnaire, Advice}
 
   def advice_for_me_section(%{id: person}) do
     case Questionnaire.with_requester(person) do
@@ -10,7 +10,7 @@ defmodule Advisor.Core.Dashboard.AdviceForMeSection do
 
   defp section_for(%{advice: advices, question_ids: questions}) do
     Enum.map(advices, fn(advice) -> %{
-      advisor: People.advisor(advice),
+      advisor: advice.advisor,
       completed: Advice.completed?(advice, questions)
     } end)
   end

@@ -1,6 +1,11 @@
 defmodule AdvisorWeb.Router do
   use AdvisorWeb, :router
 
+  if Mix.env == :dev do
+    # If using Phoenix
+    forward "/sent_emails", Bamboo.EmailPreviewPlug
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -30,7 +35,6 @@ defmodule AdvisorWeb.Router do
     get "/questionnaire/:id/delete", QuestionnaireController, :delete
 
     get "/healthcheck", HealthcheckController, :index
-
   end
 
   pipeline :api do

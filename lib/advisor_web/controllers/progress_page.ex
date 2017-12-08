@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.ProgressPage do
   use AdvisorWeb, :controller
-  alias Advisor.Core.{People, Questionnaire, Advice}
+  alias Advisor.Core.{Questionnaire, Advice}
 
   plug  AdvisorWeb.Authentication.Gatekeeper, only: :group_leads
 
@@ -21,6 +21,6 @@ defmodule AdvisorWeb.ProgressPage do
 
   defp  group_by_completion(%Questionnaire{advice: advice, question_ids: question_ids}) do
     advice
-    |> Enum.group_by(&(Advice.completed?(&1, question_ids)), &People.advisor/1)
+    |> Enum.group_by(&(Advice.completed?(&1, question_ids)), &(&1.advisor))
   end
 end

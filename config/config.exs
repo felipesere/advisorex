@@ -36,7 +36,13 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: System.get_env("GOOGLE_CLIENT_ID"),
   client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
 
-if Mix.env == :dev || Mix.env == :test do
+config :advisor, Advisor.Core.Notifications.Email.Mailer,
+  adapter: Bamboo.SendgridAdapter,
+  api_key: System.get_env("SENDGRID_API_KEY")
+
+config :advisor, FeatureToggle, emails: [only: ["Felipe Seré", "Rabea Gleissner"]]
+
+if Mix.env == :test do
   config :mix_test_watch, clear: true
 end
 

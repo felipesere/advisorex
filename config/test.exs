@@ -19,8 +19,7 @@ config :advisor, Advisor.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
+config :advisor, Advisor.Core.Notifications.Email.Mailer,
+  adapter: Bamboo.TestAdapter
 
-config :advisor, AdvisorWeb.Authentication.Password,
-  checker: AdvisorWeb.Authentication.Password.SimplePassword,
-  password: "secret"
-
+config :advisor, FeatureToggle, emails: true
