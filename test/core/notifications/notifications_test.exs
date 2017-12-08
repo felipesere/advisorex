@@ -4,7 +4,7 @@ defmodule Advisor.Core.NotificationsTest do
   alias Advisor.Core.Notifications
   alias Advisor.Test.Support.Sample
 
-  test "something" do
+  test "sends emails to all advisors" do
     questionnaire = Sample.questionnaire
     Notifications.about_new_questionnaire(questionnaire)
 
