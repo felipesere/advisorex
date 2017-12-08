@@ -40,7 +40,7 @@ config :advisor, Advisor.Core.Notifications.Email.Mailer,
   adapter: Bamboo.SendgridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY")
 
-config :advisor, FeatureToggle, emails: [only: ["Felipe Seré"]]
+config :advisor, FeatureToggle, emails: [only: ["Felipe Seré", "Rabea Gleissner"]]
 
 if Mix.env == :test do
   config :mix_test_watch, clear: true
