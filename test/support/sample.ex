@@ -50,13 +50,14 @@ defmodule Advisor.Test.Support.Sample do
     Enum.each(advisories, fn(advice) ->
       save_answers(questions, answer, advice.id)
     end)
+    Questionnaire.find(questionnaire)
   end
 
   def answer(questionnaire, name, [all: answer]) do
     advice = advice_from(questionnaire, name)
     questions = questionnaire.question_ids
     save_answers(questions, answer, advice.id)
-    questionnaire
+    Questionnaire.find(questionnaire)
   end
 
   defp save_answers(questions, answer, advice) do
