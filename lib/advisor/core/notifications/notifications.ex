@@ -17,4 +17,16 @@ defmodule Advisor.Core.Notifications do
     |> Enum.filter(fn(advice) -> enabled(:emails, advice.advisor) end)
     |> Enum.each(fn(advice) -> advice |> Emails.request_advice(data) |> Mailer.deliver_later end)
   end
+
+  def questionnaire_completed(questionnaire) do
+    data = %{
+      requester: questionnaire.requester,
+      group_lead: questionnaire.group_lead,
+      questionnaire: questionnaire,
+    }
+
+    data
+    |> Emails.completed()
+    |> Mailer.deliver_later
+  end
 end

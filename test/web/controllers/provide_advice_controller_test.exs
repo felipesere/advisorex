@@ -4,18 +4,16 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
   alias Advisor.Test.Support.Sample
 
   setup do
-    advice = Sample.questionnaire()
-             |> Sample.advice_from("Rabea Gleissner")
+    questionnaire = Sample.questionnaire()
+    advice = Sample.advice_from(questionnaire, "Rabea Gleissner")
 
-    [advice: advice]
+    [advice: advice, questions: questionnaire.question_ids]
   end
 
   test "renders the form", %{conn: conn, advice: advice} do
-    path = Routes.provide_advice_path(@endpoint, :index, advice.id)
-
     conn
     |> ThroughTheWeb.login_as("Rabea Gleissner")
-    |> get(path)
+    |> get(path_for(advice))
     |> html_response(200)
     |> has_header("Advice for Chris Jordan")
     |> has_message("This is a random message")
@@ -28,13 +26,19 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
            |> redirected_to() == "/"
   end
 
-  test "renders thank you page", %{conn: conn, advice: advice} do
-    path = Routes.provide_advice_path(@endpoint, :create, advice.id)
+  test "answers questions", %{conn: conn, advice: advice, questions: questions} do
+    payload = questions
+              |> Enum.into(%{}, fn(id) -> {id, "some answer"} end)
+              |> Map.put_new("id", advice.id)
 
     conn
-    |> ThroughTheWeb.login_as("Felipe Sere")
-    |> post(path)
+    |> ThroughTheWeb.login_as("Rabea Gleissner")
+    |> post(path_for(advice), payload)
     |> html_response(200)
     |> has_header("Thank you!")
+  end
+
+  def path_for(advice) do
+    Routes.provide_advice_path(@endpoint, :create, advice.id)
   end
 end
