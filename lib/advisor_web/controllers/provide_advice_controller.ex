@@ -2,10 +2,11 @@ defmodule AdvisorWeb.ProvideAdviceController do
   use AdvisorWeb, :controller
   alias Advisor.Core.{Questions, Questionnaire, Answers, Advice}
   alias AdvisorWeb.Authentication.User
+  alias Advisor.Core.Notifications
 
   plug  AdvisorWeb.Authentication.Gatekeeper
 
-  # TODO: This is long and by the way... did you notice the sneaky if/else?
+  # TODO: This wants to be pushed down a layer!
   def index(conn, %{"id" => id}) do
     advice = Advice.find(id, from_advisor: User.found_in(conn))
 
@@ -28,8 +29,24 @@ defmodule AdvisorWeb.ProvideAdviceController do
     end
   end
 
-  def create(conn, params) do
-    Answers.store(params)
-    render conn, "thank-you.html"
+  def create(conn, %{"id" => id} = params) do
+    advice = Advice.find(id, from_advisor: User.found_in(conn))
+    if advice do
+      Answers.store(params)
+
+      advice
+      |> Questionnaire.find()
+      |> notify()
+
+      render conn, "thank-you.html"
+    else
+      redirect(conn, to: "/")
+    end
+  end
+
+  def notify(questionnaire) do
+    if Questionnaire.completed?(questionnaire) do
+      Notifications.questionnaire_completed(questionnaire)
+    end
   end
 end

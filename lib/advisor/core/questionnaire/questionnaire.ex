@@ -1,8 +1,8 @@
-defmodule Advisor.Core.Questionnaire do
-  use Ecto.Schema
+defmodule Advisor.Core.Questionnaire do use Ecto.Schema
   import Ecto.Query
-  alias Advisor.Repo
   alias __MODULE__
+  alias Advisor.Repo
+  alias Advisor.Core.Advice
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
@@ -55,5 +55,9 @@ defmodule Advisor.Core.Questionnaire do
                                 group_lead_id: gl,
                                 requester: r,
                                 message: m}, returning: true)
+  end
+
+  def completed?(%Questionnaire{advice: advice, question_ids: questions}) do
+    Enum.all?(advice, fn(a) -> Advice.completed?(a, questions) end)
   end
 end

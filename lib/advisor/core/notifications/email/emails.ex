@@ -10,4 +10,13 @@ defmodule Advisor.Core.Notifications.Emails do
     |> put_layout({AdvisorWeb.EmailView, "base"})
     |> render("request-advice.html", advice: advice, data: data)
   end
+
+  def completed(data) do
+    new_email()
+    |> from("advisor@8thlight.com")
+    |> subject("The Feedback for #{data.requester.name} is ready.")
+    |> to(data.group_lead)
+    |> put_layout({AdvisorWeb.EmailView, "base"})
+    |> render("completed.html", data: data)
+  end
 end
