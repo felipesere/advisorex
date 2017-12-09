@@ -1,31 +1,66 @@
 module.exports = {
   bind: function() {
-    var countCheckmarks = function() {
-      return  $(".question-picker input[type=checkbox]:checked").length;
+    var state = {
+      questions: 0,
+      advisors: 0,
+      group_lead: 0
     };
 
-    var showNotification = function(numberOfQuestions) {
+    var count = function(group) {
+      return $(group + " input:checked").length;
+    }
+
+    var showNotification = function(itemName, numberOfQuestions) {
       $(".notice").removeClass("invisible");
-      $(".notice-message").text("You have selected too many questions: "+ numberOfQuestions);
-      $(".request-advice").addClass("disabled").prop("disabled", true);
+      $(".notice-message").text("You have selected too many " +itemName + ": "+ numberOfQuestions);
     };
 
     var hideNotification = function() {
       $(".notice").addClass("invisible");
-      $(".request-advice").removeClass("disabled").prop("disabled", false);
     };
 
-    var notification = function(numberOfQuestions) {
-      if ( numberOfQuestions > 5 ) {
-        showNotification(numberOfQuestions);
+    var notification = function() {
+      if ( state.questions > 5 ) {
+        showNotification("questions", state.questions);
+      } else if(state.advisors > 5) {
+        showNotification("advisors", state.advisors);
       } else {
         hideNotification();
       }
     };
 
-    $(".question-picker input[type=checkbox]").click(function() {
-      var marks = countCheckmarks();
-      notification(marks);
+    var toggleButton = function() {
+      var disable = state.advisors > 5
+        || state.advisors === 0
+        || state.questions > 5
+        || state.questions === 0
+        || state.group_lead === 0;
+
+      if(disable) {
+        $(".request-advice").addClass("disabled").prop("disabled", true);
+      } else {
+        $(".request-advice").removeClass("disabled").prop("disabled", false);
+      }
+    }
+
+    $("#group-leads input[type=radio]").click(function() {
+      state.group_lead = count("#group-leads");
+      notification();
+      toggleButton();
     });
+
+    $("#questions input[type=checkbox]").click(function() {
+      state.questions = count("#questions");
+      notification();
+      toggleButton();
+    });
+
+    $("#advisors input[type=checkbox]").click(function() {
+      state.advisors = count("#advisors");
+      notification();
+      toggleButton();
+    });
+
+    toggleButton();
   }
 }

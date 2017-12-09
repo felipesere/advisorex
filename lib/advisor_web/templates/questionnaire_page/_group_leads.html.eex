@@ -1,4 +1,4 @@
-  <ul class="people-grid">
+  <ul id="group-leads" class="people-grid">
     <%= for person <- @leads do %>
     <li class="advisor-grid-tile">
       <%= label @form, :group_lead, [for: "proposal_group_lead_#{person.id}", class: "advisor-label"] do %>
