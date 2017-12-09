@@ -1,4 +1,4 @@
-<div class="question-picker">
+<div id="questions" class="question-picker">
   <%= inputs_for @form, :questions, fn questions_form -> %>
     <ul class="green-questions">
 
