@@ -2,6 +2,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
   use AdvisorWeb.ConnCase
   import PageAssertions
   alias Advisor.Test.Support.Sample
+  alias Advisor.Core.Answers
 
   setup do
     questionnaire = Sample.questionnaire()
@@ -36,6 +37,28 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
     |> post(path_for(advice), payload)
     |> html_response(200)
     |> has_header("Thank you!")
+  end
+
+  test "can't answer twice", %{conn: conn} do
+    questionnaire = Sample.questionnaire()
+                    |> Sample.answer(all: "abc")
+
+    advice = Sample.advice_from(questionnaire, "Rabea Gleissner")
+    payload = questionnaire.question_ids
+              |> Enum.into(%{}, fn(id) -> {id, "xyz"} end)
+              |> Map.put_new("id", advice.id)
+    conn
+    |> ThroughTheWeb.login_as("Rabea Gleissner")
+    |> post(path_for(advice), payload)
+
+    answers = questionnaire
+              |> Answers.find()
+              |> Enum.filter(fn(answer) -> answer.advice_request_id == advice.id end)
+              |> Enum.map(fn(answer) -> answer.answer end)
+              |> Enum.uniq()
+
+    assert answers == ["abc"]
+
   end
 
   def path_for(advice) do

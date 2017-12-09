@@ -32,13 +32,19 @@ defmodule AdvisorWeb.ProvideAdviceController do
   def create(conn, %{"id" => id} = params) do
     advice = Advice.find(id, from_advisor: User.found_in(conn))
     if advice do
-      Answers.store(params)
+      questionnaire = Questionnaire.find(advice)
 
-      advice
-      |> Questionnaire.find()
-      |> notify()
+      if Advice.completed?(advice, questionnaire.question_ids) do
+        redirect(conn, to: "/")
+      else
+        Answers.store(params)
 
-      render conn, "thank-you.html"
+        questionnaire
+        |> Questionnaire.find()
+        |> notify()
+
+        render conn, "thank-you.html"
+      end
     else
       redirect(conn, to: "/")
     end
