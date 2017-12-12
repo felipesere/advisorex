@@ -6,6 +6,6 @@ defmodule AdvisorWeb.QuestionnaireController do
 
   def delete(conn, %{"id" => id}) do
     Questionnaire.delete(id)
-    redirect(conn, to: "/dashboard")
+    send_resp(conn, 200, "")
   end
 end
