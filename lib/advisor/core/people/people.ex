@@ -20,22 +20,22 @@ defmodule Advisor.Core.People do
     Enum.filter(everybody(), fn(person) -> person.email !=  user.email end)
   end
 
-  def everybody(), do: Repo.all(Person)
+  def everybody(), do: Repo.all(from p in Person, order_by: p.name)
 
-  def group_leads(), do: Repo.all(from p in Person, where: p.is_group_lead)
+  def group_leads(), do: Repo.all(from p in Person, where: p.is_group_lead, order_by: p.name)
 
   def find_by_id(id), do: find_by([id: id])
 
   def find_by([name: name]), do: query_by_name(name)
   def find_by([email: email]), do: query_by_email(email)
-  def find_by([id: nil]), do: nil # TODO: nill is annoying! Maybe there is a better pattern here?
   def find_by([id: id]) when is_integer(id), do: query_by_user(id)
-  def find_by([id: id]) do
+  def find_by([id: id]) when is_binary(id) do
     case parse(id) do
       :bad_parse -> nil
       id -> query_by_user(id)
     end
   end
+  def find_by(_), do: nil
 
   defp query_by_user(id),     do: Repo.one(from p in Person, where: p.id == ^id)
 
