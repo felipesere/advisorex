@@ -5,13 +5,11 @@
       <h2>Confirm</h2>
     </header>
     <div class="modal-body">
-      <p>Do you want to delete this questionnaire?</p>
+      <p>Do you really want to delete this questionnaire?</p>
     </div>
     <footer class="modal-footer">
-      <button class="keep button primary">Keep</button>
-      <button class="remove button primary red" data-questionnaire="<%= @questionnaire_id %>">
-        Delete!
-      </button>
+      <button class="remove button primary red" data-questionnaire="<%= @questionnaire_id %>">Yes</button>
+      <button class="keep button primary">No</button>
     </footer>
   </div>
 </div>
