@@ -8,9 +8,8 @@
 </ul>
 <ul class="row dashboard_actions">
   <li>
-    <a href="<%= path_to_questionnaire(@group.questionnaire_id) %>" class="button primary red">
-      Delete
-    </a>
+    <%= render "_delete_modal.html", questionnaire_id: @group.questionnaire_id %>
+    <a class="button primary red delete">Delete</a>
   </li>
   <li>
     <a href="<%= path_to_present(@group.questionnaire_id) %>" class="button primary green" target="_blank">

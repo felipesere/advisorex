@@ -570,3 +570,76 @@ img.dashboard_action_icon {
   from { background-color: #ffb3c9}
   to {background-color: transparent}
 }
+
+/* ==== MAGICAL MODAL ==== */
+.modal {
+  align-items: center;
+  bottom: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 20;
+}
+
+.modal.is-active {
+  display: flex;
+}
+
+.modal-background {
+  background-color: rgba(10, 10, 10, .86);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.modal-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+}
+
+.modal-body {
+  background-color: white;
+  flex-grow: 1;
+  overflow: auto;
+  padding: 20px;
+}
+
+.modal-footer {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top: 1px solid #dbdbdb;
+}
+
+.modal-footer, .modal-title {
+  background-color: #f5f5f5;
+  padding: 10px;
+}
+
+.modal-footer > .button {
+  margin: 0;
+}
+
+.modal-title {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.keep {
+  margin-left: 20px;
+  float: right;
+}
+
+.remove {
+  float: left;
+}

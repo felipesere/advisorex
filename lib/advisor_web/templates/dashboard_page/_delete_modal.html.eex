@@ -1,0 +1,15 @@
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-title">
+      <h2>Confirm</h2>
+    </header>
+    <div class="modal-body">
+      <p>Do you really want to delete this questionnaire?</p>
+    </div>
+    <footer class="modal-footer">
+      <button class="remove button primary red" data-questionnaire="<%= @questionnaire_id %>">Yes</button>
+      <button class="keep button primary">No</button>
+    </footer>
+  </div>
+</div>
