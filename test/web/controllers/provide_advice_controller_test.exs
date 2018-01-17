@@ -30,6 +30,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
   test "answers questions", %{conn: conn, advice: advice, questions: questions} do
     payload = questions
               |> Enum.into(%{}, fn(id) -> {id, "some answer"} end)
+              |> Map.put_new("note", "some note")
               |> Map.put_new("id", advice.id)
 
     conn

@@ -26,6 +26,7 @@ defmodule Advisor.Core.NotificationsTest do
   def answer(conn, advice, questions) do
     payload = questions
               |> Enum.into(%{}, fn(id) -> {id, "some answer"} end)
+              |> Map.put_new("note", "some note")
               |> Map.put_new("id", advice.id)
 
     conn
