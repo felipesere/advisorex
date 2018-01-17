@@ -6,7 +6,8 @@ defmodule Advisor.Core.AnswersTest do
     params = %{"uuid-1" => "answer_1",
                "uuid-2" => "answer_2",
                "_csrf_token" => "token",
-               "id" => "id"}
+               "id" => "id",
+               "note" => "extra_note"}
 
     [first, second] = Answers.all_answers_in(params)
 
