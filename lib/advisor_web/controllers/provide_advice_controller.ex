@@ -37,8 +37,12 @@ defmodule AdvisorWeb.ProvideAdviceController do
       redirect(conn, to: "/")
     else
       Answers.store(params)
-      note = Notes.store(params)
-      Advice.update(advice, note)
+
+      if Notes.note_in?(params) do
+        note = Notes.store(params)
+               |> elem(1)
+        Advice.update(advice, note)
+      end
 
       questionnaire
       |> Questionnaire.find()
