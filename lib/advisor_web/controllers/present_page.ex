@@ -11,10 +11,14 @@ defmodule AdvisorWeb.PresentPage do
 
     if questionnaire.group_lead == user do
       answered_questions = answers_per_question(questionnaire)
+      notes = [%{note: "some note",
+        person: %{name: "Rabea",
+          profile_image: "https://maxcdn.icons8.com/Share/icon/p1em/Users/user1600.png"}}]
 
       render conn, "index.html", id: questionnaire_id,
                                  request: questionnaire.requester,
-                                 answered_questions: answered_questions
+                                 answered_questions: answered_questions,
+                                 notes: notes
     else
       conn |> redirect(to: "/")
     end

@@ -1,7 +1,6 @@
 defmodule Advisor.Core.Advice do
   use Ecto.Schema
   import Ecto.Query
-  import Ecto.Changeset
   alias Advisor.Repo
   alias __MODULE__
 
@@ -11,6 +10,9 @@ defmodule Advisor.Core.Advice do
     field :questionnaire_id, :binary_id
     belongs_to :advisor, Advisor.Core.Person,
       foreign_key: :advisor_id
+    has_one :notes, Advisor.Core.Note,
+      foreign_key: :advisor_id,
+      on_delete: :delete_all
     has_many :answers, Advisor.Core.Answer,
       foreign_key: :advice_request_id,
       on_delete: :delete_all
@@ -56,11 +58,5 @@ defmodule Advisor.Core.Advice do
       error -> error
     end
 
-  end
-
-  def update(advice, note) do
-    advice
-    |> Ecto.Changeset.change(note_id: note.id)
-    |> Repo.update
   end
 end

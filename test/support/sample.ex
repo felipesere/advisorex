@@ -1,5 +1,5 @@
 defmodule Advisor.Test.Support.Sample do
-  alias Advisor.Core.{Answer, Question, Questionnaire}
+  alias Advisor.Core.{Answer, Question, Questionnaire, Note}
   alias Advisor.Repo
   alias Advisor.Test.Support.Users
 
@@ -65,5 +65,16 @@ defmodule Advisor.Test.Support.Sample do
            |> Enum.map(fn(q) -> %{question_id: q, answer: answer, advice_request_id: advice} end)
 
     Repo.insert_all(Answer, data)
+  end
+
+  def note(questionnaire, name, note) do
+    advice = advice_from(questionnaire, name)
+    save_note(note, advice.id)
+    Questionnaire.find(questionnaire)
+  end
+
+  defp save_note(note, advice_request_id) do
+    data = %Note{note: note, advice_request_id: advice_request_id}
+    Repo.insert(data)
   end
 end

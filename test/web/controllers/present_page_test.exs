@@ -8,6 +8,7 @@ defmodule AdvisorWeb.PresentPageTest do
     q = Sample.questionnaire()
         |> Sample.answer("Priya Patil", all: "some answer")
         |> Sample.answer("Rabea Gleissner", all: "other answer")
+        |> Sample.note("Rabea Gleissner", "some note")
 
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")
