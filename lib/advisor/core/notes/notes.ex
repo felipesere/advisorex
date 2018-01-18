@@ -3,7 +3,8 @@ defmodule Advisor.Core.Notes do
   alias Advisor.Core.Note
 
   def store(params) do
-    Repo.insert_all(Note, note_in(params), returning: true)
+    changes = Repo.insert_all(Note, note_in(params), returning: true)
+    List.first(elem(changes, 1))
   end
 
   def note_in(params) do

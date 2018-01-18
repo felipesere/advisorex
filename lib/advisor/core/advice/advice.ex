@@ -1,6 +1,7 @@
 defmodule Advisor.Core.Advice do
   use Ecto.Schema
   import Ecto.Query
+  import Ecto.Changeset
   alias Advisor.Repo
   alias __MODULE__
 
@@ -56,5 +57,11 @@ defmodule Advisor.Core.Advice do
       error -> error
     end
 
+  end
+
+  def update(advice, note) do
+    advice
+    |> Ecto.Changeset.change(note_id: note.id)
+    |> Repo.update
   end
 end
