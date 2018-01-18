@@ -9,7 +9,6 @@ defmodule Advisor.Core.Advice do
 
   schema "advice_requests" do
     field :questionnaire_id, :binary_id
-    field :note_id, :binary_id
     belongs_to :advisor, Advisor.Core.Person,
       foreign_key: :advisor_id
     has_many :answers, Advisor.Core.Answer,

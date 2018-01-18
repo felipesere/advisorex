@@ -1,4 +1,5 @@
-defmodule Advisor.Core.Questionnaire do use Ecto.Schema
+defmodule Advisor.Core.Questionnaire do
+  use Ecto.Schema
   import Ecto.Query
   alias __MODULE__
   alias Advisor.Repo

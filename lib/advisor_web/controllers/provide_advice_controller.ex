@@ -39,9 +39,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
       Answers.store(params)
 
       if Notes.note_in?(params) do
-        note = Notes.store(params)
-               |> elem(1)
-        Advice.update(advice, note)
+        Notes.store(params, advice)
       end
 
       questionnaire

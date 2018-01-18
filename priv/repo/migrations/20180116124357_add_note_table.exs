@@ -2,9 +2,9 @@ defmodule Advisor.Repo.Migrations.AddNoteTable do
   use Ecto.Migration
 
   def up do
-    create table(:notes, primary_key: false) do
-      add :id, :uuid, primary_key: true, default: fragment("gen_random_uuid()")
+    create table(:notes) do
       add :note, :text
+      add :advice_request_id, references(:advice_requests, type: :uuid)
     end
   end
 
