@@ -23,7 +23,7 @@
         </div>
       <% end %>
       <div class="advice-question">
-        <h3>Any other advice:</h3>
+        <h3>Any other advice?</h3>
         <textarea name="note" rows="5"></textarea>
       </div>
       <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">

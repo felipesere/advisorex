@@ -20,14 +20,17 @@
       </div>
       <hr class="separator" />
     <% end %>
-    <%= for note <- @notes do %>
-      <div class="advice-answer">
-        <aside class="provider">
-          <img class="profile-image" src="<%= note.person.profile_image %>" alt="<%= note.person.name %>" />
-          <span><%= note.person.name %></span>
-        </aside>
-        <p><%= note.note %></p>
-      </div>
-    <% end %>
+    <div class="advice-question">
+      <h3>Any other advice?</h3>
+      <%= for note <- @notes do %>
+        <div class="advice-answer">
+          <aside class="provider">
+            <img class="profile-image" src="<%= note.person.profile_image %>" alt="<%= note.person.name %>" />
+            <span><%= note.person.name %></span>
+          </aside>
+          <p><%= note.note_phrase %></p>
+        </div>
+      <% end %>
+    </div>
   </div>
 </section>

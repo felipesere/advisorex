@@ -11,9 +11,7 @@ defmodule AdvisorWeb.PresentPage do
 
     if questionnaire.group_lead == user do
       answered_questions = answers_per_question(questionnaire)
-      notes = [%{note: "some note",
-        person: %{name: "Rabea",
-          profile_image: "https://maxcdn.icons8.com/Share/icon/p1em/Users/user1600.png"}}]
+      notes = all_notes(questionnaire)
 
       render conn, "index.html", id: questionnaire_id,
                                  request: questionnaire.requester,
@@ -27,7 +25,7 @@ defmodule AdvisorWeb.PresentPage do
   defp answers_per_question(questionnaire) do
     questionnaire
     |> collect_answers()
-    |> join(advisors(questionnaire))
+    |> join_answers(advisors(questionnaire))
     |> answered_questions(questionnaire)
   end
 
@@ -39,7 +37,7 @@ defmodule AdvisorWeb.PresentPage do
     for advice <- advisories, into: %{}, do: {advice.id, advice.advisor}
   end
 
-  defp join(answers, advisors) do
+  defp join_answers(answers, advisors) do
     answers
     |> Enum.map(fn(answer) ->
       %{
@@ -61,6 +59,25 @@ defmodule AdvisorWeb.PresentPage do
         question_phrase: question.phrase,
         answers: answers
       }
+    end)
+  end
+
+  defp all_notes(questionnaire) do
+    collect_notes(questionnaire)
+    |> join_notes(advisors(questionnaire))
+  end
+
+  defp collect_notes(%Questionnaire{advice: advisories}) do
+    advisories
+    |> Enum.map(&(&1.note))
+    |> Enum.reject(&is_nil/1)
+  end
+
+  defp join_notes(notes, advisors) do
+    notes
+    |> Enum.map(fn(note) ->
+      %{note_phrase: note.note,
+        person: advisors[note.advice_request_id]}
     end)
   end
 end
