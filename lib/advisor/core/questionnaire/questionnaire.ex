@@ -1,4 +1,5 @@
-defmodule Advisor.Core.Questionnaire do use Ecto.Schema
+defmodule Advisor.Core.Questionnaire do
+  use Ecto.Schema
   import Ecto.Query
   alias __MODULE__
   alias Advisor.Repo
@@ -24,7 +25,7 @@ defmodule Advisor.Core.Questionnaire do use Ecto.Schema
   defp questionnaire() do
     Questionnaire
     |> select([q], q)
-    |> preload([:advice, [advice: [:answers, :advisor]], :requester, :group_lead])
+    |> preload([:advice, [advice: [:answers, :advisor, :note]], :requester, :group_lead])
   end
 
   def all_for_group_lead(group_lead_id) do

@@ -4,7 +4,7 @@ defmodule Advisor.Core.Answers do
   alias Advisor.Core.Advice
   import Ecto.Query
 
-  @ignored_keys ["id", "_csrf_token"]
+  @ignored_keys ["id", "_csrf_token", "note"]
 
   def store(params) do
     Repo.insert_all(Answer, all_answers_in(params), returning: true)

@@ -7,10 +7,13 @@ defmodule Advisor.Core.Advice do
   @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "advice_requests" do
-    field :questionnaire_id,  :binary_id
+    field :questionnaire_id, :binary_id
     belongs_to :advisor, Advisor.Core.Person,
       foreign_key: :advisor_id
-    has_many :answers,        Advisor.Core.Answer,
+    has_one :note, Advisor.Core.Note,
+      foreign_key: :advice_request_id,
+      on_delete: :delete_all
+    has_many :answers, Advisor.Core.Answer,
       foreign_key: :advice_request_id,
       on_delete: :delete_all
   end

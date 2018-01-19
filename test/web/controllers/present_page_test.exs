@@ -4,18 +4,19 @@ defmodule AdvisorWeb.PresentPageTest do
 
   alias Advisor.Test.Support.{Sample, Users}
 
-  test "it displays all four answers to the questionnaire", %{conn: conn} do
+  test "it displays all four answers to the questionnaire and notes", %{conn: conn} do
     q = Sample.questionnaire()
         |> Sample.answer("Priya Patil", all: "some answer")
         |> Sample.answer("Rabea Gleissner", all: "other answer")
+        |> Sample.note("Rabea Gleissner", "some note")
 
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")
     |> get(Routes.present_page_path(@endpoint, :index, q.id))
     |> html_response(200)
     |> has_title("Advice for Chris Jordan")
-    |> has_advice_questions(2)
-    |> has_answers(["some answer", "other answer"])
+    |> has_advice_questions(3)
+    |> has_answers(["some answer", "other answer", "some note"])
   end
 
   test "only the selected group lead can see the advice", %{conn: conn} do

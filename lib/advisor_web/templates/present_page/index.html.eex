@@ -6,19 +6,31 @@
 
   <div class="advice-questions">
     <%= for question <- @answered_questions do %>
-    <div class="advice-question">
-      <h3><%= question.question_phrase %></h3>
-      <%= for answer <- question.answers do %>
-      <div class="advice-answer">
-        <aside class="provider">
-          <img class="profile-image" src="<%= answer.person.profile_image %>" alt="<%= answer.person.name %>" />
-          <span><%= answer.person.name %></span>
-        </aside>
-        <p><%= answer.answer_phrase %></p>
+      <div class="advice-question">
+        <h3><%= question.question_phrase %></h3>
+        <%= for answer <- question.answers do %>
+          <div class="advice-answer">
+            <aside class="provider">
+              <img class="profile-image" src="<%= answer.person.profile_image %>" alt="<%= answer.person.name %>" />
+              <span><%= answer.person.name %></span>
+            </aside>
+            <p><%= answer.answer_phrase %></p>
+          </div>
+        <% end %>
       </div>
+      <hr class="separator" />
+    <% end %>
+    <div class="advice-question">
+      <h3>Any other advice?</h3>
+      <%= for note <- @notes do %>
+        <div class="advice-answer">
+          <aside class="provider">
+            <img class="profile-image" src="<%= note.person.profile_image %>" alt="<%= note.person.name %>" />
+            <span><%= note.person.name %></span>
+          </aside>
+          <p><%= note.note_phrase %></p>
+        </div>
       <% end %>
     </div>
-    <hr class="separator" />
-  <% end %>
   </div>
 </section>

@@ -32,7 +32,7 @@ defmodule PageAssertions do
 
   def has_answers(html, answers_to_look_for) do
     html
-    |> Floki.find(".advice-answer > blockquote")
+    |> Floki.find(".advice-answer > p")
     |> Enum.map(&Floki.text/1)
     |> Enum.each(fn(answer) -> assert answer in answers_to_look_for end)
     html
