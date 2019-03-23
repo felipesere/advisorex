@@ -3,7 +3,7 @@ defmodule AdvisorWeb.Router do
 
   if Mix.env == :dev do
     # If using Phoenix
-    forward "/sent_emails", Bamboo.EmailPreviewPlug
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
   end
 
   pipeline :browser do

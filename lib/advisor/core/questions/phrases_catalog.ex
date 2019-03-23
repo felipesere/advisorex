@@ -25,7 +25,9 @@ defmodule Advisor.Core.Questions.PhrasesCatalog do
   end
 
   defp read(file) do
-    YamlElixir.read_from_file(file)
+    {:ok, content } = YamlElixir.read_from_file(file)
+
+    content
   end
 
   defp extract(yaml) do

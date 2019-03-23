@@ -5,6 +5,10 @@
 # is restricted to this project.
 use Mix.Config
 
+config :phoenix,
+  json_library: Jason
+
+
 # General application configuration
 config :advisor,
   ecto_repos: [Advisor.Repo]

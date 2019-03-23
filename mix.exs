@@ -35,6 +35,7 @@ defmodule Advisor.Mixfile do
      {:apex, "~> 1.0"},
      {:csv, "~> 2.0"},
      {:ecto_sql, "~> 3.0"},
+     {:jason, "~> 1.1.0"},
      {:phoenix, "~> 1.4.1"},
      {:phoenix_ecto, "~> 4.0"},
      {:phoenix_html, "~> 2.6"},
@@ -42,10 +43,10 @@ defmodule Advisor.Mixfile do
      {:plug, "~> 1.7"},
      {:plug_cowboy, "~> 2.0"},
      {:postgrex, ">= 0.0.0"},
-     {:yaml_elixir, "~> 1.3"},
+     {:yaml_elixir, "~> 2.1"},
      {:ueberauth_google, "~> 0.7.0"},
      {:guardian, "~> 1.0"},
-     {:bamboo, "~> 0.8.0"},
+     {:bamboo, "~> 1.2.0"},
     ] ++ test_deps()
   end
 

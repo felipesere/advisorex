@@ -9,8 +9,8 @@ defmodule Advisor.Core.NotificationsTest do
     Notifications.about_new_questionnaire(questionnaire)
 
     subject = "Chris Jordan would like to get some advice from you!"
-    assert_delivered_with(to: [{"Rabea Gleissner", "rabea@example.com"}], subject: subject)
-    assert_delivered_with(to: [{"Priya Patil", "priya@example.com"}], subject: subject)
+    assert_email_delivered_with(to: [{"Rabea Gleissner", "rabea@example.com"}], subject: subject)
+    assert_email_delivered_with(to: [{"Priya Patil", "priya@example.com"}], subject: subject)
   end
 
   test "sends an email to the group lead", %{conn: conn} do
@@ -20,7 +20,7 @@ defmodule Advisor.Core.NotificationsTest do
 
     Enum.each(questionnaire.advice, fn(a) -> answer(conn, a, questions) end)
 
-    assert_delivered_with(to: [{group_lead.name, group_lead.email}])
+    assert_email_delivered_with(to: [{group_lead.name, group_lead.email}])
   end
 
   def answer(conn, advice, questions) do
