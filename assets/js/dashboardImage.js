@@ -1,14 +1,13 @@
-var debounce = require('debounce');
+import $ from 'cash-dom';
+import debounce from 'debounce';
 
-module.exports = {
-  from: function(fromSelector) {
+export const image = {
+  from: (fromSelector) => {
     return {
-      to: function(toSelector) {
-        var changeImage = function(event) {
-          $(toSelector).attr("src", event.target.value);
-        };
+      to: (toSelector) => {
+        const changeImage = (event) => $(toSelector).attr("src", event.target.value);
 
-        $(fromSelector).keyup(debounce(changeImage, 200));
+        $(fromSelector).on("keyup", debounce(changeImage, 200));
       }
     }
   }

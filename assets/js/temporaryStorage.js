@@ -1,25 +1,25 @@
-var debounce = require('debounce');
+import $ from "cash-dom";
+import debounce from "debounce";
 
-module.exports = {
-  bind: function(selector) {
-    if(localStorage) {
-      $(selector).each(function(idx, answer) {
-        var answerNode = $(answer)
+export const storage = {
+  bind: selector => {
+    if (localStorage) {
+      $(selector).each((idx, answer) => {
+        const answerNode = $(answer);
 
-        if(localStorage[answer.name]) {
+        if (localStorage[answer.name]) {
           answerNode.text(localStorage[answer.name]);
         }
 
-        var saveToStorage = function() {
-          localStorage[answer.name] = answerNode.val();
-        };
+        const saveToStorage = () =>
+          (localStorage[answer.name] = answerNode.val());
 
-        answerNode.keyup(debounce(saveToStorage, 300));
+        answerNode.on("keyup", debounce(saveToStorage, 300));
       });
 
-      $('button[type=submit]').click(function() {
+      $("button[type=submit]").on("click", () => {
         localStorage.clear();
       });
     }
   }
-}
+};

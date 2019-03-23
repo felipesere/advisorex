@@ -1,28 +1,32 @@
-module.exports = {
-  bind: function(selector) {
-    var toggle = function(e) {
+import $ from "cash-dom";
+
+export const modal = {
+  bind: selector => {
+    const toggle = e => {
       $(".modal").toggleClass("is-active");
       $("body").toggleClass("is-active");
     };
 
-    $(selector).click(toggle);
-    $(".keep").click(toggle);
-    $(".modal-background").click(toggle);
+    $(selector).on("click", toggle);
+    $(".keep").on("click", toggle);
+    $(".modal-background").on("click", toggle);
 
-    $(document).keyup(function(event) {
-      if( $(".is-active").length > 0 && event.keyCode == 27) {
+    $(document).on("keyup", event => {
+      if ($(".is-active").length > 0 && event.keyCode == 27) {
         toggle();
       }
     });
 
-    $(".remove").click(function(e) {
-      var questionnaireId = $(this).data("questionnaire");
-      fetch("/questionnaire/"+ questionnaireId +"/delete", {credentials: "include"}).then(function(response) {
-        if(response.ok) {
+    $(".remove").on("click", e => {
+      const questionnaireId = $(this).data("questionnaire");
+      fetch("/questionnaire/" + questionnaireId + "/delete", {
+        credentials: "include"
+      }).then(response => {
+        if (response.ok) {
           location.reload();
         }
         toggle();
       });
     });
   }
-}
+};

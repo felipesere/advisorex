@@ -1,6 +1,14 @@
-$(document).ready(function() {
-  require('js/request.js').bind();
-  require('js/temporaryStorage.js').bind('.advice-question textarea');
-  require('js/dashboardImage.js').from('.js_user-image-input').to('.js_user-image-display');
-  require('js/dashboardModal.js').bind('.delete');
-});
+import $ from 'cash-dom';
+import css from '../css/main.scss';
+
+import { request } from './request';
+import { storage } from './temporaryStorage';
+import { image } from './dashboardImage';
+import { modal } from './dashboardModal';
+
+$(document).ready(() => {
+  request.bind();
+  storage.bind('.advice-question textarea');
+  image.from('.js_user-image-input').to('js_user-image-display');
+  modal.bind('.delete');
+})
