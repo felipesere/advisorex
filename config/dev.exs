@@ -45,11 +45,9 @@ config :advisor, Advisor.Repo,
 config :ueberauth, Ueberauth,
   base_path: "/auth",
   providers: [
-    google: {Local.Strategy, [request_path: "/auth/login",
-                              callback_path: "/auth/callback"]}
-    ]
+    google: {Local.Strategy, [request_path: "/auth/login", callback_path: "/auth/callback"]}
+  ]
 
 config :advisor, FeatureToggle, emails: true
 
-config :advisor, Advisor.Core.Notifications.Email.Mailer,
-  adapter: Bamboo.LocalAdapter
+config :advisor, Advisor.Core.Notifications.Email.Mailer, adapter: Bamboo.LocalAdapter

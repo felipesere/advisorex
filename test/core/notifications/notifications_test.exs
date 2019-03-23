@@ -5,7 +5,7 @@ defmodule Advisor.Core.NotificationsTest do
   alias Advisor.Test.Support.Sample
 
   test "sends emails to all advisors" do
-    questionnaire = Sample.questionnaire
+    questionnaire = Sample.questionnaire()
     Notifications.about_new_questionnaire(questionnaire)
 
     subject = "Chris Jordan would like to get some advice from you!"
@@ -14,19 +14,20 @@ defmodule Advisor.Core.NotificationsTest do
   end
 
   test "sends an email to the group lead", %{conn: conn} do
-    questionnaire = Sample.questionnaire
+    questionnaire = Sample.questionnaire()
     questions = questionnaire.question_ids
     group_lead = questionnaire.group_lead
 
-    Enum.each(questionnaire.advice, fn(a) -> answer(conn, a, questions) end)
+    Enum.each(questionnaire.advice, fn a -> answer(conn, a, questions) end)
 
     assert_email_delivered_with(to: [{group_lead.name, group_lead.email}])
   end
 
   def answer(conn, advice, questions) do
-    payload = questions
-              |> Enum.into(%{}, fn(id) -> {id, "some answer"} end)
-              |> Map.put_new("id", advice.id)
+    payload =
+      questions
+      |> Enum.into(%{}, fn id -> {id, "some answer"} end)
+      |> Map.put_new("id", advice.id)
 
     conn
     |> ThroughTheWeb.login_as(advice.advisor.name)

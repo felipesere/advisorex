@@ -5,11 +5,13 @@ defmodule AdvisorWeb.QuestionnaireControllerTest do
   alias Advisor.Core.{Answers, Advice, Questionnaire}
 
   test "will delete an entire questionnaire", %{conn: conn} do
-    questionnaire = Sample.questionnaire(
-      group_lead: "Felipe Sere",
-      requester: "Rabea Gleissner",
-      advisors: ["Priya Patil"])
-    |> Sample.answer("Priya Patil", all: "foo")
+    questionnaire =
+      Sample.questionnaire(
+        group_lead: "Felipe Sere",
+        requester: "Rabea Gleissner",
+        advisors: ["Priya Patil"]
+      )
+      |> Sample.answer("Priya Patil", all: "foo")
 
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")

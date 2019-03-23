@@ -8,7 +8,6 @@ use Mix.Config
 config :phoenix,
   json_library: Jason
 
-
 # General application configuration
 config :advisor,
   ecto_repos: [Advisor.Repo]
@@ -19,8 +18,7 @@ config :advisor, AdvisorWeb.Endpoint,
   static_url: [path: "/assets"],
   secret_key_base: "SmmWRTx2vhEgHIcQ/7BRuQaIuvQ7fSeTrsFVuPsudiHKtD0AT068LXD61mN5Ow+d",
   render_errors: [view: AdvisorWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Advisor.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Advisor.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -30,10 +28,14 @@ config :logger, :console,
 config :ueberauth, Ueberauth,
   base_path: "/auth",
   providers: [
-    google: {Ueberauth.Strategy.Google, [request_path: "/auth/login",
-                                         callback_path: "/auth/callback",
-                                         hd: "8thlight.com",
-                                         default_scope: "email profile"]}
+    google:
+      {Ueberauth.Strategy.Google,
+       [
+         request_path: "/auth/login",
+         callback_path: "/auth/callback",
+         hd: "8thlight.com",
+         default_scope: "email profile"
+       ]}
   ]
 
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
@@ -46,10 +48,10 @@ config :advisor, Advisor.Core.Notifications.Email.Mailer,
 
 config :advisor, FeatureToggle, emails: [only: ["Felipe Seré", "Rabea Gleissner"]]
 
-if Mix.env == :test do
+if Mix.env() == :test do
   config :mix_test_watch, clear: true
 end
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

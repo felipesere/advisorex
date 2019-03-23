@@ -5,15 +5,16 @@ defmodule AdvisorWeb.AdviceRequestController do
   alias Advisor.Core.Notifications
   alias AdvisorWeb.Authentication.User
 
-  plug  AdvisorWeb.Authentication.Gatekeeper
+  plug AdvisorWeb.Authentication.Gatekeeper
 
   def create(conn, params) do
-    questionnaire = params
-                    |> QuestionnaireProposal.from_params()
-                    |> QuestionnaireProposal.for_requester(User.found_in(conn))
-                    |> Creator.create
+    questionnaire =
+      params
+      |> QuestionnaireProposal.from_params()
+      |> QuestionnaireProposal.for_requester(User.found_in(conn))
+      |> Creator.create()
 
     Notifications.about_new_questionnaire(questionnaire)
-    render conn, "links.html", advice: questionnaire.advice, questionnaire: questionnaire
+    render(conn, "links.html", advice: questionnaire.advice, questionnaire: questionnaire)
   end
 end

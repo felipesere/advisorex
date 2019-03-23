@@ -1,4 +1,5 @@
-defmodule Advisor.Core.Questionnaire do use Ecto.Schema
+defmodule Advisor.Core.Questionnaire do
+  use Ecto.Schema
   import Ecto.Query
   alias __MODULE__
   alias Advisor.Repo
@@ -7,18 +8,18 @@ defmodule Advisor.Core.Questionnaire do use Ecto.Schema
   @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "questionnaires" do
-    field :question_ids, {:array, :binary}
+    field(:question_ids, {:array, :binary})
 
-    belongs_to :requester, Advisor.Core.Person,
-      foreign_key: :requester_id
+    belongs_to(:requester, Advisor.Core.Person, foreign_key: :requester_id)
 
-    belongs_to :group_lead, Advisor.Core.Person,
-      foreign_key: :group_lead_id
+    belongs_to(:group_lead, Advisor.Core.Person, foreign_key: :group_lead_id)
 
-    field :message, :string
-    has_many :advice, Advisor.Core.Advice,
+    field(:message, :string)
+
+    has_many(:advice, Advisor.Core.Advice,
       foreign_key: :questionnaire_id,
       on_delete: :delete_all
+    )
   end
 
   defp questionnaire() do
@@ -32,8 +33,9 @@ defmodule Advisor.Core.Questionnaire do use Ecto.Schema
   end
 
   def questions(%__MODULE__{id: id}), do: questions(id)
+
   def questions(id) do
-    Repo.one(from q in Questionnaire, where: q.id == ^id, select: q.question_ids)
+    Repo.one(from(q in Questionnaire, where: q.id == ^id, select: q.question_ids))
   end
 
   def with_requester(person) do
@@ -42,22 +44,22 @@ defmodule Advisor.Core.Questionnaire do use Ecto.Schema
 
   def find(%Questionnaire{id: id}), do: find(id)
   def find(%{questionnaire_id: id}), do: find(id)
+
   def find(id) do
     Repo.one(questionnaire() |> where([q], q.id == ^id))
   end
 
   def delete(id) do
-    Repo.delete_all(from q in Questionnaire, where: q.id == ^id)
+    Repo.delete_all(from(q in Questionnaire, where: q.id == ^id))
   end
 
   def create(%{question_ids: ids}, %{requester: r, group_lead: gl, message: m}) do
-    Repo.insert(%Questionnaire{question_ids: ids,
-                                group_lead_id: gl,
-                                requester: r,
-                                message: m}, returning: true)
+    Repo.insert(%Questionnaire{question_ids: ids, group_lead_id: gl, requester: r, message: m},
+      returning: true
+    )
   end
 
   def completed?(%Questionnaire{advice: advice, question_ids: questions}) do
-    Enum.all?(advice, fn(a) -> Advice.completed?(a, questions) end)
+    Enum.all?(advice, fn a -> Advice.completed?(a, questions) end)
   end
 end

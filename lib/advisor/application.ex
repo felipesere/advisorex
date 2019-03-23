@@ -6,7 +6,7 @@ defmodule Advisor.Application do
 
     children = [
       supervisor(Advisor.Repo, []),
-      supervisor(AdvisorWeb.Endpoint, []),
+      supervisor(AdvisorWeb.Endpoint, [])
     ]
 
     opts = [strategy: :one_for_one, name: Advisor.Supervisor]

@@ -1,7 +1,7 @@
 defmodule AdvisorWeb.Router do
   use AdvisorWeb, :router
 
-  if Mix.env == :dev do
+  if Mix.env() == :dev do
     # If using Phoenix
     forward "/sent_emails", Bamboo.SentEmailViewerPlug
   end
@@ -15,7 +15,8 @@ defmodule AdvisorWeb.Router do
   end
 
   scope "/", AdvisorWeb do
-    pipe_through :browser # Use the default browser stack
+    # Use the default browser stack
+    pipe_through :browser
 
     get "/", LandingPage, :index
     get "/logout", AuthenticationController, :logout

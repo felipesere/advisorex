@@ -4,7 +4,7 @@ defmodule AdvisorWeb.LandingPageTest do
   alias Advisor.Test.Support.{Sample, Users}
 
   test "Hit the landing page", %{conn: conn} do
-    conn = get conn, "/"
+    conn = get(conn, "/")
     response = html_response(conn, 200)
 
     response

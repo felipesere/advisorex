@@ -3,7 +3,7 @@ defmodule AdvisorWeb.PresentPage do
   alias Advisor.Core.{Questions, Questionnaire}
   alias AdvisorWeb.Authentication.User
 
-  plug  AdvisorWeb.Authentication.Gatekeeper, only: :group_leads
+  plug AdvisorWeb.Authentication.Gatekeeper, only: :group_leads
 
   def index(conn, %{"id" => questionnaire_id}) do
     user = User.of(conn)
@@ -12,9 +12,11 @@ defmodule AdvisorWeb.PresentPage do
     if questionnaire.group_lead == user do
       answered_questions = answers_per_question(questionnaire)
 
-      render conn, "index.html", id: questionnaire_id,
-                                 request: questionnaire.requester,
-                                 answered_questions: answered_questions
+      render(conn, "index.html",
+        id: questionnaire_id,
+        request: questionnaire.requester,
+        answered_questions: answered_questions
+      )
     else
       conn |> redirect(to: "/")
     end
@@ -28,7 +30,7 @@ defmodule AdvisorWeb.PresentPage do
   end
 
   defp collect_answers(%Questionnaire{advice: advisories}) do
-    Enum.flat_map(advisories, &(&1.answers))
+    Enum.flat_map(advisories, & &1.answers)
   end
 
   defp advisors(%Questionnaire{advice: advisories}) do
@@ -37,7 +39,7 @@ defmodule AdvisorWeb.PresentPage do
 
   defp join(answers, advisors) do
     answers
-    |> Enum.map(fn(answer) ->
+    |> Enum.map(fn answer ->
       %{
         question_id: answer.question_id,
         answer_phrase: answer.answer,
@@ -50,9 +52,10 @@ defmodule AdvisorWeb.PresentPage do
     questions = Questions.load(question_ids)
 
     answers
-    |> Enum.group_by(&(&1.question_id), &(&1))
-    |> Enum.map(fn({question_id, answers}) ->
+    |> Enum.group_by(& &1.question_id, & &1)
+    |> Enum.map(fn {question_id, answers} ->
       question = Enum.find(questions, &(&1.id == question_id))
+
       %{
         question_phrase: question.phrase,
         answers: answers

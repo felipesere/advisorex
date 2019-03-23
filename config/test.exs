@@ -9,7 +9,6 @@ config :advisor, AdvisorWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-
 # Configure your database
 config :advisor, Advisor.Repo,
   adapter: Ecto.Adapters.Postgres,
@@ -19,7 +18,6 @@ config :advisor, Advisor.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :advisor, Advisor.Core.Notifications.Email.Mailer,
-  adapter: Bamboo.TestAdapter
+config :advisor, Advisor.Core.Notifications.Email.Mailer, adapter: Bamboo.TestAdapter
 
 config :advisor, FeatureToggle, emails: true

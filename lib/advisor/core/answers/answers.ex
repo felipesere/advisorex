@@ -12,7 +12,7 @@ defmodule Advisor.Core.Answers do
 
   def all_answers_in(%{"id" => advice_request_id} = params) do
     params
-    |> Enum.reject(fn({key, _}) -> key in @ignored_keys end)
+    |> Enum.reject(fn {key, _} -> key in @ignored_keys end)
     |> Enum.map(&to_answer/1)
     |> add(advice_request_id)
   end
@@ -25,12 +25,12 @@ defmodule Advisor.Core.Answers do
   # TODO This feels to intricite... map into Map put?
   defp add(answers, advice_request_id) do
     answers
-    |> Enum.map(&(Map.put(&1, :advice_request_id, advice_request_id)))
+    |> Enum.map(&Map.put(&1, :advice_request_id, advice_request_id))
   end
 
   def find(questionnaire) do
     ids = Advice.ids(questionnaire.advice)
 
-    Repo.all(from a in Answer, where: a.advice_request_id in ^ids)
+    Repo.all(from(a in Answer, where: a.advice_request_id in ^ids))
   end
 end

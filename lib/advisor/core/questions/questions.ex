@@ -6,5 +6,6 @@ defmodule Advisor.Core.Questions do
   def store(phrases) do
     {:ok, Question.store(phrases)}
   end
-  def phrases(questions), do: Enum.map(questions, fn(question) -> question.phrase end)
+
+  def phrases(questions), do: Enum.map(questions, fn question -> question.phrase end)
 end

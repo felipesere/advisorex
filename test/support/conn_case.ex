@@ -28,9 +28,11 @@ defmodule AdvisorWeb.ConnCase do
 
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Advisor.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Advisor.Repo, {:shared, self()})
     end
+
     {:ok, conn: Phoenix.ConnTest.build_conn() |> Plug.Test.init_test_session(%{})}
   end
 end

@@ -10,14 +10,20 @@ defmodule Advisor.Core.Summary do
   end
 
   defp content(id) do
-    query = from advice in Advice,
-      join: q in Questionnaire, on: [id: advice.questionnaire_id],
-      join: r in Person, on: [id: q.requester_id],
-      join: a in Person, on: [id: advice.advisor_id],
-      join: answer in Answer, on: [advice_request_id: advice.id],
-      where: advice.questionnaire_id == ^id,
-      group_by: [a.email, answer.inserted_at, r.name],
-      select: {answer.inserted_at, a.email, r.name, fragment("array_agg(answer)")}
+    query =
+      from(advice in Advice,
+        join: q in Questionnaire,
+        on: [id: advice.questionnaire_id],
+        join: r in Person,
+        on: [id: q.requester_id],
+        join: a in Person,
+        on: [id: advice.advisor_id],
+        join: answer in Answer,
+        on: [advice_request_id: advice.id],
+        where: advice.questionnaire_id == ^id,
+        group_by: [a.email, answer.inserted_at, r.name],
+        select: {answer.inserted_at, a.email, r.name, fragment("array_agg(answer)")}
+      )
 
     query
     |> Repo.all()

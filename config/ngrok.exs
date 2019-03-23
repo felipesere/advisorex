@@ -10,9 +10,8 @@ config :advisor, AdvisorWeb.Endpoint,
 config :ueberauth, Ueberauth,
   base_path: "/auth",
   providers: [
-    google: {Local.Strategy, [request_path: "/auth/login",
-                              callback_path: "/auth/callback"]}
-    ]
+    google: {Local.Strategy, [request_path: "/auth/login", callback_path: "/auth/callback"]}
+  ]
 
 # Do not print debug messages in production
 config :logger, :console, format: "[$level] $message\n"
@@ -25,4 +24,3 @@ config :advisor, Advisor.Repo,
   database: "advisor_dev",
   hostname: "localhost",
   pool_size: 10
-

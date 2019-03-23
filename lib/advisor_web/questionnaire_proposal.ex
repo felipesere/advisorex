@@ -6,11 +6,11 @@ defmodule AdvisorWeb.QuestionnaireProposal do
   alias __MODULE__
 
   schema "proposal" do
-    field :group_lead, :integer
-    field :requester, :integer
-    field :questions, {:map, :boolean}
-    field :advisors, {:map, :boolean}
-    field :message, :string
+    field(:group_lead, :integer)
+    field(:requester, :integer)
+    field(:questions, {:map, :boolean})
+    field(:advisors, {:map, :boolean})
+    field(:message, :string)
   end
 
   def from_params(%{"proposal" => proposal}) do
@@ -47,8 +47,8 @@ defmodule AdvisorWeb.QuestionnaireProposal do
 
   def ids(map) do
     map
-    |> Enum.filter(fn({_, v}) -> v end)
-    |> Enum.map(fn({k, _}) -> parse!(k) end)
+    |> Enum.filter(fn {_, v} -> v end)
+    |> Enum.map(fn {k, _} -> parse!(k) end)
   end
 
   def parse!(potential) do

@@ -16,7 +16,11 @@ defmodule AdvisorWeb.AuthenticationControllerTest do
   end
 
   test "unsuccesful logins just bounce back to the login page", %{conn: conn} do
-    info = %Info{email: "foo@example.com", name: "Foo Example", urls: %{website: "not-8thlight.com"}}
+    info = %Info{
+      email: "foo@example.com",
+      name: "Foo Example",
+      urls: %{website: "not-8thlight.com"}
+    }
 
     assert conn
            |> assign(:ueberauth_auth, %Auth{info: info})

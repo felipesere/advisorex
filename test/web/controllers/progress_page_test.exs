@@ -4,8 +4,9 @@ defmodule AdvisorWeb.ProgressPageTest do
   alias Advisor.Test.Support.Sample
 
   test "shows which people have already completed questionnaires", %{conn: conn} do
-    q = Sample.questionnaire()
-        |> Sample.answer("Priya Patil", all: "some answer")
+    q =
+      Sample.questionnaire()
+      |> Sample.answer("Priya Patil", all: "some answer")
 
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")
@@ -16,9 +17,10 @@ defmodule AdvisorWeb.ProgressPageTest do
   end
 
   test "all completed advice questions", %{conn: conn} do
-    q = Sample.questionnaire()
-        |> Sample.answer("Priya Patil", all: "some answer")
-        |> Sample.answer("Rabea Gleissner", all: "other answer")
+    q =
+      Sample.questionnaire()
+      |> Sample.answer("Priya Patil", all: "some answer")
+      |> Sample.answer("Rabea Gleissner", all: "other answer")
 
     conn
     |> ThroughTheWeb.login_as("Felipe Sere")

@@ -30,12 +30,15 @@ defmodule AdvisorWeb.Authentication.Gatekeeper do
   def preload(%Person{} = user, conn, %{only: :regular}) do
     assign(conn, :user, user)
   end
+
   def preload(%Person{is_group_lead: true} = user, conn, %{only: :group_leads}) do
     assign(conn, :user, user)
   end
+
   def preload(_, conn, %{redirect: false}) do
     conn
   end
+
   def preload(_, conn, _) do
     conn
     |> redirect_to_login

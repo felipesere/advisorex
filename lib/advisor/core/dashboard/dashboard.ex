@@ -2,11 +2,12 @@ defmodule Advisor.Core.Dashboard do
   alias Advisor.Core.Dashboard.{GroupLeadSection, RequiredAdviceSection, AdviceForMeSection}
   alias Advisor.Core.Questionnaire
 
-  defstruct [:group_lead_section,
-             :required_advice_section,
-             :personal_advice_section,
-             :existing_questionnaire
-            ]
+  defstruct [
+    :group_lead_section,
+    :required_advice_section,
+    :personal_advice_section,
+    :existing_questionnaire
+  ]
 
   def for_user(viewer) do
     %__MODULE__{

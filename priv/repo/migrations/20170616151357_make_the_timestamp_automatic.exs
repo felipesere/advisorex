@@ -3,13 +3,13 @@ defmodule Advisor.Repo.Migrations.MakeTheTimestampAutomatic do
 
   def up do
     alter table(:answers) do
-      modify :inserted_at, :utc_datetime, default: fragment("NOW()")
+      modify(:inserted_at, :utc_datetime, default: fragment("NOW()"))
     end
   end
 
   def down do
     alter table(:answers) do
-      modify :inserted_at, :utc_datetime, default: nil
+      modify(:inserted_at, :utc_datetime, default: nil)
     end
   end
 end

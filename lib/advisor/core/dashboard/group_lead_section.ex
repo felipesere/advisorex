@@ -10,6 +10,7 @@ defmodule Advisor.Core.Dashboard.GroupLeadSection do
   def group_lead_section(%Person{is_group_lead: false}) do
     %__MODULE__{groups: []}
   end
+
   def group_lead_section(%Person{is_group_lead: true, id: group_lead}) do
     group_lead
     |> Questionnaire.all_for_group_lead()
@@ -29,5 +30,5 @@ defmodule Advisor.Core.Dashboard.GroupLeadSection do
     }
   end
 
-  defp all_advisors(%{advice: advice}), do: Enum.map(advice, fn(a) -> a.advisor end)
+  defp all_advisors(%{advice: advice}), do: Enum.map(advice, fn a -> a.advisor end)
 end

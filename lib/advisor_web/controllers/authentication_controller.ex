@@ -23,8 +23,9 @@ defmodule AdvisorWeb.AuthenticationController do
     |> get_session(:target) || "/"
   end
 
-  def proceed(nil, conn,  _), do: conn |> redirect(to: "/")
-  def proceed(%{id: id}, conn, [redirect_to: destination]) do
+  def proceed(nil, conn, _), do: conn |> redirect(to: "/")
+
+  def proceed(%{id: id}, conn, redirect_to: destination) do
     conn
     |> fetch_session()
     |> clear_session()

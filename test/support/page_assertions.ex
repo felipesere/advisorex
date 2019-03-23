@@ -16,7 +16,7 @@ defmodule PageAssertions do
 
   def has_links(html, values) do
     links = html |> Floki.find("a") |> Enum.map(&Floki.text/1)
-    Enum.each(values, fn(value) -> assert value in links end)
+    Enum.each(values, fn value -> assert value in links end)
     html
   end
 
@@ -34,14 +34,16 @@ defmodule PageAssertions do
     html
     |> Floki.find(".advice-answer > blockquote")
     |> Enum.map(&Floki.text/1)
-    |> Enum.each(fn(answer) -> assert answer in answers_to_look_for end)
+    |> Enum.each(fn answer -> assert answer in answers_to_look_for end)
+
     html
   end
 
   def has_continue_button_with(html, text) do
-    button = html
-             |> Floki.find(".button")
-             |> Floki.text
+    button =
+      html
+      |> Floki.find(".button")
+      |> Floki.text()
 
     assert button =~ text
     html
@@ -57,16 +59,17 @@ defmodule PageAssertions do
   end
 
   def has_header(html, header) do
-    value = html
-            |> Floki.find("h1")
-            |> Floki.text
+    value =
+      html
+      |> Floki.find("h1")
+      |> Floki.text()
 
-    assert value ==  header
+    assert value == header
     html
   end
 
   def has_message(html, expected_message) do
-    message = html |> Floki.find(".message") |> Floki.text() |> String.trim
+    message = html |> Floki.find(".message") |> Floki.text() |> String.trim()
 
     assert message == expected_message
     html

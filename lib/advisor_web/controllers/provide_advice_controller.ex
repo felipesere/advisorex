@@ -4,7 +4,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
   alias AdvisorWeb.Authentication.User
   alias Advisor.Core.Notifications
 
-  plug  AdvisorWeb.Authentication.Gatekeeper
+  plug AdvisorWeb.Authentication.Gatekeeper
 
   # TODO: This wants to be pushed down a layer!
   def index(conn, %{"id" => id}) do
@@ -13,14 +13,17 @@ defmodule AdvisorWeb.ProvideAdviceController do
     if advice do
       questionnaire = Questionnaire.find(advice.questionnaire_id)
 
-      questions = questionnaire
-                  |> Questionnaire.questions()
-                  |> Questions.load()
+      questions =
+        questionnaire
+        |> Questionnaire.questions()
+        |> Questions.load()
 
-      render(conn, "advice-form.html", requester: questionnaire.requester,
-                                       questions: questions,
-                                       advice_id: id,
-                                       message: questionnaire.message)
+      render(conn, "advice-form.html",
+        requester: questionnaire.requester,
+        questions: questions,
+        advice_id: id,
+        message: questionnaire.message
+      )
     else
       conn
       |> fetch_session()
@@ -33,7 +36,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
     advice = Advice.find(id, from_advisor: User.found_in(conn))
     questionnaire = Questionnaire.find(advice)
 
-    if Advice.completed?(advice, questionnaire.question_ids)  do
+    if Advice.completed?(advice, questionnaire.question_ids) do
       redirect(conn, to: "/")
     else
       Answers.store(params)
@@ -42,7 +45,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
       |> Questionnaire.find()
       |> notify()
 
-      render conn, "thank-you.html"
+      render(conn, "thank-you.html")
     end
   end
 

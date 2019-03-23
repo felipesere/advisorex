@@ -4,24 +4,25 @@ defmodule Advisor.Core.Question do
   alias Advisor.Repo
   alias __MODULE__
 
-  @type t :: %__MODULE__{id: String.t, phrase: String.t}
+  @type t :: %__MODULE__{id: String.t(), phrase: String.t()}
   @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "questions" do
-    field :phrase, :string
+    field(:phrase, :string)
   end
 
   def store(phrases) do
-    phrases = Enum.map(phrases, &(%{phrase: &1}))
+    phrases = Enum.map(phrases, &%{phrase: &1})
 
     Question
     |> Repo.insert_all(phrases, returning: true)
-    |> elem(1) # TODO: Gaaaaaaaaah...
-    |> Enum.map(&(&1.id))
+    # TODO: Gaaaaaaaaah...
+    |> elem(1)
+    |> Enum.map(& &1.id)
   end
 
   # TODO: Load is very vague...
   def load(uuids) do
-    Repo.all(from q in Question, where: q.id in ^uuids)
+    Repo.all(from(q in Question, where: q.id in ^uuids))
   end
 end

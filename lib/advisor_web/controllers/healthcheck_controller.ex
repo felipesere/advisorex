@@ -11,13 +11,13 @@ defmodule AdvisorWeb.HealthcheckController do
       System.get_env("HEROKU_SLUG_COMMIT")
     end
 
-    defp system_sha()  do
+    defp system_sha() do
       {sha, _} = System.cmd("git", ["rev-parse", "HEAD"])
       String.trim(sha)
     end
   end
 
   def index(conn, _params) do
-    text conn, "Last commit: #{Git.current_git_sha()}"
+    text(conn, "Last commit: #{Git.current_git_sha()}")
   end
 end

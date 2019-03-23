@@ -9,9 +9,11 @@ defmodule Advisor.Core.Dashboard.AdviceForMeSection do
   end
 
   defp section_for(%{advice: advices, question_ids: questions}) do
-    Enum.map(advices, fn(advice) -> %{
-      advisor: advice.advisor,
-      completed: Advice.completed?(advice, questions)
-    } end)
+    Enum.map(advices, fn advice ->
+      %{
+        advisor: advice.advisor,
+        completed: Advice.completed?(advice, questions)
+      }
+    end)
   end
 end

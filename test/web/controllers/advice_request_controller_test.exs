@@ -6,24 +6,28 @@ defmodule AdvisorWeb.AdviceRequestControllerTest do
     felipe = Users.with("Felipe Sere")
     cj = Users.with("Chris Jordan")
 
-    proposal = %{:group_lead => Integer.to_string(felipe.id),
-                 :advisors => %{Integer.to_string(cj.id) => "true"},
-                 :questions =>  %{"13" => "true"}}
-    conn = conn
-           |> ThroughTheWeb.login_as("Felipe Sere")
-           |> post("/request", [proposal: proposal])
+    proposal = %{
+      :group_lead => Integer.to_string(felipe.id),
+      :advisors => %{Integer.to_string(cj.id) => "true"},
+      :questions => %{"13" => "true"}
+    }
+
+    conn =
+      conn
+      |> ThroughTheWeb.login_as("Felipe Sere")
+      |> post("/request", proposal: proposal)
 
     response = html_response(conn, 200)
 
-    assert response |> Floki.find("h1") |> Floki.text == "Here are your links"
-    assert response |> Floki.find(".individual") |> Enum.count == 1
+    assert response |> Floki.find("h1") |> Floki.text() == "Here are your links"
+    assert response |> Floki.find(".individual") |> Enum.count() == 1
     assert advice_link(response)
   end
 
   def advice_link(html) do
     html
     |> Floki.find(".see-advice-link")
-    |> Floki.text
+    |> Floki.text()
   end
 
   test "redirects unauthenticated user request", %{conn: conn} do
