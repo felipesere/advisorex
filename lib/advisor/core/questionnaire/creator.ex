@@ -8,11 +8,12 @@ defmodule Advisor.Core.Questionnaire.Creator do
     proposal = proposal
                |> Map.update!(:requester, & People.find_by(id: &1))
 
+    # TODO: this needs revisiting!
     m = Multi.new()
-    |> Multi.run(:question_ids,  fn(_) -> Questions.store(phrases) end)
-    |> Multi.run(:questionnaire, fn(params) -> Questionnaire.create(params, proposal) end)
-    |> Multi.run(:advisories,    fn(params) -> Advice.create(params, proposal)  end)
-    |> Multi.run(:q,             fn(%{questionnaire: q}) -> {:ok, Questionnaire.find(q.id)} end)
+    |> Multi.run(:question_ids,  fn(_repo, _changes) -> Questions.store(phrases) end)
+    |> Multi.run(:questionnaire, fn(_repo, params) -> Questionnaire.create(params, proposal) end)
+    |> Multi.run(:advisories,    fn(_repo, params) -> Advice.create(params, proposal)  end)
+    |> Multi.run(:q,             fn(_repo, %{questionnaire: q}) -> {:ok, Questionnaire.find(q.id)} end)
     |> Repo.transaction()
 
     case m do
