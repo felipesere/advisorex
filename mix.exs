@@ -52,7 +52,7 @@ defmodule Advisor.Mixfile do
 
   defp test_deps do
     [
-      {:credo, "~> 0.7", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
       {:ex_unit_notifier, "~> 0.1.3", only: :test},
       {:excoveralls, "~> 0.7.1", only: :test},
       {:floki, "~> 0.18", only: :test},
