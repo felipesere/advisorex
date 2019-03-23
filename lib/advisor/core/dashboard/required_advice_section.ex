@@ -1,5 +1,5 @@
 defmodule Advisor.Core.Dashboard.RequiredAdviceSection do
-  alias Advisor.Core.{People, Questionnaire, Advice}
+  alias Advisor.Core.{Questionnaire, Advice}
 
   def required_advice_section(%{id: advisor}) do
     advisor

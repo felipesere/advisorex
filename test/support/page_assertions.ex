@@ -10,7 +10,7 @@ defmodule PageAssertions do
 
   def has_no_link(html, value) do
     links = html |> Floki.find("a") |> Enum.map(&Floki.text/1)
-    assert not value in links
+    assert value not in links
     html
   end
 
