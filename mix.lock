@@ -50,7 +50,7 @@
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.4", "f0eafff810d2041e93f915ef59899c923f4568f4585904d010387ed74988e77b", [:make, :mix, :rebar3], [], "hexpm"},
   "telemetry": {:hex, :telemetry, "0.3.0", "099a7f3ce31e4780f971b4630a3c22ec66d22208bc090fe33a2a3a6a67754a73", [:rebar3], [], "hexpm"},
   "ueberauth": {:hex, :ueberauth, "0.6.1", "9e90d3337dddf38b1ca2753aca9b1e53d8a52b890191cdc55240247c89230412", [:mix], [{:plug, "~> 1.5", [hex: :plug, repo: "hexpm", optional: false]}], "hexpm"},
-  "ueberauth_google": {:hex, :ueberauth_google, "0.7.0", "835ae570548b236e9a91fe600ed1b817a7abf7c05650f1c74798078e366ddd46", [:mix], [{:oauth2, "~> 0.9", [hex: :oauth2, repo: "hexpm", optional: false]}, {:ueberauth, "~> 0.4", [hex: :ueberauth, repo: "hexpm", optional: false]}], "hexpm"},
+  "ueberauth_google": {:hex, :ueberauth_google, "0.8.0", "dc0e8417061c74107a3ba1419943cc930d3403b5c536b3757886964a3a70c333", [:mix], [{:oauth2, "~> 0.9", [hex: :oauth2, repo: "hexpm", optional: false]}, {:ueberauth, "~> 0.4", [hex: :ueberauth, repo: "hexpm", optional: false]}], "hexpm"},
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.4.1", "d869e4c68901dd9531385bb0c8c40444ebf624e60b6962d95952775cac5e90cd", [:rebar3], [], "hexpm"},
   "uuid": {:hex, :uuid, "1.1.8", "e22fc04499de0de3ed1116b770c7737779f226ceefa0badb3592e64d5cfb4eb9", [:mix], [], "hexpm"},
   "yamerl": {:hex, :yamerl, "0.7.0", "e51dba652dce74c20a88294130b48051ebbbb0be7d76f22de064f0f3ccf0aaf5", [:rebar3], [], "hexpm"},
