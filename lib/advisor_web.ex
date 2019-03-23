@@ -20,7 +20,7 @@ defmodule AdvisorWeb do
     quote do
       use Phoenix.Controller, namespace: AdvisorWeb
       import Plug.Conn
-      import AdvisorWeb.Router.Helpers
+      alias AdvisorWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -37,7 +37,7 @@ defmodule AdvisorWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import AdvisorWeb.Router.Helpers
+      alias AdvisorWeb.Router.Helpers, as: Routes
       import AdvisorWeb.ErrorHelpers
 
       @endpoint AdvisorWeb.Endpoint

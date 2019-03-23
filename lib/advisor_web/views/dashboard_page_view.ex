@@ -11,15 +11,15 @@ defmodule AdvisorWeb.DashboardPageView do
   def awaiting_advice(%{personal_advice_section: personal}), do: personal != :nothing
 
   def path_to_questionnaire(id) do
-    questionnaire_path(AdvisorWeb.Endpoint, :delete, id)
+    Routes.questionnaire_path(AdvisorWeb.Endpoint, :delete, id)
   end
 
   def path_to_present(id) do
-    present_page_path(AdvisorWeb.Endpoint, :index, id)
+    Routes.present_page_path(AdvisorWeb.Endpoint, :index, id)
   end
 
   def download_summary(id) do
-    download_summary_path(AdvisorWeb.Endpoint, :export, id)
+    Routes.download_summary_path(AdvisorWeb.Endpoint, :export, id)
   end
 
   def completed?(%{completed: true}), do: "completed"
