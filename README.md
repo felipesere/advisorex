@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/felipesere/advisorex/badge.svg?branch=master)](https://coveralls.io/github/felipesere/advisorex?branch=master)
 
 This little app sprung to life as an attempt to improve upon the current peer-feedback process.
-The main point is to provide valuable insight by giving advice and avoiding generic feedback.
+The main point is to provide valuable insight by _giving advice_ and avoiding _generic feedback_.
 
 Advisor allows you to create a form from a catalogue of questions and lets you direct that form to specific people.
 This makes the insights more targeted to your current situation.
@@ -16,10 +16,11 @@ Hopefully, this app will delight you by guiding you through a swift creation pro
 
 # Domain Model
 
-The picture below tries to sketch out the domain objects and their relationships. The picture is meant to give a rough idea of what
+The picture below tries to sketch out the domain objects and their relationships.
+The picture is meant to give a rough idea of what
 _things_ are relevant in Advisorex.
 Its neither complete nor detailed.
-You can find me [here](lib/advisor/core/README.md)
+You can find more [here](lib/advisor/core/README.md)
 
 ![Domain Model](doc/domain-model.jpg)
 
@@ -35,29 +36,3 @@ To start your Phoenix server:
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-# In a virtual machine
-
-Prerequisites:
-
-- [Vagrant](https://www.vagrantup.com/docs/installation/)
-
-- [](https://www.virtualbox.org/)
-
-
-Now you need to setup your virtual machine.
-
-`vagrant up`
-
-If vagrant is already running but you want to copy over the configuration or local files:
-
-`vagrant provision`
-
-To start the server for the advisorex project, run:
-
-``` unix
-vagrant ssh
-cd /advisorex
-mix seed
-mix phx.server
-```
