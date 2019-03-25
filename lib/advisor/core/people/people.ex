@@ -17,7 +17,12 @@ defmodule Advisor.Core.People do
   end
 
   def everybody_but(user) do
-    Enum.filter(everybody(), fn person -> person.email != user.email end)
+    everybody()
+    |> Enum.filter(but(user))
+  end
+
+  defp but(user) do
+    fn person -> person.email != user.email end
   end
 
   def everybody(), do: Repo.all(from(p in Person, order_by: p.name))

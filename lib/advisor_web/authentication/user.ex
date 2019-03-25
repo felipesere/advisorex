@@ -4,4 +4,6 @@ defmodule AdvisorWeb.Authentication.User do
   end
 
   def found_in(conn), do: of(conn)
+
+  def extract(conn), do: of(conn)
 end

@@ -15,6 +15,7 @@ defmodule AdvisorWeb.AdviceRequestController do
       |> Creator.create()
 
     Notifications.about_new_questionnaire(questionnaire)
+
     render(conn, "links.html", advice: questionnaire.advice, questionnaire: questionnaire)
   end
 end
