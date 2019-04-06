@@ -48,8 +48,7 @@ defmodule Advisor.Mixfile do
       {:yaml_elixir, "~> 2.1"},
       {:ueberauth_google, "~> 0.8.0"},
       {:guardian, "~> 1.0"},
-      {:bamboo, "~> 1.2.0"},
-      {:poison, "~> 3.0"}
+      {:bamboo, "~> 1.2.0"}
     ] ++ test_deps()
   end
 
