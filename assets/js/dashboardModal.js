@@ -18,7 +18,8 @@ export const modal = {
     });
 
     $(".remove").on("click", e => {
-      const questionnaireId = $(this).data("questionnaire");
+      const questionnaireId = $(".remove").data("questionnaire");
+
       fetch("/questionnaire/" + questionnaireId + "/delete", {
         credentials: "include"
       }).then(response => {
