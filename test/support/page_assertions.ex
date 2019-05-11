@@ -3,32 +3,59 @@ defmodule PageAssertions do
   import ExUnit.Assertions
 
   def has_link_to(html, value) do
-    links = html |> Floki.find("a") |> Enum.map(&Floki.text/1)
+    links = html
+            |> Floki.find("a")
+            |> Enum.map(&Floki.text/1)
     assert value in links
     html
   end
 
   def has_no_link(html, value) do
-    links = html |> Floki.find("a") |> Enum.map(&Floki.text/1)
+    links = html
+            |> Floki.find("a")
+            |> Enum.map(&Floki.text/1)
     assert value not in links
     html
   end
 
   def has_links(html, values) do
-    links = html |> Floki.find("a") |> Enum.map(&Floki.text/1)
+    links = html
+            |> Floki.find("a")
+            |> Enum.map(&Floki.text/1)
     Enum.each(values, fn value -> assert value in links end)
     html
   end
 
   def has_title(html, expected_title) do
-    assert html |> Floki.find("h1") |> Floki.text() == expected_title
+    assert html
+           |> Floki.find("h1")
+           |> Floki.text() == expected_title
     html
   end
 
   def has_advice_questions(html, amount) do
-    assert html |> Floki.find(".advice-question") |> length == amount
+    assert html
+           |> Floki.find(".advice-question")
+           |> length == amount
     html
   end
+
+  def has_see_advice_link(html) do
+    assert html
+           |> Floki.find(".see-advice-link")
+           |> Floki.text()
+
+    html
+  end
+
+  def has_links_to_advice(html, count) do
+    assert html
+           |> Floki.find(".individual")
+           |> Enum.count() == count
+
+    html
+  end
+
 
   def has_answers(html, answers_to_look_for) do
     html
@@ -69,25 +96,33 @@ defmodule PageAssertions do
   end
 
   def has_message(html, expected_message) do
-    message = html |> Floki.find(".message") |> Floki.text() |> String.trim()
+    message = html
+              |> Floki.find(".message")
+              |> Floki.text()
+              |> String.trim()
 
     assert message == expected_message
     html
   end
 
   def has_no_login(html) do
-    assert html |> Floki.find(".login") == []
+    assert html
+           |> Floki.find(".login") == []
     html
   end
 
   def has_logout_button(html) do
-    assert html |> Floki.find(".button.logout") |> length() == 1
+    assert html
+           |> Floki.find(".button.logout")
+           |> length() == 1
     html
   end
 
 
   def has_submit_buttons(html, buttons) do
-    assert html |> Floki.find("button[type=submit]") |> Enum.map(&Floki.text/1) == buttons
+    assert html
+           |> Floki.find("button[type=submit]")
+           |> Enum.map(&Floki.text/1) == buttons
     html
   end
 end

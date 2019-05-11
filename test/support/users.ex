@@ -14,7 +14,7 @@ defmodule Advisor.Test.Support.Users do
   ]
 
   def with(names) when is_list(names) do
-    Enum.map(names, fn name -> __MODULE__.with(name) end)
+    Enum.map(names, &__MODULE__.with/1)
   end
 
   def with(name) do

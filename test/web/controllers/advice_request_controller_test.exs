@@ -1,33 +1,17 @@
 defmodule AdvisorWeb.AdviceRequestControllerTest do
   use AdvisorWeb.ConnCase
   alias Advisor.Test.Support.Users
+  alias PageAssertions, as: It
 
   test "creates the proper questionnaire", %{conn: conn} do
-    felipe = Users.with("Felipe Sere")
-    cj = Users.with("Chris Jordan")
+    [felipe, cj, priya] = Users.with(["Felipe Sere", "Chris Jordan", "Priya Patil"])
 
-    proposal = %{
-      :group_lead => Integer.to_string(felipe.id),
-      :advisors => %{Integer.to_string(cj.id) => "true"},
-      :questions => %{"13" => "true"}
-    }
-
-    conn =
-      conn
-      |> Login.as("Felipe Sere")
-      |> post("/request", proposal: proposal)
-
-    response = html_response(conn, 200)
-
-    assert response |> Floki.find("h1") |> Floki.text() == "Here are your links"
-    assert response |> Floki.find(".individual") |> Enum.count() == 1
-    assert advice_link(response)
-  end
-
-  def advice_link(html) do
-    html
-    |> Floki.find(".see-advice-link")
-    |> Floki.text()
+    conn
+    |> Login.as(priya)
+    |> Submit.questionnaire(asking: [cj], group_lead: felipe, questions: [13])
+    |> It.has_title("Here are your links")
+    |> It.has_links_to_advice(1)
+    |> It.has_see_advice_link()
   end
 
   test "redirects unauthenticated user request", %{conn: conn} do
