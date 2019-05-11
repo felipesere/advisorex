@@ -1,5 +1,4 @@
 defmodule Login do
-
   def as(conn, %{name: name}), do: as(conn, name)
 
   def as(conn, name) do
