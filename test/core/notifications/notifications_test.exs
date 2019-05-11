@@ -30,7 +30,7 @@ defmodule Advisor.Core.NotificationsTest do
       |> Map.put_new("id", advice.id)
 
     conn
-    |> ThroughTheWeb.login_as(advice.advisor.name)
+    |> Login.as(advice.advisor.name)
     |> post(path_for(advice), payload)
     |> html_response(200)
   end

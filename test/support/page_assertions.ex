@@ -74,4 +74,20 @@ defmodule PageAssertions do
     assert message == expected_message
     html
   end
+
+  def has_no_login(html) do
+    assert html |> Floki.find(".login") == []
+    html
+  end
+
+  def has_logout_button(html) do
+    assert html |> Floki.find(".button.logout") |> length() == 1
+    html
+  end
+
+
+  def has_submit_buttons(html, buttons) do
+    assert html |> Floki.find("button[type=submit]") |> Enum.map(&Floki.text/1) == buttons
+    html
+  end
 end

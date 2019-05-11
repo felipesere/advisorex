@@ -9,7 +9,7 @@ defmodule AdvisorWeb.ProgressPageTest do
       |> Sample.answer("Priya Patil", all: "some answer")
 
     conn
-    |> ThroughTheWeb.login_as("Felipe Sere")
+    |> Login.as("Felipe Sere")
     |> get(Routes.progress_page_path(@endpoint, :index, q.id))
     |> html_response(200)
     |> has_completed_advice()
@@ -23,7 +23,7 @@ defmodule AdvisorWeb.ProgressPageTest do
       |> Sample.answer("Rabea Gleissner", all: "other answer")
 
     conn
-    |> ThroughTheWeb.login_as("Felipe Sere")
+    |> Login.as("Felipe Sere")
     |> get(Routes.progress_page_path(@endpoint, :index, q.id))
     |> html_response(200)
     |> has_continue_button_with("We are good to go")

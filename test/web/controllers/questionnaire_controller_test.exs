@@ -14,7 +14,7 @@ defmodule AdvisorWeb.QuestionnaireControllerTest do
       |> Sample.answer("Priya Patil", all: "foo")
 
     conn
-    |> ThroughTheWeb.login_as("Felipe Sere")
+    |> Login.as("Felipe Sere")
     |> get(Routes.questionnaire_path(@endpoint, :delete, questionnaire.id))
 
     refute Questionnaire.find(questionnaire)

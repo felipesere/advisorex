@@ -13,7 +13,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
 
   test "renders the form", %{conn: conn, advice: advice} do
     conn
-    |> ThroughTheWeb.login_as("Rabea Gleissner")
+    |> Login.as("Rabea Gleissner")
     |> get(path_for(advice))
     |> html_response(200)
     |> has_header("Advice for Chris Jordan")
@@ -22,7 +22,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
 
   test "force login if incorrect advisor is authenticated", %{conn: conn, advice: advice} do
     assert conn
-           |> ThroughTheWeb.login_as("Priya Patil")
+           |> Login.as("Priya Patil")
            |> get(Routes.provide_advice_path(@endpoint, :index, advice.id))
            |> redirected_to() == "/"
   end
@@ -34,7 +34,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
       |> Map.put_new("id", advice.id)
 
     conn
-    |> ThroughTheWeb.login_as("Rabea Gleissner")
+    |> Login.as("Rabea Gleissner")
     |> post(path_for(advice), payload)
     |> html_response(200)
     |> has_header("Thank you!")
@@ -53,7 +53,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
       |> Map.put_new("id", advice.id)
 
     conn
-    |> ThroughTheWeb.login_as("Rabea Gleissner")
+    |> Login.as("Rabea Gleissner")
     |> post(path_for(advice), payload)
 
     answers =

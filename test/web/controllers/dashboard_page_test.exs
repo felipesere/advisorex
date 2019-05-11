@@ -15,7 +15,7 @@ defmodule AdvisorWeb.DashboardPageTest do
     )
 
     conn
-    |> ThroughTheWeb.login_as(@group_lead)
+    |> Login.as(@group_lead)
     |> get("/dashboard")
     |> html_response(200)
     |> has_no_link("Request advice for yourself")
@@ -35,7 +35,7 @@ defmodule AdvisorWeb.DashboardPageTest do
     )
 
     conn
-    |> ThroughTheWeb.login_as(@group_lead)
+    |> Login.as(@group_lead)
     |> get("/dashboard")
     |> html_response(200)
     |> has_title("Hello Felipe Sere!")
@@ -57,7 +57,7 @@ defmodule AdvisorWeb.DashboardPageTest do
     )
 
     conn
-    |> ThroughTheWeb.login_as("Priya Patil")
+    |> Login.as("Priya Patil")
     |> get("/dashboard")
     |> html_response(200)
     |> advice_needed_for("Rabea Gleissner")
@@ -73,7 +73,7 @@ defmodule AdvisorWeb.DashboardPageTest do
     |> Sample.answer("Priya Patil", all: "someting")
 
     conn
-    |> ThroughTheWeb.login_as("Priya Patil")
+    |> Login.as("Priya Patil")
     |> get("/dashboard")
     |> html_response(200)
     |> no_advice_needed_for("Rabea Gleissner")
@@ -87,7 +87,7 @@ defmodule AdvisorWeb.DashboardPageTest do
     )
 
     conn
-    |> ThroughTheWeb.login_as("Rabea Gleissner")
+    |> Login.as("Rabea Gleissner")
     |> get("/dashboard")
     |> html_response(200)
     |> still_has_to_give_me_advice("Priya Patil")
@@ -98,7 +98,7 @@ defmodule AdvisorWeb.DashboardPageTest do
     Users.with("Rabea Gleissner")
 
     assert conn
-           |> ThroughTheWeb.login_as("Rabea Gleissner")
+           |> Login.as("Rabea Gleissner")
            |> post("/dashboard/settings", %{"person" => %{"is_group_lead" => "true"}})
            |> redirected_to() == "/dashboard"
 

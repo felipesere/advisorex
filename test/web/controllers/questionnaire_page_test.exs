@@ -17,7 +17,7 @@ defmodule AdvisorWeb.RequestPageTest do
 
     conn =
       conn
-      |> ThroughTheWeb.login_as("Felipe Sere")
+      |> Login.as("Felipe Sere")
       |> get("/request")
 
     response = html_response(conn, 200)

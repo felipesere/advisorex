@@ -11,7 +11,7 @@ defmodule AdvisorWeb.PresentPageTest do
       |> Sample.answer("Rabea Gleissner", all: "other answer")
 
     conn
-    |> ThroughTheWeb.login_as("Felipe Sere")
+    |> Login.as("Felipe Sere")
     |> get(Routes.present_page_path(@endpoint, :index, q.id))
     |> html_response(200)
     |> has_title("Advice for Chris Jordan")
@@ -28,7 +28,7 @@ defmodule AdvisorWeb.PresentPageTest do
     Users.with("Jim Suchy")
 
     assert conn
-           |> ThroughTheWeb.login_as("Jim Suchy")
+           |> Login.as("Jim Suchy")
            |> get(Routes.present_page_path(@endpoint, :index, q.id))
            |> redirected_to() == "/"
   end

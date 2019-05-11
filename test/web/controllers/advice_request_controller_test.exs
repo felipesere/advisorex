@@ -14,7 +14,7 @@ defmodule AdvisorWeb.AdviceRequestControllerTest do
 
     conn =
       conn
-      |> ThroughTheWeb.login_as("Felipe Sere")
+      |> Login.as("Felipe Sere")
       |> post("/request", proposal: proposal)
 
     response = html_response(conn, 200)
