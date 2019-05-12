@@ -1,5 +1,5 @@
 defmodule ThroughTheCore do
-  alias Advisor.Core.Answers
+  alias Advisor.Core.Answer
 
   def answer!(advisories, data) when is_list(advisories) do
     advisories
@@ -7,6 +7,6 @@ defmodule ThroughTheCore do
   end
 
   def answer!(%{id: id}, with: data) do
-    Answers.store(Map.put(data, "id", id))
+    Answer.store(Map.put(data, "id", id))
   end
 end

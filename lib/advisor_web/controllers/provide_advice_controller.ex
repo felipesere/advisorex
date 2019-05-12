@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.ProvideAdviceController do
   use AdvisorWeb, :controller
-  alias Advisor.Core.{Questions, Questionnaire, Answers, Advice}
+  alias Advisor.Core.{Questions, Questionnaire, Answer, Advice}
   alias AdvisorWeb.Authentication.User
   alias Advisor.Core.Notifications
 
@@ -39,7 +39,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
     if Advice.completed?(advice, questionnaire.question_ids) do
       redirect(conn, to: "/")
     else
-      Answers.store(params)
+      Answer.store(params)
 
       questionnaire
       |> Questionnaire.find()

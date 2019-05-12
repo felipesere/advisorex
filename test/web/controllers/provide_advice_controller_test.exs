@@ -2,7 +2,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
   use AdvisorWeb.ConnCase
   alias PageAssertions, as: It
   alias Advisor.Test.Support.Sample
-  alias Advisor.Core.Answers
+  alias Advisor.Core.Answer
 
   setup do
     questionnaire = Sample.questionnaire()
@@ -57,7 +57,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
 
   defp answers_for(questionnaire, %Advisor.Core.Advice{id: id}) do
     questionnaire
-    |> Answers.find()
+    |> Answer.find()
     |> Enum.filter(fn answer -> answer.advice_request_id == id end)
     |> Enum.map(fn answer -> answer.answer end)
     |> Enum.uniq()

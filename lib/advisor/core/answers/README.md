@@ -1,4 +1,4 @@
-# Answers
+# Answer
 
 Anything related to storing and finding answers.
 Normally, one would look up the answers to a given [advice](lib/advisor/core/advice/README.md) entity. This module can also look through an entire list of advice entities to find their answers.

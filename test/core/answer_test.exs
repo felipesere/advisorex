@@ -1,6 +1,6 @@
-defmodule Advisor.Core.AnswersTest do
+defmodule Advisor.Core.AnswerTest do
   use Advisor.DataCase
-  alias Advisor.Core.Answers
+  alias Advisor.Core.Answer
 
   test "transforms params into database compatible answers" do
     params = %{
@@ -10,7 +10,7 @@ defmodule Advisor.Core.AnswersTest do
       "id" => "id"
     }
 
-    [first, second] = Answers.all_answers_in(params)
+    [first, second] = Answer.all_answers_in(params)
 
     assert first == %{advice_request_id: "id", answer: "answer_1", question_id: "uuid-1"}
     assert second == %{advice_request_id: "id", answer: "answer_2", question_id: "uuid-2"}
