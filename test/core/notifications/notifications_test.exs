@@ -5,8 +5,7 @@ defmodule Advisor.Core.NotificationsTest do
   alias Advisor.Test.Support.Sample
 
   test "sends emails to all advisors" do
-    questionnaire = Sample.questionnaire()
-    Notifications.about_new_questionnaire(questionnaire)
+    Notifications.about_new_questionnaire(Sample.questionnaire())
 
     subject = "Chris Jordan would like to get some advice from you!"
     assert_email_delivered_with(to: [{"Rabea Gleissner", "rabea@example.com"}], subject: subject)
@@ -24,18 +23,10 @@ defmodule Advisor.Core.NotificationsTest do
   end
 
   def answer(conn, advice, questions) do
-    payload =
-      questions
-      |> Enum.into(%{}, fn id -> {id, "some answer"} end)
-      |> Map.put_new("id", advice.id)
+    answered = Enum.into(questions, %{"id" => advice.id}, fn id -> {id, "some answer"} end)
 
     conn
     |> Login.as(advice.advisor.name)
-    |> post(path_for(advice), payload)
-    |> html_response(200)
-  end
-
-  def path_for(advice) do
-    Routes.provide_advice_path(@endpoint, :create, advice.id)
+    |> Submit.answers!(answered, for: advice)
   end
 end
