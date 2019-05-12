@@ -8,7 +8,7 @@ defmodule AdvisorWeb.QuestionnaireControllerTest do
     questionnaire =
       Sample.questionnaire(
         mentor: "Felipe Sere",
-        requester: "Rabea Gleissner",
+        mentee: "Rabea Gleissner",
         advisors: ["Priya Patil"]
       )
       |> Sample.answer("Priya Patil", all: "foo")

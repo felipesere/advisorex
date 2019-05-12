@@ -14,7 +14,7 @@ defmodule AdvisorWeb.PresentPage do
 
       render(conn, "index.html",
         id: questionnaire_id,
-        request: questionnaire.requester,
+        request: questionnaire.mentee,
         answered_questions: answered_questions
       )
     else

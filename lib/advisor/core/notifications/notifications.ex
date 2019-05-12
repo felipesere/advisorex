@@ -7,7 +7,7 @@ defmodule Advisor.Core.Notifications do
 
   def about_new_questionnaire(questionnaire) do
     data = %{
-      requester: questionnaire.requester,
+      mentee: questionnaire.mentee,
       mentor: questionnaire.mentor,
       nr_of_questions: length(questionnaire.question_ids),
       message: questionnaire.message
@@ -20,7 +20,7 @@ defmodule Advisor.Core.Notifications do
 
   def questionnaire_completed(questionnaire) do
     data = %{
-      requester: questionnaire.requester,
+      mentee: questionnaire.mentee,
       mentor: questionnaire.mentor,
       questionnaire: questionnaire
     }

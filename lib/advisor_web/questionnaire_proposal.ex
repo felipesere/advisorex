@@ -7,7 +7,7 @@ defmodule AdvisorWeb.QuestionnaireProposal do
 
   schema "proposal" do
     field(:mentor, :integer)
-    field(:requester, :integer)
+    field(:mentee, :integer)
     field(:questions, {:map, :boolean})
     field(:advisors, {:map, :boolean})
     field(:message, :string)
@@ -20,8 +20,8 @@ defmodule AdvisorWeb.QuestionnaireProposal do
     |> filter_advisors()
   end
 
-  def for_requester(proposal, %{id: requester}) do
-    %{proposal | requester: requester}
+  def for_mentee(proposal, %{id: mentee}) do
+    %{proposal | mentee: mentee}
   end
 
   def changeset(params) do

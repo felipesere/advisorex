@@ -15,7 +15,7 @@
               <!-- COPY -->
               <tr>
                 <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
-                  <p style="margin: 0;"><%= @data.requester.name %> and <%= @data.mentor.name %> are asking if you could take a few minutes to help them with some constructive advice with <%= questions(@data.nr_of_questions) %>.</p>
+                  <p style="margin: 0;"><%= @data.mentee.name %> and <%= @data.mentor.name %> are asking if you could take a few minutes to help them with some constructive advice with <%= questions(@data.nr_of_questions) %>.</p>
                 </td>
               </tr>
               <%= if @data.message do %>
@@ -26,7 +26,7 @@
                   <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
                     <tr>
                        <td>
-                         <img alt="Logo" src="<%= @data.requester.profile_image %>" width="40" height="40" style="display: block; width: 40px; max-width: 40px; min-width: 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;background: <%= color(:dark_grey) %>;border-radius: 100%;padding: 2px;margin-right: 10px;" border="0">
+                         <img alt="Logo" src="<%= @data.mentee.profile_image %>" width="40" height="40" style="display: block; width: 40px; max-width: 40px; min-width: 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;background: <%= color(:dark_grey) %>;border-radius: 100%;padding: 2px;margin-right: 10px;" border="0">
                        </td>
                        <td>
                          <p style="margin: 0;background: <%= color(:light_grey) %>;border-left: 5px solid <%= color(:dark_grey) %>;font-style: italic;margin: 1.5em 0;padding: .5em 10px;"><%= @data.message %></p>

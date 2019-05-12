@@ -1,7 +1,7 @@
 defmodule PageQueries do
-  def requester(html) do
+  def mentee(html) do
     html
-    |> Floki.find(".progress-requester")
+    |> Floki.find(".progress-mentee")
     |> Floki.text()
   end
 

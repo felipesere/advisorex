@@ -10,7 +10,7 @@ defmodule AdvisorWeb.DashboardPageTest do
   test "you can only have a single questionnaire open", %{conn: conn} do
     Sample.questionnaire(
       mentor: "Jim Suchy",
-      requester: "Felipe Sere",
+      mentee: "Felipe Sere",
       advisors: ["Priya Patil"]
     )
 
@@ -24,13 +24,13 @@ defmodule AdvisorWeb.DashboardPageTest do
   test "it shows a section for mentors", %{conn: conn} do
     Sample.questionnaire(
       mentor: @mentor,
-      requester: "Rabea Gleissner",
+      mentee: "Rabea Gleissner",
       advisors: ["Priya Patil", "Sarah Johnston"]
     )
 
     Sample.questionnaire(
       mentor: @mentor,
-      requester: "Chris Jordan",
+      mentee: "Chris Jordan",
       advisors: ["Nick Dyer", "Jim Suchy"]
     )
 
@@ -46,13 +46,13 @@ defmodule AdvisorWeb.DashboardPageTest do
   test "it shows the advice you still have to give", %{conn: conn} do
     Sample.questionnaire(
       mentor: @mentor,
-      requester: "Rabea Gleissner",
+      mentee: "Rabea Gleissner",
       advisors: ["Priya Patil"]
     )
 
     Sample.questionnaire(
       mentor: @mentor,
-      requester: "Chris Jordan",
+      mentee: "Chris Jordan",
       advisors: ["Priya Patil"]
     )
 
@@ -67,7 +67,7 @@ defmodule AdvisorWeb.DashboardPageTest do
   test "it doesn't show advice you have already given", %{conn: conn} do
     Sample.questionnaire(
       mentor: @mentor,
-      requester: "Chris Jordan",
+      mentee: "Chris Jordan",
       advisors: ["Priya Patil"]
     )
     |> Sample.answer("Priya Patil", all: "someting")
@@ -82,7 +82,7 @@ defmodule AdvisorWeb.DashboardPageTest do
   test "it shows who still has to give you advice", %{conn: conn} do
     Sample.questionnaire(
       mentor: @mentor,
-      requester: "Rabea Gleissner",
+      mentee: "Rabea Gleissner",
       advisors: ["Priya Patil", "Sarah Johnston"]
     )
 
@@ -114,26 +114,26 @@ defmodule AdvisorWeb.DashboardPageTest do
     html
   end
 
-  def advice_needed_for(html, requester) do
+  def advice_needed_for(html, mentee) do
     assert html
            |> Floki.find(".open-advice-requets > p")
            |> Enum.map(&Floki.text/1)
-           |> Enum.member?(requester)
+           |> Enum.member?(mentee)
 
     html
   end
 
-  def no_advice_needed_for(html, requester) do
+  def no_advice_needed_for(html, mentee) do
     refute html
            |> Floki.find(".open-advice-requets > p")
            |> Enum.map(&Floki.text/1)
-           |> Enum.member?(requester)
+           |> Enum.member?(mentee)
 
     html
   end
 
-  def advice_open_for(html, requester) do
-    advice = fn text -> text =~ "Advice for " <> requester end
+  def advice_open_for(html, mentee) do
+    advice = fn text -> text =~ "Advice for " <> mentee end
 
     assert html
            |> Floki.find("li > p")

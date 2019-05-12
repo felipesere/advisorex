@@ -19,7 +19,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
         |> Questions.load()
 
       render(conn, "advice-form.html",
-        requester: questionnaire.requester,
+        mentee: questionnaire.mentee,
         questions: questions,
         advice_id: id,
         message: questionnaire.message

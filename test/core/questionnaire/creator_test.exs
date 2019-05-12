@@ -13,7 +13,7 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
 
     proposal = %QuestionnaireProposal{
       mentor: felipe.id,
-      requester: rabea.id,
+      mentee: rabea.id,
       advisors: [cj.id, priya.id],
       questions: phrases,
       message: "bla"
@@ -30,7 +30,7 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
 
     proposal = %QuestionnaireProposal{
       mentor: felipe.id,
-      requester: rabea.id,
+      mentee: rabea.id,
       advisors: [cj.id],
       questions: []
     }

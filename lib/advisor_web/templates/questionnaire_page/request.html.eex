@@ -1,7 +1,7 @@
 <%= form_for @conn, "/request", [as: :proposal], fn f -> %>
     <section class="module">
       <header class="module-header medium-header">
-        <h1>Hello <%= @requester.name %>!</h1>
+        <h1>Hello <%= @mentee.name %>!</h1>
       </header>
       <header class="module-header">
         <h1>Who is your Mentor?</h1>

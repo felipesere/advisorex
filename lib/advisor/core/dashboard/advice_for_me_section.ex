@@ -2,7 +2,7 @@ defmodule Advisor.Core.Dashboard.AdviceForMeSection do
   alias Advisor.Core.{Questionnaire, Advice}
 
   def advice_for_me_section(%{id: person}) do
-    case Questionnaire.with_requester(person) do
+    case Questionnaire.with_mentee(person) do
       nil -> :nothing
       questionnaire -> section_for(questionnaire)
     end

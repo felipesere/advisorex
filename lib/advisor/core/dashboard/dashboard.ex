@@ -14,7 +14,7 @@ defmodule Advisor.Core.Dashboard do
       mentor_section: MentorSection.mentor_section(viewer),
       required_advice_section: RequiredAdviceSection.required_advice_section(viewer),
       personal_advice_section: AdviceForMeSection.advice_for_me_section(viewer),
-      existing_questionnaire: Questionnaire.with_requester(viewer.id)
+      existing_questionnaire: Questionnaire.with_mentee(viewer.id)
     }
   end
 end

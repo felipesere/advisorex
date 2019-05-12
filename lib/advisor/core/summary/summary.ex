@@ -15,7 +15,7 @@ defmodule Advisor.Core.Summary do
         join: q in Questionnaire,
         on: [id: advice.questionnaire_id],
         join: r in Person,
-        on: [id: q.requester_id],
+        on: [id: q.mentee_id],
         join: a in Person,
         on: [id: advice.advisor_id],
         join: answer in Answer,
@@ -35,7 +35,7 @@ defmodule Advisor.Core.Summary do
     |> Questionnaire.questions()
     |> Questions.load()
     |> Questions.phrases()
-    |> prepend(["timestamp", "advisor", "requester"])
+    |> prepend(["timestamp", "advisor", "mentee"])
   end
 
   defp prepend(head, tail), do: tail ++ head

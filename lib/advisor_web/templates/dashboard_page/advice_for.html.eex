@@ -1,4 +1,4 @@
-<p>Advice for <%= @group.requester.name %></p>
+<p>Advice for <%= @group.mentee.name %></p>
 <ul class="row">
   <%= for person <- @group.advisors do %>
     <li>

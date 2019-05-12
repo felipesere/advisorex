@@ -4,7 +4,7 @@ defmodule Advisor.Core.Dashboard.MentorSection do
   defstruct groups: []
 
   defmodule Group do
-    defstruct [:questionnaire_id, :requester, :advisors]
+    defstruct [:questionnaire_id, :mentee, :advisors]
   end
 
   def mentor_section(%Person{is_mentor: false}) do
@@ -25,7 +25,7 @@ defmodule Advisor.Core.Dashboard.MentorSection do
   defp to_group(%{id: id} = questionnaire) do
     %Group{
       questionnaire_id: id,
-      requester: questionnaire.requester,
+      mentee: questionnaire.mentee,
       advisors: all_advisors(questionnaire)
     }
   end

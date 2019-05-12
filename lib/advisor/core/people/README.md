@@ -4,7 +4,7 @@ All this module does is find people by different attributes.
 There is a single structure representing any person, but there is one flag that
 distinguishes `mentors` from other people.
 
-You can search for people by `id`, `name`, or `email`, but also the role, such as `mentor/` or `requester`.
+You can search for people by `id`, `name`, or `email`, but also the role, such as `mentor/` or `mentee`.
 
 * Mentor: Person tasked with facilitating the creation of a [questionnaire](lib/advisor/core/questionnaire/README.md) with the mentee.
 * Mentee: The person that requested the advice from other people.

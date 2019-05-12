@@ -13,7 +13,7 @@ defmodule AdvisorWeb.ProgressPage do
     incomplete = Map.get(who_is_done, false, [])
 
     render(conn, "index.html",
-      requester: questionnaire.requester,
+      mentee: questionnaire.mentee,
       completed: completed,
       incomplete: incomplete,
       all_complete: incomplete == [],

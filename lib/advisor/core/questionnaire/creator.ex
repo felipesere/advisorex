@@ -6,7 +6,7 @@ defmodule Advisor.Core.Questionnaire.Creator do
   def create(%{questions: phrases} = proposal) do
     proposal =
       proposal
-      |> Map.update!(:requester, &People.find_by(id: &1))
+      |> Map.update!(:mentee, &People.find_by(id: &1))
 
     # TODO: this needs revisiting!
     m =

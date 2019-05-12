@@ -22,7 +22,7 @@
 
     <ul class="row" >
       <%= for advice <- @dashboard.required_advice_section do %>
-        <%= render "dashboard_requester.html", advice: advice %>
+        <%= render "dashboard_mentee.html", advice: advice %>
       <% end %>
     </ul>
   </section>

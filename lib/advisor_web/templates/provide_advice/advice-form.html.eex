@@ -1,12 +1,12 @@
 <form action="/provide/<%= @advice_id %>" method="post">
   <section class="module">
     <header class="module-header">
-      <h1>Advice for <%= @requester.name %></h1>
+      <h1>Advice for <%= @mentee.name %></h1>
     </header>
 
     <%= if @message do %>
       <div class="message-area">
-        <p>A little note from <%= @requester.name %>:</p>
+        <p>A little note from <%= @mentee.name %>:</p>
         <blockquote class="message">
           <%= @message %>
         </blockquote>

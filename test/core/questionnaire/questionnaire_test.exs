@@ -8,7 +8,7 @@ defmodule Advisor.Core.QuestionnaireTest do
     questionnaire =
       Sample.questionnaire(
         mentor: "Felipe Sere",
-        requester: "Rabea Gleissner",
+        mentee: "Rabea Gleissner",
         advisors: ["Priya Patil"]
       )
 

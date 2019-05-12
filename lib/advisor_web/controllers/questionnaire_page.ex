@@ -10,7 +10,7 @@ defmodule AdvisorWeb.QuestionnairePage do
     {everybody, mentors, questions} = QuestionnaireForm.data_for(User.of(conn))
 
     render(conn, "request.html",
-      requester: User.of(conn),
+      mentee: User.of(conn),
       mentors: mentors,
       everybody: everybody,
       questions: questions

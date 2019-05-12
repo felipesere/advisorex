@@ -21,7 +21,7 @@ defmodule AdvisorWeb.LandingPage do
     [
       title: "Hello #{user.name}!",
       logged_in: true,
-      existing_questionnaire: Questionnaire.with_requester(user.id),
+      existing_questionnaire: Questionnaire.with_mentee(user.id),
       redirect_to: target
     ]
   end

@@ -8,22 +8,22 @@ defmodule Advisor.Test.Support.Sample do
   def questionnaire() do
     questionnaire(
       mentor: "Felipe Sere",
-      requester: "Chris Jordan",
+      mentee: "Chris Jordan",
       advisors: ["Rabea Gleissner", "Priya Patil"]
     )
   end
 
-  def questionnaire(for: requester) do
+  def questionnaire(for: mentee) do
     questionnaire(
       mentor: "Felipe Sere",
-      requester: requester,
+      mentee: mentee,
       advisors: ["Rabea Gleissner", "Priya Patil"]
     )
   end
 
-  def questionnaire(mentor: mentor, requester: requester, advisors: advisors) do
+  def questionnaire(mentor: mentor, mentee: mentee, advisors: advisors) do
     mentor = Users.with(mentor)
-    requester = Users.with(requester)
+    mentee = Users.with(mentee)
     advisors = Users.with(advisors)
 
     ids = Question.store(["foo", "bar"])
@@ -32,7 +32,7 @@ defmodule Advisor.Test.Support.Sample do
       %Questionnaire{
         question_ids: ids,
         mentor_id: mentor.id,
-        requester: requester,
+        mentee: mentee,
         message: "This is a random message"
       }
       |> Repo.insert!()
@@ -41,7 +41,7 @@ defmodule Advisor.Test.Support.Sample do
       advisors,
       fn advisor ->
         questionnaire
-        |> Ecto.build_assoc(:advice, %{requester_id: requester.id, advisor_id: advisor.id})
+        |> Ecto.build_assoc(:advice, %{mentee_id: mentee.id, advisor_id: advisor.id})
         |> Repo.insert!()
       end
     )

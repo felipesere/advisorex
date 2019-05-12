@@ -1,6 +1,6 @@
 <section class="module">
   <header class="module-header">
-    <h1 class="progress-requester">Progress on the advice for <%= @requester.name %></h1>
+    <h1 class="progress-mentee">Progress on the advice for <%= @mentee.name %></h1>
   </header>
   <ul class="advisors">
     <%= for person <- @completed do %>

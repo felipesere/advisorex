@@ -11,7 +11,7 @@ defmodule AdvisorWeb.AdviceRequestController do
     questionnaire =
       params
       |> QuestionnaireProposal.from_params()
-      |> QuestionnaireProposal.for_requester(User.found_in(conn))
+      |> QuestionnaireProposal.for_mentee(User.found_in(conn))
       |> Creator.create()
 
     Notifications.about_new_questionnaire(questionnaire)
