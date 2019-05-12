@@ -8,8 +8,8 @@
   <% end %>
 </section>
 
-<%= if @user.is_group_lead && has_advice(@dashboard) do %>
-  <%= render "_group_lead_section.html", section: @dashboard.group_lead_section %>
+<%= if @user.is_mentor && has_advice(@dashboard) do %>
+  <%= render "_mentor_section.html", section: @dashboard.mentor_section %>
 <% end %>
 
 <%= if needs_to_give_advice(@dashboard) do %>
@@ -59,7 +59,7 @@
   </header>
   <%= form_for @update_user, "/dashboard/settings", [method: "post", class: "user-settings-form"], fn f -> %>
     <label>
-      Are you a group lead? <%= checkbox f, :is_group_lead, id: "is_group_lead"  %>
+      Are you a mentor? <%= checkbox f, :is_mentor, id: "is_mentor"  %>
     </label>
     <label>
       Image URL: <%= url_input f, :profile_image, id: "profile_image", class: "js_user-image-input user-image-input" %>

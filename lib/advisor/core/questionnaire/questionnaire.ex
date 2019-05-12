@@ -12,7 +12,7 @@ defmodule Advisor.Core.Questionnaire do
 
     belongs_to(:requester, Advisor.Core.Person, foreign_key: :requester_id)
 
-    belongs_to(:group_lead, Advisor.Core.Person, foreign_key: :group_lead_id)
+    belongs_to(:mentor, Advisor.Core.Person, foreign_key: :mentor_id)
 
     field(:message, :string)
 
@@ -25,11 +25,11 @@ defmodule Advisor.Core.Questionnaire do
   defp questionnaire() do
     Questionnaire
     |> select([q], q)
-    |> preload([:advice, [advice: [:answers, :advisor]], :requester, :group_lead])
+    |> preload([:advice, [advice: [:answers, :advisor]], :requester, :mentor])
   end
 
-  def all_for_group_lead(group_lead_id) do
-    Repo.all(questionnaire() |> where([q], q.group_lead_id == ^group_lead_id))
+  def all_for_mentor(mentor_id) do
+    Repo.all(questionnaire() |> where([q], q.mentor_id == ^mentor_id))
   end
 
   def questions(%__MODULE__{id: id}), do: questions(id)
@@ -53,8 +53,8 @@ defmodule Advisor.Core.Questionnaire do
     Repo.delete_all(from(q in Questionnaire, where: q.id == ^id))
   end
 
-  def create(%{question_ids: ids}, %{requester: r, group_lead: gl, message: m}) do
-    Repo.insert(%Questionnaire{question_ids: ids, group_lead_id: gl, requester: r, message: m},
+  def create(%{question_ids: ids}, %{requester: r, mentor: gl, message: m}) do
+    Repo.insert(%Questionnaire{question_ids: ids, mentor_id: gl, requester: r, message: m},
       returning: true
     )
   end

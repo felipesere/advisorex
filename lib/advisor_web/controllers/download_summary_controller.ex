@@ -3,7 +3,7 @@ defmodule AdvisorWeb.DownloadSummaryController do
   alias Advisor.Core.Summary
   alias CSV.Encoding.Encoder
 
-  plug AdvisorWeb.Authentication.Gatekeeper, only: :group_leads
+  plug AdvisorWeb.Authentication.Gatekeeper, only: :mentors
 
   def export(conn, %{"id" => id}) do
     conn

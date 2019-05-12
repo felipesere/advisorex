@@ -1,8 +1,8 @@
-  <ul id="group-leads" class="people-grid">
+  <ul id="mentors" class="people-grid">
     <%= for person <- @leads do %>
     <li class="advisor-grid-tile">
-      <%= label @form, :group_lead, [for: "proposal_group_lead_#{person.id}", class: "advisor-label"] do %>
-        <%= radio_button(@form ,:group_lead, person.id) %>
+      <%= label @form, :mentor, [for: "proposal_mentor_#{person.id}", class: "advisor-label"] do %>
+        <%= radio_button(@form ,:mentor, person.id) %>
         <div class="advisor-image" style="background-image: url(<%= person.profile_image %>);" >
         </div>
       <% end %>

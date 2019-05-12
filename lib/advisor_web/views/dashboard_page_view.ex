@@ -1,8 +1,8 @@
 defmodule AdvisorWeb.DashboardPageView do
   use AdvisorWeb, :view
-  alias Advisor.Core.Dashboard.GroupLeadSection
+  alias Advisor.Core.Dashboard.MentorSection
 
-  def has_advice(%{group_lead_section: %GroupLeadSection{groups: groups}}), do: Enum.any?(groups)
+  def has_advice(%{mentor_section: %MentorSection{groups: groups}}), do: Enum.any?(groups)
 
   def needs_to_give_advice(%{required_advice_section: advice}) do
     Enum.any?(advice)

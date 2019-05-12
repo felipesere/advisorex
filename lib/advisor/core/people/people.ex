@@ -27,7 +27,7 @@ defmodule Advisor.Core.People do
 
   def everybody(), do: Repo.all(from(p in Person, order_by: p.name))
 
-  def group_leads(), do: Repo.all(from(p in Person, where: p.is_group_lead, order_by: p.name))
+  def mentors(), do: Repo.all(from(p in Person, where: p.is_mentor, order_by: p.name))
 
   def find_by_id(id), do: find_by(id: id)
 

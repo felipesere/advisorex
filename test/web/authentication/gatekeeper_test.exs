@@ -13,23 +13,22 @@ defmodule AdvisorWeb.Authentication.GatekeeprTest do
     :ok
   end
 
-  test "halts the request if not user_id found in session" do
+  test "halts the request if no user found in session" do
     conn = get("/") |> Gatekeeper.call(@default_opts)
 
     assert conn.status == 302
   end
 
-  test "presrves original destination in session" do
+  test "preserves original destination in session" do
     conn =
-      "/foo"
-      |> get()
+      get("/foo")
       |> Gatekeeper.call(@default_opts)
       |> fetch_session()
 
     assert get_session(conn, :target) == "/foo"
   end
 
-  test "loads the user if it available" do
+  test "loads the user if they exist" do
     conn =
       "/foo"
       |> get()
@@ -39,8 +38,8 @@ defmodule AdvisorWeb.Authentication.GatekeeprTest do
     assert %Person{} = conn.assigns[:user]
   end
 
-  test "prevents a regular user from accessing a page for group leads" do
-    opts = Gatekeeper.init(only: :group_leads)
+  test "prevents a regular user from accessing a page for mentors" do
+    opts = Gatekeeper.init(only: :mentors)
 
     conn =
       "/foo"

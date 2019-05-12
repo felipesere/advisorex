@@ -7,7 +7,7 @@ defmodule Advisor.Test.Support.Sample do
 
   def questionnaire() do
     questionnaire(
-      group_lead: "Felipe Sere",
+      mentor: "Felipe Sere",
       requester: "Chris Jordan",
       advisors: ["Rabea Gleissner", "Priya Patil"]
     )
@@ -15,14 +15,14 @@ defmodule Advisor.Test.Support.Sample do
 
   def questionnaire(for: requester) do
     questionnaire(
-      group_lead: "Felipe Sere",
+      mentor: "Felipe Sere",
       requester: requester,
       advisors: ["Rabea Gleissner", "Priya Patil"]
     )
   end
 
-  def questionnaire(group_lead: lead, requester: requester, advisors: advisors) do
-    lead = Users.with(lead)
+  def questionnaire(mentor: mentor, requester: requester, advisors: advisors) do
+    mentor = Users.with(mentor)
     requester = Users.with(requester)
     advisors = Users.with(advisors)
 
@@ -31,7 +31,7 @@ defmodule Advisor.Test.Support.Sample do
     questionnaire =
       %Questionnaire{
         question_ids: ids,
-        group_lead_id: lead.id,
+        mentor_id: mentor.id,
         requester: requester,
         message: "This is a random message"
       }

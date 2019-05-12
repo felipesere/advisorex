@@ -12,6 +12,7 @@ defmodule AdvisorWeb.RequestPageTest do
     assert redirected_to(conn) == "/"
   end
 
+  # TODO: pretty sure this test never fails?
   test "sees the page to create a questionnaire", %{conn: conn} do
     Users.with("Felipe Sere")
 
@@ -27,11 +28,11 @@ defmodule AdvisorWeb.RequestPageTest do
            |> Enum.at(0)
            |> Floki.text() == "Hello Felipe Sere!"
 
-    number_of_group_lead = length(People.group_leads()) - @myself
+    number_of_mentor = length(People.mentors()) - @myself
 
     assert response
-           |> Floki.find(".group-lead")
-           |> length == number_of_group_lead
+           |> Floki.find(".mentor")
+           |> length == number_of_mentor
 
     number_of_advisors = length(People.everybody()) - @myself
 

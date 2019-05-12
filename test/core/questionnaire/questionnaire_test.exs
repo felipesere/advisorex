@@ -4,14 +4,14 @@ defmodule Advisor.Core.QuestionnaireTest do
 
   alias Advisor.Core.Questionnaire
 
-  test "finds a group leads questinnaires" do
+  test "finds a mentoes questionnaires" do
     questionnaire =
       Sample.questionnaire(
-        group_lead: "Felipe Sere",
+        mentor: "Felipe Sere",
         requester: "Rabea Gleissner",
         advisors: ["Priya Patil"]
       )
 
-    assert [questionnaire] == Questionnaire.all_for_group_lead(questionnaire.group_lead_id)
+    assert [questionnaire] == Questionnaire.all_for_mentor(questionnaire.mentor_id)
   end
 end

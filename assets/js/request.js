@@ -3,7 +3,7 @@ import $ from 'cash-dom';
 let state = {
   questions: 0,
   advisors: 0,
-  group_lead: 0
+  mentor: 0
 };
 
 const count = (group) => $(group + " input:checked").length;
@@ -30,7 +30,7 @@ const toggleButton = () => {
     || state.advisors === 0
     || state.questions > 5
     || state.questions === 0
-    || state.group_lead === 0;
+    || state.mentor === 0;
 
   if(disable) {
     $(".request-advice").addClass("disabled").prop("disabled", true);
@@ -41,8 +41,8 @@ const toggleButton = () => {
 
 export const request = {
   bind: function() {
-    $("#group-leads input[type=radio]").on("click", () => {
-      state.group_lead = count("#group-leads");
+    $("#mentors input[type=radio]").on("click", () => {
+      state.mentor = count("#mentors");
       notification();
       toggleButton();
     });

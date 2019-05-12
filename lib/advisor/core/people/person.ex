@@ -4,12 +4,10 @@ defmodule Advisor.Core.Person do
 
   schema "people" do
     field(:name, :string)
-
     field(:profile_image, :string,
       default: "https://maxcdn.icons8.com/Share/icon/p1em/Users/user1600.png"
     )
-
-    field(:is_group_lead, :boolean, default: false)
+    field(:is_mentor, :boolean, default: false)
     field(:email, :string)
   end
 
@@ -20,6 +18,6 @@ defmodule Advisor.Core.Person do
   end
 
   def changeset(person, params \\ %{}) do
-    cast(person, params, [:name, :profile_image, :is_group_lead])
+    cast(person, params, [:name, :profile_image, :is_mentor])
   end
 end

@@ -2,7 +2,7 @@ defmodule AdvisorWeb.ProgressPage do
   use AdvisorWeb, :controller
   alias Advisor.Core.{Questionnaire, Advice}
 
-  plug AdvisorWeb.Authentication.Gatekeeper, only: :group_leads
+  plug AdvisorWeb.Authentication.Gatekeeper, only: :mentors
 
   def index(conn, %{"id" => id}) do
     questionnaire = Questionnaire.find(id)

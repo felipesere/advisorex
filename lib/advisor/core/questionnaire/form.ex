@@ -4,10 +4,10 @@ defmodule Advisor.Core.Questionnaire.Form do
 
   def data_for(person) do
     everybody = People.everybody_but(person)
-    group_leads = Enum.filter(everybody, fn person -> person.is_group_lead end)
+    mentors = Enum.filter(everybody, fn person -> person.is_mentor end)
     questions = PhrasesCatalog.all()
 
     # TODO: Try to eliminate the forced ordering
-    {everybody, group_leads, questions}
+    {everybody, mentors, questions}
   end
 end

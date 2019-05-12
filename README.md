@@ -10,7 +10,7 @@ The main point is to provide valuable insight by _giving advice_ and avoiding _g
 Advisor allows you to create a form from a catalogue of questions and lets you direct that form to specific people.
 This makes the insights more targeted to your current situation.
 
-It also pushes the responsibility to collect and track the results away from a central authority and out the mentee/group lead pairs.
+It also pushes the responsibility to collect and track the results away from a central authority and out the mentor/mentee pair.
 
 Hopefully, this app will delight you by guiding you through a swift creation process.
 

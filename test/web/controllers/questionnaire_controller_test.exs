@@ -7,7 +7,7 @@ defmodule AdvisorWeb.QuestionnaireControllerTest do
   test "will delete an entire questionnaire", %{conn: conn} do
     questionnaire =
       Sample.questionnaire(
-        group_lead: "Felipe Sere",
+        mentor: "Felipe Sere",
         requester: "Rabea Gleissner",
         advisors: ["Priya Patil"]
       )

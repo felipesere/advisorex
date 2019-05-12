@@ -18,7 +18,7 @@ if Mix.env() == :dev do
   Repo.insert!(%Person{
     name: "Leslie Knope",
     email: "leslie@parks.com",
-    is_group_lead: true,
+    is_mentor: true,
     profile_image:
       "https://media1.popsugar-assets.com/files/thumbor/2ebfSQkPUKjxKfb5N3h2N-VIh7U/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2015/02/24/097/n/1922283/79e574c2_edit_img_image_845210_1424395524/i/Best-Leslie-Knope-GIFs.png"
   })
@@ -26,14 +26,14 @@ if Mix.env() == :dev do
   Repo.insert!(%Person{
     name: "Ron Swanson",
     email: "ron@parks.com",
-    is_group_lead: true,
+    is_mentor: true,
     profile_image: "https://pbs.twimg.com/profile_images/1369149006/ronProfile_400x400.jpg"
   })
 
   Repo.insert!(%Person{
     name: "April Ludgate",
     email: "april@parks.com",
-    is_group_lead: true,
+    is_mentor: true,
     profile_image:
       "https://i.pinimg.com/736x/ba/5f/e0/ba5fe0400e23ffb459b4d078484e6610--aubrey-plaza-aubrey-oday.jpg"
   })
@@ -75,7 +75,7 @@ if Mix.env() == :dev do
   Repo.insert!(%Person{
     name: "Chris Traeger",
     email: "chris@parks.com",
-    is_group_lead: true,
+    is_mentor: true,
     profile_image: "https://memegenerator.net/img/images/600x600/1993394/chris-traeger.jpg"
   })
 end

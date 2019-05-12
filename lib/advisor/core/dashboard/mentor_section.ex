@@ -1,4 +1,4 @@
-defmodule Advisor.Core.Dashboard.GroupLeadSection do
+defmodule Advisor.Core.Dashboard.MentorSection do
   alias Advisor.Core.{Person, Questionnaire}
 
   defstruct groups: []
@@ -7,13 +7,13 @@ defmodule Advisor.Core.Dashboard.GroupLeadSection do
     defstruct [:questionnaire_id, :requester, :advisors]
   end
 
-  def group_lead_section(%Person{is_group_lead: false}) do
+  def mentor_section(%Person{is_mentor: false}) do
     %__MODULE__{groups: []}
   end
 
-  def group_lead_section(%Person{is_group_lead: true, id: group_lead}) do
-    group_lead
-    |> Questionnaire.all_for_group_lead()
+  def mentor_section(%Person{is_mentor: true, id: mentor}) do
+    mentor
+    |> Questionnaire.all_for_mentor()
     |> Enum.map(&to_group/1)
     |> to_section()
   end

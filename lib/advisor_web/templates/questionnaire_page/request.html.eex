@@ -4,9 +4,9 @@
         <h1>Hello <%= @requester.name %>!</h1>
       </header>
       <header class="module-header">
-        <h1>Who is your Group Lead?</h1>
+        <h1>Who is your Mentor?</h1>
       </header>
-      <%= render "_group_leads.html", leads: @group_leads, form: f %>
+      <%= render "_mentors.html", leads: @mentors, form: f %>
     </section>
 
     <hr class="separator" />

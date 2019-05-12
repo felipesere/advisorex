@@ -4,9 +4,9 @@ defmodule Submit do
 
   @endpoint AdvisorWeb.Endpoint
 
-  def questionnaire(conn, asking: asking, group_lead: group_lead, questions: questions) do
+  def questionnaire(conn, asking: asking, mentor: mentor, questions: questions) do
     proposal = %{
-      :group_lead => group_lead.id,
+      :mentor => mentor.id,
       :advisors => Enum.into(asking, %{}, &as_true/1),
       :questions => Enum.into(questions, %{}, &as_true/1)
     }

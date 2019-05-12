@@ -1,6 +1,6 @@
 <section class="module">
   <header class="module-header medium-header">
-    Your groups advice:
+    Your mentees:
   </header>
   <ul class="groups-advice-section">
     <%= for group  <- @section.groups do %>

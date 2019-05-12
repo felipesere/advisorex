@@ -6,7 +6,7 @@ defmodule AdvisorWeb.QuestionnaireProposal do
   alias __MODULE__
 
   schema "proposal" do
-    field(:group_lead, :integer)
+    field(:mentor, :integer)
     field(:requester, :integer)
     field(:questions, {:map, :boolean})
     field(:advisors, {:map, :boolean})
@@ -26,7 +26,7 @@ defmodule AdvisorWeb.QuestionnaireProposal do
 
   def changeset(params) do
     %QuestionnaireProposal{}
-    |> cast(params, [:group_lead, :questions, :advisors, :message])
+    |> cast(params, [:mentor, :questions, :advisors, :message])
     |> apply_changes()
   end
 

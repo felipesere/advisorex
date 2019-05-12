@@ -5,37 +5,37 @@ defmodule AdvisorWeb.DashboardPageTest do
   alias Advisor.Test.Support.{Sample, Users}
   alias Advisor.Core.People
 
-  @group_lead "Felipe Sere"
+  @mentor "Felipe Sere"
 
   test "you can only have a single questionnaire open", %{conn: conn} do
     Sample.questionnaire(
-      group_lead: "Jim Suchy",
+      mentor: "Jim Suchy",
       requester: "Felipe Sere",
       advisors: ["Priya Patil"]
     )
 
     conn
-    |> Login.as(@group_lead)
+    |> Login.as(@mentor)
     |> get("/dashboard")
     |> html_response(200)
     |> has_no_link("Request advice for yourself")
   end
 
-  test "it shows a section for group leads", %{conn: conn} do
+  test "it shows a section for mentors", %{conn: conn} do
     Sample.questionnaire(
-      group_lead: @group_lead,
+      mentor: @mentor,
       requester: "Rabea Gleissner",
       advisors: ["Priya Patil", "Sarah Johnston"]
     )
 
     Sample.questionnaire(
-      group_lead: @group_lead,
+      mentor: @mentor,
       requester: "Chris Jordan",
       advisors: ["Nick Dyer", "Jim Suchy"]
     )
 
     conn
-    |> Login.as(@group_lead)
+    |> Login.as(@mentor)
     |> get("/dashboard")
     |> html_response(200)
     |> has_title("Hello Felipe Sere!")
@@ -45,13 +45,13 @@ defmodule AdvisorWeb.DashboardPageTest do
 
   test "it shows the advice you still have to give", %{conn: conn} do
     Sample.questionnaire(
-      group_lead: @group_lead,
+      mentor: @mentor,
       requester: "Rabea Gleissner",
       advisors: ["Priya Patil"]
     )
 
     Sample.questionnaire(
-      group_lead: @group_lead,
+      mentor: @mentor,
       requester: "Chris Jordan",
       advisors: ["Priya Patil"]
     )
@@ -66,7 +66,7 @@ defmodule AdvisorWeb.DashboardPageTest do
 
   test "it doesn't show advice you have already given", %{conn: conn} do
     Sample.questionnaire(
-      group_lead: @group_lead,
+      mentor: @mentor,
       requester: "Chris Jordan",
       advisors: ["Priya Patil"]
     )
@@ -81,7 +81,7 @@ defmodule AdvisorWeb.DashboardPageTest do
 
   test "it shows who still has to give you advice", %{conn: conn} do
     Sample.questionnaire(
-      group_lead: @group_lead,
+      mentor: @mentor,
       requester: "Rabea Gleissner",
       advisors: ["Priya Patil", "Sarah Johnston"]
     )
@@ -94,15 +94,15 @@ defmodule AdvisorWeb.DashboardPageTest do
     |> still_has_to_give_me_advice("Sarah Johnston")
   end
 
-  test "it allows you to become a group lead", %{conn: conn} do
+  test "it allows you to become a mentor", %{conn: conn} do
     Users.with("Rabea Gleissner")
 
     assert conn
            |> Login.as("Rabea Gleissner")
-           |> post("/dashboard/settings", %{"person" => %{"is_group_lead" => "true"}})
+           |> post("/dashboard/settings", %{"person" => %{"is_mentor" => "true"}})
            |> redirected_to() == "/dashboard"
 
-    assert People.find_by(name: "Rabea Gleissner").is_group_lead
+    assert People.find_by(name: "Rabea Gleissner").is_mentor
   end
 
   def still_has_to_give_me_advice(html, advisor) do

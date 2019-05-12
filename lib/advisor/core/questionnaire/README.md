@@ -1,6 +1,6 @@
 # Questionnaire
 
-This is the collection of questions that a requester and his group lead will send out to advisors.
+This is the collection of questions that a mentee and his mentor will send out to advisors.
 Currently we can create questionnaires through the `Creator` and find them by id.
 
 ## Changes

@@ -3,13 +3,13 @@ defmodule AdvisorWeb.PresentPage do
   alias Advisor.Core.{Questions, Questionnaire}
   alias AdvisorWeb.Authentication.User
 
-  plug AdvisorWeb.Authentication.Gatekeeper, only: :group_leads
+  plug AdvisorWeb.Authentication.Gatekeeper, only: :mentors
 
   def index(conn, %{"id" => questionnaire_id}) do
     user = User.of(conn)
     questionnaire = Questionnaire.find(questionnaire_id)
 
-    if questionnaire.group_lead == user do
+    if questionnaire.mentor == user do
       answered_questions = answers_per_question(questionnaire)
 
       render(conn, "index.html",

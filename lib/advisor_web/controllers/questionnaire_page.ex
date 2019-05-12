@@ -7,11 +7,11 @@ defmodule AdvisorWeb.QuestionnairePage do
 
   # TODO This could be a better/more-intuitive structure
   def index(conn, _params) do
-    {everybody, group_leads, questions} = QuestionnaireForm.data_for(User.of(conn))
+    {everybody, mentors, questions} = QuestionnaireForm.data_for(User.of(conn))
 
     render(conn, "request.html",
       requester: User.of(conn),
-      group_leads: group_leads,
+      mentors: mentors,
       everybody: everybody,
       questions: questions
     )

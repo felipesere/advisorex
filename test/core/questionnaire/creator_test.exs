@@ -12,7 +12,7 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
     phrases = ["first question", "second question"]
 
     proposal = %QuestionnaireProposal{
-      group_lead: felipe.id,
+      mentor: felipe.id,
       requester: rabea.id,
       advisors: [cj.id, priya.id],
       questions: phrases,
@@ -29,7 +29,7 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
     [felipe, rabea, cj] = Users.with(["Felipe Sere", "Rabea Gleissner", "Chris Jordan"])
 
     proposal = %QuestionnaireProposal{
-      group_lead: felipe.id,
+      mentor: felipe.id,
       requester: rabea.id,
       advisors: [cj.id],
       questions: []

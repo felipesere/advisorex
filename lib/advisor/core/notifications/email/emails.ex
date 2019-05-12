@@ -12,7 +12,7 @@ defmodule Advisor.Core.Notifications.Emails do
   def completed(data) do
     base()
     |> subject("The Feedback for #{data.requester.name} is ready.")
-    |> to(data.group_lead)
+    |> to(data.mentor)
     |> render("completed.html", data: data)
   end
 

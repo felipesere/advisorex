@@ -9,8 +9,8 @@ defmodule Advisor.Test.Support.Users do
     %Person{name: "Nick Dyer", email: "nick@example.com"},
     %Person{name: "Priya Patil", email: "priya@example.com"},
     %Person{name: "Rabea Gleissner", email: "rabea@example.com"},
-    %Person{name: "Jim Suchy", email: "jim@example.com", is_group_lead: true},
-    %Person{name: "Felipe Sere", email: "felipe@example.com", is_group_lead: true}
+    %Person{name: "Jim Suchy", email: "jim@example.com", is_mentor: true},
+    %Person{name: "Felipe Sere", email: "felipe@example.com", is_mentor: true}
   ]
 
   def with(names) when is_list(names) do

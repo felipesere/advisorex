@@ -19,7 +19,7 @@ defmodule AdvisorWeb.PresentPageTest do
     |> has_answers(["some answer", "other answer"])
   end
 
-  test "only the selected group lead can see the advice", %{conn: conn} do
+  test "only the selected mentor can see the advice", %{conn: conn} do
     q =
       Sample.questionnaire()
       |> Sample.answer("Priya Patil", all: "some answer")

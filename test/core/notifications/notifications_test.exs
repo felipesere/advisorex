@@ -13,14 +13,14 @@ defmodule Advisor.Core.NotificationsTest do
     assert_email_delivered_with(to: [{"Priya Patil", "priya@example.com"}], subject: subject)
   end
 
-  test "sends an email to the group lead", %{conn: conn} do
+  test "sends an email to the mentor", %{conn: conn} do
     questionnaire = Sample.questionnaire()
     questions = questionnaire.question_ids
-    group_lead = questionnaire.group_lead
+    mentor = questionnaire.mentor
 
     Enum.each(questionnaire.advice, fn a -> answer(conn, a, questions) end)
 
-    assert_email_delivered_with(to: [{group_lead.name, group_lead.email}])
+    assert_email_delivered_with(to: [{mentor.name, mentor.email}])
   end
 
   def answer(conn, advice, questions) do

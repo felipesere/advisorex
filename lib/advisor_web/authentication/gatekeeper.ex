@@ -31,7 +31,7 @@ defmodule AdvisorWeb.Authentication.Gatekeeper do
     assign(conn, :user, user)
   end
 
-  def preload(%Person{is_group_lead: true} = user, conn, %{only: :group_leads}) do
+  def preload(%Person{is_mentor: true} = user, conn, %{only: :mentors}) do
     assign(conn, :user, user)
   end
 
