@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.ProvideAdviceControllerTest do
   use AdvisorWeb.ConnCase
-  import PageAssertions
+  alias PageAssertions, as: It
   alias Advisor.Test.Support.Sample
   alias Advisor.Core.Answers
 
@@ -14,30 +14,26 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
   test "renders the form", %{conn: conn, advice: advice} do
     conn
     |> Login.as("Rabea Gleissner")
-    |> get(path_for(advice))
-    |> html_response(200)
-    |> has_header("Advice for Chris Jordan")
-    |> has_message("This is a random message")
+    |> Visit.page_for(advice)
+    |> It.has_header("Advice for Chris Jordan")
+    |> It.has_message("This is a random message")
   end
 
   test "force login if incorrect advisor is authenticated", %{conn: conn, advice: advice} do
     assert conn
            |> Login.as("Priya Patil")
-           |> get(Routes.provide_advice_path(@endpoint, :index, advice.id))
+           |> Visit.the(advice)
            |> redirected_to() == "/"
   end
 
   test "answers questions", %{conn: conn, advice: advice, questions: questions} do
-    payload =
-      questions
-      |> Enum.into(%{}, fn id -> {id, "some answer"} end)
-      |> Map.put_new("id", advice.id)
+    # something like 'create an answer'
+    payload = Enum.into(questions, %{"id" => advice.id}, fn id -> {id, "some answer"} end)
 
     conn
     |> Login.as("Rabea Gleissner")
-    |> post(path_for(advice), payload)
-    |> html_response(200)
-    |> has_header("Thank you!")
+    |> Submit.answers!(payload, for: advice)
+    |> It.has_header("Thank you!")
   end
 
   test "can't answer twice", %{conn: conn} do
@@ -54,19 +50,16 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
 
     conn
     |> Login.as("Rabea Gleissner")
-    |> post(path_for(advice), payload)
+    |> Submit.answers(payload, for: advice)
 
-    answers =
-      questionnaire
-      |> Answers.find()
-      |> Enum.filter(fn answer -> answer.advice_request_id == advice.id end)
-      |> Enum.map(fn answer -> answer.answer end)
-      |> Enum.uniq()
-
-    assert answers == ["abc"]
+    assert answers_for(questionnaire, advice) == ["abc"]
   end
 
-  def path_for(advice) do
-    Routes.provide_advice_path(@endpoint, :create, advice.id)
+  defp answers_for(questionnaire, %Advisor.Core.Advice{id: id}) do
+    questionnaire
+    |> Answers.find()
+    |> Enum.filter(fn answer -> answer.advice_request_id == id end)
+    |> Enum.map(fn answer -> answer.answer end)
+    |> Enum.uniq()
   end
 end

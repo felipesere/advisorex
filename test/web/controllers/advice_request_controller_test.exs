@@ -14,7 +14,7 @@ defmodule AdvisorWeb.AdviceRequestControllerTest do
     |> It.has_see_advice_link()
   end
 
-  test "redirects unauthenticated user request", %{conn: conn} do
+  test "redirects unauthenticated users back to the landing page", %{conn: conn} do
     conn = post conn, "/request", []
 
     assert redirected_to(conn) == "/"

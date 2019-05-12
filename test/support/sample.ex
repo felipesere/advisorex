@@ -28,7 +28,7 @@ defmodule Advisor.Test.Support.Sample do
 
     ids = Question.store(["foo", "bar"])
 
-    q =
+    questionnaire =
       %Questionnaire{
         question_ids: ids,
         group_lead_id: lead.id,
@@ -37,13 +37,16 @@ defmodule Advisor.Test.Support.Sample do
       }
       |> Repo.insert!()
 
-    Enum.each(advisors, fn advisor ->
-      q
-      |> Ecto.build_assoc(:advice, %{requester_id: requester.id, advisor_id: advisor.id})
-      |> Repo.insert!()
-    end)
+    Enum.each(
+      advisors,
+      fn advisor ->
+        questionnaire
+        |> Ecto.build_assoc(:advice, %{requester_id: requester.id, advisor_id: advisor.id})
+        |> Repo.insert!()
+      end
+    )
 
-    Questionnaire.find(q.id)
+    Questionnaire.find(questionnaire.id)
   end
 
   def advice_from(questionnaire, name) do
@@ -55,17 +58,22 @@ defmodule Advisor.Test.Support.Sample do
     advisories = questionnaire.advice
     questions = questionnaire.question_ids
 
-    Enum.each(advisories, fn advice ->
-      save_answers(questions, answer, advice.id)
-    end)
+    Enum.each(
+      advisories,
+      fn advice ->
+        save_answers(questions, answer, advice.id)
+      end
+    )
 
     Questionnaire.find(questionnaire)
   end
 
   def answer(questionnaire, name, all: answer) do
     advice = advice_from(questionnaire, name)
-    questions = questionnaire.question_ids
-    save_answers(questions, answer, advice.id)
+
+    questionnaire.question_ids
+    |> save_answers(answer, advice.id)
+
     Questionnaire.find(questionnaire)
   end
 
