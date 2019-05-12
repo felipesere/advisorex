@@ -1,7 +1,7 @@
 defmodule Advisor.Core.Summary do
   alias Advisor.Core.{Person, Answer, Advice}
   alias Advisor.Core.Questionnaire
-  alias Advisor.Core.Questions
+  alias Advisor.Core.Question
   alias Advisor.Repo
   import Ecto.Query
 
@@ -33,8 +33,8 @@ defmodule Advisor.Core.Summary do
   defp header(id) do
     id
     |> Questionnaire.questions()
-    |> Questions.load()
-    |> Questions.phrases()
+    |> Question.load()
+    |> Question.phrases()
     |> prepend(["timestamp", "advisor", "mentee"])
   end
 

@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.ProvideAdviceController do
   use AdvisorWeb, :controller
-  alias Advisor.Core.{Questions, Questionnaire, Answer, Advice}
+  alias Advisor.Core.{Question, Questionnaire, Answer, Advice}
   alias AdvisorWeb.Authentication.User
   alias Advisor.Core.Notifications
 
@@ -16,7 +16,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
       questions =
         questionnaire
         |> Questionnaire.questions()
-        |> Questions.load()
+        |> Question.load()
 
       render(conn, "advice-form.html",
         mentee: questionnaire.mentee,

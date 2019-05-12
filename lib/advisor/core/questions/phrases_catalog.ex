@@ -1,4 +1,4 @@
-defmodule Advisor.Core.Questions.PhrasesCatalog do
+defmodule Advisor.Core.Question.PhrasesCatalog do
   defmodule Phrase do
     defstruct [:phrase, :kind, :id]
   end

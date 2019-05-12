@@ -1,7 +1,7 @@
-defmodule Advisor.Core.Questions.PhrasesCatalogTests do
+defmodule Advisor.Core.Question.PhrasesCatalogTests do
   use ExUnit.Case
-  alias Advisor.Core.Questions.PhrasesCatalog
-  alias Advisor.Core.Questions
+  alias Advisor.Core.Question.PhrasesCatalog
+  alias Advisor.Core.Question
 
   test "Finds the different kinds of questions from the YAML" do
     questions = PhrasesCatalog.all()
@@ -13,7 +13,7 @@ defmodule Advisor.Core.Questions.PhrasesCatalogTests do
   end
 
   test "Can strip the phrases" do
-    assert PhrasesCatalog.find([1]) |> Questions.phrases() == [
+    assert PhrasesCatalog.find([1]) |> Question.phrases() == [
              "How has this person navigated difficult situations with the client?"
            ]
   end

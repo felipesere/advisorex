@@ -7,5 +7,5 @@ It is further subdivided into 6 sub-systems:
 2. [Answer](lib/advisor/core/answers/README.md), where you'll find the ability to look for answers. Pun.
 3. [People](lib/advisor/core/people/README.md), to find people in multiple ways.
 4. [Questionnaire](lib/advisor/core/questionnaire/README.md), to create or find questionnaires
-5. [Questions](lib/advisor/core/questions/README.md), to find any questions
+5. [Question](lib/advisor/core/questions/README.md), to find any questions
 6. [Summary](lib/advisor/core/summary/README.md), to get a CSV export of a questionnaire

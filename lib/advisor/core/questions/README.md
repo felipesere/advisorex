@@ -1,4 +1,4 @@
-# Questions
+# Question
 
 Here we can find any question that can be [answered](lib/advisor/core/answers/README.md').
 Find questions based on their ids questions or just all of them.

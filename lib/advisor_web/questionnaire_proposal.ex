@@ -1,8 +1,8 @@
 defmodule AdvisorWeb.QuestionnaireProposal do
   import Ecto.Changeset
   use Ecto.Schema
-  alias Advisor.Core.Questions
-  alias Advisor.Core.Questions.PhrasesCatalog
+  alias Advisor.Core.Question
+  alias Advisor.Core.Question.PhrasesCatalog
   alias __MODULE__
 
   schema "proposal" do
@@ -42,7 +42,7 @@ defmodule AdvisorWeb.QuestionnaireProposal do
     questions
     |> ids()
     |> PhrasesCatalog.find()
-    |> Questions.phrases()
+    |> Question.phrases()
   end
 
   def ids(map) do
