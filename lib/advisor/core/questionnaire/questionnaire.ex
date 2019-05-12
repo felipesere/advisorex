@@ -53,7 +53,7 @@ defmodule Advisor.Core.Questionnaire do
     Repo.delete_all(from(q in Questionnaire, where: q.id == ^id))
   end
 
-  def create(%{question_ids: ids}, %{mentee: r, mentor: gl, message: m}) do
+  def create(%{question_ids: ids, mentee: r}, %{mentor: gl, message: m}) do
     Repo.insert(%Questionnaire{question_ids: ids, mentor_id: gl, mentee: r, message: m},
       returning: true
     )

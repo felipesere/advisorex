@@ -16,32 +16,28 @@ defmodule Advisor.Core.People do
     |> Repo.insert!()
   end
 
+  def everybody(), do: Repo.all(from(p in Person, order_by: p.name))
+
+  def mentors(), do: Repo.all(from(p in Person, where: p.is_mentor, order_by: p.name))
+
   def everybody_but(user) do
     everybody()
     |> Enum.filter(but(user))
   end
 
-  defp but(user) do
-    fn person -> person.email != user.email end
-  end
+  defp but(user), do: fn person -> person.email != user.email end
 
-  def everybody(), do: Repo.all(from(p in Person, order_by: p.name))
-
-  def mentors(), do: Repo.all(from(p in Person, where: p.is_mentor, order_by: p.name))
-
-  def find_by_id(id), do: find_by(id: id)
+  def find(id), do: find_by(id: id)
 
   def find_by(name: name), do: query_by_name(name)
   def find_by(email: email), do: query_by_email(email)
   def find_by(id: id) when is_integer(id), do: query_by_user(id)
-
   def find_by(id: id) when is_binary(id) do
     case parse(id) do
       :bad_parse -> nil
       id -> query_by_user(id)
     end
   end
-
   def find_by(_), do: nil
 
   defp query_by_user(id), do: Repo.one(from(p in Person, where: p.id == ^id))

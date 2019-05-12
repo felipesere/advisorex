@@ -4,22 +4,24 @@ defmodule Advisor.Core.Questionnaire.Creator do
   alias Advisor.Repo
 
   def create(%{questions: phrases} = proposal) do
-    proposal =
-      proposal
-      |> Map.update!(:mentee, &People.find_by(id: &1))
-
-    # TODO: this needs revisiting!
-    m =
+    multi =
       Multi.new()
-      |> Multi.run(:question_ids, fn _repo, _changes -> Questions.store(phrases) end)
-      |> Multi.run(:questionnaire, fn _repo, params -> Questionnaire.create(params, proposal) end)
-      |> Multi.run(:advisories, fn _repo, params -> Advice.create(params, proposal) end)
-      |> Multi.run(:q, fn _repo, %{questionnaire: q} -> {:ok, Questionnaire.find(q.id)} end)
-      |> Repo.transaction()
+      |> Multi.run(:mentee, fn _, _ -> mentee(proposal) end)
+      |> Multi.run(:question_ids, fn _, _ -> Questions.store(phrases) end)
+      |> Multi.run(:questionnaire, fn _, params -> Questionnaire.create(params, proposal) end)
+      |> Multi.run(:advisories, fn _, params -> Advice.create(params, proposal) end)
+      |> Multi.run(:result, fn _, %{questionnaire: q} -> {:ok, Questionnaire.find(q.id)} end)
 
-    case m do
-      {:ok, data} -> data.q
+    case Repo.transaction(multi) do
+      {:ok, %{result: result}} -> result
       error -> error
+    end
+  end
+
+  def mentee(%{mentee: id}) do
+    case People.find_by(id: id) do
+      nil -> {:error, :no_mentee}
+      mentee -> {:ok, mentee}
     end
   end
 end

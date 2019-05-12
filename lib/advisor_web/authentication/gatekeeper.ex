@@ -13,7 +13,7 @@ defmodule AdvisorWeb.Authentication.Gatekeeper do
   def call(conn, opts) do
     conn
     |> user_id()
-    |> People.find_by_id()
+    |> People.find()
     |> preload(conn, opts)
   end
 
