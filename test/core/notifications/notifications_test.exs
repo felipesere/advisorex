@@ -14,7 +14,7 @@ defmodule Advisor.Core.NotificationsTest do
 
   test "sends an email to the mentor", %{conn: conn} do
     questionnaire = Sample.questionnaire()
-    questions = questionnaire.question_ids
+    questions = questionnaire.questions
     mentor = questionnaire.mentor
 
     Enum.each(questionnaire.advice, fn a -> answer(conn, a, questions) end)
@@ -23,7 +23,7 @@ defmodule Advisor.Core.NotificationsTest do
   end
 
   def answer(conn, advice, questions) do
-    answered = Enum.into(questions, %{"id" => advice.id}, fn id -> {id, "some answer"} end)
+    answered = Enum.into(questions, %{"id" => advice.id}, fn q -> {q.id, "some answer"} end)
 
     conn
     |> Login.as(advice.advisor.name)

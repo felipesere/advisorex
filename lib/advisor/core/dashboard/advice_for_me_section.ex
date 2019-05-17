@@ -8,7 +8,7 @@ defmodule Advisor.Core.Dashboard.AdviceForMeSection do
     end
   end
 
-  defp section_for(%{advice: advices, question_ids: questions}) do
+  defp section_for(%{advice: advices, questions: questions}) do
     Enum.map(advices, fn advice ->
       %{
         advisor: advice.advisor,

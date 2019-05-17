@@ -4,7 +4,6 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
   alias AdvisorWeb.QuestionnaireProposal
   alias Advisor.Test.Support.Users
 
-  # TODO: This should be using the Support.Proposal as a builder
   test "creates a simple questionnaire" do
     [felipe, rabea, cj, priya] =
       Users.with(["Felipe Sere", "Rabea Gleissner", "Chris Jordan", "Priya Patil"])
@@ -23,6 +22,7 @@ defmodule Advisor.Core.Questionnaire.CreatorTest do
 
     assert Enum.map(created.advice, & &1.advisor.id) == [cj.id, priya.id]
     assert created.message == "bla"
+    assert length(created.questions) == 2
   end
 
   test "message is optional" do

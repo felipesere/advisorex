@@ -9,7 +9,7 @@ defmodule Advisor.Core.Notifications do
     data = %{
       mentee: questionnaire.mentee,
       mentor: questionnaire.mentor,
-      nr_of_questions: length(questionnaire.question_ids),
+      nr_of_questions: length(questionnaire.questions),
       message: questionnaire.message
     }
 

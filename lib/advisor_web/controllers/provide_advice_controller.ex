@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.ProvideAdviceController do
   use AdvisorWeb, :controller
-  alias Advisor.Core.{Question, Questionnaire, Answer, Advice}
+  alias Advisor.Core.{Questionnaire, Answer, Advice}
   alias AdvisorWeb.Authentication.User
   alias Advisor.Core.Notifications
 
@@ -13,14 +13,9 @@ defmodule AdvisorWeb.ProvideAdviceController do
     if advice do
       questionnaire = Questionnaire.find(advice.questionnaire_id)
 
-      questions =
-        questionnaire
-        |> Questionnaire.questions()
-        |> Question.load()
-
       render(conn, "advice-form.html",
         mentee: questionnaire.mentee,
-        questions: questions,
+        questions: questionnaire.questions,
         advice_id: id,
         message: questionnaire.message
       )
@@ -36,7 +31,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
     advice = Advice.find(id, from_advisor: User.found_in(conn))
     questionnaire = Questionnaire.find(advice)
 
-    if Advice.completed?(advice, questionnaire.question_ids) do
+    if Advice.completed?(advice, questionnaire.questions) do
       redirect(conn, to: "/")
     else
       Answer.store(params)

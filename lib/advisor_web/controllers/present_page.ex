@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.PresentPage do
   use AdvisorWeb, :controller
-  alias Advisor.Core.{Question, Questionnaire}
+  alias Advisor.Core.Questionnaire
   alias AdvisorWeb.Authentication.User
 
   plug AdvisorWeb.Authentication.Gatekeeper, only: :mentors
@@ -48,9 +48,7 @@ defmodule AdvisorWeb.PresentPage do
     end)
   end
 
-  defp answered_questions(answers, %Questionnaire{question_ids: question_ids}) do
-    questions = Question.load(question_ids)
-
+  defp answered_questions(answers, %Questionnaire{questions: questions}) do
     answers
     |> Enum.group_by(& &1.question_id, & &1)
     |> Enum.map(fn {question_id, answers} ->

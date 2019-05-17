@@ -26,14 +26,12 @@ defmodule Advisor.Test.Support.Sample do
     mentee = Users.with(mentee)
     advisors = Users.with(advisors)
 
-    ids = Question.store(["foo", "bar"])
-
     questionnaire =
       %Questionnaire{
-        question_ids: ids,
         mentor_id: mentor.id,
         mentee: mentee,
-        message: "This is a random message"
+        message: "This is a random message",
+        questions: [%Question{phrase: "foo"}, %Question{phrase: "bar"}],
       }
       |> Repo.insert!()
 
@@ -56,7 +54,7 @@ defmodule Advisor.Test.Support.Sample do
 
   def answer(questionnaire, all: answer) do
     advisories = questionnaire.advice
-    questions = questionnaire.question_ids
+    questions = questionnaire.questions
 
     Enum.each(
       advisories,
@@ -71,7 +69,7 @@ defmodule Advisor.Test.Support.Sample do
   def answer(questionnaire, name, all: answer) do
     advice = advice_from(questionnaire, name)
 
-    questionnaire.question_ids
+    questionnaire.questions
     |> save_answers(answer, advice.id)
 
     Questionnaire.find(questionnaire)
@@ -80,7 +78,7 @@ defmodule Advisor.Test.Support.Sample do
   defp save_answers(questions, answer, advice) do
     data =
       questions
-      |> Enum.map(fn q -> %{question_id: q, answer: answer, advice_request_id: advice} end)
+      |> Enum.map(fn q -> %{question_id: q.id, answer: answer, advice_request_id: advice} end)
 
     Repo.insert_all(Answer, data)
   end

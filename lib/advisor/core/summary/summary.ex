@@ -33,7 +33,6 @@ defmodule Advisor.Core.Summary do
   defp header(id) do
     id
     |> Questionnaire.questions()
-    |> Question.load()
     |> Question.phrases()
     |> prepend(["timestamp", "advisor", "mentee"])
   end

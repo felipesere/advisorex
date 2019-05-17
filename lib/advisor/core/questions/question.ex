@@ -1,6 +1,5 @@
 defmodule Advisor.Core.Question do
   use Ecto.Schema
-  import Ecto.Query
   alias Advisor.Repo
   alias __MODULE__
 
@@ -17,10 +16,6 @@ defmodule Advisor.Core.Question do
     {_, questions} = Repo.insert_all(Question, phrases, returning: true)
 
     Enum.map(questions, & &1.id)
-  end
-
-  def load(uuids) do
-    Repo.all(from(q in Question, where: q.id in ^uuids))
   end
 
   def phrases(questions), do: Enum.map(questions, fn question -> question.phrase end)

@@ -8,7 +8,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
     questionnaire = Sample.questionnaire()
     advice = Sample.advice_from(questionnaire, "Rabea Gleissner")
 
-    [advice: advice, questions: questionnaire.question_ids]
+    [advice: advice, questions: questionnaire.questions]
   end
 
   test "renders the form", %{conn: conn, advice: advice} do
@@ -28,7 +28,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
 
   test "answers questions", %{conn: conn, advice: advice, questions: questions} do
     # something like 'create an answer'
-    payload = Enum.into(questions, %{"id" => advice.id}, fn id -> {id, "some answer"} end)
+    payload = questions |> Enum.into(%{"id" => advice.id}, fn q -> {q.id, "some answer"} end)
 
     conn
     |> Login.as("Rabea Gleissner")
@@ -43,10 +43,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
 
     advice = Sample.advice_from(questionnaire, "Rabea Gleissner")
 
-    payload =
-      questionnaire.question_ids
-      |> Enum.into(%{}, fn id -> {id, "xyz"} end)
-      |> Map.put_new("id", advice.id)
+    payload = questionnaire.questions |> Enum.into(%{"id" => advice.id}, fn q -> {q.id, "xzy"} end)
 
     conn
     |> Login.as("Rabea Gleissner")
