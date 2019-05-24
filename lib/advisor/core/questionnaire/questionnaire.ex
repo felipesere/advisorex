@@ -18,7 +18,7 @@ defmodule Advisor.Core.Questionnaire do
       on_delete: :delete_all
     )
 
-    many_to_many(:questions, Advisor.Core.Question, join_through: "questionnaire_to_question")
+    has_many(:questions, Advisor.Core.Question)
   end
 
   defp questionnaire() do

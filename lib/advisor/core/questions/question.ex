@@ -8,6 +8,7 @@ defmodule Advisor.Core.Question do
 
   schema "questions" do
     field(:phrase, :string)
+    belongs_to(:questionnaire, Advisor.Core.Questionnaire, type: :binary_id)
   end
 
   def store(phrases) do
