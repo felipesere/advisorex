@@ -2,37 +2,37 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
   use AdvisorWeb.ConnCase
   alias PageAssertions, as: It
   alias Advisor.Test.Support.Sample
-  alias Advisor.Core.Answer
 
   setup do
     questionnaire = Sample.questionnaire()
-    advice = Sample.advice_from(questionnaire, "Rabea Gleissner")
 
-    [advice: advice, questions: questionnaire.questions]
+    [questionnaire: questionnaire, questions: questionnaire.questions]
   end
 
-  test "renders the form", %{conn: conn, advice: advice} do
+  test "renders the form", %{conn: conn, questionnaire: questionnaire} do
     conn
     |> Login.as("Rabea Gleissner")
-    |> Visit.page_for(advice)
+    |> Visit.provide_advice_to!(questionnaire)
     |> It.has_header("Advice for Chris Jordan")
     |> It.has_message("This is a random message")
   end
 
-  test "force login if incorrect advisor is authenticated", %{conn: conn, advice: advice} do
+  test "force login if incorrect advisor is authenticated", %{conn: conn, questionnaire: questionnaire} do
+    nick = Advisor.Test.Support.Users.with("Nick Dyer")
+
     assert conn
-           |> Login.as("Priya Patil")
-           |> Visit.the(advice)
+           |> Login.as(nick)
+           |> Visit.provide_advice_to(questionnaire)
            |> redirected_to() == "/"
   end
 
-  test "answers questions", %{conn: conn, advice: advice, questions: questions} do
+  test "answers questions", %{conn: conn, questions: questions, questionnaire: questionnaire} do
     # something like 'create an answer'
-    payload = questions |> Enum.into(%{"id" => advice.id}, fn q -> {q.id, "some answer"} end)
+    payload = questions |> Enum.into(%{"id" => questionnaire.id}, fn q -> {q.id, "some answer"} end)
 
     conn
     |> Login.as("Rabea Gleissner")
-    |> Submit.answers!(payload, for: advice)
+    |> Submit.answers!(payload, for: questionnaire)
     |> It.has_header("Thank you!")
   end
 
@@ -41,21 +41,21 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
       Sample.questionnaire()
       |> Sample.answer(all: "abc")
 
-    advice = Sample.advice_from(questionnaire, "Rabea Gleissner")
-
-    payload = questionnaire.questions |> Enum.into(%{"id" => advice.id}, fn q -> {q.id, "xzy"} end)
+    payload = questionnaire.questions |> Enum.into(%{"id" => questionnaire.id}, fn q -> {q.id, "xzy"} end)
 
     conn
     |> Login.as("Rabea Gleissner")
-    |> Submit.answers(payload, for: advice)
+    |> Submit.answers(payload, for: questionnaire)
 
-    assert answers_for(questionnaire, advice) == ["abc"]
+    assert answers_from("Rabea Gleissner", in: questionnaire) == ["abc"]
   end
 
-  defp answers_for(questionnaire, %Advisor.Core.Advice{id: id}) do
+  defp answers_from(advisor_name, [in: questionnaire]) do
     questionnaire
-    |> Answer.find()
-    |> Enum.filter(fn answer -> answer.advice_request_id == id end)
+    |> Advisor.Core.Questionnaire.find()
+    |> Map.fetch!(:advice)
+    |> Enum.find(fn advice -> advice.advisor.name == advisor_name end)
+    |> Map.fetch!(:answers)
     |> Enum.map(fn answer -> answer.answer end)
     |> Enum.uniq()
   end

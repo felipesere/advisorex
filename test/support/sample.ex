@@ -1,5 +1,5 @@
 defmodule Advisor.Test.Support.Sample do
-  alias Advisor.Core.{Answer, Question, Questionnaire}
+  alias Advisor.Core.{Answer, Questionnaire}
   alias Advisor.Repo
   alias Advisor.Test.Support.Users
 
@@ -26,25 +26,13 @@ defmodule Advisor.Test.Support.Sample do
     mentee = Users.with(mentee)
     advisors = Users.with(advisors)
 
-    questionnaire =
-      %Questionnaire{
-        mentor_id: mentor.id,
-        mentee: mentee,
-        message: "This is a random message",
-        questions: [%Question{phrase: "foo"}, %Question{phrase: "bar"}],
-      }
-      |> Repo.insert!()
-
-    Enum.each(
-      advisors,
-      fn advisor ->
-        questionnaire
-        |> Ecto.build_assoc(:advice, %{mentee_id: mentee.id, advisor_id: advisor.id})
-        |> Repo.insert!()
-      end
-    )
-
-    Questionnaire.find(questionnaire.id)
+    Questionnaire.Creator.create(%{
+      mentee: mentee.id,
+      mentor: mentor.id,
+      message: "This is a random message",
+      questions: ["foo", "bar"],
+      advisors: Enum.map(advisors, fn a -> a.id end)
+    })
   end
 
   def advice_from(questionnaire, name) do

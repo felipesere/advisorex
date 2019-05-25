@@ -11,14 +11,14 @@ defmodule Visit do
     |> html_response(200)
   end
 
-  def the(conn, %Advisor.Core.Advice{id: id}) do
+  def provide_advice_to!(conn, param) do
     conn
-    |> get(Routes.provide_advice_path(@endpoint, :index, id))
+    |> provide_advice_to(param)
+    |> html_response(200)
   end
 
-  def page_for(conn, %Advisor.Core.Advice{id: id}) do
+  def provide_advice_to(conn, %Advisor.Core.Questionnaire{id: id}) do
     conn
     |> get(Routes.provide_advice_path(@endpoint, :create, id))
-    |> html_response(200)
   end
 end

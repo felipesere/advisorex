@@ -22,14 +22,7 @@ defmodule Advisor.Core.Advice do
     |> preload([:answers, :advisor])
   end
 
-  def find(%{id: id}) do
-    Repo.all(advice() |> where([advice], advice.questionnaire_id == ^id))
-  end
-
-  def find(advice_id, from_advisor: %{id: advisor_id}) do
-    Repo.one(advice() |> where([a], a.id == ^advice_id and a.advisor_id == ^advisor_id))
-  end
-
+  # Why does this return a list?
   def from_advisor(advisor) do
     Repo.all(advice() |> where([a], a.advisor_id == ^advisor))
   end

@@ -1,6 +1,5 @@
 defmodule Advisor.Core.Answer do
   alias Advisor.Repo
-  alias Advisor.Core.Answer
   alias Advisor.Core.Advice
   import Ecto.Query
   alias __MODULE__
@@ -39,11 +38,5 @@ defmodule Advisor.Core.Answer do
   defp add(answers, advice_request_id) do
     answers
     |> Enum.map(&Map.put(&1, :advice_request_id, advice_request_id))
-  end
-
-  def find(questionnaire) do
-    ids = Advice.ids(questionnaire.advice)
-
-    Repo.all(from(a in Answer, where: a.advice_request_id in ^ids))
   end
 end

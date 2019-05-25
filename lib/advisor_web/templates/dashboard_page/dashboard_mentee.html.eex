@@ -1,5 +1,5 @@
 <li class="open-advice-requets">
   <img class="profile-image"  src="<%= @advice.mentee.profile_image %>">
   <p><%= @advice.mentee.name %></p>
-  <a href="<%= Routes.provide_advice_path(AdvisorWeb.Endpoint, :index, @advice.advice.id) %>" target="_blank" class="button primary profile-size">Give advice now</a>
+  <a href="<%= Routes.provide_advice_path(AdvisorWeb.Endpoint, :index, @advice.advice.questionnaire_id) %>" target="_blank" class="button primary profile-size">Give advice now</a>
 </li>

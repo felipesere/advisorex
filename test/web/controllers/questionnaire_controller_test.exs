@@ -2,7 +2,7 @@ defmodule AdvisorWeb.QuestionnaireControllerTest do
   use AdvisorWeb.ConnCase
 
   alias Advisor.Test.Support.Sample
-  alias Advisor.Core.{Answer, Advice, Questionnaire}
+  alias Advisor.Core.Questionnaire
 
   test "will delete an entire questionnaire", %{conn: conn} do
     questionnaire =
@@ -18,7 +18,5 @@ defmodule AdvisorWeb.QuestionnaireControllerTest do
     |> get(Routes.questionnaire_path(@endpoint, :delete, questionnaire.id))
 
     refute Questionnaire.find(questionnaire)
-    assert [] == Answer.find(questionnaire)
-    assert [] == Advice.find(questionnaire)
   end
 end
