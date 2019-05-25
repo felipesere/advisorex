@@ -21,12 +21,12 @@ defmodule AdvisorWeb.Router do
     get "/", LandingPage, :index
     get "/logout", AuthenticationController, :logout
 
-
     # view the fhe form to create a questionnaire
     get "/request", QuestionnairePage, :index
 
     # submit the questionnaire you want to create
-    post "/request", AdviceRequestController, :create # Lol this needs renaming
+    # Lol this needs renaming
+    post "/request", AdviceRequestController, :create
 
     # view the status of a questionnaire, who are we waiting for and who is done
     get "/progress/:id", ProgressPage, :index

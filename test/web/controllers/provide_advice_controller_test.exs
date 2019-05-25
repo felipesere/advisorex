@@ -17,7 +17,10 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
     |> It.has_message("This is a random message")
   end
 
-  test "force login if incorrect advisor is authenticated", %{conn: conn, questionnaire: questionnaire} do
+  test "force login if incorrect advisor is authenticated", %{
+    conn: conn,
+    questionnaire: questionnaire
+  } do
     nick = Advisor.Test.Support.Users.with("Nick Dyer")
 
     assert conn
@@ -28,7 +31,8 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
 
   test "answers questions", %{conn: conn, questions: questions, questionnaire: questionnaire} do
     # something like 'create an answer'
-    payload = questions |> Enum.into(%{"id" => questionnaire.id}, fn q -> {q.id, "some answer"} end)
+    payload =
+      questions |> Enum.into(%{"id" => questionnaire.id}, fn q -> {q.id, "some answer"} end)
 
     conn
     |> Login.as("Rabea Gleissner")
@@ -41,7 +45,8 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
       Sample.questionnaire()
       |> Sample.answer(all: "abc")
 
-    payload = questionnaire.questions |> Enum.into(%{"id" => questionnaire.id}, fn q -> {q.id, "xzy"} end)
+    payload =
+      questionnaire.questions |> Enum.into(%{"id" => questionnaire.id}, fn q -> {q.id, "xzy"} end)
 
     conn
     |> Login.as("Rabea Gleissner")
@@ -50,7 +55,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
     assert answers_from("Rabea Gleissner", in: questionnaire) == ["abc"]
   end
 
-  defp answers_from(advisor_name, [in: questionnaire]) do
+  defp answers_from(advisor_name, in: questionnaire) do
     questionnaire
     |> Advisor.Core.Questionnaire.find()
     |> Map.fetch!(:advice)

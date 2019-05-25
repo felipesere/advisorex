@@ -3,7 +3,9 @@ defmodule AdvisorWeb.EmailView do
 
   @endpoint AdvisorWeb.Endpoint
 
-  def advice_path(advice), do: Routes.provide_advice_url(@endpoint, :index, advice.questionnaire_id)
+  def advice_path(advice),
+    do: Routes.provide_advice_url(@endpoint, :index, advice.questionnaire_id)
+
   def landing_page(), do: Routes.landing_page_url(@endpoint, :index)
 
   def questionnaire(questionnaire),

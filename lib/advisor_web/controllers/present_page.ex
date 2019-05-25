@@ -29,9 +29,11 @@ defmodule AdvisorWeb.PresentPage do
     |> answered_questions(questionnaire)
   end
 
-  defp collect_answers(%Questionnaire{advice: advisories}), do: Enum.flat_map(advisories, & &1.answers)
+  defp collect_answers(%Questionnaire{advice: advisories}),
+    do: Enum.flat_map(advisories, & &1.answers)
 
-  defp advisors(%Questionnaire{advice: advisories}), do: Enum.into(advisories, %{}, fn advice -> {advice.id, advice.advisor} end)
+  defp advisors(%Questionnaire{advice: advisories}),
+    do: Enum.into(advisories, %{}, fn advice -> {advice.id, advice.advisor} end)
 
   defp join(answers, advisors) do
     answers

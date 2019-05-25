@@ -33,23 +33,19 @@ defmodule Advisor.Repo.Migrations.DeleteSampleUsers do
       ]
     )
 
-    Repo.insert!(
-      %{
-        name: "Enrique Comba Riepenhausen",
-        email: "ecomba@example.com",
-        is_group_lead: true
-      }
-    )
+    Repo.insert!(%{
+      name: "Enrique Comba Riepenhausen",
+      email: "ecomba@example.com",
+      is_group_lead: true
+    })
 
     Repo.insert!(%{name: "Amelia Suchy", email: "amelia@example.com", is_group_lead: true})
     Repo.insert!(%{name: "Felipe Sere", email: "felipe@example.com", is_group_lead: true})
 
-    Repo.insert!(
-      %{
-        name: "Georgina McFadyen",
-        email: "georgina@example.com",
-        is_group_lead: true
-      }
-    )
+    Repo.insert!(%{
+      name: "Georgina McFadyen",
+      email: "georgina@example.com",
+      is_group_lead: true
+    })
   end
 end

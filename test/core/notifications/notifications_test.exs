@@ -23,7 +23,8 @@ defmodule Advisor.Core.NotificationsTest do
   end
 
   def answer(conn, advice, questions) do
-    answered = Enum.into(questions, %{"id" => advice.questionnaire_id}, fn q -> {q.id, "some answer"} end)
+    answered =
+      Enum.into(questions, %{"id" => advice.questionnaire_id}, fn q -> {q.id, "some answer"} end)
 
     conn
     |> Login.as(advice.advisor.name)

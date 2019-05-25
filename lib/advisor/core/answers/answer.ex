@@ -17,7 +17,6 @@ defmodule Advisor.Core.Answer do
     timestamps(@only_created_at)
   end
 
-
   def store(params) do
     Repo.insert_all(Answer, all_answers_in(params), returning: true)
   end

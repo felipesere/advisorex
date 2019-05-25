@@ -17,20 +17,23 @@ defmodule Advisor.Repo.Migrations.QuestionsKnowTheQuestionnaire do
     from(q in "questions", select: [:id])
     |> Repo.all()
     |> Enum.map(fn %{id: question_id} ->
-      %{questionnaire_id: questionnaire_id} = Enum.find(relations, fn (%{question_id: id}) -> id == question_id end)
+      %{questionnaire_id: questionnaire_id} =
+        Enum.find(relations, fn %{question_id: id} -> id == question_id end)
 
-      from( q in "questions", where: q.id == ^question_id, update: [set: [questionnaire_id: ^questionnaire_id]])
+      from(q in "questions",
+        where: q.id == ^question_id,
+        update: [set: [questionnaire_id: ^questionnaire_id]]
+      )
       |> Repo.update_all([])
-     end)
+    end)
 
-
-    drop table(:questionnaire_to_question)
+    drop(table(:questionnaire_to_question))
   end
 
   def down do
     create table(:questionnaire_to_question) do
       add(:questionnaire_id, references(:questionnaires, type: :uuid, on_delete: :delete_all))
-      add(:question_id,      references(:questions,      type: :uuid, on_delete: :delete_all))
+      add(:question_id, references(:questions, type: :uuid, on_delete: :delete_all))
     end
 
     flush()
@@ -38,13 +41,14 @@ defmodule Advisor.Repo.Migrations.QuestionsKnowTheQuestionnaire do
     questions =
       from(q in "questions", select: [:id, :questionnaire_id])
       |> Repo.all()
-      |> Enum.map(fn %{id: i, questionnaire_id: qid} -> %{question_id: i, questionnaire_id: qid}  end)
+      |> Enum.map(fn %{id: i, questionnaire_id: qid} ->
+        %{question_id: i, questionnaire_id: qid}
+      end)
 
     Repo.insert_all("questionnaire_to_question", questions)
 
     alter table(:questions) do
-      remove :questionnaire_id
+      remove(:questionnaire_id)
     end
-
   end
 end

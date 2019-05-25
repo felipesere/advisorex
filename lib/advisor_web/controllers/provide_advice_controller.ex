@@ -11,7 +11,8 @@ defmodule AdvisorWeb.ProvideAdviceController do
     possible_advisor = User.found_in(conn)
     questionnaire = Questionnaire.find(questionnaire_id)
     # TODO: this may crash if there is no real questionnaire id coming in!
-    legitimate_advisor = Enum.find(questionnaire.advice, fn advice -> advice.advisor == possible_advisor end)
+    legitimate_advisor =
+      Enum.find(questionnaire.advice, fn advice -> advice.advisor == possible_advisor end)
 
     if questionnaire && legitimate_advisor do
       render(conn, "advice-form.html",
@@ -31,12 +32,16 @@ defmodule AdvisorWeb.ProvideAdviceController do
   def create(conn, %{"id" => questionnaire_id} = params) do
     advisor = User.found_in(conn)
     questionnaire = Questionnaire.find(questionnaire_id)
-    advice = Advice.from_advisor(advisor.id) |> Enum.find(fn a -> a.questionnaire_id == questionnaire_id end)
+
+    advice =
+      Advice.from_advisor(advisor.id)
+      |> Enum.find(fn a -> a.questionnaire_id == questionnaire_id end)
 
     if Advice.completed?(advice, questionnaire.questions) do
       redirect(conn, to: "/")
     else
-      answer_details = Map.put(params, "id", advice.id) # TODO: meh...
+      # TODO: meh...
+      answer_details = Map.put(params, "id", advice.id)
       Answer.store(answer_details)
 
       questionnaire

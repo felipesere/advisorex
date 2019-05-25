@@ -32,12 +32,14 @@ defmodule Advisor.Core.People do
   def find_by(name: name), do: query_by_name(name)
   def find_by(email: email), do: query_by_email(email)
   def find_by(id: id) when is_integer(id), do: query_by_user(id)
+
   def find_by(id: id) when is_binary(id) do
     case parse(id) do
       :bad_parse -> nil
       id -> query_by_user(id)
     end
   end
+
   def find_by(_), do: nil
 
   defp query_by_user(id), do: Repo.one(from(p in Person, where: p.id == ^id))

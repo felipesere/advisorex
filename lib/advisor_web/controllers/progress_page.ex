@@ -23,6 +23,6 @@ defmodule AdvisorWeb.ProgressPage do
 
   defp group_by_completion(%Questionnaire{advice: advice, questions: questions}) do
     advice
-    |> Enum.group_by(&Advice.completed?(&1, questions), &(&1.advisor))
+    |> Enum.group_by(&Advice.completed?(&1, questions), & &1.advisor)
   end
 end

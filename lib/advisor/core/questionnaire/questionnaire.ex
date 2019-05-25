@@ -45,6 +45,7 @@ defmodule Advisor.Core.Questionnaire do
 
   def find(%Questionnaire{id: id}), do: find(id)
   def find(%{questionnaire_id: id}), do: find(id)
+
   def find(id) do
     Repo.one(questionnaire() |> where([q], q.id == ^id))
   end
@@ -53,11 +54,23 @@ defmodule Advisor.Core.Questionnaire do
     Repo.delete_all(from(q in Questionnaire, where: q.id == ^id))
   end
 
-  def create(%{mentor: mentor_id, mentee: mentee_id,  message: m, questions: phrases, advisors: advisors}) do
+  def create(%{
+        mentor: mentor_id,
+        mentee: mentee_id,
+        message: m,
+        questions: phrases,
+        advisors: advisors
+      }) do
     questions = Enum.map(phrases, fn p -> %Question{phrase: p} end)
-    advice = Enum.map(advisors, fn advisor ->  %Advice{advisor_id: advisor} end)
+    advice = Enum.map(advisors, fn advisor -> %Advice{advisor_id: advisor} end)
 
-    Repo.insert!(%Questionnaire{mentor_id: mentor_id, mentee_id: mentee_id, message: m, questions: questions, advice: advice})
+    Repo.insert!(%Questionnaire{
+      mentor_id: mentor_id,
+      mentee_id: mentee_id,
+      message: m,
+      questions: questions,
+      advice: advice
+    })
   end
 
   def completed?(%Questionnaire{advice: advice, questions: questions}) do
