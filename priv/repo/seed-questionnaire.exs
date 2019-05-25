@@ -20,18 +20,16 @@ if Mix.env() == :dev do
   andy = People.find_by(name: "Andy Dwyer")
   donna = People.find_by(name: "Donna Meagle")
 
-  questionnaire =
-    Repo.insert!(
-      %Questionnaire{
-        mentor: leslie,
-        mentee: april,
-        message: "I want to run the animal shelter",
-        questions: [
-          %Question{phrase: "How is this persons humor?"},
-          %Question{phrase: "Have they stumbled yet?"}
-        ],
-      }
-    )
-
-  {:ok, _} = Advice.create(%{questionnaire: questionnaire}, %{advisors: [andy.id, donna.id]})
+  Repo.insert!(
+    %Questionnaire{
+      mentor: leslie,
+      mentee: april,
+      message: "I want to run the animal shelter",
+      questions: [
+        %Question{phrase: "How is this persons humor?"},
+        %Question{phrase: "Have they stumbled yet?"}
+      ],
+      advice: [%Advice{advisor: andy}, %Advice{advisor: donna}],
+    }
+  )
 end

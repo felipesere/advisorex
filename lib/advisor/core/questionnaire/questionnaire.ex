@@ -53,8 +53,11 @@ defmodule Advisor.Core.Questionnaire do
     Repo.delete_all(from(q in Questionnaire, where: q.id == ^id))
   end
 
-  def create(%{mentee: r}, %{mentor: gl, message: m, questions: phrases}) do
-    {:ok, Repo.insert!(%Questionnaire{mentor_id: gl, mentee: r, message: m, questions: Enum.map(phrases, fn p -> %Question{phrase: p} end)})}
+  def create(%{mentor: mentor_id, mentee: mentee_id,  message: m, questions: phrases, advisors: advisors}) do
+    questions = Enum.map(phrases, fn p -> %Question{phrase: p} end)
+    advice = Enum.map(advisors, fn advisor ->  %Advice{advisor_id: advisor} end)
+
+    Repo.insert!(%Questionnaire{mentor_id: mentor_id, mentee_id: mentee_id, message: m, questions: questions, advice: advice})
   end
 
   def completed?(%Questionnaire{advice: advice, questions: questions}) do
