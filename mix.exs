@@ -45,9 +45,10 @@ defmodule Advisor.Mixfile do
       {:plug, "~> 1.7"},
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
+      {:poison, "~> 3.0"},
       {:yaml_elixir, "~> 2.1"},
       {:ueberauth_google, "~> 0.8.0"},
-      {:guardian, "~> 1.0"},
+      {:ueberauth, "~> 0.6.1"},
       {:bamboo, "~> 1.2.0"}
     ] ++ test_deps()
   end
