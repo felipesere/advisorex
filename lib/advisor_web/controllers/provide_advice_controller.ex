@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.ProvideAdviceController do
   use AdvisorWeb, :controller
-  alias Advisor.Core.{Questionnaire, Answer, Advice}
+  alias Advisor.Core.{Questionnaire, Advice}
   alias AdvisorWeb.Authentication.User
   alias Advisor.Core.Notifications
 
@@ -33,6 +33,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
     advisor = User.found_in(conn)
     questionnaire = Questionnaire.find(questionnaire_id)
 
+    # TODO: this may crash if the advisor is wrong
     advice =
       Advice.from_advisor(advisor.id)
       |> Enum.find(fn a -> a.questionnaire_id == questionnaire_id end)
@@ -40,9 +41,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
     if Advice.completed?(advice, questionnaire.questions) do
       redirect(conn, to: "/")
     else
-      # TODO: meh...
-      answer_details = Map.put(params, "id", advice.id)
-      Answer.store(answer_details)
+      Advice.save_answers(advice, params)
 
       questionnaire
       |> Questionnaire.find()

@@ -22,9 +22,16 @@ defmodule Advisor.Core.Advice do
     |> preload([:answers, :advisor])
   end
 
-  # Why does this return a list?
   def from_advisor(advisor) do
     Repo.all(advice() |> where([a], a.advisor_id == ^advisor))
+  end
+
+  def save_answers(advice, answers) do
+    answers = Advisor.Core.Answer.all_answers_in(answers)
+
+    advice
+    |> Ecto.Changeset.change(%{answers: answers})
+    |> Repo.update!()
   end
 
   def completed?(%Advice{answers: answers}, expected) when is_list(expected) do

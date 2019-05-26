@@ -1,9 +1,6 @@
 defmodule Advisor.Test.Support.Sample do
-  alias Advisor.Core.{Answer, Questionnaire}
-  alias Advisor.Repo
+  alias Advisor.Core.{Advice, Questionnaire}
   alias Advisor.Test.Support.Users
-
-  # TODO think about using Ecto.Multi here
 
   def questionnaire() do
     questionnaire(
@@ -44,12 +41,7 @@ defmodule Advisor.Test.Support.Sample do
     advisories = questionnaire.advice
     questions = questionnaire.questions
 
-    Enum.each(
-      advisories,
-      fn advice ->
-        save_answers(questions, answer, advice.id)
-      end
-    )
+    Enum.each(advisories, fn advice -> save_answers(questions, answer, advice) end)
 
     Questionnaire.find(questionnaire)
   end
@@ -58,16 +50,13 @@ defmodule Advisor.Test.Support.Sample do
     advice = advice_from(questionnaire, name)
 
     questionnaire.questions
-    |> save_answers(answer, advice.id)
+    |> save_answers(answer, advice)
 
     Questionnaire.find(questionnaire)
   end
 
   defp save_answers(questions, answer, advice) do
-    data =
-      questions
-      |> Enum.map(fn q -> %{question_id: q.id, answer: answer, advice_request_id: advice} end)
-
-    Repo.insert_all(Answer, data)
+    answered = Enum.into(questions, %{}, fn q -> {q.id, answer} end)
+    Advice.save_answers(advice, answered)
   end
 end

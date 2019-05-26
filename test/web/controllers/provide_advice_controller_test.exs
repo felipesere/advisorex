@@ -38,6 +38,8 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
     |> Login.as("Rabea Gleissner")
     |> Submit.answers!(payload, for: questionnaire)
     |> It.has_header("Thank you!")
+
+    assert answers_from("Rabea Gleissner", in: questionnaire) == ["some answer"]
   end
 
   test "can't answer twice", %{conn: conn} do

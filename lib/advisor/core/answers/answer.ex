@@ -1,5 +1,4 @@
 defmodule Advisor.Core.Answer do
-  alias Advisor.Repo
   alias __MODULE__
 
   use Ecto.Schema
@@ -15,25 +14,10 @@ defmodule Advisor.Core.Answer do
     timestamps(@only_created_at)
   end
 
-  def store(params) do
-    Repo.insert_all(Answer, all_answers_in(params), returning: true)
-  end
-
-  def all_answers_in(%{"id" => advice_request_id} = params) do
+  def all_answers_in(params) do
     params
+    # this has to be better!
     |> Enum.reject(fn {key, _} -> key in @ignored_keys end)
-    |> Enum.map(&to_answer/1)
-    |> add(advice_request_id)
-  end
-
-  # TODO This feels to intricite... map into Map put?
-  defp to_answer({question_id, answer}) do
-    %{question_id: question_id, answer: answer}
-  end
-
-  # TODO This feels to intricite... map into Map put?
-  defp add(answers, advice_request_id) do
-    answers
-    |> Enum.map(&Map.put(&1, :advice_request_id, advice_request_id))
+    |> Enum.map(fn {id, answer} -> %Answer{question_id: id, answer: answer} end)
   end
 end
