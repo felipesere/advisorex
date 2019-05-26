@@ -31,8 +31,6 @@ defmodule Advisor.Core.Questionnaire do
     Repo.all(questionnaire() |> where([q], q.mentor_id == ^mentor_id))
   end
 
-  def questions(%__MODULE__{id: id}), do: questions(id)
-
   def questions(id) do
     id
     |> find()
