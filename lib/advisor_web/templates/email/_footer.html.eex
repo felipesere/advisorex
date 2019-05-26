@@ -9,7 +9,7 @@
       <!-- UNSUBSCRIBE -->
       <tr>
         <td bgcolor="<%= color(:background) %>" align="left" style="padding: 0px 30px 30px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 18px;" >
-          <p style="margin: 0; margin-top: 20px; text-align: center;">If these emails get annoying, please feel free to <a href="<%= landing_page() %>" target="_blank" style="color: #111111; font-weight: 700;">unsubscribe</a>.</p>
+          <p style="margin: 0; margin-top: 20px; text-align: center;">If these emails get annoying, please feel free to <a href="<%= landing_page() %>" style="color: #111111; font-weight: 700;">unsubscribe</a>.</p>
         </td>
       </tr>
     </table>

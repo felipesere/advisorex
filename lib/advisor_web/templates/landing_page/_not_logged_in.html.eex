@@ -1,4 +1,4 @@
-<%= if Mix.env in [:dev, :ngrok] do  %>
+<%= if Mix.env in [:dev, :ngrok, :ci] do  %>
   <%= for person <- everybody() do %>
     <a href="/auth/login?email=<%= person.email %>" class="button primary login">Login as <%= person.name %></a>
   <% end %>

@@ -1,0 +1,8 @@
+{
+  "name": "advisorex",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "cypress": "^3.3.1"
+  }
+}

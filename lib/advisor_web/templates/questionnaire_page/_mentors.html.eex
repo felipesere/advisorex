@@ -5,8 +5,8 @@
         <%= radio_button(@form ,:mentor, person.id) %>
         <div class="advisor-image" style="background-image: url(<%= person.profile_image %>);" >
         </div>
+        <p class="advisor-name"><%= person.name %></p>
       <% end %>
-      <p class="advisor-name"><%= person.name %></p>
     </li>
     <% end %>
   </ul>

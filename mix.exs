@@ -58,17 +58,16 @@ defmodule Advisor.Mixfile do
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10.0", only: :test},
       {:floki, "~> 0.18", only: :test},
-      {:mix_test_watch, "~> 0.4"},
       {:dialyxir, "~> 0.5.1"}
     ]
   end
 
   defp aliases do
     [
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.setup": ["ecto.create --quiet", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"],
-      ci: ["test", "credo"],
+      ci: ["test", "credo", "coveralls.travis"],
       seed: ["run priv/repo/seeds.exs"],
       "seed.questionnaire": ["run priv/repo/seed-questionnaire.exs"]
     ]

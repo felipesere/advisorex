@@ -10,27 +10,13 @@ use Mix.Config
 config :advisor, AdvisorWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
-  code_reloader: true,
+  code_reloader: false,
   check_origin: false,
-  watchers: [
-        node: [
-          "node_modules/webpack/bin/webpack.js",
-          "--mode",
-          "development",
-          "--watch-stdin",
-          cd: Path.expand("../assets", __DIR__)
-        ]
-      ]
+  watchers: []
 
 
 config :advisor, AdvisorWeb.Endpoint,
-  live_reload: [
-    patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
-      ~r{lib/advisor/web/views/.*(ex)$},
-      ~r{lib/advisor/web/templates/.*(eex)$}
-    ]
-  ]
+  live_reload: []
 
 config :logger, :console, format: "[$level] $message\n"
 
@@ -50,6 +36,6 @@ config :ueberauth, Ueberauth,
     google: {Local.Strategy, [request_path: "/auth/login", callback_path: "/auth/callback"]}
   ]
 
-config :advisor, FeatureToggle, emails: true
+config :advisor, FeatureToggle, emails: false
 
 config :advisor, Advisor.Core.Notifications.Email.Mailer, adapter: Bamboo.LocalAdapter

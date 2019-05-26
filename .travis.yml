@@ -1,24 +1,54 @@
 language: elixir
+
 elixir:
 - 1.8.0
+
 otp_release:
 - 20.3
+
+dist: xenial
+
 services:
 - postgresql
+
 addons:
   postgresql: '9.4'
-before_script:
-- psql -c 'create database advisor_test;' -U postgres
-- psql -c 'create extension pgcrypto;' -U postgres
-script:
-- MIX_ENV=test mix ci
-- MIX_ENV=test mix coveralls.travis
+  apt:
+    packages:
+    - libgconf-2-4
+    - inotify-tools
+
+env:
+  global:
+    - CYPRESS_CACHE_FOLDER=cache/Cypress
+
 cache:
   directories:
-  - _build
-  - deps
-  - otp
-  - ".kerl"
+    - ~/.cache
+    - ~/.npm
+    - node_modules
+    - assets/node_modules
+    - _build
+    - deps
+    - otp
+    - .kerl
+  override:
+    - npx cypress verify
+
+before_script:
+- sudo apt-get install
+- psql -c 'create database advisor_test;' -U postgres
+- psql -c 'create extension pgcrypto;' -U postgres
+
+script:
+- MIX_ENV=test mix ci
+- npm install
+- npm --prefix assets install
+- npm --prefix assets run deploy
+- mix ecto.setup
+- MIX_ENV=ci mix phx.server > /dev/null &
+- CYPRESS_CACHE_FOLDER=./node_modules/cypress/cache/Cypress npx cypress run
+
 deploy:
   provider: heroku
   app: advisorex

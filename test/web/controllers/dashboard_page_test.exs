@@ -116,7 +116,7 @@ defmodule AdvisorWeb.DashboardPageTest do
 
   def advice_needed_for(html, mentee) do
     assert html
-           |> Floki.find(".open-advice-requets > p")
+           |> Floki.find(".open-advice-requests > p")
            |> Enum.map(&Floki.text/1)
            |> Enum.member?(mentee)
 
@@ -125,7 +125,7 @@ defmodule AdvisorWeb.DashboardPageTest do
 
   def no_advice_needed_for(html, mentee) do
     refute html
-           |> Floki.find(".open-advice-requets > p")
+           |> Floki.find(".open-advice-requests > p")
            |> Enum.map(&Floki.text/1)
            |> Enum.member?(mentee)
 
