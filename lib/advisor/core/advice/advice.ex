@@ -27,10 +27,6 @@ defmodule Advisor.Core.Advice do
     Repo.all(advice() |> where([a], a.advisor_id == ^advisor))
   end
 
-  def ids(advisories) do
-    Enum.map(advisories, & &1.id)
-  end
-
   def completed?(%Advice{answers: answers}, expected) when is_list(expected) do
     length(answers) == length(expected)
   end

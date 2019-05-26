@@ -1,7 +1,5 @@
 defmodule Advisor.Core.Answer do
   alias Advisor.Repo
-  alias Advisor.Core.Advice
-  import Ecto.Query
   alias __MODULE__
 
   use Ecto.Schema
