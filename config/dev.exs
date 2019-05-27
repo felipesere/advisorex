@@ -19,7 +19,13 @@ config :advisor, AdvisorWeb.Endpoint,
           "development",
           "--watch-stdin",
           cd: Path.expand("../assets", __DIR__)
-        ]
+        ],
+        npm: [
+          "--prefix",
+          "assets",
+          "run",
+          "css",
+        ],
       ]
 
 

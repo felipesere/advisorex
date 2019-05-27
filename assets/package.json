@@ -2,8 +2,9 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "deploy": "webpack --mode production",
-    "watch": "webpack --mode development --watch-stdin"
+    "deploy": "npm run js && npm run css",
+    "js": "webpack --mode production",
+    "css": "node-sass ./css/* | postcss -o ../priv/static/css/app.css"
   },
   "dependencies": {
     "cash-dom": "3.1.0",
@@ -17,12 +18,9 @@
     "@babel/preset-env": "^7.0.0",
     "babel-loader": "^8.0.0",
     "copy-webpack-plugin": "^5.0.0",
-    "css-loader": "^2.1.0",
-    "sass-loader": "^7.1.0",
+    "cssnano": "^4.1.10",
     "node-sass": "^4.11.0",
-    "mini-css-extract-plugin": "^0.5.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.0",
-    "style-loader": "^0.23.1",
+    "postcss-cli": "^6.1.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.0.0",
     "tar": ">=4.4.2",

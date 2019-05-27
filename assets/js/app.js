@@ -1,5 +1,4 @@
 import $ from 'cash-dom';
-import css from '../css/main.scss';
 
 import { request } from './request';
 import { storage } from './temporaryStorage';
