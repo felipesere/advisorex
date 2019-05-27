@@ -3,22 +3,14 @@
   "license": "MIT",
   "scripts": {
     "deploy": "webpack --mode production",
-    "watch": "webpack --mode development --watch-stdin",
-    "approve": "backstop approve",
-    "test": "backstop test",
-    "init": "backstop init",
-    "reference": "backstop reference"
+    "watch": "webpack --mode development --watch-stdin"
   },
   "dependencies": {
-    "backstopjs": "^3.8.8",
     "cash-dom": "3.1.0",
     "debounce": "^1.2.0",
-    "node-sass": "^4.11.0",
-    "phoenix": "file:../deps/phoenix",
-    "phoenix_html": "file:../deps/phoenix_html",
-    "sass-loader": "^7.1.0",
     "lodash": ">=4.17.11",
-    "sshpk": ">=1.13.2"
+    "phoenix": "file:../deps/phoenix",
+    "phoenix_html": "file:../deps/phoenix_html"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -26,11 +18,14 @@
     "babel-loader": "^8.0.0",
     "copy-webpack-plugin": "^5.0.0",
     "css-loader": "^2.1.0",
+    "sass-loader": "^7.1.0",
+    "node-sass": "^4.11.0",
     "mini-css-extract-plugin": "^0.5.0",
     "optimize-css-assets-webpack-plugin": "^5.0.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.0.0",
-    "tar": ">=4.4.2"
+    "tar": ">=4.4.2",
+    "sshpk": ">=1.13.2"
   }
 }
