@@ -9,10 +9,7 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,400i" rel="stylesheet">
     <link rel="icon" type="image/png" href="https://8thlight.com/images/logos/logo-color-f66c53fd.png">
-
-    <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
-
   <body>
     <header class="top">
       <a href="/"><img class="logo" src="https://8thlight.com/images/branding/8th-Light-Logo-Color-No-Text-28048670.png" alt="8th Light logo" /></a>
@@ -20,5 +17,6 @@
 
     <%= render @view_module, @view_template, assigns %>
 
+    <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
