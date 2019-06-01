@@ -16,6 +16,7 @@ const noNode = {
   present: false,
 
   prop: (name, value) => {},
+  disabled: (value) => {},
   on: (event, handler) => {},
   add: classname => {},
   remove: classname => {},
@@ -43,6 +44,10 @@ class ProperNode {
 
   prop(name, value) {
     this.node.setAttribute(name, value);
+  }
+
+  disabled(value) {
+    this.node.disabled = value;
   }
 
   on(event, handler) {

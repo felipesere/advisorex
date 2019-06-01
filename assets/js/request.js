@@ -32,14 +32,14 @@ const toggleButton = () => {
     || state.questions === 0
     || state.mentor === 0;
 
-  const advice = $(".request-advice")
+  const advice = $("#ask-for-advice")
 
   if(disable) {
     advice.add("disabled");
-    advice.prop("disabled", true);
+    advice.disabled(true);
   } else {
     advice.remove("disabled");
-    advice.prop("disabled", false);
+    advice.disabled(false);
   }
 }
 

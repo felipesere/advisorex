@@ -39,7 +39,7 @@
 
     <section class="module">
       <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
-      <button type="submit" class="request-advice button primary full">Ask for advice</button>
+      <button type="submit" class="request-advice button primary full" id="ask-for-advice">Ask for advice</button>
     </section>
 <% end %>
 
