@@ -1,6 +1,6 @@
-defmodule Advisor.Core.AdviceTest do
+defmodule Advisor.AdviceTest do
   use ExUnit.Case
-  alias Advisor.Core.{Advice, Answer}
+  alias Advisor.{Advice, Answer}
 
   test "can figure out if an advice has been answered fully" do
     advice = %Advice{answers: [%Answer{}, %Answer{}, %Answer{}]}

@@ -1,7 +1,7 @@
-defmodule Advisor.Core.NotificationsTest do
+defmodule Advisor.NotificationsTest do
   use AdvisorWeb.ConnCase
   use Bamboo.Test
-  alias Advisor.Core.Notifications
+  alias Advisor.Notifications
   alias Advisor.Test.Support.Sample
 
   test "sends emails to all advisors" do

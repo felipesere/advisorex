@@ -1,7 +1,7 @@
-defmodule Advisor.Core.Question.PhrasesCatalogTests do
+defmodule Advisor.Question.PhrasesCatalogTests do
   use ExUnit.Case
-  alias Advisor.Core.Question.PhrasesCatalog
-  alias Advisor.Core.Question
+  alias Advisor.Question.PhrasesCatalog
+  alias Advisor.Question
 
   test "Finds the different kinds of questions from the YAML" do
     questions = PhrasesCatalog.all()

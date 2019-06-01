@@ -1,8 +1,8 @@
 defmodule AdvisorWeb.AdviceRequestController do
   use AdvisorWeb, :controller
   alias AdvisorWeb.QuestionnaireProposal
-  alias Advisor.Core.Questionnaire.Creator
-  alias Advisor.Core.Notifications
+  alias Advisor.Questionnaire.Creator
+  alias Advisor.Notifications
   alias AdvisorWeb.Authentication.User
 
   plug AdvisorWeb.Authentication.Gatekeeper

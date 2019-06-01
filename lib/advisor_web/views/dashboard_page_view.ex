@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.DashboardPageView do
   use AdvisorWeb, :view
-  alias Advisor.Core.Dashboard.MentorSection
+  alias Advisor.Dashboard.MentorSection
 
   def has_advice(%{mentor_section: %MentorSection{groups: groups}}), do: Enum.any?(groups)
 

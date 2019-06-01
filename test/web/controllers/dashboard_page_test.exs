@@ -3,7 +3,7 @@ defmodule AdvisorWeb.DashboardPageTest do
   import PageAssertions
 
   alias Advisor.Test.Support.{Sample, Users}
-  alias Advisor.Core.People
+  alias Advisor.People
 
   @mentor "Felipe Sere"
 

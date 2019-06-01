@@ -1,2 +1,2 @@
-defmodule Advisor.Core.Dashboard.AdviceForMeSectionTest do
+defmodule Advisor.Dashboard.AdviceForMeSectionTest do
 end

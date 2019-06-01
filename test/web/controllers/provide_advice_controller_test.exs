@@ -59,7 +59,7 @@ defmodule AdvisorWeb.ProvideAdviceControllerTest do
 
   defp answers_from(advisor_name, in: questionnaire) do
     questionnaire
-    |> Advisor.Core.Questionnaire.find()
+    |> Advisor.Questionnaire.find()
     |> Map.fetch!(:advice)
     |> Enum.find(fn advice -> advice.advisor.name == advisor_name end)
     |> Map.fetch!(:answers)

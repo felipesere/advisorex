@@ -1,7 +1,7 @@
-defmodule Advisor.Core.LoginUserTest do
+defmodule Advisor.LoginUserTest do
   use Advisor.DataCase
-  alias Advisor.Core.LoginUser
-  alias Advisor.Core.{Person, People}
+  alias Advisor.LoginUser
+  alias Advisor.{Person, People}
 
   test "creates the user if has not logged in before" do
     auth = auth_for("somebody@8thlight.com", "Somebody")

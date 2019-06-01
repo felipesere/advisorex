@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.QuestionnairePage do
   use AdvisorWeb, :controller
-  alias Advisor.Core.Questionnaire.Form, as: QuestionnaireForm
+  alias Advisor.Questionnaire.Form, as: QuestionnaireForm
   alias AdvisorWeb.Authentication.User
 
   plug AdvisorWeb.Authentication.Gatekeeper

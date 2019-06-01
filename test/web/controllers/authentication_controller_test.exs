@@ -3,7 +3,7 @@ defmodule AdvisorWeb.AuthenticationControllerTest do
   alias Ueberauth.Auth.Info
   alias Ueberauth.Auth
   alias AdvisorWeb.AuthenticationController
-  alias Advisor.Core.People
+  alias Advisor.People
 
   test "successful login creates user in the database", %{conn: conn} do
     info = %Info{email: "foo@example.com", name: "Foo Example", urls: %{website: "8thlight.com"}}

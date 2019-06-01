@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.DownloadSummaryController do
   use AdvisorWeb, :controller
-  alias Advisor.Core.Summary
+  alias Advisor.Summary
   alias CSV.Encoding.Encoder
 
   plug AdvisorWeb.Authentication.Gatekeeper, only: :mentors

@@ -4,7 +4,7 @@ defmodule Local.Strategy do
   alias Ueberauth.Auth.Info
   alias Ueberauth.Strategy.Helpers
   alias Plug.Conn.Query
-  alias Advisor.Core.People
+  alias Advisor.People
 
   def handle_request!(conn) do
     path = Helpers.callback_path(conn)

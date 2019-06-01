@@ -1,5 +1,5 @@
 defmodule Advisor.Test.Support.Sample do
-  alias Advisor.Core.{Advice, Questionnaire}
+  alias Advisor.{Advice, Questionnaire}
   alias Advisor.Test.Support.Users
 
   def questionnaire() do

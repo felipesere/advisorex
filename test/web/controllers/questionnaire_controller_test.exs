@@ -2,7 +2,7 @@ defmodule AdvisorWeb.QuestionnaireControllerTest do
   use AdvisorWeb.ConnCase
 
   alias Advisor.Test.Support.Sample
-  alias Advisor.Core.Questionnaire
+  alias Advisor.Questionnaire
 
   test "will delete an entire questionnaire", %{conn: conn} do
     questionnaire =

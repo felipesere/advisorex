@@ -18,6 +18,6 @@ config :advisor, Advisor.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :advisor, Advisor.Core.Notifications.Email.Mailer, adapter: Bamboo.TestAdapter
+config :advisor, Advisor.Notifications.Email.Mailer, adapter: Bamboo.TestAdapter
 
 config :advisor, FeatureToggle, emails: true

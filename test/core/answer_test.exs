@@ -1,6 +1,6 @@
-defmodule Advisor.Core.AnswerTest do
+defmodule Advisor.AnswerTest do
   use Advisor.DataCase
-  alias Advisor.Core.Answer
+  alias Advisor.Answer
 
   test "transforms params into database compatible answers" do
     params = %{

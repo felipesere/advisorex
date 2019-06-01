@@ -1,8 +1,8 @@
-defmodule Advisor.Core.QuestionnaireTest do
+defmodule Advisor.QuestionnaireTest do
   use Advisor.DataCase
   alias Advisor.Test.Support.Sample
 
-  alias Advisor.Core.Questionnaire
+  alias Advisor.Questionnaire
 
   test "finds a mentoes questionnaires" do
     questionnaire =

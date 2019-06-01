@@ -9,7 +9,7 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias Advisor.Core.Person
+alias Advisor.Person
 alias Advisor.Repo
 
 if Mix.env() == :dev do

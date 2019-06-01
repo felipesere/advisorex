@@ -57,4 +57,4 @@ config :ueberauth, Ueberauth,
 
 config :advisor, FeatureToggle, emails: true
 
-config :advisor, Advisor.Core.Notifications.Email.Mailer, adapter: Bamboo.LocalAdapter
+config :advisor, Advisor.Notifications.Email.Mailer, adapter: Bamboo.LocalAdapter

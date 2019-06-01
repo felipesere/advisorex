@@ -17,7 +17,7 @@ defmodule Visit do
     |> html_response(200)
   end
 
-  def provide_advice_to(conn, %Advisor.Core.Questionnaire{id: id}) do
+  def provide_advice_to(conn, %Advisor.Questionnaire{id: id}) do
     conn
     |> get(Routes.provide_advice_path(@endpoint, :create, id))
   end

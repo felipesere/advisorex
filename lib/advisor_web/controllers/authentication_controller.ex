@@ -1,7 +1,7 @@
 defmodule AdvisorWeb.AuthenticationController do
   use AdvisorWeb, :controller
 
-  alias Advisor.Core.LoginUser
+  alias Advisor.LoginUser
 
   plug Ueberauth
 

@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.DashboardPage do
   use AdvisorWeb, :controller
-  alias Advisor.Core.{Dashboard, Person, People}
+  alias Advisor.{Dashboard, Person, People}
   alias AdvisorWeb.Authentication.User
 
   plug AdvisorWeb.Authentication.Gatekeeper

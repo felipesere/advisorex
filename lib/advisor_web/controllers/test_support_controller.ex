@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.TestSupportController do
   use AdvisorWeb, :controller
-  alias Advisor.Core.Questionnaire
+  alias Advisor.Questionnaire
   alias Advisor.Repo
 
   def delete_all(conn, _params) do

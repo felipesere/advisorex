@@ -1,7 +1,7 @@
 defmodule AdvisorWeb.LandingPage do
   use AdvisorWeb, :controller
   alias AdvisorWeb.Authentication.User
-  alias Advisor.Core.Questionnaire
+  alias Advisor.Questionnaire
 
   plug AdvisorWeb.Authentication.Gatekeeper, redirect: false
 

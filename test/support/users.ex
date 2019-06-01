@@ -1,5 +1,5 @@
 defmodule Advisor.Test.Support.Users do
-  alias Advisor.Core.{Person, People}
+  alias Advisor.{Person, People}
   alias Advisor.Repo
 
   @people [

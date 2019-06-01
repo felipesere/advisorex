@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.QuestionnaireController do
   use AdvisorWeb, :controller
-  alias Advisor.Core.Questionnaire
+  alias Advisor.Questionnaire
 
   plug AdvisorWeb.Authentication.Gatekeeper, only: :mentors
 

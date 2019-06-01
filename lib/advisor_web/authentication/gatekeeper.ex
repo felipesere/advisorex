@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.Authentication.Gatekeeper do
   import Plug.Conn
-  alias Advisor.Core.{Person, People}
+  alias Advisor.{Person, People}
   import Phoenix.Controller, only: [redirect: 2]
 
   def init(opts) do

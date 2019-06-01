@@ -1,7 +1,7 @@
 defmodule AdvisorWeb.Authentication.GatekeeprTest do
   use AdvisorWeb.ConnCase
   alias AdvisorWeb.Authentication.Gatekeeper
-  alias Advisor.Core.{Person, People}
+  alias Advisor.{Person, People}
   alias Plug.Test, as: PlugSupport
   alias Advisor.Test.Support.Users
 

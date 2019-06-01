@@ -1,8 +1,8 @@
-defmodule Advisor.Core.SummaryTest do
+defmodule Advisor.SummaryTest do
   use Advisor.DataCase
 
   alias Advisor.Test.Support.Sample
-  alias Advisor.Core.Summary
+  alias Advisor.Summary
 
   test "presents tabular data for a given questionnaire" do
     questionnaire = Sample.questionnaire()

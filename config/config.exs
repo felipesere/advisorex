@@ -43,7 +43,7 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_secret: System.get_env("GOOGLE_CLIENT_SECRET"),
   json_library: Jason
 
-config :advisor, Advisor.Core.Notifications.Email.Mailer,
+config :advisor, Advisor.Notifications.Email.Mailer,
   adapter: Bamboo.SendgridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY")
 

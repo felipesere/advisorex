@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.ProgressPage do
   use AdvisorWeb, :controller
-  alias Advisor.Core.{Questionnaire, Advice}
+  alias Advisor.{Questionnaire, Advice}
 
   plug AdvisorWeb.Authentication.Gatekeeper, only: :mentors
 
