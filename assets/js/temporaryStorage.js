@@ -18,7 +18,7 @@ export const storage = {
         answerNode.on("keyup", debounce(saveToStorage, 300));
       });
 
-      $("button[type=submit]").on("click", () => {
+      $("#submit-your-advice").on("click", () => {
         localStorage.clear();
       });
     }

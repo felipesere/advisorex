@@ -23,7 +23,7 @@
         </div>
       <% end %>
       <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
-      <button type="submit" class="button primary full">Submit your advice</button>
+      <button type="submit" class="button primary full" id="submit-your-advice">Submit your advice</button>
     </div>
   </section>
 </form>
