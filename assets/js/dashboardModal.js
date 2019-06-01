@@ -1,18 +1,18 @@
-import $ from "cash-dom";
+import {$} from './fquery';
 
 export const modal = {
   bind: selector => {
     const toggle = e => {
-      $(".modal").toggleClass("is-active");
-      $("body").toggleClass("is-active");
+      $(".modal").toggle("is-active");
+      $("body").toggle("is-active");
     };
 
     $(selector).on("click", toggle);
     $(".keep").on("click", toggle);
     $(".modal-background").on("click", toggle);
 
-    $(document).on("keyup", event => {
-      if ($(".is-active").length > 0 && event.keyCode == 27) {
+    document.addEventListener("keyup", event => {
+      if ($(".is-active").present && event.keyCode == 27) {
         toggle();
       }
     });

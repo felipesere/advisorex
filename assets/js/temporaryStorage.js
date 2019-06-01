@@ -1,18 +1,19 @@
-import $ from "cash-dom";
 import debounce from "debounce";
+import {$, grab} from './fquery';
 
 export const storage = {
   bind: selector => {
     if (localStorage) {
-      $(selector).each((idx, answer) => {
-        const answerNode = $(answer);
+      grab(selector).forEach((answerNode) => {
+        let name = answerNode.get('name')
 
-        if (localStorage[answer.name]) {
-          answerNode.text(localStorage[answer.name]);
+        if (localStorage[name]) {
+          answerNode.text = localStorage[name]
         }
 
-        const saveToStorage = () =>
-          (localStorage[answer.name] = answerNode.val());
+        const saveToStorage = () => {
+          localStorage[name] = answerNode.value()
+        };
 
         answerNode.on("keyup", debounce(saveToStorage, 300));
       });

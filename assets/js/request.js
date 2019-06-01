@@ -1,4 +1,4 @@
-import $ from 'cash-dom';
+import {$, all} from './fquery';
 
 let state = {
   questions: 0,
@@ -6,14 +6,14 @@ let state = {
   mentor: 0
 };
 
-const count = (group) => $(group + " input:checked").length;
+const count = (group) => document.querySelectorAll(group + " input:checked").length;
 
 const showNotification = (itemName, numberOfQuestions) => {
-  $(".notice").removeClass("invisible");
-  $(".notice-message").text("You have selected too many " +itemName + ": "+ numberOfQuestions);
+  $(".notice").remove("invisible");
+  $(".notice-message").text = `You have selected too many ${itemName} : ${numberOfQuestions}`;
 };
 
-const hideNotification = () => $(".notice").addClass("invisible");
+const hideNotification = () => $(".notice").add("invisible");
 
 const notification = () => {
   if ( state.questions > 5 ) {
@@ -32,28 +32,32 @@ const toggleButton = () => {
     || state.questions === 0
     || state.mentor === 0;
 
+  const advice = $(".request-advice")
+
   if(disable) {
-    $(".request-advice").addClass("disabled").prop("disabled", true);
+    advice.add("disabled");
+    advice.prop("disabled", true);
   } else {
-    $(".request-advice").removeClass("disabled").prop("disabled", false);
+    advice.remove("disabled");
+    advice.prop("disabled", false);
   }
 }
 
 export const request = {
   bind: function() {
-    $("#mentors input[type=radio]").on("click", () => {
+    all("#mentors input[type=radio]", "click", () => {
       state.mentor = count("#mentors");
       notification();
       toggleButton();
     });
 
-    $("#questions input[type=checkbox]").on("click", () => {
+    all("#questions input[type=checkbox]", "click", () => {
       state.questions = count("#questions");
       notification();
       toggleButton();
     });
 
-    $("#advisors input[type=checkbox]").on("click", () => {
+    all("#advisors input[type=checkbox]", "click", () => {
       state.advisors = count("#advisors");
       notification();
       toggleButton();

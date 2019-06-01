@@ -3,12 +3,11 @@
   "license": "MIT",
   "scripts": {
     "deploy": "npm run js && npm run css",
-    "js": "rollup --config --compact",
-    "js:watch": "rollup --config --compact --watch",
+    "js": "rollup --config",
+    "js:watch": "rollup --config --watch",
     "css": "node-sass ./css/* | postcss -o ../priv/static/css/app.css"
   },
   "dependencies": {
-    "cash-dom": "3.1.0",
     "debounce": "^1.2.0"
   },
   "devDependencies": {
@@ -17,6 +16,7 @@
     "postcss-cli": "^6.1.2",
     "rollup": "^1.12.4",
     "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-node-resolve": "^5.0.0"
+    "rollup-plugin-node-resolve": "^5.0.0",
+    "rollup-plugin-terser": "^5.0.0"
   }
 }
