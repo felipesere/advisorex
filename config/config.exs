@@ -47,6 +47,9 @@ config :advisor, Advisor.Notifications.Email.Mailer,
   adapter: Bamboo.SendgridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY")
 
+config :advisor, Advisor.Question.PhrasesCatalog,
+  path: './questions.yml'
+
 config :advisor, FeatureToggle, emails: [only: ["Felipe Seré", "Rabea Gleissner"]]
 
 # Import environment specific config. This must remain at the bottom

@@ -1,26 +1,49 @@
 defmodule Advisor.Question.PhrasesCatalog do
+  require Logger
+
   defmodule Phrase do
     defstruct [:phrase, :kind, :id]
   end
 
-  @path "lib/advisor/questions/questions.yml"
+  def start_link() do
+    questions = load()
 
-  def find(ids) do
-    all()
-    |> flatten()
-    |> Enum.filter(fn %Phrase{id: id} -> id in ids end)
+    Agent.start_link(fn() -> questions end, name: __MODULE__)
   end
 
-  def all() do
+  def load() do
     path()
+    |> log()
     |> read()
     |> extract()
   end
 
   defp path() do
     File.cwd!()
-    |> Path.join(@path)
+    |> Path.join(configured_path())
     |> String.to_charlist()
+  end
+
+  defp configured_path() do
+    :advisor
+    |> Application.get_env(Advisor.Question.PhrasesCatalog)
+    |> Keyword.get(:path)
+  end
+
+  defp log(path) do
+    Logger.info "Loading questions from: #{path}"
+
+    path
+  end
+
+  def all() do
+    Agent.get(__MODULE__, fn(questions) -> questions end)
+  end
+
+  def find(ids) do
+    all()
+    |> flatten()
+    |> Enum.filter(fn %Phrase{id: id} -> id in ids end)
   end
 
   defp read(file) do
