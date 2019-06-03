@@ -16,12 +16,6 @@ defmodule Advisor.Advice do
     )
   end
 
-  defp advice() do
-    Advice
-    |> select([ar], ar)
-    |> preload([:answers, :advisor])
-  end
-
   def from_advisor(advisor) do
     Repo.all(advice() |> where([a], a.advisor_id == ^advisor))
   end
@@ -40,5 +34,11 @@ defmodule Advisor.Advice do
 
   def completed?(%Advice{answers: answers}, number_of_answers) do
     length(answers) == number_of_answers
+  end
+
+  defp advice() do
+    Advice
+    |> select([ar], ar)
+    |> preload([:answers, :advisor])
   end
 end

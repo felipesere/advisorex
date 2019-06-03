@@ -25,8 +25,6 @@ defmodule Advisor.People do
     |> Enum.filter(but(user))
   end
 
-  defp but(user), do: fn person -> person.email != user.email end
-
   def find(id), do: find_by(id: id)
 
   def find_by(name: name), do: query_by_name(name)
@@ -41,6 +39,8 @@ defmodule Advisor.People do
   end
 
   def find_by(_), do: nil
+
+  defp but(user), do: fn person -> person.email != user.email end
 
   defp query_by_user(id), do: Repo.one(from(p in Person, where: p.id == ^id))
 
