@@ -24,34 +24,34 @@ defmodule AdvisorWeb.QuestionnaireProposal do
     %{proposal | mentee: mentee}
   end
 
-  def changeset(params) do
+  defp changeset(params) do
     %QuestionnaireProposal{}
     |> cast(params, [:mentor, :questions, :advisors, :message])
     |> apply_changes()
   end
 
-  def load_questions(%QuestionnaireProposal{questions: questions} = struct) do
+  defp load_questions(%QuestionnaireProposal{questions: questions} = struct) do
     %{struct | questions: load(questions)}
   end
 
-  def filter_advisors(%QuestionnaireProposal{advisors: advisors} = struct) do
+  defp filter_advisors(%QuestionnaireProposal{advisors: advisors} = struct) do
     %{struct | advisors: ids(advisors)}
   end
 
-  def load(questions) do
+  defp load(questions) do
     questions
     |> ids()
     |> PhrasesCatalog.find()
     |> Question.phrases()
   end
 
-  def ids(map) do
+  defp ids(map) do
     map
     |> Enum.filter(fn {_, v} -> v end)
     |> Enum.map(fn {k, _} -> parse!(k) end)
   end
 
-  def parse!(potential) do
+  defp parse!(potential) do
     case Integer.parse(potential) do
       {number, ""} -> number
       _ -> raise "Could not parse to integer"
