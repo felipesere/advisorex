@@ -10,7 +10,23 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
+Cypress.Commands.add("loginAs", (name) => {
+    cy.visit('/')
+
+    cy.contains(`Login as ${name}`).click()
+})
+
+Cypress.Commands.add("answerWith", (answers) => {
+    cy.get('.advice-question textarea').each((answerBox, i) => {
+      cy.wrap(answerBox).type(answers[i])
+    })
+})
+
+Cypress.Commands.add("openQuestionnaireFor", (name) => {
+    cy.get('.open-advice-requests').contains(name).parent().contains('Give advice now').click()
+})
+
+
 //
 //
 // -- This is a child command --

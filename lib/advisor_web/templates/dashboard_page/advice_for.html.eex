@@ -12,12 +12,12 @@
     <a class="button primary red delete">Delete</a>
   </li>
   <li>
-    <a href="<%= path_to_present(@group.questionnaire_id) %>" class="button primary green" target="_blank">
+    <a href="<%= path_to_present(@group.questionnaire_id) %>" class="button primary green">
       Present
     </a>
   </li>
   <li>
-    <a href="<%= download_summary(@group.questionnaire_id) %>" class="button primary" target="_blank">
+    <a href="<%= download_summary(@group.questionnaire_id) %>" class="button primary">
       Download CSV
     </a>
   </li>
