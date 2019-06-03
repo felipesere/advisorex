@@ -1,3 +1,7 @@
+# IDEA configuration
+.idea/
+advisor.iml
+
 # App artifacts
 /_build
 /db

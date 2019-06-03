@@ -13,11 +13,11 @@ defmodule AdvisorWeb.LandingPage do
     render(conn, "index.html", data_for(user, target))
   end
 
-  def data_for(nil, _) do
+  defp data_for(nil, _) do
     @defaults
   end
 
-  def data_for(user, target) do
+  defp data_for(user, target) do
     [
       title: "Hello #{user.name}!",
       logged_in: true,
@@ -26,5 +26,5 @@ defmodule AdvisorWeb.LandingPage do
     ]
   end
 
-  def target(conn), do: get_session(conn, :target) || "/"
+  defp target(conn), do: get_session(conn, :target) || "/"
 end

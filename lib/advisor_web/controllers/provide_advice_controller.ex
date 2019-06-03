@@ -51,7 +51,7 @@ defmodule AdvisorWeb.ProvideAdviceController do
     end
   end
 
-  def notify(questionnaire) do
+  defp notify(questionnaire) do
     if Questionnaire.completed?(questionnaire) do
       Notifications.questionnaire_completed(questionnaire)
     end

@@ -18,6 +18,22 @@ defmodule Advisor.Question.PhrasesCatalog do
     |> extract()
   end
 
+  def all() do
+    Agent.get(__MODULE__, fn(questions) -> questions end)
+  end
+
+  def find(ids) do
+    all()
+    |> flatten()
+    |> Enum.filter(fn %Phrase{id: id} -> id in ids end)
+  end
+
+  defp read(file) do
+    {:ok, content} = YamlElixir.read_from_file(file)
+
+    content
+  end
+
   defp path() do
     File.cwd!()
     |> Path.join(configured_path())
@@ -34,22 +50,6 @@ defmodule Advisor.Question.PhrasesCatalog do
     Logger.info "Loading questions from: #{path}"
 
     path
-  end
-
-  def all() do
-    Agent.get(__MODULE__, fn(questions) -> questions end)
-  end
-
-  def find(ids) do
-    all()
-    |> flatten()
-    |> Enum.filter(fn %Phrase{id: id} -> id in ids end)
-  end
-
-  defp read(file) do
-    {:ok, content} = YamlElixir.read_from_file(file)
-
-    content
   end
 
   defp extract(yaml) do

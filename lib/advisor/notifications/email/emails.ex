@@ -16,7 +16,7 @@ defmodule Advisor.Notifications.Emails do
     |> render("completed.html", data: data)
   end
 
-  def base() do
+  defp base() do
     new_email()
     |> from("advisor@8thlight.com")
     |> put_layout({AdvisorWeb.EmailView, "base"})

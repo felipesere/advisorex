@@ -17,25 +17,25 @@ defmodule AdvisorWeb.AuthenticationController do
     end
   end
 
-  def destination(conn) do
+  def logout(conn, _params) do
+    conn
+    |> configure_session(drop: true)
+    |> redirect(to: "/")
+  end
+
+  defp destination(conn) do
     conn
     |> fetch_session()
     |> get_session(:target) || "/"
   end
 
-  def proceed(nil, conn, _), do: conn |> redirect(to: "/")
+  defp proceed(nil, conn, _), do: conn |> redirect(to: "/")
 
-  def proceed(%{id: id}, conn, redirect_to: destination) do
+  defp proceed(%{id: id}, conn, redirect_to: destination) do
     conn
     |> fetch_session()
     |> clear_session()
     |> put_session(:user, "#{id}")
     |> redirect(to: destination)
-  end
-
-  def logout(conn, _params) do
-    conn
-    |> configure_session(drop: true)
-    |> redirect(to: "/")
   end
 end

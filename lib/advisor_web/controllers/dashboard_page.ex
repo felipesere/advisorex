@@ -24,12 +24,12 @@ defmodule AdvisorWeb.DashboardPage do
     |> back_to_dashboard(conn)
   end
 
-  def back_to_dashboard({:ok, _}, conn), do: redirect_with_flash(conn, :info, "Settings updated!")
+  defp back_to_dashboard({:ok, _}, conn), do: redirect_with_flash(conn, :info, "Settings updated!")
 
-  def back_to_dashboard({:error, _}, conn),
+  defp back_to_dashboard({:error, _}, conn),
     do: redirect_with_flash(conn, :error, "Sorry, something went wrong")
 
-  def redirect_with_flash(conn, status, message) do
+  defp redirect_with_flash(conn, status, message) do
     conn
     |> put_flash(status, message)
     |> redirect(to: "/dashboard")

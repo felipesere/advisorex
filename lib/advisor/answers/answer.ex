@@ -18,6 +18,8 @@ defmodule Advisor.Answer do
     params
     # this has to be better!
     |> Enum.reject(fn {key, _} -> key in @ignored_keys end)
-    |> Enum.map(fn {id, answer} -> %Answer{question_id: id, answer: answer} end)
+    |> Enum.map(&new/1)
   end
+
+  defp new({id, answer}), do: %Answer{question_id: id, answer: answer}
 end
