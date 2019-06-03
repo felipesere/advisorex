@@ -17,7 +17,7 @@ defmodule AdvisorWeb.Authentication.Gatekeeper do
     |> preload(conn, opts)
   end
 
-  def user_id(conn) do
+  defp user_id(conn) do
     conn.assigns[:user_id] || from_session(conn)
   end
 
@@ -27,24 +27,24 @@ defmodule AdvisorWeb.Authentication.Gatekeeper do
     |> get_session(:user)
   end
 
-  def preload(%Person{} = user, conn, %{only: :regular}) do
+  defp preload(%Person{} = user, conn, %{only: :regular}) do
     assign(conn, :user, user)
   end
 
-  def preload(%Person{is_mentor: true} = user, conn, %{only: :mentors}) do
+  defp preload(%Person{is_mentor: true} = user, conn, %{only: :mentors}) do
     assign(conn, :user, user)
   end
 
-  def preload(_, conn, %{redirect: false}) do
+  defp preload(_, conn, %{redirect: false}) do
     conn
   end
 
-  def preload(_, conn, _) do
+  defp preload(_, conn, _) do
     conn
     |> redirect_to_login
   end
 
-  def redirect_to_login(conn) do
+  defp redirect_to_login(conn) do
     conn
     |> preserve_original_destination
     |> redirect(to: "/")
