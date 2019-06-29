@@ -1,20 +1,12 @@
 defmodule AdvisorWeb.AuthenticationController do
   use AdvisorWeb, :controller
-
-  alias Advisor.LoginUser
-
   plug Ueberauth
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    if auth.info.urls[:website] == "8thlight.com" do
-      target = destination(conn)
+    email = auth.info.email
+    user = Advisor.People.find_by(email: email)
 
-      auth
-      |> LoginUser.find_or_create()
-      |> proceed(conn, redirect_to: target)
-    else
-      conn |> redirect(to: "/")
-    end
+    proceed(user, conn, redirect_to: destination(conn))
   end
 
   def logout(conn, _params) do

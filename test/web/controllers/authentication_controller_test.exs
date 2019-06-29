@@ -5,14 +5,15 @@ defmodule AdvisorWeb.AuthenticationControllerTest do
   alias AdvisorWeb.AuthenticationController
   alias Advisor.People
 
-  test "successful login creates user in the database", %{conn: conn} do
-    info = %Info{email: "foo@example.com", name: "Foo Example", urls: %{website: "8thlight.com"}}
+  test "successful when user found in database", %{conn: conn} do
+    conn = conn |> Plug.Test.init_test_session(target: "/far-away")
 
-    conn
-    |> assign(:ueberauth_auth, %Auth{info: info})
-    |> AuthenticationController.callback("empty-params")
+    Advisor.Test.Support.Users.with("Felipe Sere")
 
-    assert People.find_by(email: "foo@example.com")
+    assert conn
+           |> assign(:ueberauth_auth, %Auth{info: %Info{email: "felipe@example.com", name: "Foo Example"}})
+           |> AuthenticationController.callback("empty-params")
+           |> redirected_to() == "/far-away"
   end
 
   test "unsuccesful logins just bounce back to the login page", %{conn: conn} do
