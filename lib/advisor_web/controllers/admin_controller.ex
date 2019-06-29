@@ -3,10 +3,6 @@ defmodule AdvisorWeb.AdminController do
   plug AdvisorWeb.Authentication.Gatekeeper, only: :admin
 
   def create_person(conn, params) do
-    create(conn, params)
-  end
-
-  def create(conn, params) do
     case Advisor.People.create(params) do
       :ok ->
         send_resp(conn, 201, "")
@@ -26,5 +22,18 @@ defmodule AdvisorWeb.AdminController do
   def remove_person(conn, %{"email" => email}) do
     Advisor.People.delete(email: email)
     send_resp(conn, 200, "")
+  end
+
+  def update_person(%Plug.Conn{body_params: body_params} = conn, %{"email" => email}) do
+    case Advisor.People.update(email, body_params) do
+      :ok ->
+        send_resp(conn, 200, "")
+      :not_found ->
+        send_resp(conn, 404, "Not found")
+      error ->
+        conn
+        |> put_status(400)
+        |> json(validation_error(error))
+    end
   end
 end

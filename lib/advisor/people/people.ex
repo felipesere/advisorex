@@ -1,4 +1,5 @@
 defmodule Advisor.People do
+  alias Advisor.Person
   alias Advisor.Repo
   alias Advisor.Person
   import Ecto.Query
@@ -10,7 +11,7 @@ defmodule Advisor.People do
 
   def create(data) do
 
-    person = changeset(data)
+    person = changeset(data, %Person{})
 
     if person.valid? do
       Repo.insert!(person)
@@ -21,8 +22,8 @@ defmodule Advisor.People do
     end
   end
 
-  defp changeset(data) do
-    %Person{}
+  defp changeset(data, person) do
+    person
     |> cast(data, [:name, :email])
     |> validate_required([:email, :name])
     |> validate_length(:name, min: 5)
@@ -71,6 +72,24 @@ defmodule Advisor.People do
   end
 
   def delete([email: email]) do
-    from(p in Person, where: p.email == ^email) |> Repo.delete_all()
+    from(p in Person, where: p.email == ^email)
+    |> Repo.delete_all()
+  end
+
+  def update(email, params) do
+    person = find_by(email: email)
+
+    if person do
+      changes = changeset(params, person)
+
+      if changes.valid? do
+        Repo.update(changes)
+        :ok
+      else
+        changes.errors
+      end
+    else
+      :not_found
+    end
   end
 end
