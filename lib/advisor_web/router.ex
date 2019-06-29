@@ -74,5 +74,6 @@ defmodule AdvisorWeb.Router do
 
   scope "/admin", AdvisorWeb do
     post "/people", AdminController, :create_person
+    delete "/people/:email", AdminController, :remove_person
   end
 end

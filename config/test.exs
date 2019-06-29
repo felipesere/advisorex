@@ -21,3 +21,5 @@ config :advisor, Advisor.Repo,
 config :advisor, Advisor.Notifications.Email.Mailer, adapter: Bamboo.TestAdapter
 
 config :advisor, FeatureToggle, emails: true
+
+config :advisor, AdvisorWeb.AdminController, api_key: "SECRET"

@@ -50,6 +50,9 @@ config :advisor, Advisor.Notifications.Email.Mailer,
   adapter: Bamboo.SendgridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY")
 
+config :advisor, AdvisorWeb.AdminController,
+  api_key: System.get_env("ADVISOR_ADMIN_API_KEY")
+
 config :advisor, Advisor.Question.PhrasesCatalog,
   path: './questions.yml'
 

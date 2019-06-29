@@ -39,6 +39,7 @@ defmodule Advisor.People do
     |> Enum.filter(but(user))
   end
 
+  def find(%{id: id}), do: find_by(id: id)
   def find(id), do: find_by(id: id)
 
   def find_by(name: name), do: query_by_name(name)
@@ -67,5 +68,9 @@ defmodule Advisor.People do
       {id, ""} -> id
       _ -> :bad_parse
     end
+  end
+
+  def delete([email: email]) do
+    from(p in Person, where: p.email == ^email) |> Repo.delete_all()
   end
 end
