@@ -1,7 +1,7 @@
 defmodule Advisor.Questionnaire.CreatorTest do
   use Advisor.DataCase
   alias Advisor.Questionnaire.Creator
-  alias AdvisorWeb.QuestionnaireProposal
+  alias AdvisorWeb.DraftQuestionnaire
   alias Advisor.Test.Support.Users
 
   test "creates a simple questionnaire" do
@@ -10,7 +10,7 @@ defmodule Advisor.Questionnaire.CreatorTest do
 
     phrases = ["first question", "second question"]
 
-    proposal = %QuestionnaireProposal{
+    draft = %DraftQuestionnaire{
       mentor: felipe.id,
       mentee: rabea.id,
       advisors: [cj.id, priya.id],
@@ -18,7 +18,7 @@ defmodule Advisor.Questionnaire.CreatorTest do
       message: "bla"
     }
 
-    created = Creator.create(proposal)
+    created = Creator.create(draft)
 
     assert Enum.map(created.advice, & &1.advisor.id) == [cj.id, priya.id]
     assert created.message == "bla"
@@ -28,14 +28,14 @@ defmodule Advisor.Questionnaire.CreatorTest do
   test "message is optional" do
     [felipe, rabea, cj] = Users.with(["Felipe Sere", "Rabea Gleissner", "Chris Jordan"])
 
-    proposal = %QuestionnaireProposal{
+    draft = %DraftQuestionnaire{
       mentor: felipe.id,
       mentee: rabea.id,
       advisors: [cj.id],
       questions: []
     }
 
-    created = Creator.create(proposal)
+    created = Creator.create(draft)
 
     assert created.message == nil
   end

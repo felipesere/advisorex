@@ -1,11 +1,11 @@
-defmodule AdvisorWeb.QuestionnaireProposal do
+defmodule AdvisorWeb.DraftQuestionnaire do
   import Ecto.Changeset
   use Ecto.Schema
   alias Advisor.Question
   alias Advisor.Question.PhrasesCatalog
   alias __MODULE__
 
-  schema "proposal" do
+  schema "draft" do
     field(:mentor, :integer)
     field(:mentee, :integer)
     field(:questions, {:map, :boolean})
@@ -13,28 +13,28 @@ defmodule AdvisorWeb.QuestionnaireProposal do
     field(:message, :string)
   end
 
-  def from_params(%{"proposal" => proposal}) do
-    proposal
+  def from_params(%{"draft" => draft}) do
+    draft
     |> changeset()
     |> load_questions()
     |> filter_advisors()
   end
 
-  def for_mentee(proposal, %{id: mentee}) do
-    %{proposal | mentee: mentee}
+  def for_mentee(draft, %{id: mentee}) do
+    %{draft | mentee: mentee}
   end
 
   defp changeset(params) do
-    %QuestionnaireProposal{}
+    %DraftQuestionnaire{}
     |> cast(params, [:mentor, :questions, :advisors, :message])
     |> apply_changes()
   end
 
-  defp load_questions(%QuestionnaireProposal{questions: questions} = struct) do
+  defp load_questions(%DraftQuestionnaire{questions: questions} = struct) do
     %{struct | questions: load(questions)}
   end
 
-  defp filter_advisors(%QuestionnaireProposal{advisors: advisors} = struct) do
+  defp filter_advisors(%DraftQuestionnaire{advisors: advisors} = struct) do
     %{struct | advisors: ids(advisors)}
   end
 

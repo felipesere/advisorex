@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.AdviceRequestController do
   use AdvisorWeb, :controller
-  alias AdvisorWeb.QuestionnaireProposal
+  alias AdvisorWeb.DraftQuestionnaire
   alias Advisor.Questionnaire.Creator
   alias Advisor.Notifications
   alias AdvisorWeb.Authentication.User
@@ -10,8 +10,8 @@ defmodule AdvisorWeb.AdviceRequestController do
   def create(conn, params) do
     questionnaire =
       params
-      |> QuestionnaireProposal.from_params()
-      |> QuestionnaireProposal.for_mentee(User.found_in(conn))
+      |> DraftQuestionnaire.from_params()
+      |> DraftQuestionnaire.for_mentee(User.found_in(conn))
       |> Creator.create()
 
     Notifications.about_new_questionnaire(questionnaire)

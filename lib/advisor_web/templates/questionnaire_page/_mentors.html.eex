@@ -1,7 +1,7 @@
   <ul id="mentors" class="people-grid">
     <%= for person <- @leads do %>
     <li class="advisor-grid-tile">
-      <%= label @form, :mentor, [for: "proposal_mentor_#{person.id}", class: "advisor-label"] do %>
+      <%= label @form, :mentor, [for: "draft_mentor_#{person.id}", class: "advisor-label"] do %>
         <%= radio_button(@form ,:mentor, person.id) %>
         <div class="advisor-image" style="background-image: url(<%= person.profile_image %>);" >
         </div>

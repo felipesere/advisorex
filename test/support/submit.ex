@@ -5,14 +5,14 @@ defmodule Submit do
   @endpoint AdvisorWeb.Endpoint
 
   def questionnaire(conn, asking: asking, mentor: mentor, questions: questions) do
-    proposal = %{
+    draft = %{
       :mentor => mentor.id,
       :advisors => Enum.into(asking, %{}, &as_true/1),
       :questions => Enum.into(questions, %{}, &as_true/1)
     }
 
     conn
-    |> post("/request", proposal: proposal)
+    |> post("/request", draft: draft)
     |> html_response(200)
   end
 
