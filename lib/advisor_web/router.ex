@@ -71,4 +71,8 @@ defmodule AdvisorWeb.Router do
     get "/login", AuthenticationController, :login
     get "/callback", AuthenticationController, :callback
   end
+
+  scope "/admin", AdvisorWeb do
+    post "/people", AdminController, :create_person
+  end
 end

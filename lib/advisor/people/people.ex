@@ -9,11 +9,25 @@ defmodule Advisor.People do
   end
 
   def create(data) do
+
+    person = changeset(data)
+
+    if person.valid? do
+      Repo.insert!(person)
+
+      :ok
+    else
+      person.errors
+    end
+  end
+
+  defp changeset(data) do
     %Person{}
     |> cast(data, [:name, :email])
+    |> validate_required([:email, :name])
+    |> validate_length(:name, min: 5)
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
-    |> Repo.insert!()
   end
 
   def everybody(), do: Repo.all(from(p in Person, order_by: p.name))
