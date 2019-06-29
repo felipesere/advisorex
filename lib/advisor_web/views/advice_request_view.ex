@@ -1,4 +1,4 @@
-defmodule AdvisorWeb.AdviceRequestView do
+defmodule AdvisorWeb.DraftQuestionnaireView do
   use AdvisorWeb, :view
 
   def provide_advice(%{questionnaire_id: id}),

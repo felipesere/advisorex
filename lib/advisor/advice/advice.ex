@@ -11,7 +11,7 @@ defmodule Advisor.Advice do
     belongs_to(:advisor, Advisor.Person, foreign_key: :advisor_id)
 
     has_many(:answers, Advisor.Answer,
-      foreign_key: :advice_request_id,
+      foreign_key: :advice_id,
       on_delete: :delete_all
     )
   end

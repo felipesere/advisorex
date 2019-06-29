@@ -8,7 +8,7 @@ defmodule Advisor.Answer do
   @only_created_at [updated_at: false]
 
   schema "answers" do
-    field(:advice_request_id, :binary_id)
+    field(:advice_id, :binary_id)
     field(:question_id, :binary)
     field(:answer, :string)
     timestamps(@only_created_at)

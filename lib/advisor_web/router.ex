@@ -31,7 +31,7 @@ defmodule AdvisorWeb.Router do
 
     # submit the questionnaire you want to create
     # Lol this needs renaming
-    post "/request", AdviceRequestController, :create
+    post "/request", DraftQuestionnaireController, :create
 
     # view the status of a questionnaire, who are we waiting for and who is done
     get "/progress/:id", ProgressPage, :index

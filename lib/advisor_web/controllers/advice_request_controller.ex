@@ -1,4 +1,4 @@
-defmodule AdvisorWeb.AdviceRequestController do
+defmodule AdvisorWeb.DraftQuestionnaireController do
   use AdvisorWeb, :controller
   alias AdvisorWeb.DraftQuestionnaire
   alias Advisor.Questionnaire.Creator

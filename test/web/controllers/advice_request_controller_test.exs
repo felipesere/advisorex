@@ -1,4 +1,4 @@
-defmodule AdvisorWeb.AdviceRequestControllerTest do
+defmodule AdvisorWeb.DraftQuestionnaireControllerTest do
   use AdvisorWeb.ConnCase
   alias Advisor.Test.Support.Users
   alias PageAssertions, as: It

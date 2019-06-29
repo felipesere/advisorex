@@ -41,7 +41,7 @@ defmodule AdvisorWeb.PresentPage do
       %{
         question_id: answer.question_id,
         answer_phrase: answer.answer,
-        person: advisors[answer.advice_request_id]
+        person: advisors[answer.advice_id]
       }
     end)
   end
