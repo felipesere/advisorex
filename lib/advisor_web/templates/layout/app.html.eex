@@ -5,11 +5,11 @@
     <title>Advisor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
-    <link rel="icon" type="image/png" href="https://8thlight.com/images/logos/logo-color-f66c53fd.png">
+    <link rel="icon" type="image/png" href="<%= Brand.icon() %>">
   </head>
   <body>
     <header class="top">
-      <a href="/"><img class="logo" src="https://8thlight.com/images/branding/8th-Light-Logo-Color-No-Text-28048670.png" alt="8th Light logo" /></a>
+      <a href="/"><img class="logo" src="<%= Brand.logo() %>" alt="<%= Brand.logo_alt() %>" /></a>
     </header>
 
     <%= render @view_module, @view_template, assigns %>
