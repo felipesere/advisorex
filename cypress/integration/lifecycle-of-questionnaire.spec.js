@@ -1,4 +1,4 @@
-describe('Creating a new questionnaire', () => {
+describe('Lifecycle of a questionnaire', () => {
   const goToYourDashboard = () => {
     cy.contains('Go to your Dashboard').click()
   }
