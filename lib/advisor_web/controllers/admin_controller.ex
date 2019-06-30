@@ -43,7 +43,19 @@ defmodule AdvisorWeb.AdminController do
     advisor = Advisor.People.find_by(email: email)
 
     if advisor do
-      Advisor.Questionnaire.update(id, advisor: advisor)
+      Advisor.Questionnaire.add_advisor(id, advisor: advisor)
+
+      send_resp(conn, 200, "")
+    else
+      send_resp(conn, 404, "")
+    end
+  end
+
+  def remove_advisor(conn, %{"id" => id, "email" => email}) do
+    advisor = Advisor.People.find_by(email: email)
+
+    if advisor do
+      Advisor.Questionnaire.remove_advisor(id, advisor: advisor)
 
       send_resp(conn, 200, "")
     else

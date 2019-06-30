@@ -80,5 +80,6 @@ defmodule AdvisorWeb.Router do
 
     get "/questionnaires", AdminController, :show_questionnaires
     post "/questionnaires/:id/advisors/:email", AdminController, :add_advisor
+    delete "/questionnaires/:id/advisors/:email", AdminController, :remove_advisor
   end
 end

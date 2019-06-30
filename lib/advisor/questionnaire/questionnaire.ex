@@ -13,9 +13,12 @@ defmodule Advisor.Questionnaire do
 
     field(:message, :string)
 
-    has_many(:advice, Advisor.Advice,
+    has_many(
+      :advice,
+      Advisor.Advice,
       foreign_key: :questionnaire_id,
-      on_delete: :delete_all
+      on_delete: :delete_all,
+      on_replace: :delete
     )
 
     has_many(:questions, Advisor.Question)
@@ -35,7 +38,10 @@ defmodule Advisor.Questionnaire do
   end
 
   def all_for_mentor(mentor_id) do
-    Repo.all(questionnaire() |> where([q], q.mentor_id == ^mentor_id))
+    Repo.all(
+      questionnaire()
+      |> where([q], q.mentor_id == ^mentor_id)
+    )
   end
 
   def questions(id) do
@@ -45,42 +51,63 @@ defmodule Advisor.Questionnaire do
   end
 
   def with_mentee(person) do
-    Repo.one(questionnaire() |> where([q], q.mentee_id == ^person))
+    Repo.one(
+      questionnaire()
+      |> where([q], q.mentee_id == ^person)
+    )
   end
 
   def find(%Questionnaire{id: id}), do: find(id)
   def find(%{questionnaire_id: id}), do: find(id)
 
   def find(id) do
-    Repo.one(questionnaire() |> where([q], q.id == ^id))
+    Repo.one(
+      questionnaire()
+      |> where([q], q.id == ^id)
+    )
   end
 
   def delete(id) do
     Repo.delete_all(from(q in Questionnaire, where: q.id == ^id))
   end
 
-  def update(id, [advisor: person]) do
+  def add_advisor(id, [advisor: person]) do
     questionnaire = find(id)
     Advisor.Advice.by(person, questionnaire: questionnaire)
   end
 
-  def create(%{
-        mentor: mentor_id,
-        mentee: mentee_id,
-        message: m,
-        questions: phrases,
-        advisors: advisors
-      }) do
+  def remove_advisor(id, [advisor: person]) do
+    questionnaire = find(id)
+
+    new_advisors = Enum.reject(questionnaire.advice, fn a -> a.advisor.id == person.id end)
+
+    questionnaire
+    |> Ecto.Changeset.change()
+    |> Ecto.Changeset.put_assoc(:advice, new_advisors)
+    |> Repo.update!()
+  end
+
+  def create(
+        %{
+          mentor: mentor_id,
+          mentee: mentee_id,
+          message: m,
+          questions: phrases,
+          advisors: advisors
+        }
+      ) do
     questions = Enum.map(phrases, fn p -> %Question{phrase: p} end)
     advice = Enum.map(advisors, fn advisor -> %Advice{advisor_id: advisor} end)
 
-    Repo.insert!(%Questionnaire{
-      mentor_id: mentor_id,
-      mentee_id: mentee_id,
-      message: m,
-      questions: questions,
-      advice: advice
-    })
+    Repo.insert!(
+      %Questionnaire{
+        mentor_id: mentor_id,
+        mentee_id: mentee_id,
+        message: m,
+        questions: questions,
+        advice: advice
+      }
+    )
   end
 
   def completed?(%Questionnaire{advice: advice, questions: questions}) do

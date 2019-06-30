@@ -47,6 +47,11 @@ defmodule Mix.Tasks.Advisor do
     IO.puts "Done"
   end
 
+  def handle(["update", "questionnaire", id, "remove", email | _ ], opts) do
+    {:ok, _} = request(:delete, "/admin/questionnaires/#{id}/advisors/#{email}", opts)
+    IO.puts "Done"
+  end
+
   def request(verb, resource, opts) do
     base = base(opts)
     body = body_of(opts)

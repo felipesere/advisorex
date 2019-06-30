@@ -86,6 +86,24 @@ defmodule AdvisorWeb.AdminControllerTest do
     assert Advisor.Questionnaire.find(questionnaire) |> advisors() == ["Priya Patil", "Sarah Johnston", uku.name]
   end
 
+  test "can remove advisors from a questionnaire", %{conn: conn} do
+    sarah = Users.with("Sarah Johnston")
+
+    questionnaire = Sample.questionnaire(
+      mentor: "Felipe Sere",
+      mentee: "Rabea Gleissner",
+      advisors: ["Priya Patil", "Sarah Johnston"]
+    )
+
+    conn =
+      conn
+      |> put_req_header("authorization", "Bearer SECRET")
+      |> delete("/admin/questionnaires/#{questionnaire.id}/advisors/#{sarah.email}")
+
+    assert response(conn, 200)
+    assert Advisor.Questionnaire.find(questionnaire) |> advisors() == ["Priya Patil"]
+  end
+
   def advisors(q) do
     Enum.map(q.advice, fn a -> a.advisor.name end)
   end
