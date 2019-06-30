@@ -9,11 +9,11 @@ defmodule Mix.Tasks.Advisor do
   def run(params) do
     {:ok, _} = Application.ensure_all_started(:hackney)
 
-    handle(params, :prod)
+    handle(params, [to: :prod])
   end
 
   def handle(["--local" | rest], _) do
-    handle(rest, :local)
+    handle(rest, [to: :local])
   end
 
   def handle(["show", "questionnaires" | _], opts) do
@@ -32,10 +32,22 @@ defmodule Mix.Tasks.Advisor do
     IO.puts "Done"
   end
 
+  def handle(["create", "person" | params], opts) do
+    person =
+      params
+      |> Enum.chunk_every(2)
+      |> Enum.into(%{}, fn [field, value] -> {String.replace(field, "--", ""), value} end)
+
+    {:ok, _} = request(:post, "/admin/people", [{:payload, person} | opts])
+    IO.puts "created"
+  end
+
   def request(verb, resource, opts) do
     base = base(opts)
+    body = body_of(opts)
+           |> IO.inspect
 
-    {:ok, status, _, client_ref} = :hackney.request(verb, base <> resource, headers())
+    {:ok, status, _, client_ref} = :hackney.request(verb, base <> resource, headers(opts), body, [])
 
     case status do
       401 -> {:error, :unauthorized}
@@ -45,8 +57,19 @@ defmodule Mix.Tasks.Advisor do
 
   end
 
-  def base(:prod), do: @prod
-  def base(:local), do: @local
+  def base(opts) do
+    case Keyword.fetch!(opts, :to) do
+      :prod -> @prod
+      :local -> @local
+    end
+  end
+
+  def body_of(opts) do
+    case Keyword.get(opts, :payload) do
+      nil -> []
+      {:ok, data} -> Jason.encode!(data)
+    end
+  end
 
   def read_body(client) do
     with {:ok, body} <- :hackney.body(client),
@@ -58,8 +81,20 @@ defmodule Mix.Tasks.Advisor do
     end
   end
 
-  def headers() do
+  def headers(opts), do: auth() ++ content_type(opts)
+
+  defp auth() do
     token = System.get_env("ADVISOR_ADMIN_API_KEY")
     [{"Authorization", "Bearer #{token}"}]
+  end
+
+  defp content_type(opts) do
+    has_payload = Keyword.get(opts, :payload)
+
+    if has_payload do
+      [{"Content-Type", "application/json"}]
+    else
+      []
+    end
   end
 end
