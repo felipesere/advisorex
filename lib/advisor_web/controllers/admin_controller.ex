@@ -44,8 +44,21 @@ defmodule AdvisorWeb.AdminController do
     |> json(simplify(Advisor.Questionnaire.all()))
   end
 
+  def show_people(conn, _params) do
+    conn
+    |> json(simplify(Advisor.People.everybody()))
+  end
+
+  defp simplify(%Advisor.Questionnaire{} = q) do
+    %{mentee: q.mentee.name, mentor: q.mentor.name, id: q.id, advisors: advisors(q)}
+  end
+
+  defp simplify(%Advisor.Person{} = p) do
+    %{name: p.name, email: p.email, is_mentor: p.is_mentor}
+  end
+
   defp simplify(data) do
-    Enum.map(data, fn q -> %{mentee: q.mentee.name, mentor: q.mentor.name, id: q.id, advisors: advisors(q)} end)
+    Enum.map(data, &simplify/1)
   end
 
   def advisors(questionnarie) do

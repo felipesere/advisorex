@@ -22,6 +22,11 @@ defmodule Mix.Tasks.Advisor do
     Scribe.print(questionnaires, data: ["id", "mentor", "mentee", {"advisors", fn %{"advisors" => a} -> Enum.join(a, ", ") end}])
   end
 
+  def handle(["show", "people" | _], opts) do
+    {:ok, people} = request(:get, "/admin/people", opts)
+    Scribe.print(people, data: ["name", "email", "is_mentor"])
+  end
+
   def handle(["delete", "person", email | _], opts) do
     {:ok, _} = request(:delete, "/admin/people/#{email}", opts)
     IO.puts "Done"
