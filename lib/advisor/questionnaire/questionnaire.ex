@@ -27,6 +27,13 @@ defmodule Advisor.Questionnaire do
     |> preload([:advice, [advice: [:answers, :advisor]], :mentee, :mentor, :questions])
   end
 
+  def all() do
+    Questionnaire
+    |> select([:id, :mentor_id, :mentee_id])
+    |> preload([:mentee, :mentor])
+    |> Repo.all()
+  end
+
   def all_for_mentor(mentor_id) do
     Repo.all(questionnaire() |> where([q], q.mentor_id == ^mentor_id))
   end

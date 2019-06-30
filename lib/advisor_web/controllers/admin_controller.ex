@@ -36,4 +36,11 @@ defmodule AdvisorWeb.AdminController do
         |> json(validation_error(error))
     end
   end
+
+  def show_questionnaires(conn, _params) do
+    conn
+    |> json(simplify(Advisor.Questionnaire.all()))
+  end
+
+  defp simplify(data), do: Enum.map(data, fn q -> %{mentee: q.mentee.name, mentor: q.mentor.name, id: q.id} end)
 end

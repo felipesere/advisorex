@@ -1,5 +1,6 @@
 defmodule AdvisorWeb.AdminControllerTest do
   alias Advisor.Test.Support.Users
+  alias Advisor.Test.Support.Sample
   use AdvisorWeb.ConnCase
   alias Advisor.People
 
@@ -41,6 +42,30 @@ defmodule AdvisorWeb.AdminControllerTest do
     |> delete("/admin/people/#{felipe.email}")
 
     refute People.find(felipe)
+  end
+
+  test "can list existing questionnaires", %{conn: conn} do
+    Sample.questionnaire(
+      mentor: "Felipe Sere",
+      mentee: "Rabea Gleissner",
+      advisors: ["Priya Patil", "Sarah Johnston"]
+    )
+
+    Sample.questionnaire(
+      mentor: "Uku Taht",
+      mentee: "Chris Jordan",
+      advisors: ["Nick Dyer", "Jim Suchy"]
+    )
+
+    conn =
+      conn
+      |> put_req_header("authorization", "Bearer SECRET")
+      |> get("/admin/questionnaires")
+
+    assert [
+             %{"id" => _, "mentee" => "Rabea Gleissner", "mentor" => "Felipe Sere"},
+             %{"id" => _, "mentee" => "Chris Jordan", "mentor" => "Uku Taht"}
+           ] = json_response(conn, 200)
   end
 
   test "failures are reported", %{conn: conn} do
