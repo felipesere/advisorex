@@ -55,7 +55,6 @@ defmodule Mix.Tasks.Advisor do
   def request(verb, resource, opts) do
     base = base(opts)
     body = body_of(opts)
-           |> IO.inspect
 
     {:ok, status, _, client_ref} = :hackney.request(verb, base <> resource, headers(opts), body, [])
 
