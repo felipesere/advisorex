@@ -63,8 +63,8 @@ defmodule AdvisorWeb.AdminControllerTest do
       |> get("/admin/questionnaires")
 
     assert [
-             %{"id" => _, "mentee" => "Rabea Gleissner", "mentor" => "Felipe Sere"},
-             %{"id" => _, "mentee" => "Chris Jordan", "mentor" => "Uku Taht"}
+             %{"id" => _, "mentee" => "Rabea Gleissner", "mentor" => "Felipe Sere", "advisors" => ["Priya Patil", "Sarah Johnston"]},
+             %{"id" => _, "mentee" => "Chris Jordan", "mentor" => "Uku Taht", "advisors" => ["Nick Dyer", "Jim Suchy"]}
            ] = json_response(conn, 200)
   end
 

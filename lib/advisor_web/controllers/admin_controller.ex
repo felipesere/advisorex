@@ -20,8 +20,10 @@ defmodule AdvisorWeb.AdminController do
   defp field_and_reason({field, {reason, _}}), do: {field, reason}
 
   def remove_person(conn, %{"email" => email}) do
-    Advisor.People.delete(email: email)
-    send_resp(conn, 200, "")
+    case Advisor.People.delete(email: email) do
+      {0, _} -> send_resp(conn, 404, "Not found")
+      {1, _} -> send_resp(conn, 200, "Deleted")
+    end
   end
 
   def update_person(%Plug.Conn{body_params: body_params} = conn, %{"email" => email}) do
@@ -42,5 +44,11 @@ defmodule AdvisorWeb.AdminController do
     |> json(simplify(Advisor.Questionnaire.all()))
   end
 
-  defp simplify(data), do: Enum.map(data, fn q -> %{mentee: q.mentee.name, mentor: q.mentor.name, id: q.id} end)
+  defp simplify(data) do
+    Enum.map(data, fn q -> %{mentee: q.mentee.name, mentor: q.mentor.name, id: q.id, advisors: advisors(q)} end)
+  end
+
+  def advisors(questionnarie) do
+    Enum.map(questionnarie.advice, fn a -> a.advisor.name end)
+  end
 end

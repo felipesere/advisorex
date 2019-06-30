@@ -30,7 +30,7 @@ defmodule Advisor.Questionnaire do
   def all() do
     Questionnaire
     |> select([:id, :mentor_id, :mentee_id])
-    |> preload([:mentee, :mentor])
+    |> preload([:advice, [advice: [:advisor]], :mentee, :mentor])
     |> Repo.all()
   end
 

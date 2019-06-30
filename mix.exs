@@ -11,7 +11,9 @@ defmodule Advisor.Mixfile do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      test_coverage: [tool: ExCoveralls]
+      test_coverage: [
+        tool: ExCoveralls
+      ]
     ]
   end
 
@@ -37,6 +39,7 @@ defmodule Advisor.Mixfile do
       {:apex, "~> 1.0"},
       {:csv, "~> 2.0"},
       {:ecto_sql, "~> 3.0"},
+      {:hackney, "~> 1.15"},
       {:jason, "~> 1.1.0"},
       {:phoenix, "~> 1.4.1"},
       {:phoenix_ecto, "~> 4.0"},
@@ -46,6 +49,7 @@ defmodule Advisor.Mixfile do
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
       {:poison, "~> 3.0"},
+      {:scribe, "~> 0.10.0"},
       {:yaml_elixir, "~> 2.1"},
       {:ueberauth_google, "~> 0.8.0"},
       {:ueberauth, "~> 0.6.1"},
