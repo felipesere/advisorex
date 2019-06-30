@@ -68,6 +68,28 @@ defmodule AdvisorWeb.AdminControllerTest do
            ] = json_response(conn, 200)
   end
 
+  test "can add new advisors to a questionnaire", %{conn: conn} do
+    questionnaire = Sample.questionnaire(
+      mentor: "Felipe Sere",
+      mentee: "Rabea Gleissner",
+      advisors: ["Priya Patil", "Sarah Johnston"]
+    )
+
+    uku = Users.with("Uku Taht")
+
+    conn =
+      conn
+      |> put_req_header("authorization", "Bearer SECRET")
+      |> post("/admin/questionnaires/#{questionnaire.id}/advisors/#{uku.email}")
+
+    assert response(conn, 200)
+    assert Advisor.Questionnaire.find(questionnaire) |> advisors() == ["Priya Patil", "Sarah Johnston", uku.name]
+  end
+
+  def advisors(q) do
+    Enum.map(q.advice, fn a -> a.advisor.name end)
+  end
+
   test "failures are reported", %{conn: conn} do
     response = conn
                |> put_req_header("authorization", "Bearer SECRET")

@@ -59,6 +59,11 @@ defmodule Advisor.Questionnaire do
     Repo.delete_all(from(q in Questionnaire, where: q.id == ^id))
   end
 
+  def update(id, [advisor: person]) do
+    questionnaire = find(id)
+    Advisor.Advice.by(person, questionnaire: questionnaire)
+  end
+
   def create(%{
         mentor: mentor_id,
         mentee: mentee_id,

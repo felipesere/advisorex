@@ -41,4 +41,9 @@ defmodule Advisor.Advice do
     |> select([ar], ar)
     |> preload([:answers, :advisor])
   end
+
+  def by(person, [questionnaire: q]) do
+    %Advice{advisor_id: person.id, questionnaire_id: q.id}
+    |> Repo.insert!()
+  end
 end

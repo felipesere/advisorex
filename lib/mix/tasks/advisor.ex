@@ -42,6 +42,11 @@ defmodule Mix.Tasks.Advisor do
     IO.puts "created"
   end
 
+  def handle(["update", "questionnaire", id, "add", email | _ ], opts) do
+    {:ok, _} = request(:post, "/admin/questionnaires/#{id}/advisors/#{email}", opts)
+    IO.puts "Done"
+  end
+
   def request(verb, resource, opts) do
     base = base(opts)
     body = body_of(opts)

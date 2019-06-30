@@ -39,6 +39,18 @@ defmodule AdvisorWeb.AdminController do
     end
   end
 
+  def add_advisor(conn, %{"id" => id, "email" => email}) do
+    advisor = Advisor.People.find_by(email: email)
+
+    if advisor do
+      Advisor.Questionnaire.update(id, advisor: advisor)
+
+      send_resp(conn, 200, "")
+    else
+      send_resp(conn, 404, "")
+    end
+  end
+
   def show_questionnaires(conn, _params) do
     conn
     |> json(simplify(Advisor.Questionnaire.all()))

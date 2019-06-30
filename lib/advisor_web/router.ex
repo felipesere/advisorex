@@ -79,5 +79,6 @@ defmodule AdvisorWeb.Router do
     delete "/people/:email", AdminController, :remove_person
 
     get "/questionnaires", AdminController, :show_questionnaires
+    post "/questionnaires/:id/advisors/:email", AdminController, :add_advisor
   end
 end
