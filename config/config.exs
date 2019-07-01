@@ -47,7 +47,7 @@ config :advisor, Advisor.Notifications.Emails,
   source_email: "advisor@8thlight.com"
 
 config :advisor, Advisor.Notifications.Email.Mailer,
-  adapter: Bamboo.SendgridAdapter,
+  adapter: Bamboo.SendGridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY")
 
 config :advisor, AdvisorWeb.AdminController,
