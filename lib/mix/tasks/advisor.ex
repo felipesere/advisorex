@@ -52,6 +52,10 @@ defmodule Mix.Tasks.Advisor do
     IO.puts "Done"
   end
 
+  def handle(args, _) do
+    IO.puts "Unknown command: " <> Enum.join(args, " ")
+  end
+
   def request(verb, resource, opts) do
     base = base(opts)
     body = body_of(opts)
@@ -76,7 +80,7 @@ defmodule Mix.Tasks.Advisor do
   def body_of(opts) do
     case Keyword.get(opts, :payload) do
       nil -> []
-      {:ok, data} -> Jason.encode!(data)
+      data -> Jason.encode!(data)
     end
   end
 
