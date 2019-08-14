@@ -16,15 +16,18 @@ defmodule Advisor.Repo.Migrations.QuestionsKnowTheQuestionnaire do
 
     from(q in "questions", select: [:id])
     |> Repo.all()
-    |> Enum.map(fn %{id: question_id} ->
-      %{questionnaire_id: questionnaire_id} =
-        Enum.find(relations, fn %{question_id: id} -> id == question_id end)
+    |> Enum.each(fn %{id: question_id} ->
+      found = Enum.find(relations, fn %{question_id: id} -> id == question_id end)
 
-      from(q in "questions",
-        where: q.id == ^question_id,
-        update: [set: [questionnaire_id: ^questionnaire_id]]
-      )
+      if found do
+        %{questionnaire_id: questionnaire_id}  = found
+
+        from(q in "questions",
+          where: q.id == ^question_id,
+          update: [set: [questionnaire_id: ^questionnaire_id]]
+        )
       |> Repo.update_all([])
+      end
     end)
 
     drop(table(:questionnaire_to_question))
