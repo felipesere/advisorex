@@ -23,6 +23,6 @@
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-node-resolve": "^5.0.1",
     "rollup-plugin-terser": "^5.0.0",
-    "backstopjs": "^3.8.8"
+    "backstopjs": "4.0.3"
   }
 }
