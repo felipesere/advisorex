@@ -37,7 +37,7 @@
     "html_report": "vendor/backstop_data/html_report",
     "ci_report": "vendor/backstop_data/ci_report"
   },
-  "report": ["browser"],
+  "report": [],
   "engine": "chrome",
   "engineFlags": [],
   "delay": 1000,

@@ -35,10 +35,8 @@ const toggleButton = () => {
   const advice = $("#ask-for-advice")
 
   if(disable) {
-    advice.add("disabled");
     advice.disabled(true);
   } else {
-    advice.remove("disabled");
     advice.disabled(false);
   }
 }

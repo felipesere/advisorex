@@ -1,12 +1,48 @@
-<section class="module">
-  <header class="module-header medium-header">
-    Your mentees:
-  </header>
-  <ul class="groups-advice-section">
-    <%= for group  <- @section.groups do %>
-      <li class="row groups-advice">
-        <%= render "advice_for.html", group: group %>
-      </li>
-    <% end %>
-  </ul>
+<section class="center-l wider">
+  <h2>Your mentees:</h2>
+  <table class="row-based">
+    <thead class="vh">
+      <tr>
+        <td>Mentee</td>
+        <td>Advisors</td>
+        <td>Actions</td>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for group  <- @section.groups do %>
+        <tr>
+          <td><%= group.mentee.name %></td>
+          <td>
+            <div class="row">
+            <%= for person <- group.advisors do %>
+              <div class="small-circle">
+                <div class="frame">
+                  <img class="circle" src="<%= person.profile_image %>">
+                </div>
+              </div>
+            <% end %>
+            </div>
+          </td>
+          </td>
+          <td>
+            <ul class="row">
+              <li>
+                <%= render "_delete_modal.html", questionnaire_id: group.questionnaire_id %>
+                <a class="button primary red delete">Delete</a>
+              </li>
+              <li>
+                <a href="<%= path_to_present(group.questionnaire_id) %>" class="button primary green">
+                  Present
+                </a>
+              </li>
+              <li>
+                <a href="<%= download_summary(group.questionnaire_id) %>" class="button primary">
+                  Download CSV
+                </a>
+              </li>
+            </ul>
+          </td>
+        <% end %>
+    </tbody>
+  </table>
 </section>

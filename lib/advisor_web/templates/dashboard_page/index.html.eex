@@ -1,7 +1,5 @@
-<section class="module center">
-  <header class="module-header">
-    <h1>Hello <%= @user.name %>!</h1>
-  </header>
+<section class="center-l">
+  <h1>Hello <%= @user.name %>!</h1>
 
   <%= if ! @dashboard.existing_questionnaire do %>
     <a href="/request" class="button primary">Request advice for yourself</a>
@@ -9,66 +7,80 @@
 </section>
 
 <%= if @user.is_mentor && has_advice(@dashboard) do %>
+  <hr />
   <%= render "_mentor_section.html", section: @dashboard.mentor_section %>
 <% end %>
 
 <%= if needs_to_give_advice(@dashboard) do %>
-  <hr class="separator" />
+  <hr />
 
-  <section class="module">
-    <header class="module-header medium-header">
-      These people are still awaiting your advice:
-    </header>
+  <section class="center-l">
+    <h2>These people are still awaiting your advice:</h2>
 
-    <ul class="row" >
+    <div class="people-grid">
       <%= for advice <- @dashboard.required_advice_section do %>
         <%= render "dashboard_mentee.html", advice: advice %>
       <% end %>
-    </ul>
+    </div>
   </section>
 <% end %>
 
 <%= if awaiting_advice(@dashboard) do %>
-  <hr class="separator" />
+  <hr />
 
-  <section class="module">
-    <header class="module-header medium-header">
-      Status of your own request for advice:
-    </header>
+  <section class="center-l">
+    <h2>Status of your own request for advice:</h2>
 
-    <ul class="row">
+    <div class="people-grid">
       <%= for advice <- @dashboard.personal_advice_section do %>
-        <li class="status-of-my-advisors">
-          <img class="profile-image <%= completed?(advice) %>"  src="<%= advice.advisor.profile_image %>">
+        <div>
+          <div class="frame">
+            <img class="<%= completed?(advice) %>"  src="<%= advice.advisor.profile_image %>">
+          </div>
           <p><%= advice.advisor.name %></p>
           <p><%= completed?(advice) %></p>
-        </li>
+        </div>
       <% end %>
-    </ul>
+    </div>
   </section>
 <% end %>
 
-<hr class="separator" />
+<hr />
 
 <% info = get_flash(@conn, :info) %>
 <% error = get_flash(@conn, :error) %>
-<div class="flash-notification" role="alert"><%= if info, do: info, else: error %></div>
-<section class="module">
-  <header class="module-header medium-header">
-    Your settings:
-  </header>
-  <%= form_for @update_user, "/dashboard/settings", [method: "post", class: "user-settings-form"], fn f -> %>
-    <label>
-      Are you a mentor? <%= checkbox f, :is_mentor, id: "is_mentor"  %>
-    </label>
-    <label>
-      Image URL: <%= url_input f, :profile_image, id: "profile_image", class: "js_user-image-input user-image-input" %>
-    </label>
-    <div>
-      <img class="profile-image js_user-image-display" src="<%= @update_user.data.profile_image %>" />
-    </div>
-    <div>
-      <%= submit "Save", class: "button primary small save-user-settings" %>
-    </div>
-  <% end %>
+
+<%= if info || error do %>
+  <div class="flash-notification" role="alert"><%= if info, do: info, else: error %></div>
+<% end %>
+
+<section class="center-l">
+  <h2>Your settings:</h2>
+    <%= form_for @update_user, "/dashboard/settings", [method: "post", class: "center"], fn f -> %>
+      <div class="stack-s">
+        <div class="with-sidebar">
+          <div>
+            <label for="person[is_mentor]">Are you a mentor?</label>
+            <%= checkbox f, :is_mentor, id: "is_mentor" %>
+          </div>
+        </div>
+
+        <div class="with-sidebar">
+          <div>
+            <label for="person[profile_image]">Image URL:</label>
+            <%= url_input f, :profile_image, id: "profile_image", class: "js_user-image-input" %>
+          </div>
+        </div>
+
+        <div class="profile-size center">
+          <div class="frame">
+            <img class="js_user-image-display" src="<%= @update_user.data.profile_image %>" />
+          </div>
+        </div>
+
+        <div class="center-l">
+          <%= submit "Save", class: "button primary small" %>
+        </div>
+      </div>
+    <% end %>
 </section>

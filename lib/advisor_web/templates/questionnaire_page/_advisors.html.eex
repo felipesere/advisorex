@@ -1,12 +1,13 @@
 <%= inputs_for @form, :advisors, fn advisors_form -> %>
   <ul id="advisors" class="people-grid">
     <%= for person <- @everybody do %>
-      <li class="advisor-grid-tile">
-        <%= label advisors_form, :advisor, [for: "draft_advisors_#{person.id}", class: "advisor-label"] do %>
-           <%= checkbox(advisors_form, String.to_atom("#{person.id}"), class: "advisor-select") %>
-           <div class="advisor-image" style="background-image: url(<%= person.profile_image %>);" >
+      <li>
+        <%= label advisors_form, :advisor, [for: "draft_advisors_#{person.id}"] do %>
+           <%= checkbox(advisors_form, String.to_atom("#{person.id}"), [class: 'vh']) %>
+           <div class="frame">
+             <img src="<%= person.profile_image %>" />
            </div>
-           <p class="advisor-name"><%= person.name %></p>
+           <p><%= person.name %></p>
         <% end %>
       </li>
     <% end %>
