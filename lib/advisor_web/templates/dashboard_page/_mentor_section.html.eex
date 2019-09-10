@@ -28,16 +28,18 @@
             <ul class="row">
               <li>
                 <%= render "_delete_modal.html", questionnaire_id: group.questionnaire_id %>
-                <a class="button primary red delete">Delete</a>
+                <a class="button primary red delete">
+                  <icon class="icon-trash" />
+                </a>
               </li>
               <li>
                 <a href="<%= path_to_present(group.questionnaire_id) %>" class="button primary green">
-                  Present
+                  <icon class="icon-desktop" />
                 </a>
               </li>
               <li>
                 <a href="<%= download_summary(group.questionnaire_id) %>" class="button primary">
-                  Download CSV
+                  <icon class="icon-download-alt" />
                 </a>
               </li>
             </ul>

@@ -23,7 +23,7 @@ config :advisor, AdvisorWeb.Endpoint,
           "--prefix",
           "assets",
           "run",
-          "css",
+          "css:watch",
         ],
       ]
 
