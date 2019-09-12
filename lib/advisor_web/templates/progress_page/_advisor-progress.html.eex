@@ -5,7 +5,7 @@
   <span class="advisor">
     <%= @person.name %>
   </span>
-  <span>
+  <span data-testid="completeness">
     <%= if @state  == :incomplete do %>
       Incomplete
     <% else %>

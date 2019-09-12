@@ -1,6 +1,6 @@
   <ul id="mentors" class="people-grid">
     <%= for person <- @leads do %>
-      <li>
+      <li data-testid="mentor">
         <%= label @form, :mentor, [for: "draft_mentor_#{person.id}"] do %>
           <%= radio_button(@form ,:mentor, person.id, [class: 'vh']) %>
           <div class="frame">

@@ -9,7 +9,7 @@ defmodule AdvisorWeb.DraftQuestionnaireControllerTest do
     conn
     |> Login.as(priya)
     |> Submit.questionnaire(asking: [cj], mentor: felipe, questions: [13])
-    |> It.has_title("Here are your links")
+    |> It.has_title("Here are your links:")
     |> It.has_links_to_advice(1)
     |> It.has_see_advice_link()
   end

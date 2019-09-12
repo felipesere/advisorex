@@ -37,7 +37,7 @@
           <div class="frame">
             <img class="<%= completed?(advice) %>"  src="<%= advice.advisor.profile_image %>">
           </div>
-          <p><%= advice.advisor.name %></p>
+          <p data-testid="still-has-to-give-you-advice"><%= advice.advisor.name %></p>
           <p><%= completed?(advice) %></p>
         </div>
       <% end %>

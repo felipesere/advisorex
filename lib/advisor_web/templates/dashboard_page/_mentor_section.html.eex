@@ -11,7 +11,7 @@
     <tbody>
       <%= for group  <- @section.groups do %>
         <tr>
-          <td><%= group.mentee.name %></td>
+          <td data-testid="dashboard-mentee"><%= group.mentee.name %></td>
           <td>
             <div class="row">
             <%= for person <- group.advisors do %>

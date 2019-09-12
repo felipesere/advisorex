@@ -1,6 +1,6 @@
 <div class="modal">
   <div class="modal-background"></div>
-  <div class="modal-card stack">
+  <div class="modal-card stack-l">
     <h2 class="center">Confirm</h2>
     <div class="modal-body">
       <p>Do you really want to delete this questionnaire?</p>

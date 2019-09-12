@@ -35,14 +35,14 @@ defmodule PageAssertions do
   def has_title(html, expected_title) do
     assert html
            |> Floki.find("h1")
-           |> Floki.text() == expected_title
+           |> Floki.text() =~ expected_title
 
     html
   end
 
   def has_advice_questions(html, amount) do
     assert html
-           |> Floki.find(".advice-question")
+           |> Floki.find("[data-testid=advice-question]")
            |> length == amount
 
     html
@@ -58,7 +58,7 @@ defmodule PageAssertions do
 
   def has_links_to_advice(html, count) do
     assert html
-           |> Floki.find(".individual")
+           |> Floki.find("[data-testid=link-to-give-advice]")
            |> Enum.count() == count
 
     html
@@ -76,7 +76,7 @@ defmodule PageAssertions do
   def has_continue_button_with(html, text) do
     button =
       html
-      |> Floki.find(".button")
+      |> Floki.find("button")
       |> Floki.text()
 
     assert button =~ text
@@ -85,7 +85,7 @@ defmodule PageAssertions do
 
   def has_completed_advice(html) do
     assert html
-           |> Floki.find(".completeness")
+           |> Floki.find("[data-testid=completeness]")
            |> Enum.map(&Floki.text/1)
            |> Enum.any?(&(&1 =~ "Completed"))
 

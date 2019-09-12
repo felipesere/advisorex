@@ -1,7 +1,7 @@
 <%= inputs_for @form, :advisors, fn advisors_form -> %>
   <ul id="advisors" class="people-grid">
     <%= for person <- @everybody do %>
-      <li>
+      <li data-testid="advisor">
         <%= label advisors_form, :advisor, [for: "draft_advisors_#{person.id}"] do %>
            <%= checkbox(advisors_form, String.to_atom("#{person.id}"), [class: 'vh']) %>
            <div class="frame">

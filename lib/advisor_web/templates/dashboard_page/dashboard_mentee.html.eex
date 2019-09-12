@@ -2,6 +2,6 @@
   <div class="frame">
     <img src="<%= @advice.mentee.profile_image %>">
   </div>
-  <p><%= @advice.mentee.name %></p>
+  <p data-testid="open-advice-requests"><%= @advice.mentee.name %></p>
   <a href="<%= Routes.provide_advice_path(AdvisorWeb.Endpoint, :index, @advice.advice.questionnaire_id) %>" class="button primary profile-size">Give advice now</a>
 </div>
