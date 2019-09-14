@@ -1,11 +1,13 @@
 @import "fontello.css";
 
 :root {
-  /* to be used later when using the stack and center */
   --measure: 80ch;
 
   /* space 1 */
   --s1: 2rem;
+
+  /* space 2 */
+  --s2: 10px;
 
   --background: #f6f7f8;
   --darker-background: #dadee2;
@@ -65,7 +67,7 @@ input[type="checkbox"] {
 }
 
 body:last-child {
-  margin-bottom: 2rem;
+  margin-bottom: var(--s1);
 }
 
 hr {
@@ -544,7 +546,7 @@ textarea {
 }
 
 .modal.is-active {
-  display: flex; /* why does this need to be flex? */
+  display: block;
 }
 
 .modal-background {
@@ -557,24 +559,21 @@ textarea {
 }
 
 .modal-card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  margin: 0 auto;
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #f5f5f5;
 }
 
-/* it should be possible to describe this differently? */
 .modal-card .row {
-  margin-bottom: 10px;
+  justify-content: space-between;
+  margin: var(--s2);
 }
 
 .modal-body {
   background-color: white;
-  flex-grow: 1;
-  overflow: auto;
-  padding: 20px;
+  padding: var(--s2);
   border-top: 1px solid #dbdbdb;
   border-bottom: 1px solid #dbdbdb;
 }

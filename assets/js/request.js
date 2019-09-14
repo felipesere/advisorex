@@ -1,4 +1,4 @@
-import {$, all} from './fquery';
+import {$, forEach} from './fquery';
 
 let state = {
   questions: 0,
@@ -43,19 +43,19 @@ const toggleButton = () => {
 
 export const request = {
   bind: function() {
-    all("#mentors input[type=radio]", "click", () => {
+    forEach("#mentors input[type=radio]", "click", () => {
       state.mentor = count("#mentors");
       notification();
       toggleButton();
     });
 
-    all("#questions input[type=checkbox]", "click", () => {
+    forEach("#questions input[type=checkbox]", "click", () => {
       state.questions = count("#questions");
       notification();
       toggleButton();
     });
 
-    all("#advisors input[type=checkbox]", "click", () => {
+    forEach("#advisors input[type=checkbox]", "click", () => {
       state.advisors = count("#advisors");
       notification();
       toggleButton();

@@ -27,8 +27,7 @@
           <td>
             <ul class="row">
               <li>
-                <%= render "_delete_modal.html", questionnaire_id: group.questionnaire_id %>
-                <a class="button primary red delete">
+                <a class="button primary red delete" data-questionnaire-id="<%= group.questionnaire_id %>" data-mentee-name="<%= group.mentee.name %>">
                   <icon class="icon-trash" />
                 </a>
               </li>

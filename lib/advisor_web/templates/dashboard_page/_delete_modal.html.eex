@@ -1,12 +1,12 @@
 <div class="modal">
   <div class="modal-background"></div>
-  <div class="modal-card stack-l">
-    <h2 class="center">Confirm</h2>
+  <div class="modal-card">
+    <h2 class="center" id="modal-title"></h2>
     <div class="modal-body">
       <p>Do you really want to delete this questionnaire?</p>
     </div>
     <div class="row">
-      <button class="remove button primary red" data-questionnaire="<%= @questionnaire_id %>">Delete it!</button>
+      <button class="remove button primary red">Delete it!</button>
       <button class="keep button primary">Take me back</button>
     </div>
   </div>

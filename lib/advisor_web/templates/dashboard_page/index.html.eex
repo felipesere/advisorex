@@ -84,3 +84,4 @@
       </div>
     <% end %>
 </section>
+<%= render "_delete_modal.html" %>

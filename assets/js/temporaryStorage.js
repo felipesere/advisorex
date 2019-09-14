@@ -1,10 +1,10 @@
 import debounce from "debounce";
-import {$, grab} from './fquery';
+import {$, all} from './fquery';
 
 export const storage = {
   bind: selector => {
     if (localStorage) {
-      grab(selector).forEach((answerNode) => {
+      all(selector).forEach((answerNode) => {
         let name = answerNode.get('name')
 
         if (localStorage[name]) {

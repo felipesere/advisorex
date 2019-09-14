@@ -1,10 +1,8 @@
-export const all = (selector, event, listener) => {
-  document.querySelectorAll(selector).forEach(e => {
-    e.addEventListener(event, listener);
-  });
+export const forEach = (selector, event, listener) => {
+  return all(selector).forEach(node => node.on(event, listener))
 };
 
-export const grab = selector => {
+export const all = selector => {
   const nodes = document.querySelectorAll(selector);
 
   if (nodes) {
@@ -28,7 +26,13 @@ const noNode = {
 };
 
 export const $ = selector => {
-  const node = document.querySelector(selector);
+  let node;
+  if (typeof(selector) === "string") {
+    node = document.querySelector(selector);
+  } else {
+    node = document
+  }
+
   if (node) {
     return new ProperNode(node);
   } else {
