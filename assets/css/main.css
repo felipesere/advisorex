@@ -215,8 +215,8 @@ table tr:nth-child(even) {
   align-content: center;
 }
 
-.row > * {
-  flex: 0 1 20%;
+.row > * + * {
+  margin-left: 10px;
 }
 
 /* Utilities */
