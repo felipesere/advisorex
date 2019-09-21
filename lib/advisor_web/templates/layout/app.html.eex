@@ -11,10 +11,11 @@
   <body>
     <header class="top">
       <a href="/"><img class="logo" src="<%= Brand.logo() %>" alt="<%= Brand.logo_alt() %>" /></a>
+      <%= if ["/" | @conn.path_info] |> Path.join() == "/" do %>
+        <a style="right: 0; position: absolute; margin-top: 10px; margin-right: 10px; colour: #495561; text-decoration: none;" href="/questions">Check out the questions!</a>
+      <% end %>
     </header>
-
     <%= render @view_module, @view_template, assigns %>
-
     <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
