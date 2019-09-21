@@ -43,3 +43,9 @@ terraform/terraform.tfstate
 
 assets/vendor/backstop_data/bitmaps_test/**
 assets/vendor/backstop_data/html_report/**
+
+
+.elixir_ls/
+.idea/
+.vscode/
+advisor.iml
