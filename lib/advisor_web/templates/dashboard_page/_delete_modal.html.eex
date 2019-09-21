@@ -1,5 +1,5 @@
 <div class="modal">
-  <div class="modal-background"></div>
+  <div class="darkend-modal-backdrop"></div>
   <div class="modal-card">
     <h2 class="center" id="modal-title"></h2>
     <div class="modal-body">

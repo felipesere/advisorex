@@ -41,7 +41,7 @@ export const modal = {
     })
 
     $(".keep").on("click", toggle);
-    $(".modal-background").on("click", toggle);
+    $(".darkend-modal-backdrop").on("click", toggle);
 
     $(document).on("keyup", (event) => {
       if ($(".modal--active").present && event.keyCode == 27) {
