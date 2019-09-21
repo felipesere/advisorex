@@ -11,9 +11,6 @@
   <body>
     <header class="top">
       <a href="/"><img class="logo" src="<%= Brand.logo() %>" alt="<%= Brand.logo_alt() %>" /></a>
-      <%= if ["/" | @conn.path_info] |> Path.join() == "/" do %>
-        <a class="to-questions-link" href="/questions">Check out the questions!</a>
-      <% end %>
     </header>
     <%= render @view_module, @view_template, assigns %>
     <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>

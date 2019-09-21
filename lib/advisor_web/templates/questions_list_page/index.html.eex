@@ -1,41 +1,71 @@
-<section class="center-l">
-  <div id="questions" class="question-picker">
-    <ul class="center" style="text-align: justify">
-      <h1 style="color: #52aa5e">Technical</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <%= for q <- @questions.technical do %>
-        <li style="text-align: left; text-indent: 50px; margin-bottom: 10px;">
-          <%= q.phrase %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+<section class="center-simple">
+  <header class="underlined">
+    <h1>Asking the right question...</h1>
+    <div class="light-grey highlight" ></div>
+  </header>
+  <p>Some kind of intro</p>
 </section>
+
 <hr />
-<section class="center-l">
-  <div id="questions" class="question-picker">
-    <ul class="center" style="text-align: justify">
-      <h1 style="color: #ea635e">Client</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <%= for q <- @questions.client do %>
-        <li style="text-align: left; text-indent: 50px; margin-bottom: 5px;">
-          <%= q.phrase %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+
+<section class="center-simple">
+  <header class="underlined">
+    <h2>Technical</h2>
+    <div class="light-green highlight" ></div>
+  </header>
+
+  <p>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+
+  <ul class="list-of-questions">
+    <%= for q <- @questions.technical do %>
+      <li>
+        <%= q.phrase %>
+      </li>
+    <% end %>
+  </ul>
 </section>
+
 <hr />
-<section class="center-l">
-  <div id="questions" class="question-picker">
-    <ul class="center" style="text-align: justify">
-      <h1 style="color: #4992f9">Community</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <%= for q <- @questions.community do %>
-        <li style="text-align: left; text-indent: 50px; margin-bottom: 5px;">
-          <%= q.phrase %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+
+<section class="center-simple">
+  <header class="underlined">
+    <h2>Client</h2>
+    <div class="light-blue highlight" ></div>
+  </header>
+
+  <p>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+
+  <ul class="list-of-questions">
+    <%= for q <- @questions.client do %>
+      <li>
+        <%= q.phrase %>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<hr />
+
+
+<section class="center-simple">
+  <header class="underlined">
+    <h2>Community</h2>
+    <div class="light-red highlight" ></div>
+  </header>
+
+  <p>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+
+  <ul class="list-of-questions">
+    <%= for q <- @questions.community do %>
+      <li>
+        <%= q.phrase %>
+      </li>
+    <% end %>
+  </ul>
 </section>

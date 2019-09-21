@@ -19,15 +19,19 @@
   --darker-primary: #1a88b7;
 
   --blue: #4992f9;
+  --light-blue: #b6d3fc;
   --darker-blue: #297ff7;
 
   --green: #52aa5e;
+  --light-green: #b9ddbe;
   --darker-green: #499954;
 
   --red: #ea635e;
+  --light-red: #f6c0be;
   --darker-red: #e64640;
 
   --grey: #9a9a9a;
+  --light-grey: #d6d6d6;
   --darker-grey: #8a8a8a;
 
   --border-grey: #8894a0;
@@ -72,14 +76,24 @@ body:last-child {
 
 hr {
   background-image: linear-gradient(to left, var(--background), var(--separator-grey), var(--background));
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   border: 0;
   max-width: var(--measure);
   height: 1px;
 }
 
 /* The center */
+
+.center-simple {
+  box-sizing: content-box;
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: var(--s1);
+  padding-right: var(--s1);
+}
 
 .center-l {
   box-sizing: content-box;
@@ -221,10 +235,26 @@ table tr:nth-child(even) {
 
 /* Utilities */
 
+.underlined {
+  display: inline-block;
+}
+
+header h1,
+header h2 {
+  margin: 0;
+  padding: 0;
+  letter-spacing: 1px;
+  font-size: 3rem;
+  line-height: 1.25;
+  z-index: 9999;
+  position: relative;
+  font-weight: 300;
+  font-family: "Alfa Slab One", serif
+}
+
 .button {
   display: block;
 }
-
 
 .large {
   font-size: 3rem;
@@ -237,6 +267,15 @@ table tr:nth-child(even) {
 
 .hidden-overflow {
   overflow: hidden;
+}
+
+.highlight {
+  height: 1rem;
+  position: relative;
+  top: -25px;
+  left: -5px;
+  width: 110%;
+  line-height: 1.6;
 }
 
 /* other */
@@ -296,6 +335,19 @@ button:disabled,
   width: 40px;
 }
 
+.list-of-questions {
+  margin-left: 2rem;
+}
+
+.list-of-questions li {
+  list-style: square;
+}
+
+.list-of-questions li + li {
+  margin-top: 1rem;
+}
+
+
 .question-picker {
   display: flex;
   flex-direction: column;
@@ -313,6 +365,7 @@ button:disabled,
     width: 33%;
   }
 }
+
 
 .question {
   display: none;
@@ -464,18 +517,43 @@ textarea {
   width: 200px;
 }
 
+.light-grey {
+  background: var(--light-grey);
+}
+
 .green {
   background: var(--green);
+}
+
+.light-green {
+  background: var(--light-green);
+}
+
+.green--shadow {
   box-shadow: inset 0 -3px 0 var(--darker-green);
 }
 
 .red {
   background: var(--red);
+}
+
+.light-red {
+  background: var(--light-red);
+}
+
+.red--shadow {
   box-shadow: inset 0 -3px 0 var(--darker-red);
 }
 
 .blue {
   background: var(--primary);
+}
+
+.light-blue {
+  background: var(--light-blue);
+}
+
+.blue--shadow {
   box-shadow: inset 0 -3px 0 var(--darker-primary);
 }
 
