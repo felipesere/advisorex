@@ -9,7 +9,7 @@ defmodule AdvisorWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  if Mix.env() in [:dev, :ci] do
+  if Mix.env() in [:dev, :ci, :demo] do
     scope "/test/", AdvisorWeb do
       pipe_through :browser
 

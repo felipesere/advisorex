@@ -12,7 +12,7 @@
 alias Advisor.Person
 alias Advisor.Repo
 
-if Mix.env() == :dev do
+if Mix.env in [:dev, :ngrok, :ci, :demo] do 
   Repo.delete_all(Person)
 
   Repo.insert!(%Person{

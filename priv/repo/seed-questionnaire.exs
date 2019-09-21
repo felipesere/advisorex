@@ -12,7 +12,7 @@
 alias Advisor.{Advice, People, Question, Questionnaire}
 alias Advisor.Repo
 
-if Mix.env() == :dev do
+if Mix.env in [:dev, :ngrok, :ci, :demo] do 
   Repo.delete_all(Questionnaire)
 
   leslie = People.find_by(name: "Leslie Knope")
