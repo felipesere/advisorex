@@ -1,8 +1,7 @@
-<section class="module">
-  <header class="module-header">
-    <h1 class="progress-mentee">Progress on the advice for <%= @mentee.name %></h1>
-  </header>
-  <ul class="advisors">
+<section class="center">
+  <h1 class="progress-mentee">Progress on the advice for <%= @mentee.name %></h1>
+
+  <ul class="people-grid">
     <%= for person <- @completed do %>
       <%= render "_advisor-progress.html", person: person, state: true %>
     <% end %>
@@ -10,12 +9,12 @@
       <%= render "_advisor-progress.html", person: person, state: :incomplete %>
     <% end %>
   </ul>
-</section>
 
-<section class="module">
+  <hr />
+
   <%= if @all_complete do %>
-    <a href="/present/<%= @questionnaire.id %>" class="button primary full">We are good to go!</a>
+    <button href="/present/<%= @questionnaire.id %>" class="primary">We are good to go!</button>
   <% else %>
-    <p class="button primary full disabled">Waiting for further responses</p>
+    <button class="primary" disabled>Waiting for further responses</button>
   <% end %>
 </section>

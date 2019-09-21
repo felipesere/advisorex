@@ -1,6 +1,6 @@
 defmodule AdvisorWeb.DashboardPageTest do
   use AdvisorWeb.ConnCase
-  import PageAssertions
+  alias PageAssertions, as: It
 
   alias Advisor.Test.Support.{Sample, Users}
   alias Advisor.People
@@ -16,9 +16,8 @@ defmodule AdvisorWeb.DashboardPageTest do
 
     conn
     |> Login.as(@mentor)
-    |> get("/dashboard")
-    |> html_response(200)
-    |> has_no_link("Request advice for yourself")
+    |> Visit.the(:dashboard)
+    |> It.has_no_link("Request advice for yourself")
   end
 
   test "it shows a section for mentors", %{conn: conn} do
@@ -36,11 +35,10 @@ defmodule AdvisorWeb.DashboardPageTest do
 
     conn
     |> Login.as(@mentor)
-    |> get("/dashboard")
-    |> html_response(200)
-    |> has_title("Hello Felipe Sere!")
-    |> advice_open_for("Rabea Gleissner")
-    |> advice_open_for("Chris Jordan")
+    |> Visit.the(:dashboard)
+    |> It.has_title("Hello Felipe Sere!")
+    |> pending_advice_for("Rabea Gleissner")
+    |> pending_advice_for("Chris Jordan")
   end
 
   test "it shows the advice you still have to give", %{conn: conn} do
@@ -58,8 +56,7 @@ defmodule AdvisorWeb.DashboardPageTest do
 
     conn
     |> Login.as("Priya Patil")
-    |> get("/dashboard")
-    |> html_response(200)
+    |> Visit.the(:dashboard)
     |> advice_needed_for("Rabea Gleissner")
     |> advice_needed_for("Chris Jordan")
   end
@@ -74,8 +71,7 @@ defmodule AdvisorWeb.DashboardPageTest do
 
     conn
     |> Login.as("Priya Patil")
-    |> get("/dashboard")
-    |> html_response(200)
+    |> Visit.the(:dashboard)
     |> no_advice_needed_for("Rabea Gleissner")
   end
 
@@ -88,10 +84,9 @@ defmodule AdvisorWeb.DashboardPageTest do
 
     conn
     |> Login.as("Rabea Gleissner")
-    |> get("/dashboard")
-    |> html_response(200)
-    |> still_has_to_give_me_advice("Priya Patil")
-    |> still_has_to_give_me_advice("Sarah Johnston")
+    |> Visit.the(:dashboard)
+    |> still_has_to_give_you_advice("Priya Patil")
+    |> still_has_to_give_you_advice("Sarah Johnston")
   end
 
   test "it allows you to become a mentor", %{conn: conn} do
@@ -105,9 +100,9 @@ defmodule AdvisorWeb.DashboardPageTest do
     assert People.find_by(name: "Rabea Gleissner").is_mentor
   end
 
-  def still_has_to_give_me_advice(html, advisor) do
+  def still_has_to_give_you_advice(html, advisor) do
     assert html
-           |> Floki.find(".status-of-my-advisors > p")
+           |> Floki.find("[data-testid=still-has-to-give-you-advice]")
            |> Enum.map(&Floki.text/1)
            |> Enum.member?(advisor)
 
@@ -116,7 +111,7 @@ defmodule AdvisorWeb.DashboardPageTest do
 
   def advice_needed_for(html, mentee) do
     assert html
-           |> Floki.find(".open-advice-requests > p")
+           |> Floki.find("[data-testid=open-advice-requests]")
            |> Enum.map(&Floki.text/1)
            |> Enum.member?(mentee)
 
@@ -125,18 +120,18 @@ defmodule AdvisorWeb.DashboardPageTest do
 
   def no_advice_needed_for(html, mentee) do
     refute html
-           |> Floki.find(".open-advice-requests > p")
+           |> Floki.find("[data-testid=open-advice-requests]")
            |> Enum.map(&Floki.text/1)
            |> Enum.member?(mentee)
 
     html
   end
 
-  def advice_open_for(html, mentee) do
-    advice = fn text -> text =~ "Advice for " <> mentee end
+  def pending_advice_for(html, mentee) do
+    advice = fn text -> text =~ mentee end
 
     assert html
-           |> Floki.find("li > p")
+           |> Floki.find("[data-testid=dashboard-mentee]")
            |> Enum.map(&Floki.text/1)
            |> Enum.any?(advice)
 

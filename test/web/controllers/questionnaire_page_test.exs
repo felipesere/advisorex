@@ -3,6 +3,7 @@ defmodule AdvisorWeb.RequestPageTest do
   alias Advisor.Test.Support.Users
   alias Advisor.People
   alias Advisor.Question.PhrasesCatalog
+  alias PageAssertions, as: It
 
   @myself 1
 
@@ -12,40 +13,45 @@ defmodule AdvisorWeb.RequestPageTest do
     assert redirected_to(conn) == "/"
   end
 
-  # TODO: pretty sure this test never fails?
   test "sees the page to create a questionnaire", %{conn: conn} do
-    Users.with("Felipe Sere")
+    Users.with(:everybody)
 
-    conn =
-      conn
-      |> Login.as("Felipe Sere")
-      |> get("/request")
-
-    response = html_response(conn, 200)
-
-    assert response
-           |> Floki.find("h1")
-           |> Enum.at(0)
-           |> Floki.text() == "Hello Felipe Sere!"
-
-    number_of_mentor = length(People.mentors()) - @myself
-
-    assert response
-           |> Floki.find(".mentor")
-           |> length == number_of_mentor
-
+    number_of_mentors = length(People.mentors()) - @myself
     number_of_advisors = length(People.everybody()) - @myself
-
-    assert response
-           |> Floki.find(".advisor")
-           |> length == number_of_advisors
-
     number_of_questions = PhrasesCatalog.all() |> flatten |> length
 
-    assert response
-           |> Floki.find(".question-picker li")
-           |> length == number_of_questions
+    conn
+    |> Login.as("Felipe Sere")
+    |> Visit.the(:create_questionnaire)
+    |> It.has_title("Hello Felipe Sere!")
+    |> has_mentors(number_of_mentors)
+    |> has_advisors(number_of_advisors)
+    |> has_questions(number_of_questions)
   end
 
   defp flatten(%{client: c, technical: t, community: co}), do: c ++ t ++ co
+
+  defp has_mentors(html, number) do
+    assert html
+           |> Floki.find("[data-testid=mentor]")
+           |> length == number
+
+    html
+  end
+
+  defp has_advisors(html, number) do
+    assert html
+           |> Floki.find("[data-testid=advisor]")
+           |> length == number
+
+    html
+  end
+
+  def has_questions(html, number) do
+    assert html
+           |> Floki.find(".question-picker li")
+           |> length == number
+
+    html
+  end
 end

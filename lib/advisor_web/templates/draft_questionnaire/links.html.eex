@@ -1,17 +1,17 @@
-<section class="module">
-  <header class="module-header">
-    <h1>Here are your links</h1>
-  </header>
+<section class="center">
+  <h1>Here are your links:</h1>
 
-  <ul class="advice-links">
+  <ul class="stack-l">
     <%= for advice <- @advice do %>
       <li>
         <p><%= advice.advisor.name %>
-        <a class="individual" href="<%= provide_advice(advice) %>"><%= advice.questionnaire_id %></a>
+        <a data-testid="link-to-give-advice" href="<%= provide_advice(advice) %>"><%= advice.questionnaire_id %></a>
         </p>
       </li>
     <% end %>
   </ul>
 
-  <p>See advice <a class="see-advice-link" href="<%= progress_link(@questionnaire) %>"><%= @questionnaire.id %></a></p>
+  <hr />
+
+  <p>See advice <a class href="<%= progress_link(@questionnaire) %>"><%= @questionnaire.id %></a></p>
 </section>

@@ -1,12 +1,13 @@
   <ul id="mentors" class="people-grid">
     <%= for person <- @leads do %>
-    <li class="advisor-grid-tile">
-      <%= label @form, :mentor, [for: "draft_mentor_#{person.id}", class: "advisor-label"] do %>
-        <%= radio_button(@form ,:mentor, person.id) %>
-        <div class="advisor-image" style="background-image: url(<%= person.profile_image %>);" >
-        </div>
-        <p class="advisor-name"><%= person.name %></p>
-      <% end %>
-    </li>
+      <li data-testid="mentor">
+        <%= label @form, :mentor, [for: "draft_mentor_#{person.id}"] do %>
+          <%= radio_button(@form ,:mentor, person.id, [class: 'vh']) %>
+          <div class="frame">
+            <img src="<%= person.profile_image %>" />
+          </div>
+          <p><%= person.name %></p>
+        <% end %>
+      </li>
     <% end %>
   </ul>

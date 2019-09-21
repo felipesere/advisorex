@@ -3,4 +3,4 @@
 <% end %>
 <a href="/dashboard" class="button primary">Go to your Dashboard</a>
 
-<a href="/logout" class="button primary full logout">Log out</a>
+<a href="/logout" class="button primary logout">Log out</a>

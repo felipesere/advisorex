@@ -45,7 +45,7 @@ describe('Lifecycle of a questionnaire', () => {
 
     goToYourDashboard()
 
-    cy.contains('Advice for Ben Wyatt');
+    cy.contains('Ben Wyatt');
   })
 
   it('is filled out by Donna Meagle', () => {
@@ -77,7 +77,7 @@ describe('Lifecycle of a questionnaire', () => {
 
     goToYourDashboard()
 
-    cy.contains('.groups-advice', 'Ben Wyatt').contains('Present').click()
+    cy.contains('[data-testid=dashboard-mentee]', 'Ben Wyatt').parent().get('[data-testid=present-action]').click()
 
     questions.forEach((question) => {
       cy.contains(question)
@@ -89,8 +89,8 @@ describe('Lifecycle of a questionnaire', () => {
 
     goToYourDashboard()
 
-    cy.contains('.groups-advice', 'Ben Wyatt').contains('Delete').click()
-    cy.contains('Yes').click()
+    cy.contains('[data-testid=dashboard-mentee]', 'Ben Wyatt').parent().get('[data-testid=delete-action]').click()
+    cy.contains('Delete it!').click()
 
     cy.contains('Ben Wyatt').should('not.exist')
   })

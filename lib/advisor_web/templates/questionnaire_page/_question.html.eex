@@ -1,6 +1,6 @@
 <li>
-  <label>
-    <%= checkbox(@form, String.to_atom("#{@q.id}")) %>
+  <label class="<%= @color %>">
+    <%= checkbox(@form, String.to_atom("#{@q.id}"), class: "question") %>
     <span><%= @q.phrase %></span>
   </label>
 </li>

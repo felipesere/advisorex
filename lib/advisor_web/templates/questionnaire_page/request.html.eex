@@ -1,46 +1,36 @@
 <%= form_for @conn, "/request", [as: :draft], fn f -> %>
-    <section class="module">
-      <header class="module-header medium-header">
-        <h1>Hello <%= @mentee.name %>!</h1>
-      </header>
-      <header class="module-header">
-        <h1>Who is your Mentor?</h1>
-      </header>
-      <%= render "_mentors.html", leads: @mentors, form: f %>
-    </section>
+  <section class="center-l">
+    <h1>Hello <%= @mentee.name %>!</h1>
+    <h2>Who is your Mentor?</h2>
+    <%= render "_mentors.html", leads: @mentors, form: f %>
+  </section>
 
-    <hr class="separator" />
+  <hr />
 
-    <section class="module">
-      <header class="module-header">
-        <h1>Tell us why you are looking for advice:</h1>
-        <p>(max 140 characters, like Twitter!)</p>
-      </header>
-      <%= textarea(f, :message, rows: 3, maxlength: 140, class: "context-of-advice") %>
-    </section>
+  <section class="center-l">
+    <h2>Tell us why you are looking for advice:</h2>
+    <p>(max 140 characters, like Twitter!)</p>
+    <%= textarea(f, :message, rows: 3, maxlength: 140, class: "context-of-advice") %>
+  </section>
 
-    <hr class="separator" />
+  <hr />
 
-    <section class="module">
-      <header class="module-header">
-        <h1>Choose topics for advice</h1>
-      </header>
-      <%= render "_questions.html", questions: @questions, form: f %>
-    </section>
+  <section class="center-l">
+    <h1>Choose topics for advice</h1>
+    <%= render "_questions.html", questions: @questions, form: f %>
+  </section>
 
-    <hr class="separator" />
+  <hr />
 
-    <section class="module">
-      <header class="module-header">
-        <h1>Choose people to give you advice</h1>
-      </header>
-      <%= render "_advisors.html", everybody: @everybody, form: f %>
-    </section>
+  <section class="center-l">
+    <h1>Choose people to give you advice</h1>
+    <%= render "_advisors.html", everybody: @everybody, form: f %>
+  </section>
 
-    <section class="module">
-      <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
-      <button type="submit" class="request-advice button primary full" id="ask-for-advice">Ask for advice</button>
-    </section>
+  <section class="center-l">
+    <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
+    <button type="submit" class="request-advice button primary" id="ask-for-advice">Ask for advice</button>
+  </section>
 <% end %>
 
 <div class="notice invisible">

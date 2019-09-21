@@ -30,4 +30,15 @@ if Mix.env() == :dev do
     ],
     advice: [%Advice{advisor: andy}, %Advice{advisor: donna}]
   })
+
+  Repo.insert!(%Questionnaire{
+    mentor: leslie,
+    mentee: donna,
+    message: "I want to run the animal shelter",
+    questions: [
+      %Question{phrase: "How is this persons humor?"},
+      %Question{phrase: "Have they stumbled yet?"}
+    ],
+    advice: [%Advice{advisor: andy}, %Advice{advisor: april}]
+  })
 end

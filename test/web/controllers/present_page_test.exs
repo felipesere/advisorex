@@ -1,26 +1,25 @@
 defmodule AdvisorWeb.PresentPageTest do
   use AdvisorWeb.ConnCase
-  import PageAssertions
+  alias PageAssertions, as: It
 
   alias Advisor.Test.Support.{Sample, Users}
 
   test "it displays all four answers to the questionnaire", %{conn: conn} do
-    q =
+    %{id: id} =
       Sample.questionnaire()
       |> Sample.answer("Priya Patil", all: "some answer")
       |> Sample.answer("Rabea Gleissner", all: "other answer")
 
     conn
     |> Login.as("Felipe Sere")
-    |> get(Routes.present_page_path(@endpoint, :index, q.id))
-    |> html_response(200)
-    |> has_title("Advice for Chris Jordan")
-    |> has_advice_questions(2)
-    |> has_answers(["some answer", "other answer"])
+    |> Visit.the(:questionnaire, id)
+    |> It.has_title("Advice for Chris Jordan")
+    |> It.has_advice_questions(2)
+    |> It.has_answers(["some answer", "other answer"])
   end
 
   test "only the selected mentor can see the advice", %{conn: conn} do
-    q =
+    %{id: id} =
       Sample.questionnaire()
       |> Sample.answer("Priya Patil", all: "some answer")
       |> Sample.answer("Rabea Gleissner", all: "other answer")
@@ -29,7 +28,7 @@ defmodule AdvisorWeb.PresentPageTest do
 
     assert conn
            |> Login.as("Jim Suchy")
-           |> get(Routes.present_page_path(@endpoint, :index, q.id))
+           |> Visit.the!(:questionnaire, id)
            |> redirected_to() == "/"
   end
 end

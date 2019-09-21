@@ -1,0 +1,48 @@
+{
+  "id": "backstop_default",
+  "viewports": [
+    {
+      "label": "iphone",
+      "width": 375,
+      "height": 667
+    },
+    {
+      "label": "tablet",
+      "width": 1024,
+      "height": 768
+    }
+  ],
+  "onBeforeScript": "chromy/onBefore.js",
+  "onReadyScript": "chromy/onReady.js",
+  "scenarios": [
+    {
+      "label": "landing page",
+      "url": "http://localhost:4000/"
+    },
+    {
+      "label": "ask for advice",
+      "url": "http://localhost:4000/request",
+      "onReadyScript": "./ask_for_advice.js"
+    },
+    {
+      "label": "look at your dashboard",
+      "url": "http://localhost:4000/dashboard",
+      "onReadyScript": "./look_at_dashboard.js"
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "vendor/backstop_data/bitmaps_reference",
+    "bitmaps_test": "vendor/backstop_data/bitmaps_test",
+    "engine_scripts": "vendor/backstop_data/engine_scripts",
+    "html_report": "vendor/backstop_data/html_report",
+    "ci_report": "vendor/backstop_data/ci_report"
+  },
+  "report": [],
+  "engine": "chrome",
+  "engineFlags": [],
+  "delay": 1000,
+  "asyncCaptureLimit": 5,
+  "asyncCompareLimit": 50,
+  "debug": false,
+  "debugWindow": false
+}

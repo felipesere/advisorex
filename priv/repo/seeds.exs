@@ -27,7 +27,7 @@ if Mix.env() == :dev do
     name: "Ron Swanson",
     email: "ron@parks.com",
     is_mentor: true,
-    profile_image: "https://pbs.twimg.com/profile_images/1369149006/ronProfile_400x400.jpg"
+    profile_image: "https://static.independent.co.uk/s3fs-public/thumbnails/image/2016/10/17/11/ron-swanson.jpg?w968"
   })
 
   Repo.insert!(%Person{

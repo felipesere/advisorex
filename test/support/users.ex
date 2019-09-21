@@ -13,6 +13,12 @@ defmodule Advisor.Test.Support.Users do
     %Person{name: "Felipe Sere", email: "felipe@example.com", is_mentor: true}
   ]
 
+  def with(:everybody) do
+    @people
+    |> Enum.map(fn p -> p.name end)
+    |> __MODULE__.with()
+  end
+
   def with(names) when is_list(names) do
     Enum.map(names, &__MODULE__.with/1)
   end

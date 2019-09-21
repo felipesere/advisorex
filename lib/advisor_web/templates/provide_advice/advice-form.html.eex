@@ -1,8 +1,6 @@
 <form action="/provide/<%= @questionnaire_id %>" method="post">
-  <section class="module">
-    <header class="module-header">
-      <h1>Advice for <%= @mentee.name %></h1>
-    </header>
+  <section class="center-l">
+    <h1>Advice for <%= @mentee.name %></h1>
 
     <%= if @message do %>
       <div class="message-area">
@@ -12,19 +10,19 @@
         </blockquote>
       </div>
 
-      <hr class="separator" />
+      <hr />
     <% end %>
 
-    <div class="advice-questions">
+    <div class="stack-l">
       <%= for question <- @questions do  %>
-        <div class="advice-question">
+        <div>
           <h3><%= question.phrase %></h3>
           <textarea name="<%= question.id %>" rows="5"></textarea>
         </div>
       <% end %>
       <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
-      <button type="submit" class="button primary full" id="submit-your-advice">Submit your advice</button>
     </div>
+    <button type="submit" class="button primary" id="submit-your-advice">Submit your advice</button>
   </section>
 </form>
 

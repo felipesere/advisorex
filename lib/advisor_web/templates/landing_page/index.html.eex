@@ -1,10 +1,8 @@
-<section class="module">
-  <header class="module-header large-header">
-    <h1><%= @title %></h1>
-    <p>Let's help someone on the path to mastery today.</p>
-  </header>
+<section class="center-l">
+  <h1 class="large"><%= @title %></h1>
+  <p>Let's help someone on the path to mastery today.</p>
 
-  <div class="login-buttons">
+  <div class="stack-s">
     <%= if @logged_in do %>
       <%= render "_logged_in.html", existing_questionnaire: @existing_questionnaire %>
     <% else %>

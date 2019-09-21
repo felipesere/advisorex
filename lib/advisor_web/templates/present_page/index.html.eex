@@ -1,24 +1,23 @@
-<section class="module">
-  <header class="module-header">
-    <h1>Advice for <%= @request.name %></h1>
-    <a href="/present/<%= @id %>/download.csv"><img class="download-link" src="/assets/images/download-csv.png" alt="Download the file"></a>
-  </header>
+<section class="center">
+  <h1>Advice for <%= @request.name %></h1>
+  <a href="/present/<%= @id %>/download.csv"><img class="download-link" src="/assets/images/download-csv.png" alt="Download the file"></a>
+  <!-- possibly remove that link...-->
 
-  <div class="advice-questions">
+  <hr />
+
+  <div class="stack-l">
     <%= for question <- @answered_questions do %>
-    <div class="advice-question">
-      <h3><%= question.question_phrase %></h3>
+      <h3 data-testid="advice-question"><%= question.question_phrase %></h3>
       <%= for answer <- question.answers do %>
-      <div class="advice-answer">
-        <aside class="provider">
-          <img class="profile-image" src="<%= answer.person.profile_image %>" alt="<%= answer.person.name %>" />
-          <span><%= answer.person.name %></span>
-        </aside>
-        <p><%= answer.answer_phrase %></p>
-      </div>
+        <div>
+          <aside class="provider">
+            <img src="<%= answer.person.profile_image %>" alt="<%= answer.person.name %>" />
+            <span><%= answer.person.name %></span>
+          </aside>
+          <p><%= answer.answer_phrase %></p>
+        </div>
       <% end %>
-    </div>
-    <hr class="separator" />
-  <% end %>
+      <hr />
+    <% end %>
   </div>
 </section>

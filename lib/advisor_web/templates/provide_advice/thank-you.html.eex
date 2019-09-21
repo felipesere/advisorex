@@ -1,6 +1,4 @@
-<section class="module">
-  <header class="module-header large-header">
-    <h1>Thank you!</h1>
-    <p>Your advice is greatly appreciated.</p>
-  </header>
+<section class="center-l">
+  <h1>Thank you!</h1>
+  <p>Your advice is greatly appreciated.</p>
 </section>

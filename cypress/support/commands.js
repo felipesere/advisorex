@@ -17,13 +17,13 @@ Cypress.Commands.add("loginAs", (name) => {
 })
 
 Cypress.Commands.add("answerWith", (answers) => {
-    cy.get('.advice-question textarea').each((answerBox, i) => {
+    cy.get('textarea').each((answerBox, i) => {
       cy.wrap(answerBox).type(answers[i])
     })
 })
 
 Cypress.Commands.add("openQuestionnaireFor", (name) => {
-    cy.get('.open-advice-requests').contains(name).parent().contains('Give advice now').click()
+    cy.get('[data-testid=open-advice-requests]').contains(name).parent().contains('Give advice now').click()
 })
 
 
