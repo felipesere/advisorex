@@ -12,8 +12,8 @@ const findNodeWith = (element, expectedAttribute) => {
 }
 
 const toggle = e => {
-  $(".modal").toggle("is-active");
-  $("body").toggle("is-active");
+  $(".modal").toggle("modal--active");
+  $("body").toggle("hidden-overflow");
 };
 
 export const modal = {
@@ -44,7 +44,7 @@ export const modal = {
     $(".modal-background").on("click", toggle);
 
     $(document).on("keyup", (event) => {
-      if ($(".is-active").present && event.keyCode == 27) {
+      if ($(".modal--active").present && event.keyCode == 27) {
         toggle();
       }
     });
