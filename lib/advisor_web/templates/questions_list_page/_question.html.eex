@@ -1,5 +1,0 @@
-<li>
-  <label class="<%= @color %>">
-    <span><%= @q.phrase %></span>
-  </label>
-</li>
