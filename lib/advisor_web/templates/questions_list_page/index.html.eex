@@ -1,0 +1,80 @@
+<section class="center-simple">
+  <header class="underlined">
+    <h1>Asking the right question...</h1>
+    <div class="light-grey highlight" ></div>
+  </header>
+  <p>
+  In the world of software craftsmanship, learning and growing is one of the
+  cornerstones. To do this, we must first learn how to ask the right questions.
+  Below you will find some of the questions within <i>Advisor</i> to help us in
+  that journey.
+  </p>
+</section>
+
+<hr />
+
+<section class="center-simple">
+  <header class="underlined">
+    <h2>Technical</h2>
+    <div class="light-green highlight" ></div>
+  </header>
+
+  <p>
+  These are questions to probe your technical abilities and prompt people to
+  expose you to techniques and tools that push you to grow.
+  </p>
+
+  <ul class="list-of-questions">
+    <%= for q <- @questions.technical do %>
+      <li>
+        <%= q.phrase %>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<hr />
+
+<section class="center-simple">
+  <header class="underlined">
+    <h2>Client</h2>
+    <div class="light-blue highlight" ></div>
+  </header>
+
+  <p>
+  These questions aim to make people think how they approach clients, communication
+  and collaboration.
+  </p>
+
+  <ul class="list-of-questions">
+    <%= for q <- @questions.client do %>
+      <li>
+        <%= q.phrase %>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<hr />
+
+
+<section class="center-simple">
+  <header class="underlined">
+    <h2>Community</h2>
+    <div class="light-red highlight" ></div>
+  </header>
+
+  <p>
+  As crafters we draw skills and knowledge from our team and the larger community
+  of software. These questions will prompt people to think about how we engage
+  with them.
+  </p>
+
+  <ul class="list-of-questions">
+    <%= for q <- @questions.community do %>
+      <li>
+        <%= q.phrase %>
+      </li>
+    <% end %>
+  </ul>
+</section>

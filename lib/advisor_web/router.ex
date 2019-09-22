@@ -26,6 +26,8 @@ defmodule AdvisorWeb.Router do
     get "/", LandingPage, :index
     get "/logout", AuthenticationController, :logout
 
+    get "/questions", QuestionsListPage, :index
+
     # view the fhe form to create a questionnaire
     get "/request", QuestionnairePage, :index
 

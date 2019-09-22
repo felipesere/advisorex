@@ -1,5 +1,5 @@
 <li>
-  <label class="<%= @color %>">
+  <label class="<%= @color %> <%= @color %>--shadow">
     <%= checkbox(@form, String.to_atom("#{@q.id}"), class: "question") %>
     <span><%= @q.phrase %></span>
   </label>

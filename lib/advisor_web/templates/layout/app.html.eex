@@ -12,9 +12,7 @@
     <header class="top">
       <a href="/"><img class="logo" src="<%= Brand.logo() %>" alt="<%= Brand.logo_alt() %>" /></a>
     </header>
-
     <%= render @view_module, @view_template, assigns %>
-
     <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
