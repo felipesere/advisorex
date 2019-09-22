@@ -3,7 +3,12 @@
     <h1>Asking the right question...</h1>
     <div class="light-grey highlight" ></div>
   </header>
-  <p>Some kind of intro</p>
+  <p>
+  In the world of software craftsmanship, learning and growing is one of the
+  cornerstones. To do this, we must first learn how to make the right questions.
+  Below you will find some of the questions within <i>Advisor</i> to help us in
+  that journey.
+  </p>
 </section>
 
 <hr />
@@ -15,7 +20,8 @@
   </header>
 
   <p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  These are questions to probe your technical abilities and prompt people to
+  expose you to techniques and tools that push you to grow.
   </p>
 
   <ul class="list-of-questions">
@@ -36,7 +42,8 @@
   </header>
 
   <p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  These questions aim to make people think how they approach clients, communication
+  and collaboration.
   </p>
 
   <ul class="list-of-questions">
@@ -58,7 +65,9 @@
   </header>
 
   <p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  As crafters we draw skills and knowledge from our team and the larger community
+  of software. These questions will prompt people to think about how we engage
+  with them.
   </p>
 
   <ul class="list-of-questions">
