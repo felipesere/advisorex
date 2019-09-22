@@ -658,10 +658,5 @@ textarea {
 }
 
 .to-questions-link {
-  right: 0;
-  position: absolute;
-  margin-top: 10px;
-  margin-right: 10px;
   color: var(--text-color);
-  text-decoration: none;
 }

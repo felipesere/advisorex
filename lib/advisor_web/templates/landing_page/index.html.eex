@@ -8,5 +8,10 @@
     <% else %>
       <%= render "_not_logged_in.html" %>
     <% end %>
+    
+    <div>
+    Don’t have a login? Check the questions 
+    <a class="to-questions-link" href="/questions">here!</a>
+    </div>
   </div>
 </section>
