@@ -6,6 +6,9 @@ technical:
   - "Is this person the technical lead for stories?"
   - "How well does this person know their tools?"
   - "How well does this person pick up new tools?"
+  - "What frameworks should this person look into next and why?"
+  - "What tools should this person explore and why?"
+  - "Which anguages you do you think this person would be good at?"
 
 client:
   - "How has this person contributed to the success of their client?"
