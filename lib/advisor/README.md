@@ -1,4 +1,4 @@
-# The of Advisor
+# The World of Advisor
 
 The area contains all the elements of Advisor detached from their HTTP counterparts. There should not be any web involvement here.
 
