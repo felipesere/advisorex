@@ -17,8 +17,7 @@ config :advisor, AdvisorWeb.Endpoint,
   url: [host: "localhost"],
   static_url: [path: "/assets"],
   secret_key_base: "SmmWRTx2vhEgHIcQ/7BRuQaIuvQ7fSeTrsFVuPsudiHKtD0AT068LXD61mN5Ow+d",
-  render_errors: [view: AdvisorWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Advisor.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: AdvisorWeb.ErrorView, accepts: ~w(html json)]
 
 # Configures Elixir's Logger
 config :logger, :console,

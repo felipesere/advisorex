@@ -5,9 +5,9 @@ defmodule Advisor.Application do
     import Supervisor.Spec
 
     children = [
-      supervisor(Advisor.Repo, []),
-      supervisor(AdvisorWeb.Endpoint, []),
-      supervisor(Advisor.Question.PhrasesCatalog, [])
+      {Advisor.Repo, []},
+      {AdvisorWeb.Endpoint, []},
+      {Advisor.Question.PhrasesCatalog, []},
     ]
 
     opts = [strategy: :one_for_one, name: Advisor.Supervisor]

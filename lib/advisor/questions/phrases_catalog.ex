@@ -5,6 +5,13 @@ defmodule Advisor.Question.PhrasesCatalog do
     defstruct [:phrase, :kind, :id]
   end
 
+  def child_spec(_arg) do
+    %{
+       id: Advisor.Question.PhrasesCatalog,
+       start: {Advisor.Question.PhrasesCatalog, :start_link, []}
+    }
+  end
+
   def start_link() do
     questions = load()
 

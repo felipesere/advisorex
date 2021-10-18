@@ -1,5 +1,5 @@
 defmodule Submit do
-  use Phoenix.ConnTest
+  import Phoenix.ConnTest
   alias AdvisorWeb.Router.Helpers, as: Routes
 
   @endpoint AdvisorWeb.Endpoint

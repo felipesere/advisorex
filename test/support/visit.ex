@@ -1,5 +1,5 @@
 defmodule Visit do
-  use Phoenix.ConnTest
+  import Phoenix.ConnTest
   alias AdvisorWeb.Router.Helpers, as: Routes
 
   # The default endpoint for testing
