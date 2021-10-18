@@ -27,7 +27,8 @@ config :logger, level: :info
 config :advisor, Advisor.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "15")
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "15"),
+  ssl: true
 
 config :ueberauth, Ueberauth,
   base_path: "/auth",
