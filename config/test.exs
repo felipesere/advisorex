@@ -13,10 +13,11 @@ config :logger, level: :warn
 config :advisor, Advisor.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "",
+  password: "postgres",
   database: "advisor_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
 
 config :advisor, Advisor.Notifications.Email.Mailer, adapter: Bamboo.TestAdapter
 

@@ -47,7 +47,8 @@ config :advisor, Advisor.Repo,
   password: "",
   database: "advisor_dev",
   hostname: "localhost",
-  pool_size: 10
+  pool_size: 10,
+  ssl: true
 
 config :ueberauth, Ueberauth,
   base_path: "/auth",
