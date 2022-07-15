@@ -5,7 +5,7 @@ defmodule Advisor.Mixfile do
     [
       app: :advisor,
       version: "0.0.1",
-      elixir: "~> 1.12.0",
+      elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -39,7 +39,7 @@ defmodule Advisor.Mixfile do
       {:apex, "~> 1.0"},
       {:csv, "~> 2.0"},
       {:ecto_sql, "~> 3.0"},
-      {:hackney, "~> 1.15"},
+      {:hackney, "~> 1.18"},
       {:jason, "~> 1.2"},
       {:phoenix, "~> 1.6"},
       {:phoenix_ecto, "~> 4.0"},
@@ -51,8 +51,8 @@ defmodule Advisor.Mixfile do
       {:poison, "~> 5.0"},
       {:scribe, "~> 0.10.0"},
       {:yaml_elixir, "~> 2.1"},
-      {:ueberauth_google, "~> 0.8.0"},
-      {:ueberauth, "~> 0.6.1"},
+      {:ueberauth_google, "~> 0.10"},
+      {:ueberauth, "~> 0.10"},
       {:bamboo, "~> 2.2"},
       {:bamboo_phoenix, "1.0.0"},
     ] ++ test_deps()
