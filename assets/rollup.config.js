@@ -6,8 +6,7 @@ export default {
   input: "js/app.js",
   output: {
     file: "../priv/static/js/app.js",
-    format: "esm",
-    minify: true,
+    format: "esm"
   },
   plugins: [resolve(), commonjs(), terser()]
 };
