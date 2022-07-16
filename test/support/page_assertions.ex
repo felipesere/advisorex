@@ -1,6 +1,4 @@
 defmodule PageAssertions do
-  import Plug.Conn
-  import Phoenix.ConnTest
   import ExUnit.Assertions
 
   def has_link_to(html, value) do
