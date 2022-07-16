@@ -5,14 +5,14 @@
     <title>Advisor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
-    <link rel="icon" type="image/png" href="<%= Brand.icon() %>">
+    <link rel="stylesheet" href={Routes.static_path(@conn, "/css/app.css")}>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/js/app.js")}></script>
+    <link rel="icon" type="image/png" href={ Brand.icon() }>
   </head>
   <body>
     <header class="top">
-      <a href="/"><img class="logo" src="<%= Brand.logo() %>" alt="<%= Brand.logo_alt() %>" /></a>
+      <a href="/"><img class="logo" src={ Brand.logo() } alt={ Brand.logo_alt() }/></a>
     </header>
     <%= render view_module(@conn), view_template(@conn), assigns %>
-    <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

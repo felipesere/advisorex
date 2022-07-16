@@ -5,7 +5,7 @@
         <%= label advisors_form, :advisor, [for: "draft_advisors_#{person.id}"] do %>
            <%= checkbox(advisors_form, String.to_atom("#{person.id}"), [class: 'vh']) %>
            <div class="frame">
-             <img src="<%= person.profile_image %>" />
+             <img src={ person.profile_image } />
            </div>
            <p><%= person.name %></p>
         <% end %>

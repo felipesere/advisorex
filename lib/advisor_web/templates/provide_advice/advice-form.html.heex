@@ -1,4 +1,4 @@
-<form action="/provide/<%= @questionnaire_id %>" method="post">
+<form action={ "/provide/#{ @questionnaire_id }" } method="post">
   <section class="center-l">
     <h1>Advice for <%= @mentee.name %></h1>
 
@@ -17,10 +17,10 @@
       <%= for question <- @questions do  %>
         <div>
           <h3><%= question.phrase %></h3>
-          <textarea name="<%= question.id %>" rows="5"></textarea>
+          <textarea name={ question.id } rows="5"></textarea>
         </div>
       <% end %>
-      <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
+      <input type="hidden" name="_csrf_token" value={ get_csrf_token() }>
     </div>
     <button type="submit" class="button primary" id="submit-your-advice">Submit your advice</button>
   </section>

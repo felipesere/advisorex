@@ -17,32 +17,32 @@
             <%= for person <- group.advisors do %>
               <div class="small-circle">
                 <div class="frame">
-                  <img class="circle" src="<%= person.profile_image %>">
+                  <img class="circle" src={person.profile_image}>
                 </div>
               </div>
             <% end %>
             </div>
           </td>
-          </td>
           <td>
             <ul class="row">
               <li>
-                <a class="button primary red delete" data-testid="delete-action" data-questionnaire-id="<%= group.questionnaire_id %>" data-mentee-name="<%= group.mentee.name %>">
+                <a class="button primary red delete" data-testid="delete-action" data-questionnaire-id={ group.questionnaire_id } data-mentee-name={ group.mentee.name }>
                   <icon class="icon-trash" />
                 </a>
               </li>
               <li>
-                <a data-testid="present-action" href="<%= path_to_present(group.questionnaire_id) %>" class="button primary green">
+                <a data-testid="present-action" href={ path_to_present(group.questionnaire_id) } class="button primary green">
                   <icon class="icon-desktop" />
                 </a>
               </li>
               <li>
-                <a href="<%= download_summary(group.questionnaire_id) %>" class="button primary">
+                <a href={ download_summary(group.questionnaire_id) } class="button primary">
                   <icon class="icon-download-alt" />
                 </a>
               </li>
             </ul>
           </td>
+        </tr>
         <% end %>
     </tbody>
   </table>

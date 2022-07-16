@@ -5,7 +5,7 @@
     <%= for advice <- @advice do %>
       <li>
         <p><%= advice.advisor.name %>
-        <a data-testid="link-to-give-advice" href="<%= provide_advice(advice) %>"><%= advice.questionnaire_id %></a>
+          <a data-testid="link-to-give-advice" href={ provide_advice(advice) }><%= advice.questionnaire_id %></a>
         </p>
       </li>
     <% end %>
@@ -13,5 +13,5 @@
 
   <hr />
 
-  <p>See advice <a class href="<%= progress_link(@questionnaire) %>"><%= @questionnaire.id %></a></p>
+  <p>See advice <a class href={ progress_link(@questionnaire) }><%= @questionnaire.id %></a></p>
 </section>

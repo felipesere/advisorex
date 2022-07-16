@@ -13,7 +13,7 @@
   <hr />
 
   <%= if @all_complete do %>
-    <button href="/present/<%= @questionnaire.id %>" class="primary">We are good to go!</button>
+    <button href={ "/present/#{ @questionnaire.id }" } class="primary">We are good to go!</button>
   <% else %>
     <button class="primary" disabled>Waiting for further responses</button>
   <% end %>

@@ -1,6 +1,6 @@
 <section class="center">
   <h1>Advice for <%= @request.name %></h1>
-  <a href="/present/<%= @id %>/download.csv"><img class="download-link" src="/assets/images/download-csv.png" alt="Download the file"></a>
+  <a href={"/present/#{ @id }/download.csv"}><img class="download-link" src="/assets/images/download-csv.png" alt="Download the file"></a>
   <!-- possibly remove that link...-->
 
   <hr />
@@ -11,7 +11,7 @@
       <%= for answer <- question.answers do %>
         <div>
           <aside class="provider">
-            <img src="<%= answer.person.profile_image %>" alt="<%= answer.person.name %>" />
+            <img src={ answer.person.profile_image } alt={ answer.person.name } />
             <span><%= answer.person.name %></span>
           </aside>
           <p><%= answer.answer_phrase %></p>

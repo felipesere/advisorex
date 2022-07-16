@@ -35,7 +35,7 @@
       <%= for advice <- @dashboard.personal_advice_section do %>
         <div>
           <div class="frame">
-            <img class="<%= completed?(advice) %>"  src="<%= advice.advisor.profile_image %>">
+            <img class={ completed?(advice) }  src={ advice.advisor.profile_image }>
           </div>
           <p data-testid="still-has-to-give-you-advice"><%= advice.advisor.name %></p>
           <p><%= completed?(advice) %></p>
@@ -74,7 +74,7 @@
 
         <div class="profile-size center">
           <div class="frame">
-            <img class="js_user-image-display" src="<%= @update_user.data.profile_image %>" />
+            <img class="js_user-image-display" src={ @update_user.data.profile_image } />
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 <li>
   <div class="frame">
-    <img class="profile-image <%= @state %>"  src="<%= @person.profile_image %>">
+    <img class={ "profile-image #{ @state }" }  src={ @person.profile_image }>
   </div>
   <span class="advisor">
     <%= @person.name %>

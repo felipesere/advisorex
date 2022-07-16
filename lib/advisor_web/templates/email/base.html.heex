@@ -69,7 +69,7 @@
     div[style*="margin: 16px 0;"] { margin: 0 !important; }
 </style>
 </head>
-<body style="background-color: <%= color(:background) %>; margin: 0 !important; padding: 0 !important;">
+<body style={ "background-color: #{ color(:background) }; margin: 0 !important; padding: 0 !important;" }>
   <%= @inner_content %>
 </body>
 </html>
