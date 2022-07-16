@@ -44,11 +44,11 @@ config :phoenix, :stacktrace_depth, 20
 config :advisor, Advisor.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "",
+  password: "postgres",
   database: "advisor_dev",
   hostname: "localhost",
   pool_size: 10,
-  ssl: true
+  ssl: false
 
 config :ueberauth, Ueberauth,
   base_path: "/auth",
