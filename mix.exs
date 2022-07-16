@@ -52,7 +52,7 @@ defmodule Advisor.Mixfile do
       {:scribe, "~> 0.10.0"},
       {:yaml_elixir, "~> 2.1"},
       {:ueberauth_google, "~> 0.10"},
-      {:ueberauth, "~> 0.10"},
+      {:ueberauth, "~> 0.7"},
       {:bamboo, "~> 2.2"},
       {:bamboo_phoenix, "1.0.0"},
     ] ++ test_deps()
