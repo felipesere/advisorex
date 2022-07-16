@@ -6,6 +6,8 @@ defmodule Advisor.Application do
 
     children = [
       {Advisor.Repo, []},
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Advisor.PubSub},
       {AdvisorWeb.Endpoint, []},
       {Advisor.Question.PhrasesCatalog, []},
     ]
