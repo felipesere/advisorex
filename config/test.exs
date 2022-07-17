@@ -21,6 +21,7 @@ config :advisor, Advisor.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
+config :advisor, Advisor.Mailer, adapter: Swoosh.Adapters.Test
 
 config :advisor, Advisor.Notifications.Email.Mailer, adapter: Bamboo.TestAdapter
 

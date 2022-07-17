@@ -19,6 +19,8 @@ config :advisor, AdvisorWeb.Endpoint,
   secret_key_base: "SmmWRTx2vhEgHIcQ/7BRuQaIuvQ7fSeTrsFVuPsudiHKtD0AT068LXD61mN5Ow+d",
   pubsub_server: Advisor.PubSub
 
+config :advisor, Advisor.Mailer, adapter: Swoosh.Adapters.Local
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
