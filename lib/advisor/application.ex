@@ -2,8 +2,6 @@ defmodule Advisor.Application do
   use Application
 
   def start(_type, _args) do
-    import Supervisor.Spec
-
     children = [
       {Advisor.Repo, []},
       # Start the PubSub system
