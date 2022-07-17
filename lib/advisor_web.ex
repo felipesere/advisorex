@@ -31,13 +31,16 @@ defmodule AdvisorWeb do
         namespace: AdvisorWeb
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1, view_template: 1]
+      import Phoenix.Controller, only: [get_csrf_token: 0, view_module: 1, view_template: 1, get_flash: 1, get_flash: 2]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
       alias AdvisorWeb.Router.Helpers, as: Routes
       import AdvisorWeb.ErrorHelpers
+
+      # Include shared imports and aliases for views
+      unquote(view_helpers())
 
       @endpoint AdvisorWeb.Endpoint
     end
@@ -48,6 +51,22 @@ defmodule AdvisorWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+    end
+  end
+
+  defp view_helpers do
+    quote do
+      # Use all HTML functionality (forms, tags, etc)
+      use Phoenix.HTML
+
+      # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
+      import Phoenix.LiveView.Helpers
+
+      # Import basic rendering functionality (render, render_layout, etc)
+      import Phoenix.View
+
+      import AdvisorWeb.ErrorHelpers
+      alias AdvisorWeb.Router.Helpers, as: Routes
     end
   end
 
