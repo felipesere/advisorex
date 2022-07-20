@@ -7,12 +7,6 @@ config :advisor, AdvisorWeb.Endpoint,
   url: [scheme: "https", host: "advisorex.ngrok.io", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
-config :ueberauth, Ueberauth,
-  base_path: "/auth",
-  providers: [
-    google: {Local.Strategy, [request_path: "/auth/login", callback_path: "/auth/callback"]}
-  ]
-
 # Do not print debug messages in production
 config :logger, :console, format: "[$level] $message\n"
 

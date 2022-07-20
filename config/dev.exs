@@ -50,12 +50,6 @@ config :advisor, Advisor.Repo,
   pool_size: 10,
   ssl: false
 
-config :ueberauth, Ueberauth,
-  base_path: "/auth",
-  providers: [
-    google: {Local.Strategy, [request_path: "/auth/login", callback_path: "/auth/callback"]}
-  ]
-
 config :advisor, FeatureToggle, emails: true
 
 config :advisor, Advisor.Notifications.Email.Mailer, adapter: Bamboo.LocalAdapter

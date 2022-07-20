@@ -18,13 +18,6 @@ defmodule AdvisorWeb.AuthenticationController do
     end
   end
 
-  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    email = auth.info.email
-    user = Advisor.People.find_by(email: email)
-
-    proceed(user, conn, redirect_to: destination(conn))
-  end
-
   def logout(conn, _params) do
     conn
     |> configure_session(drop: true)

@@ -26,24 +26,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :ueberauth, Ueberauth,
-  base_path: "/auth",
-  providers: [
-    google:
-      {Ueberauth.Strategy.Google,
-       [
-         request_path: "/auth/login",
-         callback_path: "/auth/callback",
-         hd: "8thlight.com",
-         default_scope: "email profile"
-       ]}
-  ]
-
-config :ueberauth, Ueberauth.Strategy.Google.OAuth,
-  client_id: System.get_env("GOOGLE_CLIENT_ID"),
-  client_secret: System.get_env("GOOGLE_CLIENT_SECRET"),
-  json_library: Jason
-
 config :advisor, Advisor.Notifications.Emails,
   source_email: "advisor@8thlight.com"
 

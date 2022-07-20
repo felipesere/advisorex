@@ -30,12 +30,6 @@ config :advisor, Advisor.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "15"),
   ssl: true
 
-config :ueberauth, Ueberauth,
-  base_path: "/auth",
-  providers: [
-    google: {Local.Strategy, [request_path: "/auth/login", callback_path: "/auth/callback"]}
-  ]
-
 config :advisor, FeatureToggle, emails: true
 
 config :advisor, Advisor.Notifications.Email.Mailer, adapter: Bamboo.LocalAdapter
