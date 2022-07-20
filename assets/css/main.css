@@ -233,6 +233,17 @@ table tr:nth-child(even) {
   margin-left: 10px;
 }
 
+/* Items on the edges */
+.items_on_edges {
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
+}
+
+.mr {
+  margin-right: 10px;
+}
+
 /* Utilities */
 
 .underlined {
