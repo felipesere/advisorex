@@ -10,10 +10,21 @@
 //
 //
 // -- This is a parent command --
-Cypress.Commands.add("loginAs", (name) => {
-    cy.visit('/')
+//
+const people = {
+    "Ben Wyatt": "ben@parks.com",
+    "April Ludgate": "april@parks.com",
+    "Donna Meagle": "donna@parks.com",
+    "Ann Perkins": "ann@parks.com"
+}
 
-    cy.contains(`Login as ${name}`).click()
+Cypress.Commands.add("loginAs", (name) => {
+    cy.visit('/auth/login')
+
+    cy.get('#user_email').type(people[name])
+    cy.get('#user_password').type("test")
+
+    cy.contains(`Login`).click()
 })
 
 Cypress.Commands.add("answerWith", (answers) => {

@@ -2,8 +2,8 @@
   "name": "advisorex",
   "version": "1.0.0",
   "description": "",
-  "dependencies": {},
   "devDependencies": {
-    "cypress": "^3.4.1"
+    "cypress": "^10",
+    "cypress-fail-fast": "^5.0.0"
   }
 }
