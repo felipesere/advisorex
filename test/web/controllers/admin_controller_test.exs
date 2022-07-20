@@ -14,10 +14,11 @@ defmodule AdvisorWeb.AdminControllerTest do
   end
 
   test "creates a new person", %{conn: conn} do
-    conn
-    |> put_req_header("authorization", "Bearer SECRET")
-    |> post("/admin/people", %{name: "Lightning McQueen", email: "lightning@mcqueen.com"})
+    conn = conn
+           |> put_req_header("authorization", "Bearer SECRET")
+           |> post("/admin/people", %{name: "Lightning McQueen", email: "lightning@mcqueen.com", password: "test"})
 
+    assert response(conn, 201)
 
     assert People.find_by(email: "lightning@mcqueen.com")
   end

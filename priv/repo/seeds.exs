@@ -11,71 +11,82 @@
 # and so on) as they will fail if something goes wrong.
 alias Advisor.Person
 alias Advisor.Repo
+alias Advisor.People
+
 
 if Mix.env in [:dev, :ngrok, :ci, :demo] do 
   Repo.delete_all(Person)
 
-  Repo.insert!(%Person{
+  People.create(%{
     name: "Leslie Knope",
     email: "leslie@parks.com",
     is_mentor: true,
     profile_image:
-      "https://media1.popsugar-assets.com/files/thumbor/2ebfSQkPUKjxKfb5N3h2N-VIh7U/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2015/02/24/097/n/1922283/79e574c2_edit_img_image_845210_1424395524/i/Best-Leslie-Knope-GIFs.png"
+      "https://media1.popsugar-assets.com/files/thumbor/2ebfSQkPUKjxKfb5N3h2N-VIh7U/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2015/02/24/097/n/1922283/79e574c2_edit_img_image_845210_1424395524/i/Best-Leslie-Knope-GIFs.png",
+    password: "test",
   })
 
-  Repo.insert!(%Person{
+  People.create(%{
     name: "Ron Swanson",
     email: "ron@parks.com",
     is_mentor: true,
-    profile_image: "https://static.independent.co.uk/s3fs-public/thumbnails/image/2016/10/17/11/ron-swanson.jpg?w968"
+    profile_image: "https://static.independent.co.uk/s3fs-public/thumbnails/image/2016/10/17/11/ron-swanson.jpg?w968",
+    password: "test",
   })
 
-  Repo.insert!(%Person{
+  People.create(%{
     name: "April Ludgate",
     email: "april@parks.com",
     is_mentor: true,
     profile_image:
-      "https://i.pinimg.com/736x/ba/5f/e0/ba5fe0400e23ffb459b4d078484e6610--aubrey-plaza-aubrey-oday.jpg"
+    "https://i.pinimg.com/736x/ba/5f/e0/ba5fe0400e23ffb459b4d078484e6610--aubrey-plaza-aubrey-oday.jpg",
+    password: "test",
   })
 
-  Repo.insert!(%Person{
+  People.create(%{
     name: "Andy Dwyer",
     email: "andy@parks.com",
-    profile_image: "https://pbs.twimg.com/profile_images/618214848975929344/iYgT29Up.jpg"
+    profile_image: "https://pbs.twimg.com/profile_images/618214848975929344/iYgT29Up.jpg",
+    password: "test",
   })
 
-  Repo.insert!(%Person{
+  People.create(%{
     name: "Tom Haverford",
     email: "tom@parks.com",
-    profile_image: "http://cdn.pastemagazine.com/www/blogs/lists/tomhaverford.png?1360172963"
+    profile_image: "http://cdn.pastemagazine.com/www/blogs/lists/tomhaverford.png?1360172963",
+    password: "test",
   })
 
-  Repo.insert!(%Person{
+  People.create(%{
     name: "Ann Perkins",
     email: "ann@parks.com",
-    profile_image: "https://upload.wikimedia.org/wikipedia/en/3/33/Ann_Perkins.jpg"
+    profile_image: "https://upload.wikimedia.org/wikipedia/en/3/33/Ann_Perkins.jpg",
+    password: "test",
   })
 
-  Repo.insert!(%Person{
+  People.create(%{
     name: "Donna Meagle",
     email: "donna@parks.com",
     profile_image:
-      "http://vignette4.wikia.nocookie.net/parksandrecreation/images/5/59/Donna_2.jpg/revision/latest?cb=20111015210204"
+    "http://vignette4.wikia.nocookie.net/parksandrecreation/images/5/59/Donna_2.jpg/revision/latest?cb=20111015210204",
+    password: "test",
   })
 
-  Repo.insert!(%Person{
+  People.create(%{
     name: "Ben Wyatt",
     email: "ben@parks.com",
     profile_image:
-      "https://vignette.wikia.nocookie.net/parksandrecreation/images/0/0a/Ben.jpg/revision/latest/scale-to-width-down/350?cb=20110809181418"
+    "https://vignette.wikia.nocookie.net/parksandrecreation/images/0/0a/Ben.jpg/revision/latest/scale-to-width-down/350?cb=20110809181418",
+    password: "test",
   })
 
-  Repo.insert!(%Person{name: "Jerry Gergich", email: "jerry@parks.com"})
+  People.create(%{name: "Jerry Gergich", email: "jerry@parks.com", password: "test"})
 
-  Repo.insert!(%Person{
+  People.create(%{
     name: "Chris Traeger",
     email: "chris@parks.com",
     is_mentor: true,
-    profile_image: "https://memegenerator.net/img/images/600x600/1993394/chris-traeger.jpg"
+    profile_image: "https://memegenerator.net/img/images/600x600/1993394/chris-traeger.jpg",
+    password: "test",
   })
 end

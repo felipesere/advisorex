@@ -3,15 +3,29 @@ defmodule Advisor.People do
   alias Advisor.Repo
   alias Advisor.Person
   import Ecto.Query
-  import Ecto.Changeset
 
   def update(person) do
     Repo.update(person)
   end
+  def update(email, params) do
+    person = find_by(email: email)
+
+    if person do
+      changes = Person.changeset(person, params)
+
+      if changes.valid? do
+        Repo.update(changes)
+        :ok
+      else
+        changes.errors
+      end
+    else
+      :not_found
+    end
+  end
 
   def create(data) do
-
-    person = changeset(data, %Person{})
+    person = Person.changeset(%Person{}, data, hash_password: true)
 
     if person.valid? do
       Repo.insert!(person)
@@ -22,15 +36,6 @@ defmodule Advisor.People do
     end
   end
 
-  defp changeset(data, person) do
-    person
-    |> cast(data, [:name, :email])
-    |> validate_required([:email, :name])
-    |> validate_length(:name, min: 5)
-    |> validate_format(:email, ~r/@/)
-    |> unique_constraint(:email)
-  end
-
   def everybody(), do: Repo.all(from(p in Person, order_by: p.name))
 
   def mentors(), do: Repo.all(from(p in Person, where: p.is_mentor, order_by: p.name))
@@ -38,6 +43,14 @@ defmodule Advisor.People do
   def everybody_but(user) do
     everybody()
     |> Enum.filter(but(user))
+  end
+
+  def get_user_by_email_and_password(email, password)
+      when is_binary(email) and is_binary(password) do
+    user = find_by(email: email)
+    if Advisor.Accounts.User.valid_password?(user, password) do
+      user
+    end
   end
 
   def find(%{id: id}), do: find_by(id: id)
@@ -74,22 +87,5 @@ defmodule Advisor.People do
   def delete([email: email]) do
     from(p in Person, where: p.email == ^email)
     |> Repo.delete_all()
-  end
-
-  def update(email, params) do
-    person = find_by(email: email)
-
-    if person do
-      changes = changeset(params, person)
-
-      if changes.valid? do
-        Repo.update(changes)
-        :ok
-      else
-        changes.errors
-      end
-    else
-      :not_found
-    end
   end
 end

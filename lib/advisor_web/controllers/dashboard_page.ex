@@ -12,7 +12,7 @@ defmodule AdvisorWeb.DashboardPage do
     render(conn, "index.html",
       user: user,
       dashboard: dashboard,
-      update_user: Person.changeset(user)
+      update_user: Person.changeset(user, %{})
     )
   end
 

@@ -1,6 +1,22 @@
 defmodule AdvisorWeb.AuthenticationController do
   use AdvisorWeb, :controller
-  plug Ueberauth
+  alias Advisor.People
+
+
+  def login(conn, _params) do
+    render(conn, "login.html", error_message: nil)
+  end
+
+  def submit(conn, %{"user" => user_params}) do
+    %{"email" => email, "password" => password} = user_params
+
+    if user = People.get_user_by_email_and_password(email, password) do
+      proceed(user, conn, redirect_to: destination(conn))
+    else
+      # In order to prevent user enumeration attacks, don't disclose whether the email is registered.
+      render(conn, "login.html", error_message: "Invalid email or password")
+    end
+  end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     email = auth.info.email

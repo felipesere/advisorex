@@ -7,7 +7,7 @@ defmodule AdvisorWeb.LandingPageTest do
     conn
     |> Visit.the(:landing_page)
     |> It.has_title("Advisor")
-    |> It.has_link_to("Login with Google")
+    |> It.has_link_to("Go to Login")
   end
 
   test "No need to login again", %{conn: conn} do

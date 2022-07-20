@@ -18,11 +18,6 @@ defmodule AdvisorWeb.UserAuth do
   It renews the session ID and clears the whole session
   to avoid fixation attacks. See the renew_session
   function to customize this behaviour.
-
-  It also sets a `:live_socket_id` key in the session,
-  so LiveView sessions are identified and automatically
-  disconnected on log out. The line can be safely removed
-  if you are not using LiveView.
   """
   def log_in_user(conn, user, params \\ %{}) do
     token = Accounts.generate_user_session_token(user)
@@ -31,7 +26,6 @@ defmodule AdvisorWeb.UserAuth do
     conn
     |> renew_session()
     |> put_session(:user_token, token)
-    |> put_session(:live_socket_id, "users_sessions:#{Base.url_encode64(token)}")
     |> maybe_write_remember_me_cookie(token, params)
     |> redirect(to: user_return_to || signed_in_path(conn))
   end
@@ -73,10 +67,6 @@ defmodule AdvisorWeb.UserAuth do
   def log_out_user(conn) do
     user_token = get_session(conn, :user_token)
     user_token && Accounts.delete_session_token(user_token)
-
-    if live_socket_id = get_session(conn, :live_socket_id) do
-      AdvisorWeb.Endpoint.broadcast(live_socket_id, "disconnect", %{})
-    end
 
     conn
     |> renew_session()

@@ -10,7 +10,7 @@ defmodule Advisor.Test.Support.Users do
     %Person{name: "Priya Patil", email: "priya@example.com"},
     %Person{name: "Rabea Gleissner", email: "rabea@example.com"},
     %Person{name: "Jim Suchy", email: "jim@example.com", is_mentor: true},
-    %Person{name: "Felipe Sere", email: "felipe@example.com", is_mentor: true}
+    %Person{name: "Felipe Sere", email: "felipe@example.com", is_mentor: true},
   ]
 
   def with(:everybody) do
@@ -33,6 +33,7 @@ defmodule Advisor.Test.Support.Users do
   def add(name) do
     @people
     |> Enum.find(fn p -> p.name == name end)
+    |> Person.changeset(%{password: "test"}, hash_password: true)
     |> Repo.insert!()
   end
 end
