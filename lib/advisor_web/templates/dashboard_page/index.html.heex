@@ -56,7 +56,7 @@
 
 <section class="center-l">
   <h2>Your settings:</h2>
-    <%= form_for @update_user, "/dashboard/settings", [method: "post", class: "center"], fn f -> %>
+    <.form class="center" let={f} for={@update_user} action={Routes.dashboard_page_path(@conn, :settings)} method={"post"} as={:person}>
       <div class="stack-s">
         <div class="with-sidebar">
           <div>
@@ -82,6 +82,6 @@
           <%= submit "Save", class: "button primary small" %>
         </div>
       </div>
-    <% end %>
+    </.form>
 </section>
 <%= render "_delete_modal.html" %>

@@ -1,4 +1,4 @@
-<%= form_for @conn, "/request", [as: :draft], fn f -> %>
+<.form let={f} for={@conn} action={"/request"} method={"post"} as={:draft}>
   <section class="center-l">
     <h1>Hello <%= @mentee.name %>!</h1>
     <h2>Who is your Mentor?</h2>
@@ -31,7 +31,7 @@
     <input type="hidden" name="_csrf_token" value={ get_csrf_token() }>
     <button type="submit" class="request-advice button primary" id="ask-for-advice">Ask for advice</button>
   </section>
-<% end %>
+</.form>
 
 <div class="notice invisible">
   <p class="notice-message"></p>
