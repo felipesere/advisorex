@@ -6,18 +6,12 @@
     "js": "rollup --config",
     "js:watch": "rollup --config --watch",
     "css": "postcss css/main.css -o ../priv/static/css/app.css",
-    "css:watch": "postcss css/main.css -o ../priv/static/css/app.css --watch",
-    "approve": "backstop approve",
-    "test": "backstop test",
-    "init": "backstop init",
-    "reference": "backstop reference",
-    "browse": "backstop openReport"
+    "css:watch": "postcss css/main.css -o ../priv/static/css/app.css --watch"
   },
   "dependencies": {
     "debounce": "^1.2.1"
   },
   "devDependencies": {
-    "backstopjs": "6.1.0",
     "cssnano": "^5.1.12",
     "postcss-cli": "^10.0.0",
     "postcss-import": "^14.1.0",
