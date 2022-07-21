@@ -23,7 +23,7 @@ config :advisor, Advisor.Repo,
 
 config :advisor, Advisor.Mailer, adapter: Swoosh.Adapters.Test
 
-config :advisor, Advisor.Notifications.Email.Mailer, adapter: Bamboo.TestAdapter
+config :advisor, Advisor.Notifications.Email.Mailer, adapter: Swoosh.Adapters.Test
 
 config :advisor, FeatureToggle, emails: true
 

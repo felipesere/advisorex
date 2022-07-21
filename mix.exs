@@ -23,7 +23,7 @@ defmodule Advisor.Mixfile do
   def application do
     [
       mod: {Advisor.Application, []},
-      extra_applications: [:logger, :runtime_tools, :bamboo, :bcrypt_elixir]
+      extra_applications: [:logger, :runtime_tools, :swoosh, :bcrypt_elixir]
     ]
   end
 
@@ -52,10 +52,9 @@ defmodule Advisor.Mixfile do
       {:poison, "~> 5.0"},
       {:scribe, "~> 0.10.0"},
       {:yaml_elixir, "~> 2.1"},
-      {:bamboo, "~> 2.2"},
-      {:bamboo_phoenix, "1.0.0"},
       {:swoosh, "~> 1.3"},
-      {:bcrypt_elixir, "~> 3.0"}
+      {:phoenix_swoosh, "~> 1.0"},
+      {:bcrypt_elixir, "~> 3.0"},
     ] ++ test_deps()
   end
 

@@ -33,4 +33,4 @@ config :advisor, Advisor.Repo,
 
 config :advisor, FeatureToggle, emails: false
 
-config :advisor, Advisor.Notifications.Email.Mailer, adapter: Bamboo.LocalAdapter
+config :advisor, Advisor.Notifications.Email.Mailer, adapter: Swoosh.Adapters.Local

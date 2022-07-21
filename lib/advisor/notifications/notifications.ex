@@ -3,7 +3,7 @@ defmodule Advisor.Notifications do
   alias Advisor.Notifications.Email.Mailer
   alias Advisor.Notifications.Emails
 
-  use Bamboo.Phoenix, view: AdvisorWeb.EmailView
+  use Phoenix.Swoosh, view: AdvisorWeb.EmailView
 
   def about_new_questionnaire(questionnaire) do
     data = %{
@@ -15,7 +15,7 @@ defmodule Advisor.Notifications do
 
     questionnaire.advice
     |> Enum.filter(fn advice -> enabled(:emails, advice.advisor) end)
-    |> Enum.each(fn advice -> advice |> Emails.request_advice(data) |> Mailer.deliver_later() end)
+    |> Enum.each(fn advice -> advice |> Emails.request_advice(data) |> Mailer.deliver() end)
   end
 
   def questionnaire_completed(questionnaire) do
@@ -27,6 +27,6 @@ defmodule Advisor.Notifications do
 
     data
     |> Emails.completed()
-    |> Mailer.deliver_later()
+    |> Mailer.deliver()
   end
 end

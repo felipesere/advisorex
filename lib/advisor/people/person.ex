@@ -19,9 +19,9 @@ defmodule Advisor.Person do
     timestamps()
   end
 
-  defimpl Bamboo.Formatter, for: Advisor.Person do
-    def format_email_address(person, _opts) do
-      {person.name, person.email}
+  defimpl Swoosh.Email.Recipient, for: Advisor.Person do
+    def format(%Advisor.Person{name: name, email: address}) do
+      {name, address}
     end
   end
 

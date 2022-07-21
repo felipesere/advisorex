@@ -30,7 +30,7 @@ config :advisor, Advisor.Notifications.Emails,
   source_email: "advisor@8thlight.com"
 
 config :advisor, Advisor.Notifications.Email.Mailer,
-  adapter: Bamboo.SendGridAdapter,
+  adapter: Swoosh.Adapters.Sendgrid,
   api_key: System.get_env("SENDGRID_API_KEY")
 
 config :advisor, AdvisorWeb.AdminController,

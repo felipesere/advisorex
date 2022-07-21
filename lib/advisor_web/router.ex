@@ -19,7 +19,7 @@ defmodule AdvisorWeb.Router do
       get "/questionnaire/delete-all", TestSupportController, :delete_all
     end
 
-    forward "/sent_emails", Bamboo.SentEmailViewerPlug
+    forward "/sent_emails", Plug.Swoosh.MailboxPreview
   end
 
   scope "/", AdvisorWeb do
