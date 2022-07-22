@@ -13,19 +13,8 @@ config :advisor, AdvisorWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [
-        npm: [
-          "--prefix",
-          "assets",
-          "run",
-          "js:watch",
-        ],
-        npm: [
-          "--prefix",
-          "assets",
-          "run",
-          "css:watch",
-        ],
-      ]
+       esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+  ]
 
 
 config :advisor, AdvisorWeb.Endpoint,

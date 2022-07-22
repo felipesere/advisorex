@@ -1,23 +1,7 @@
 {
   "repository": {},
   "license": "MIT",
-  "scripts": {
-    "deploy": "npm run js && npm run css",
-    "js": "rollup --config",
-    "js:watch": "rollup --config --watch",
-    "css": "postcss css/main.css -o ../priv/static/css/app.css",
-    "css:watch": "postcss css/main.css -o ../priv/static/css/app.css --watch"
-  },
   "dependencies": {
     "debounce": "^1.2.1"
-  },
-  "devDependencies": {
-    "cssnano": "^5.1.12",
-    "postcss-cli": "^10.0.0",
-    "postcss-import": "^14.1.0",
-    "rollup": "^2.77.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.0.1",
-    "rollup-plugin-terser": "^7.0.2"
   }
 }

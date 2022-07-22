@@ -5,6 +5,16 @@
 # is restricted to this project.
 import Config
 
+# Configure esbuild (the version is required)
+config :esbuild,
+  version: "0.12.18",
+  default: [
+    args:
+      ~w(css/app.css js/app.js --bundle --target=es2016 --outdir=../priv/static),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
+
 config :phoenix,
   json_library: Jason
 

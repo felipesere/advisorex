@@ -55,6 +55,7 @@ defmodule Advisor.Mixfile do
       {:swoosh, "~> 1.3"},
       {:phoenix_swoosh, "~> 1.0"},
       {:bcrypt_elixir, "~> 3.0"},
+      {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
     ] ++ test_deps()
   end
 
@@ -74,7 +75,8 @@ defmodule Advisor.Mixfile do
       test: ["ecto.create --quiet", "ecto.migrate", "test"],
       ci: ["test", "credo", "coveralls.travis"],
       seed: ["run priv/repo/seeds.exs"],
-      "seed.questionnaire": ["run priv/repo/seed-questionnaire.exs"]
+      "seed.questionnaire": ["run priv/repo/seed-questionnaire.exs"],
+      "assets.deploy": ["esbuild default --minify", "phx.digest"]
     ]
   end
 end
