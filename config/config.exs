@@ -27,7 +27,7 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :advisor, Advisor.Notifications.Emails,
-  source_email: "advisor@8thlight.com"
+  source_email: "advisor-app@felipesere.com"
 
 config :advisor, Advisor.Notifications.Email.Mailer,
   adapter: Swoosh.Adapters.Sendgrid,
@@ -40,9 +40,9 @@ config :advisor, Advisor.Question.PhrasesCatalog,
   path: './questions.yml'
 
 config :advisor, Brand,
-  icon: "https://8thlight.com/images/logos/logo-color-f66c53fd.png",
-  logo: 'https://8thlight.com/images/branding/8th-Light-Logo-Color-No-Text-28048670.png',
-  alt: '8th Light Logo'
+  icon: "/assets/favicon.ico",
+  logo: "/assets/images/advisor-large.png",
+  alt: 'Advisor Logo'
 
 
 config :advisor, FeatureToggle, emails: [only: ["Felipe Seré", "Rabea Gleissner"]]
