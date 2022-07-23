@@ -39,6 +39,9 @@ config :advisor, Advisor.Repo,
   pool_size: 10,
   ssl: false
 
+config :advisor, AdvisorWeb.AdminController,
+  api_key: :none
+
 config :advisor, FeatureToggle, emails: true
 
 config :advisor, Advisor.Notifications.Email.Mailer, adapter: Swoosh.Adapters.Local

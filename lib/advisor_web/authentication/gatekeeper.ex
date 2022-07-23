@@ -15,6 +15,7 @@ defmodule AdvisorWeb.Authentication.Gatekeeper do
     %{only: allowed_role, redirect: redirect, token: token}
   end
 
+  def call(conn, %{only: :admin, token: :none}), do: conn
   def call(conn, %{only: :admin, token: token}) do
     if authenticated?(conn, token) do
       conn
