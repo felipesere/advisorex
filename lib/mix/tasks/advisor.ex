@@ -54,6 +54,19 @@ defmodule Mix.Tasks.Advisor do
 
   def handle(args, _) do
     IO.puts "Unknown command: " <> Enum.join(args, " ")
+    IO.puts "Supported commands:"
+    IO.puts ""
+    IO.puts "'show people' to list all current people"
+    IO.puts "'delete person <email>' to delete user from system"
+    IO.puts "'create person --$FIELD $VALUE' creates a new person. Requires"
+    IO.puts "   --name  : the name of the person"
+    IO.puts "   --email : the email ther person will use to login"
+    IO.puts "   --password : the password the person will use to login"
+    IO.puts "   --is_mentor : true/false depending on the person being a mentor"
+    IO.puts "   --is_mentor : true/false depending on the person being a mentor"
+    IO.puts "'show questionnaires' to list all current questionnaires"
+    IO.puts "'update questionnaires $ID add $email' to add an advisor to a questionnaire"
+    IO.puts "'update questionnaires $ID remove $email' to remove an advisor to a questionnaire"
   end
 
   def request(verb, resource, opts) do
