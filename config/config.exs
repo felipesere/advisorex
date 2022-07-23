@@ -47,7 +47,7 @@ config :advisor, Advisor.Question.PhrasesCatalog,
 
 config :advisor, Brand,
   icon: "/assets/favicon.ico",
-  logo: "/assets/images/advisor-large.png",
+  logo: "/assets/images/advisor-small.png",
   alt: 'Advisor Logo'
 
 
