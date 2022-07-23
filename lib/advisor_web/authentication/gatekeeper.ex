@@ -8,15 +8,14 @@ defmodule AdvisorWeb.Authentication.Gatekeeper do
     allowed_role = Keyword.get(opts, :only, :regular)
     redirect = Keyword.get(opts, :redirect, "/")
 
+    %{only: allowed_role, redirect: redirect}
+  end
+
+  def call(conn, %{only: :admin}) do
     token = :advisor
             |> Application.get_env(AdvisorWeb.AdminController, [])
             |> Keyword.fetch!(:api_key)
 
-    %{only: allowed_role, redirect: redirect, token: token}
-  end
-
-  def call(conn, %{only: :admin, token: :none}), do: conn
-  def call(conn, %{only: :admin, token: token}) do
     if authenticated?(conn, token) do
       conn
     else
@@ -70,6 +69,7 @@ defmodule AdvisorWeb.Authentication.Gatekeeper do
     |> put_session(:target, conn.request_path)
   end
 
+  def authenticated?(_, :none), do: true
   def authenticated?(conn, access_token) do
     token =
       conn

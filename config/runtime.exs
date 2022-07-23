@@ -1,4 +1,3 @@
-
 import Config
 
 # config/runtime.exs is executed for all environments, including
@@ -47,8 +46,8 @@ if config_env() == :prod do
   admin_api_key =
     System.get_env("ADVISOR_ADMIN_API_KEY") ||
       raise """
-  environment variable SECRET_KEY_BASE is missing.
-  This needs to be set to enable the admin API
+      environment variable SECRET_KEY_BASE is missing.
+      This needs to be set to enable the admin API
       """
 
   config :advisor, AdvisorWeb.AdminController,
