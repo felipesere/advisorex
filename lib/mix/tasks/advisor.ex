@@ -4,7 +4,7 @@ defmodule Mix.Tasks.Advisor do
   @shortdoc "Interact with the API on prod"
 
   @local "http://localhost:4000"
-  @prod  "https://advisorex.herokuapp.com"
+  @prod  "https://shrouded-thicket-08549.herokuapp.com"
 
   def run(params) do
     {:ok, _} = Application.ensure_all_started(:hackney)

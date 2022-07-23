@@ -26,7 +26,6 @@ config :advisor,
 config :advisor, AdvisorWeb.Endpoint,
   url: [host: "localhost"],
   static_url: [path: "/assets"],
-  secret_key_base: "SmmWRTx2vhEgHIcQ/7BRuQaIuvQ7fSeTrsFVuPsudiHKtD0AT068LXD61mN5Ow+d",
   pubsub_server: Advisor.PubSub
 
 config :advisor, Advisor.Mailer, adapter: Swoosh.Adapters.Local
@@ -42,9 +41,6 @@ config :advisor, Advisor.Notifications.Emails,
 config :advisor, Advisor.Notifications.Email.Mailer,
   adapter: Swoosh.Adapters.Sendgrid,
   api_key: System.get_env("SENDGRID_API_KEY")
-
-config :advisor, AdvisorWeb.AdminController,
-  api_key: System.get_env("ADVISOR_ADMIN_API_KEY")
 
 config :advisor, Advisor.Question.PhrasesCatalog,
   path: './questions.yml'

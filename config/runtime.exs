@@ -43,4 +43,14 @@ if config_env() == :prod do
       port: String.to_integer(System.get_env("PORT") || "4000")
     ],
     secret_key_base: secret_key_base
+
+  admin_api_key =
+    System.get_env("ADVISOR_ADMIN_API_KEY") ||
+      raise """
+  environment variable SECRET_KEY_BASE is missing.
+  This needs to be set to enable the admin API
+      """
+
+  config :advisor, AdvisorWeb.AdminController,
+      api_key: admin_api_key
 end
