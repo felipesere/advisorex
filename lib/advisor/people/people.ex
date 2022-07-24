@@ -48,9 +48,14 @@ defmodule Advisor.People do
   def get_user_by_email_and_password(email, password)
       when is_binary(email) and is_binary(password) do
     user = find_by(email: email)
-    if Advisor.Accounts.User.valid_password?(user, password) do
+    if valid_password?(user, password) do
       user
     end
+  end
+
+  defp valid_password?(%Advisor.Person{hashed_password: hashed_password}, password)
+      when is_binary(hashed_password) and byte_size(password) > 0 do
+    Bcrypt.verify_pass(password, hashed_password)
   end
 
   def find(%{id: id}), do: find_by(id: id)
