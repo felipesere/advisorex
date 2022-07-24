@@ -54,8 +54,8 @@ defmodule Advisor.Repo.Migrations.ChangeForImmutableQuetsions do
       %{phrase: "How well does this person communicate with the client?", kind: 2},
       %{phrase: "How well does this person communicate with the team?", kind: 2},
       %{phrase: "How does this person lead by example?", kind: 2},
-      %{phrase: "How has this person helped individuals at 8th Light improve?", kind: 3},
-      %{phrase: "How has this person helped 8th Light improve?", kind: 3},
+      %{phrase: "How has this person helped individuals at around them improve?", kind: 3},
+      %{phrase: "How has this person helped improve their community as a whole?", kind: 3},
       %{phrase: "How well does this person explain techincal concepts to others?", kind: 3},
       %{phrase: "What could this person do to become a better mentor?", kind: 3}
     ])

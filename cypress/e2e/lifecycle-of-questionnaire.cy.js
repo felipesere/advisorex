@@ -10,7 +10,7 @@ describe('Lifecycle of a questionnaire', () => {
   const questions = [
     'How could this person become a better pair?',
     'How has this person contributed to the success of their client?',
-    'How has this person helped individuals at 8th Light improve?',
+    'How has this person helped individuals around them improve?',
   ]
 
   it('for Ben Wyatt', () => {
