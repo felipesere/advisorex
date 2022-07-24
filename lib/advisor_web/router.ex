@@ -1,15 +1,12 @@
 defmodule AdvisorWeb.Router do
   use AdvisorWeb, :router
 
-  import AdvisorWeb.UserAuth
-
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug :fetch_current_user
   end
 
   if Mix.env() in [:dev, :ci, :demo] do
