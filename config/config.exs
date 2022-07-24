@@ -26,6 +26,7 @@ config :advisor,
 config :advisor, AdvisorWeb.Endpoint,
   url: [host: "localhost"],
   static_url: [path: "/assets"],
+  secret_key_base: "+JJwCm0xvnMkaqNZRq0j4509jFqjE26fuVaxdQjxaqLKJKbY58sHCe5NSAjhtx8J",
   pubsub_server: Advisor.PubSub
 
 config :advisor, Advisor.Mailer, adapter: Swoosh.Adapters.Local

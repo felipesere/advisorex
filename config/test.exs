@@ -7,7 +7,6 @@ config :bcrypt_elixir, :log_rounds, 1
 # you can enable the server option below.
 config :advisor, AdvisorWeb.Endpoint,
   http: [port: 4001],
-  secret_key_base: "+JJwCm0xvnMkaqNZRq0j4509jFqjE26fuVaxdQjxaqLKJKbY58sHCe5NSAjhtx8J",
   server: false
 
 # Print only warnings and errors during test
