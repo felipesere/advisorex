@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "devDependencies": {
-    "cypress": "^10",
+    "cypress": "^14",
     "cypress-fail-fast": "^5.0.0"
   }
 }
